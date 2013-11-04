@@ -166,10 +166,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Logics\Interfaces\ISecurityProvider.cs" />
-    <Compile Include="Logics\Interfaces\IUserProvider.cs" />
-    <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\BusinessModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -277,10 +273,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FreightSystem.Logics.Interfaces\FreightSystem.Logics.Interfaces.csproj">
+      <Project>{7A203698-1111-43B6-A06C-5C29FB468D85}</Project>
+      <Name>FreightSystem.Logics.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FreightSystem.Models\FreightSystem.Models.csproj">
+      <Project>{13221790-B59D-4EE3-9D89-6538DD30C298}</Project>
+      <Name>FreightSystem.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
