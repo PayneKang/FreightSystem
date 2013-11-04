@@ -1,98 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
-using System.Globalization;
-using System.Web.Mvc;
-using System.Web.Security;
+using System.Linq;
+using System.Web;
 
 namespace FreightSystem.Models
 {
-    public class UsersContext : DbContext
+    public class UserModel
     {
-        public UsersContext()
-            : base("DefaultConnection")
-        {
-        }
-
-        public DbSet<UserProfile> UserProfiles { get; set; }
+        public string Location { get; set; }
+        public string Name { get; set; }
+        public string Password { get; set; }
+        public int RoleID { get; set; }
+        public int UserID { get; set; }
+        public string Comment { get; set; }
+        public DateTime CreateDateTime { get; set; }
+        public RoleModel Role { get; set; }
     }
-
-    [Table("UserProfile")]
-    public class UserProfile
+    public class RoleModel
     {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
-        public string UserName { get; set; }
+        public int RoleID { get; set; }
+        public string RoleName { get; set; }
+        public AccessModel[] Accesses { get; set; }
     }
-
-    public class RegisterExternalLoginModel
+    public class AccessModel
     {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        public string ExternalLoginData { get; set; }
+        public bool CanCreate { get; set; }
+        public bool CanDelete { get; set; }
+        public bool CanUpdate { get; set; }
+        public bool CanQuery { get; set; }
+        public string ModelName { get; set; }
+        public string PropertyName { get; set; }
+        public int RoleID { get; set; }
     }
-
-    public class LocalPasswordModel
-    {
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
-        public string OldPassword { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "New password")]
-        public string NewPassword { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-    }
-
     public class LoginModel
     {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        public string Username { get; set; }
         public string Password { get; set; }
-
-        [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
-    }
-
-    public class RegisterModel
-    {
-        [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-    }
-
-    public class ExternalLogin
-    {
-        public string Provider { get; set; }
-        public string ProviderDisplayName { get; set; }
-        public string ProviderUserId { get; set; }
     }
 }
