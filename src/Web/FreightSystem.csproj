@@ -168,7 +168,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logics\Interfaces\ISecurityProvider.cs" />
+    <Compile Include="Logics\Interfaces\IUserProvider.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\BusinessModels.cs" />
     <Compile Include="Models\SecurityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
