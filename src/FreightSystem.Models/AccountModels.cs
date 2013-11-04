@@ -11,7 +11,7 @@ namespace FreightSystem.Models
         public string Name { get; set; }
         public string Password { get; set; }
         public int RoleID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public string Comment { get; set; }
         public DateTime CreateDateTime { get; set; }
         public RoleModel Role { get; set; }
