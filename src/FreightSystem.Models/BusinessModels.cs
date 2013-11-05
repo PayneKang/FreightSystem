@@ -28,9 +28,6 @@ namespace FreightSystem.Models
         public int CreatorUserID { get; set; }
         public decimal Deductions { get; set; }
         public decimal DeliverPrice { get; set; }
-        /// <summary>
-        /// 专线或者直运
-        /// </summary>
         public string DeliverType { get; set; }
         public decimal HandlingFee { get; set; }
         public DateTime PayDate { get; set; }

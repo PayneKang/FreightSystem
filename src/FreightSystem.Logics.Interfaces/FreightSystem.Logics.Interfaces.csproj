@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ISecurityProvider.cs" />
+    <Compile Include="IUserCacheProvider.cs" />
     <Compile Include="IUserProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

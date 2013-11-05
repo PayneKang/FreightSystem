@@ -1,7 +1,7 @@
 ﻿
 namespace FreightSystem.Logics.Interfaces
 {
-    public interface ISecurityProvider
+    public interface IUserCacheProvider
     {
 
     }

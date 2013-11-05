@@ -59,7 +59,7 @@ namespace FreightSystem.Logics.Implementations
             throw new NotImplementedException();
         }
 
-        public List<UserModel> QueryUsers(int startIndex, int length)
+        public List<UserModel> QueryUsers(int startIndex, int length,out int totalCount)
         {
             throw new NotImplementedException();
         }

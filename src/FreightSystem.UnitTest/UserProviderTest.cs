@@ -95,7 +95,8 @@ namespace FreightSystem.UnitTest
             int length = 0; // TODO: 初始化为适当的值
             List<UserModel> expected = null; // TODO: 初始化为适当的值
             List<UserModel> actual;
-            actual = target.QueryUsers(startIndex, length);
+            int totalCount;
+            actual = target.QueryUsers(startIndex, length,out totalCount);
             Assert.AreEqual(expected, actual);
             Assert.Inconclusive("验证此测试方法的正确性。");
         }
