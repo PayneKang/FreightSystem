@@ -19,7 +19,7 @@ namespace FreightSystem.Logics.Implementations
         {
         }
 
-        private void InitDBHelper()
+        public void InitDBHelper()
         {
             dbHelper = new AccessDBHelper();
         }

@@ -14,6 +14,8 @@ namespace FreightSystem.Models
         public string UserID { get; set; }
         public string Comment { get; set; }
         public DateTime CreateDateTime { get; set; }
+        public DateTime LastLoginTime { get; set; }
+        public string LastLoginIP { get; set; }
         public RoleModel Role { get; set; }
     }
     public class RoleModel
@@ -24,6 +26,7 @@ namespace FreightSystem.Models
     }
     public class AccessModel
     {
+        public int AccessID { get; set; }
         public bool CanCreate { get; set; }
         public bool CanDelete { get; set; }
         public bool CanUpdate { get; set; }

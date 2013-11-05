@@ -123,5 +123,16 @@ namespace FreightSystem.UnitTest
             Assert.IsNotNull(target);
 
         }
+
+        /// <summary>
+        ///A test for InitDBHelper
+        ///</summary>
+        [TestMethod()]
+        [DeploymentItem("FreightSystem.Logics.Implementations.dll")]
+        public void InitDBHelperTest()
+        {
+            FreightSystem.Logics.Implementations.UserProvider_Accessor target = new FreightSystem.Logics.Implementations.UserProvider_Accessor(); // TODO: Initialize to an appropriate value
+            target.InitDBHelper();
+        }
     }
 }

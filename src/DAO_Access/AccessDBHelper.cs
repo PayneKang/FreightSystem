@@ -13,7 +13,7 @@ namespace DAO_Access
         public static string OleConnString { get; set; }
         static AccessDBHelper()
         {
-            OleConnString = ConfigurationManager.ConnectionStrings["AccessConnectionString"].ConnectionString;
+            OleConnString = string.Format(ConfigurationManager.AppSettings["AccessConnectionString"], ConfigurationManager.AppSettings["DBPath"], ConfigurationManager.AppSettings["DBPassword"]);
         }
         private OleDbConnection conn;
 
@@ -41,7 +41,7 @@ namespace DAO_Access
                 cmd.Parameters.AddRange(parameters);
             OleDbDataAdapter da = new OleDbDataAdapter(cmd);
             DataSet ds = new DataSet();
-            if(length == 0 && !string.IsNullOrEmpty(srcTable))
+            if(length == 0 || string.IsNullOrEmpty(srcTable))
                 da.Fill(ds);
             else
                 da.Fill(ds,startIndex,length,srcTable);
