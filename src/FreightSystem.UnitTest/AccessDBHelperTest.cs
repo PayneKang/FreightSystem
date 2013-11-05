@@ -51,7 +51,7 @@ namespace FreightSystem.UnitTest
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            File.Copy(@"E:\Payne\FreightSystem\trunk\src\FreightSystem.UnitTest\Database\BaseDB.mdb", @"E:\Payne\FreightSystem\trunk\src\FreightSystem.UnitTest\Database\SysDB.mdb", true);
+            File.Copy(@"D:\Projects\FreightSystem\trunk\src\FreightSystem.UnitTest\Database\BaseDB.mdb", @"D:\Projects\FreightSystem\trunk\src\FreightSystem.UnitTest\Database\SysDB.mdb", true);
         }
         //
         //Use TestCleanup to run code after each test has run

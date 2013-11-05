@@ -69,19 +69,43 @@ namespace FreightSystem.UnitTest
             OleDbParameter[] mockParameters = new OleDbParameter[] { 
                 new OleDbParameter("userid","001"),
                 new OleDbParameter("password","001")};
-            mockDB.Setup(x => x.ExecuteSql2DataSet(@"select * from users where userid=@userid and password=@password",mockParameters , 0, 0, string.Empty)).Returns(mockResult);
+            mockDB.Setup(x => x.ExecuteSql2DataSet(@"select * from users where userid=@userid and password=@password", mockParameters, 0, 0, string.Empty)).Returns(mockResult);
 
             mockUser.Setup(x => x.dbHelper).Returns(mockDB.Object);
             mockUser.SetReturnsDefault(mockUser.Object);
-            
+
             UserProvider target = mockUser.Object; // TODO: 初始化为适当的值
-            
+
             string userID = "001"; // TODO: 初始化为适当的值
             string password = "001"; // TODO: 初始化为适当的值
             UserModel expected = null; // TODO: 初始化为适当的值
             UserModel actual;
             actual = target.FindUser(userID, password);
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void FindUserWithIncorrectUsernamePwd()
+        {
+            UserProvider target = new UserProvider(); // TODO: 初始化为适当的值
+
+            string userID = "001"; // TODO: 初始化为适当的值
+            string password = "001"; // TODO: 初始化为适当的值
+            UserModel expected = null; // TODO: 初始化为适当的值
+            UserModel actual;
+            actual = target.FindUser(userID, password);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod()]
+        public void FindUserWithCorrectUsernamePwd()
+        {
+            UserProvider target = new UserProvider(); // TODO: 初始化为适当的值
+
+            string userID = "Payne"; // TODO: 初始化为适当的值
+            string password = "123456"; // TODO: 初始化为适当的值
+            UserModel actual;
+            actual = target.FindUser(userID, password);
+            Assert.AreEqual("Payne Kang", actual.Name);
         }
 
         /// <summary>
@@ -92,13 +116,13 @@ namespace FreightSystem.UnitTest
         {
             UserProvider target = new UserProvider(); // TODO: 初始化为适当的值
             int startIndex = 0; // TODO: 初始化为适当的值
-            int length = 0; // TODO: 初始化为适当的值
-            List<UserModel> expected = null; // TODO: 初始化为适当的值
+            int length = 1; // TODO: 初始化为适当的值
             List<UserModel> actual;
             int totalCount;
             actual = target.QueryUsers(startIndex, length,out totalCount);
-            Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("验证此测试方法的正确性。");
+            Assert.AreEqual(1, actual.Count);
+            Assert.AreEqual(2, totalCount);
+            Assert.AreEqual("Payne Kang", actual[0].Name);
         }
 
         /// <summary>
@@ -133,6 +157,25 @@ namespace FreightSystem.UnitTest
         {
             FreightSystem.Logics.Implementations.UserProvider_Accessor target = new FreightSystem.Logics.Implementations.UserProvider_Accessor(); // TODO: Initialize to an appropriate value
             target.InitDBHelper();
+        }
+
+        /// <summary>
+        ///QueryUsers 的测试
+        ///</summary>
+        [TestMethod()]
+        public void QueryUsersTest1()
+        {
+            UserProvider target = new UserProvider(); // TODO: 初始化为适当的值
+            int startIndex = 0; // TODO: 初始化为适当的值
+            int length = 0; // TODO: 初始化为适当的值
+            int totalCount = 0; // TODO: 初始化为适当的值
+            int totalCountExpected = 0; // TODO: 初始化为适当的值
+            List<UserModel> expected = null; // TODO: 初始化为适当的值
+            List<UserModel> actual;
+            actual = target.QueryUsers(startIndex, length, out totalCount);
+            Assert.AreEqual(totalCountExpected, totalCount);
+            Assert.AreEqual(expected, actual);
+            Assert.Inconclusive("验证此测试方法的正确性。");
         }
     }
 }

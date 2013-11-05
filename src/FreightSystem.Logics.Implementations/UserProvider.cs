@@ -36,9 +36,6 @@ namespace FreightSystem.Logics.Implementations
             if (ds == null) 
                 return null;
 
-            if (ds.Tables.Count == 0)
-                return null;
-
             if (ds.Tables[0].Rows.Count == 0)
                 return null;
 
@@ -61,7 +58,25 @@ namespace FreightSystem.Logics.Implementations
 
         public List<UserModel> QueryUsers(int startIndex, int length,out int totalCount)
         {
-            throw new NotImplementedException();
+            if (dbHelper == null)
+                InitDBHelper();
+            object count = dbHelper.ExecuteScalar("select count(*) from Users");
+            totalCount = (int)count;
+            DataSet ds = dbHelper.ExecuteSql2DataSet("select * from Users", null, startIndex, length, "Users");
+
+            DataRow[] rows = new DataRow[ds.Tables[0].Rows.Count];
+            ds.Tables[0].Rows.CopyTo(rows, 0);
+            return (from x in rows
+                    select new UserModel()
+                    {
+                        Comment = x["comment"].ToString(),
+                        CreateDateTime = (DateTime)x["createdatetime"],
+                        Location = x["location"].ToString(),
+                        Name = x["name"].ToString(),
+                        Password = x["password"].ToString(),
+                        RoleID = (int)x["roleid"],
+                        UserID = x["userid"].ToString()
+                    }).ToList<UserModel>();
         }
     }
 }
