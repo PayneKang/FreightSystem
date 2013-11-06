@@ -105,6 +105,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
+    <Compile Include="Filters\LoggedInAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +208,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FreightSystem.Logics.Implementations\FreightSystem.Logics.Implementations.csproj">
+      <Project>{E41211F4-7BF9-4EBC-BF43-82E3D730F426}</Project>
+      <Name>FreightSystem.Logics.Implementations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FreightSystem.Logics.Interfaces\FreightSystem.Logics.Interfaces.csproj">
+      <Project>{7A203698-1111-43B6-A06C-5C29FB468D85}</Project>
+      <Name>FreightSystem.Logics.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FreightSystem.Models\FreightSystem.Models.csproj">
+      <Project>{13221790-B59D-4EE3-9D89-6538DD30C298}</Project>
+      <Name>FreightSystem.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Security\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
