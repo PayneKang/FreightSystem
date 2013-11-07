@@ -13,7 +13,11 @@ namespace DAO_Access
         public static string OleConnString { get; set; }
         static AccessDBHelper()
         {
-            OleConnString = string.Format(ConfigurationManager.AppSettings["AccessConnectionString"], ConfigurationManager.AppSettings["DBPath"], ConfigurationManager.AppSettings["DBPassword"]);
+            LoadDBSettingsForWeb(ConfigurationManager.AppSettings["AccessConnectionString"], ConfigurationManager.AppSettings["DBPath"], ConfigurationManager.AppSettings["DBPassword"]);
+        }
+        public static void LoadDBSettingsForWeb(string connectionStringTemp, string dbPath, string pwd)
+        {
+            OleConnString = string.Format(connectionStringTemp, dbPath, pwd);
         }
         private OleDbConnection conn;
 
