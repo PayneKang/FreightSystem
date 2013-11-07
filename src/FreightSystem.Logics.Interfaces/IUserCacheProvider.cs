@@ -6,5 +6,6 @@ namespace FreightSystem.Logics.Interfaces
     {
         UserModel GetCurrentLoggedUser();
         void SaveUser(UserModel user);
+        void CleanUser();
     }
 }
