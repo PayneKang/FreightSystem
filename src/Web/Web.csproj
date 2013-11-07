@@ -104,6 +104,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\DBConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Filters\LoggedInAttribute.cs" />
@@ -210,6 +211,10 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAO_Access\DAO_Access.csproj">
+      <Project>{3175B070-7294-4C7E-9C00-481FC6422D60}</Project>
+      <Name>DAO_Access</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FreightSystem.Logics.Implementations\FreightSystem.Logics.Implementations.csproj">
       <Project>{E41211F4-7BF9-4EBC-BF43-82E3D730F426}</Project>
       <Name>FreightSystem.Logics.Implementations</Name>
@@ -225,6 +230,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Security\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

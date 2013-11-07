@@ -1,0 +1,10 @@
+﻿@if (ViewBag.LoggedUser != null) {
+    <text>
+        你好，@ViewBag.LoggedUser.Name @Html.ActionLink("注销","Logout","Security")
+    </text>
+} else {
+    <ul>
+        <li>@Html.ActionLink("注册", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}
