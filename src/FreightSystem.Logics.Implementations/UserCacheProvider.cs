@@ -30,5 +30,15 @@ namespace FreightSystem.Logics.Implementations
             }
             HttpContext.Current.Session[UserSessionKey] = user;
         }
+
+
+        public void CleanUser()
+        {
+            if (HttpContext.Current.Session[UserSessionKey] == null)
+            {
+                return;
+            }
+            HttpContext.Current.Session.Remove(UserSessionKey);
+        }
     }
 }
