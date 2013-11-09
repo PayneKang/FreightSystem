@@ -5,6 +5,15 @@ using System.Web;
 
 namespace FreightSystem.Models
 {
+    public class TransportRecordListModel
+    {
+        public const int PageSize = 20;
+        public int PageIndex { get; set; }
+        public int TotalCount { get; set; }
+        public int TotalPage { get; set; }
+        public List<TransportRecordModel> ItemList { get; set; }
+    }
+
     public class TransportRecordModel
     {
 

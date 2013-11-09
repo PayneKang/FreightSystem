@@ -1,0 +1,32 @@
+﻿@model FreightSystem.Models.TransportRecordListModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<table cellpadding="3" cellspacing="1" border="1">
+    <thead>
+        <tr>
+            <th>日期</th>
+            <th>车牌号</th>
+            <th>司机</th>
+            <th>出发地</th>
+            <th>目的地</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">
+            首页 上一页 当前第 [ @Model.PageIndex ] 页，共 [ @Model.TotalPage ] 页 下一页 尾页
+            </td>
+        </tr>
+    </tfoot>
+</table>
