@@ -12,7 +12,8 @@ namespace FreightSystem.Logics.Implementations
 {
     public class UserProvider:IUserProvider
     {
-        public const string QueryUserSql = @"select * from users where userid=@userid and password=@password";
+        private const string QueryUserSql = @"select * from users where [userid]=@userid and [password]=@password";
+        private const string ChangePasswordSql = @"update users set [password]=@newpassword where ([userid]=@userid)";
         public virtual IOleDBHelper dbHelper { get; private set; }
 
         public UserProvider()
@@ -77,6 +78,17 @@ namespace FreightSystem.Logics.Implementations
                         RoleID = (int)x["roleid"],
                         UserID = x["userid"].ToString()
                     }).ToList<UserModel>();
+        }
+
+
+        public void ChangePassword(string userID, string newPassword)
+        {
+            if (dbHelper == null)
+                InitDBHelper();
+            dbHelper.ExecuteNonQuery(ChangePasswordSql, new OleDbParameter[] { 
+                new OleDbParameter("newpassword",newPassword),
+                new OleDbParameter("userid",userID)
+            });
         }
     }
 }

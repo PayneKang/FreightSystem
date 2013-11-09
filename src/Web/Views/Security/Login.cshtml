@@ -1,10 +1,9 @@
 ﻿@model FreightSystem.Models.LoginModel
 @{
-    ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "登录系统";
 }
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
+    <h1>@ViewBag.Title</h1>
 </hgroup>
 
 
@@ -12,14 +11,13 @@
 <h2>@ViewBag.ErrorMessage</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     <fieldset>
-        <legend>“登录”表单</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.Username)
+                <div>用户名</div>
                 @Html.TextBoxFor(m => m.Username)
             </li>
             <li>
-                @Html.LabelFor(m => m.Password)
+                <div>密码</div>
                 @Html.PasswordFor(m => m.Password)
             </li>
         </ol>
