@@ -22,19 +22,14 @@ namespace FreightSystem.Models
         public DateTime DeliverDate { get; set; }
         public string DeliverNumber { get; set; }
         public string Driver { get; set; }
-        public int FromLocation { get; set; }
+        public string FromLocation { get; set; }
         public string PackageName { get; set; }
         public int Quantity { get; set; }
         public string ToLocation { get; set; }
         public decimal Volume { get; set; }
         public decimal AccountPayble { get; set; }
-        public string Additional_1 { get; set; }
-        public string Additional_2 { get; set; }
-        public string Additional_3 { get; set; }
-        public string Additional_4 { get; set; }
-        public string Additional_5 { get; set; }
         public string Comment { get; set; }
-        public int CreatorUserID { get; set; }
+        public string CreatorUserID { get; set; }
         public decimal Deductions { get; set; }
         public decimal DeliverPrice { get; set; }
         public string DeliverType { get; set; }

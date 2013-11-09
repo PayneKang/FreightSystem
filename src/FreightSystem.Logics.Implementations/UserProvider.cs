@@ -10,25 +10,14 @@ using System.Data;
 
 namespace FreightSystem.Logics.Implementations
 {
-    public class UserProvider:IUserProvider
+    public class UserProvider : BaseProvider,IUserProvider
     {
         private const string QueryUserSql = @"select * from users where [userid]=@userid and [password]=@password";
         private const string ChangePasswordSql = @"update users set [password]=@newpassword where ([userid]=@userid)";
         public virtual IOleDBHelper dbHelper { get; private set; }
 
-        public UserProvider()
-        {
-        }
-
-        public void InitDBHelper()
-        {
-            dbHelper = new AccessDBHelper();
-        }
-
         public UserModel FindUser(string userID, string password)
         {
-            if (dbHelper == null)
-                InitDBHelper();
             DataSet ds = dbHelper.ExecuteSql2DataSet(QueryUserSql, new OleDbParameter[] { 
                 new OleDbParameter("userid",userID),
                 new OleDbParameter("password",password)
@@ -59,8 +48,6 @@ namespace FreightSystem.Logics.Implementations
 
         public List<UserModel> QueryUsers(int startIndex, int length,out int totalCount)
         {
-            if (dbHelper == null)
-                InitDBHelper();
             object count = dbHelper.ExecuteScalar("select count(*) from Users");
             totalCount = (int)count;
             DataSet ds = dbHelper.ExecuteSql2DataSet("select * from Users", null, startIndex, length, "Users");
@@ -83,8 +70,6 @@ namespace FreightSystem.Logics.Implementations
 
         public void ChangePassword(string userID, string newPassword)
         {
-            if (dbHelper == null)
-                InitDBHelper();
             dbHelper.ExecuteNonQuery(ChangePasswordSql, new OleDbParameter[] { 
                 new OleDbParameter("newpassword",newPassword),
                 new OleDbParameter("userid",userID)
