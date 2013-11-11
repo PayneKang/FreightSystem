@@ -6,6 +6,7 @@ using FreightSystem.Logics.Interfaces;
 using DAO_Access;
 using FreightSystem.Models;
 using System.Data;
+using System.Data.OleDb;
 
 namespace FreightSystem.Logics.Implementations
 {
@@ -69,7 +70,32 @@ namespace FreightSystem.Logics.Implementations
 
         public void InsertTransprotModel(TransportRecordModel model)
         {
-            throw new NotImplementedException();
+            OleDbParameter[] insertParameters = new OleDbParameter[] { 
+                //@, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @, @
+                new OleDbParameter("CarLicense",model.CarLicense),
+                new OleDbParameter("ClientName",model.ClientName),
+                new OleDbParameter("DeliverDate",model.DeliverDate),
+                new OleDbParameter("DeliverNumber",model.DeliverNumber),
+                new OleDbParameter("Driver",model.Driver),
+                new OleDbParameter("FromLocation",model.FromLocation),
+                new OleDbParameter("PackageName",model.PackageName),
+                new OleDbParameter("Quantity",model.Quantity),
+                new OleDbParameter("ToLocation",model.ToLocation),
+                new OleDbParameter("Volumn",model.Volume),
+                new OleDbParameter("AccountPayble",model.AccountPayble),
+                new OleDbParameter("Comment",model.Comment),
+                new OleDbParameter("CreatorUserID",model.CreatorUserID),
+                new OleDbParameter("Deduction",model.Deductions),
+                new OleDbParameter("DeliverPrice",model.DeliverPrice),
+                new OleDbParameter("DeliverType",model.DeliverType),
+                new OleDbParameter("HandlingFee",model.HandlingFee),
+                new OleDbParameter("PayDate",model.PayDate),
+                new OleDbParameter("PrePay",model.PrePay),
+                new OleDbParameter("Reparations",model.Reparations),
+                new OleDbParameter("ShortBargeFee",model.ShortBargeFee),
+                new OleDbParameter("Status",model.Status)
+            };
+            DbHelper.ExecuteNonQuery(InsertTransportRecordSql, insertParameters);
         }
     }
 }
