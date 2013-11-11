@@ -10,69 +10,70 @@ using System.Data;
 
 namespace FreightSystem.Logics.Implementations
 {
-    public class UserProvider : BaseProvider,IUserProvider
+    public class UserProvider : IUserProvider
     {
-        private const string QueryUserSql = @"select * from users where [userid]=@userid and [password]=@password";
-        private const string ChangePasswordSql = @"update users set [password]=@newpassword where ([userid]=@userid)";
-
         public UserModel FindUser(string userID, string password)
         {
-            DataSet ds = DbHelper.ExecuteSql2DataSet(QueryUserSql, new OleDbParameter[] { 
-                new OleDbParameter("userid",userID),
-                new OleDbParameter("password",password)
-            },0,0,string.Empty);
-
-            if (ds == null) 
-                return null;
-
-            if (ds.Tables[0].Rows.Count == 0)
-                return null;
-
-            return new UserModel()
+            using (SQLDBDataContext context = new SQLDBDataContext())
             {
-                 Comment = ds.Tables[0].Rows[0]["comment"].ToString(),
-                 CreateDateTime = (DateTime)ds.Tables[0].Rows[0]["createdatetime"],
-                 Location = ds.Tables[0].Rows[0]["location"].ToString(),
-                 Name = ds.Tables[0].Rows[0]["name"].ToString(),
-                 Password = ds.Tables[0].Rows[0]["password"].ToString(),
-                 RoleID = (int)ds.Tables[0].Rows[0]["roleid"],
-                 UserID = ds.Tables[0].Rows[0]["userid"].ToString()
-            };
+                User user = context.Users.FirstOrDefault(x => x.UserID == userID && x.Password == password);
+                if (user == null)
+                    return null;
+                return new UserModel()
+                {
+                    Comment = user.Comment,
+                    CreateDateTime = user.CreateDateTime,
+                    Location = user.Location,
+                    Name = user.Name,
+                    Password = user.Password,
+                    RoleID = user.RoleId,
+                    UserID = user.UserID
+                };
+            }
         }
 
         public void UpdateUser(UserModel user)
         {
-            throw new NotImplementedException();
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                User target = context.Users.FirstOrDefault(x => x.UserID == user.UserID);
+                if (target == null)
+                    throw new ApplicationException("用户不存在");
+                target.Comment = user.Comment;
+                target.LastLoginIP = user.LastLoginIP;
+                target.LastLoginTime = user.LastLoginTime;
+                target.Location = user.Location;
+                target.Name = user.Name;
+                target.RoleId = user.RoleID;
+                context.SubmitChanges();
+            }
         }
 
         public List<UserModel> QueryUsers(int startIndex, int length,out int totalCount)
         {
-            object count = DbHelper.ExecuteScalar("select count(*) from Users");
-            totalCount = (int)count;
-            DataSet ds = DbHelper.ExecuteSql2DataSet("select * from Users", null, startIndex, length, "Users");
-
-            DataRow[] rows = new DataRow[ds.Tables[0].Rows.Count];
-            ds.Tables[0].Rows.CopyTo(rows, 0);
-            return (from x in rows
-                    select new UserModel()
-                    {
-                        Comment = x["comment"].ToString(),
-                        CreateDateTime = (DateTime)x["createdatetime"],
-                        Location = x["location"].ToString(),
-                        Name = x["name"].ToString(),
-                        Password = x["password"].ToString(),
-                        RoleID = (int)x["roleid"],
-                        UserID = x["userid"].ToString()
-                    }).ToList<UserModel>();
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                totalCount = context.Users.Count();
+                List<UserModel> result = (from x in context.Users
+                                          orderby x.CreateDateTime descending
+                                          select new UserModel()
+                                          {
+                                          }).ToList();
+                return result;
+            }
         }
 
 
         public void ChangePassword(string userID, string newPassword)
         {
-            DbHelper.ExecuteNonQuery(ChangePasswordSql, new OleDbParameter[] { 
-                new OleDbParameter("newpassword",newPassword),
-                new OleDbParameter("userid",userID)
-            });
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                User target = context.Users.FirstOrDefault(x => x.UserID == userID);
+                if (target == null)
+                    throw new ApplicationException("用户不存在");
+                target.Password = newPassword;
+                context.SubmitChanges();
+            }
         }
     }
 }

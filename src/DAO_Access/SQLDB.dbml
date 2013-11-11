@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FreightSystemDB" Class="SQLDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=FreightSystemDB;User ID=sa" SettingsObjectName="DAO_Access.Properties.Settings" SettingsPropertyName="FreightSystemDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Access" Member="Accesses">
+    <Type Name="Access">
+      <Column Name="AccessID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CanCreate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanDelete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanUpdate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CanQuery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ModelName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PropertyName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Role_Access" Member="Role" ThisKey="RoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="CreateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Location" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginIP" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="User_TransportRecord" Member="TransportRecords" ThisKey="UserID" OtherKey="CreatorUserID" Type="TransportRecord" />
+      <Association Name="Role_User" Member="Role" ThisKey="RoleId" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Role">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Role_Access" Member="Accesses" ThisKey="RoleID" OtherKey="RoleID" Type="Access" />
+      <Association Name="Role_User" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransportRecords" Member="TransportRecords">
+    <Type Name="TransportRecord">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CarLicense" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ClientName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="DeliverDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DeliverNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Driver" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FromLocation" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PackageName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ToLocation" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Volume" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AccountPayble" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatorUserID" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Deductions" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DeliverPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DeliverType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HandlingFee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PayDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PrePay" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Reparations" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ShortBargeFee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="User_TransportRecord" Member="User" ThisKey="CreatorUserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

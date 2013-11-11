@@ -8,7 +8,7 @@ using FreightSystem.Models;
 
 namespace FreightSystem.Logics.Implementations
 {
-    public class UserCacheProvider : BaseProvider,IUserCacheProvider
+    public class UserCacheProvider : IUserCacheProvider
     {
         private const string UserSessionKey = "LoggedUser";
         public UserModel GetCurrentLoggedUser()
