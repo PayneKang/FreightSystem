@@ -11,8 +11,9 @@ namespace FreightSystem.Logics.Implementations
 {
     public class BusinessProvider : BaseProvider,IBusinessProvider
     {
-        public const string CountTransportListSql = "select count(*) from [TransportRecords]";
-        public const string QueryTransportListSql = "select * from [TransportRecords] order by id desc";
+        public const string CountTransportListSql = @"select count(*) from [TransportRecords]";
+        public const string QueryTransportListSql = @"select * from [TransportRecords] order by id desc";
+        public const string InsertTransportRecordSql = @"insert into [TransportRecords] (CarLicense, ClientName, DeliverDate, DeliverNumber, Driver, FromLocation, PackageName, Quantity, ToLocation, Volumn, AccountPayble, Comment, CreatorUserID, Deductions, DeliverPrice, DeliverType, HandlingFee, PayDate, PrePay, Reparations, ShortBargeFee, Status) Values(@CarLicense, @ClientName, @DeliverDate, @DeliverNumber, @Driver, @FromLocation, @PackageName, @Quantity, @ToLocation, @Volumn, @AccountPayble, @Comment, @CreatorUserID, @Deduction, @DeliverPrice, @DeliverType, @HandlingFee, @PayDate, @PrePay, @Reparations, @ShortBargeFee, @Status)";
 
         public TransportRecordListModel QueryTransportModel(int pageIndex)
         {
@@ -63,6 +64,12 @@ namespace FreightSystem.Logics.Implementations
             }
 
             return listModel;
+        }
+
+
+        public void InsertTransprotModel(TransportRecordModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

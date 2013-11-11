@@ -1,5 +1,35 @@
-﻿@{
+﻿@model FreightSystem.Models.TransportRecordModel
+@{
     ViewBag.Title = "NewTransportRecord";
 }
 
-<h2>NewTransportRecord</h2>
+<section id="loginForm">
+<h2>@ViewBag.ErrorMessage</h2>
+@using (Html.BeginForm()) {
+    <fieldset>
+    <table>
+        <tr>
+            <th>日期</th>
+            <td>@Html.TextBoxFor(m=>m.DeliverDate)</td>
+        </tr>
+        <tr>
+            <th>车牌号</th>
+            <td>@Html.TextBoxFor(m=>m.CarLicense)</td>
+        </tr>
+        <tr>
+            <th>司机</th>
+            <td>@Html.TextBoxFor(m=>m.Driver)</td>
+        </tr>
+        <tr>
+            <th>出发地</th>
+            <td>@Html.TextBoxFor(m=>m.FromLocation)</td>
+        </tr>
+        <tr>
+            <th>目的地</th>
+            <td>@Html.TextBoxFor(m=>m.ToLocation)</td>
+        </tr>
+    </table>
+    <input type="submit" value="保存" />
+    </fieldset>
+}
+</section>
