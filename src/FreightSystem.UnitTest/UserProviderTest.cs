@@ -71,7 +71,7 @@ namespace FreightSystem.UnitTest
                 new OleDbParameter("password","001")};
             mockDB.Setup(x => x.ExecuteSql2DataSet(@"select * from users where userid=@userid and password=@password", mockParameters, 0, 0, string.Empty)).Returns(mockResult);
 
-            mockUser.Setup(x => x.dbHelper).Returns(mockDB.Object);
+            mockUser.Setup(x => x.DbHelper).Returns(mockDB.Object);
             mockUser.SetReturnsDefault(mockUser.Object);
 
             UserProvider target = mockUser.Object; // TODO: 初始化为适当的值

@@ -14,11 +14,10 @@ namespace FreightSystem.Logics.Implementations
     {
         private const string QueryUserSql = @"select * from users where [userid]=@userid and [password]=@password";
         private const string ChangePasswordSql = @"update users set [password]=@newpassword where ([userid]=@userid)";
-        public virtual IOleDBHelper dbHelper { get; private set; }
 
         public UserModel FindUser(string userID, string password)
         {
-            DataSet ds = dbHelper.ExecuteSql2DataSet(QueryUserSql, new OleDbParameter[] { 
+            DataSet ds = DbHelper.ExecuteSql2DataSet(QueryUserSql, new OleDbParameter[] { 
                 new OleDbParameter("userid",userID),
                 new OleDbParameter("password",password)
             },0,0,string.Empty);
@@ -48,9 +47,9 @@ namespace FreightSystem.Logics.Implementations
 
         public List<UserModel> QueryUsers(int startIndex, int length,out int totalCount)
         {
-            object count = dbHelper.ExecuteScalar("select count(*) from Users");
+            object count = DbHelper.ExecuteScalar("select count(*) from Users");
             totalCount = (int)count;
-            DataSet ds = dbHelper.ExecuteSql2DataSet("select * from Users", null, startIndex, length, "Users");
+            DataSet ds = DbHelper.ExecuteSql2DataSet("select * from Users", null, startIndex, length, "Users");
 
             DataRow[] rows = new DataRow[ds.Tables[0].Rows.Count];
             ds.Tables[0].Rows.CopyTo(rows, 0);
@@ -70,7 +69,7 @@ namespace FreightSystem.Logics.Implementations
 
         public void ChangePassword(string userID, string newPassword)
         {
-            dbHelper.ExecuteNonQuery(ChangePasswordSql, new OleDbParameter[] { 
+            DbHelper.ExecuteNonQuery(ChangePasswordSql, new OleDbParameter[] { 
                 new OleDbParameter("newpassword",newPassword),
                 new OleDbParameter("userid",userID)
             });
