@@ -17,5 +17,12 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [LoggedIn]
+        [HttpGet]
+        public ActionResult NewTransportRecord()
+        {
+            return View();
+        }
+
     }
 }
