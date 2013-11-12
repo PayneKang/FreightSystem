@@ -13,16 +13,18 @@ namespace Web.Controllers
     public class BusinessController : Controller
     {
         IBusinessProvider businessProvider;
+        IUserCacheProvider cacheProvider;
 
         public BusinessController()
         {
             this.businessProvider = new BusinessProvider();
+            this.cacheProvider = new UserCacheProvider();
         }
 
         [LoggedIn]
-        public ActionResult Index(int pageIndex = 1)
+        public ActionResult Index(int page = 1)
         {
-            TransportRecordListModel model = new TransportRecordListModel();
+            TransportRecordListModel model = businessProvider.QueryTransportModel(page);
             return View(model);
         }
 
@@ -37,7 +39,16 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult NewTransportRecord(TransportRecordModel model)
         {
-            businessProvider.InsertTransprotModel(model);
+            model.CreatorUserID = this.cacheProvider.GetCurrentLoggedUser().UserID;
+            try
+            {
+                businessProvider.InsertTransprotModel(model);
+                return RedirectToAction("Index", "Business");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+            }
             return View(model);
         }
 

@@ -22,11 +22,15 @@ namespace FreightSystem.Logics.Implementations
                 int totalCount = context.TransportRecords.Count();
                 listModel.TotalCount = totalCount;
                 listModel.TotalPage = totalCount / TransportRecordListModel.PageSize;
+                listModel.PageIndex = pageIndex;
                 if (totalCount % TransportRecordListModel.PageSize > 0)
                     listModel.TotalPage++;
-
+                if (listModel.TotalPage < 1)
+                    listModel.TotalPage = 1;
+                if (pageIndex > listModel.TotalPage)
+                    pageIndex = listModel.TotalPage;
                 int startIndex = (pageIndex - 1) * TransportRecordListModel.PageSize;
-                listModel.ItemList = (from x in context.TransportRecords.Skip(startIndex).Take(TransportRecordListModel.PageSize)
+                listModel.ItemList = (from x in context.TransportRecords.OrderByDescending(x=>x.ID).Skip(startIndex).Take(TransportRecordListModel.PageSize)
                                       select new TransportRecordModel()
                                       {
                                           AccountPayble = x.AccountPayble,

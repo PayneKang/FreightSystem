@@ -17,7 +17,10 @@ namespace Web.Filters
         {
             UserModel loggedUser = provider.GetCurrentLoggedUser();
             if (loggedUser == null)
-                filterContext.HttpContext.Response.Redirect("/Security/Login");
+            {
+                filterContext.Result = new RedirectResult("/Security/Login");
+                return;
+            }
             filterContext.Controller.ViewBag.LoggedUser = loggedUser;
             base.OnActionExecuting(filterContext);
         }

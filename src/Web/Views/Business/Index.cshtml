@@ -1,4 +1,5 @@
 ﻿@model FreightSystem.Models.TransportRecordListModel
+@using FreightSystem.Models;
 @{
     ViewBag.Title = "Index";
 }
@@ -16,13 +17,16 @@
         </tr>
     </thead>
     <tbody>
+    @foreach (TransportRecordModel record in Model.ItemList)
+    {
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>@record.DeliverDate</td>
+            <td>@record.CarLicense</td>
+            <td>@record.Driver</td>
+            <td>@record.FromLocation</td>
+            <td>@record.ToLocation</td>
         </tr>
+    }
     </tbody>
     <tfoot>
         <tr>
