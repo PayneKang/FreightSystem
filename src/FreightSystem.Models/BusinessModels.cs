@@ -16,7 +16,6 @@ namespace FreightSystem.Models
 
     public class TransportRecordModel
     {
-
         public string CarLicense { get; set; }
         public string ClientName { get; set; }
         public string Consignee { get; set; }
@@ -27,6 +26,7 @@ namespace FreightSystem.Models
         public string PackageName { get; set; }
         public int? Quantity { get; set; }
         public string ToLocation { get; set; }
+        public string ToProvince { get; set; }
         public double? Volume { get; set; }
         public double? AccountPayble { get; set; }
         public string Comment { get; set; }
@@ -40,5 +40,6 @@ namespace FreightSystem.Models
         public double? Reparations { get; set; }
         public double? ShortBargeFee { get; set; }
         public string Status { get; set; }
+        public string TrayNo { get; set; }
     }
 }

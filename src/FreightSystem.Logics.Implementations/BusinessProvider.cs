@@ -54,7 +54,8 @@ namespace FreightSystem.Logics.Implementations
                                           ShortBargeFee = x.ShortBargeFee,
                                           Status = x.Status,
                                           ToLocation = x.ToLocation,
-                                          Volume = x.Volume
+                                          Volume = x.Volume,
+                                          TrayNo = x.TrayNo
                                       }).ToList();
             }
             return listModel;
@@ -88,7 +89,8 @@ namespace FreightSystem.Logics.Implementations
                     ShortBargeFee = model.ShortBargeFee,
                     Status = model.Status,
                     ToLocation = model.ToLocation,
-                    Volume = model.Volume
+                    Volume = model.Volume,
+                    TrayNo = model.TrayNo
                 };
                 context.TransportRecords.InsertOnSubmit(newRecord);
                 context.SubmitChanges();

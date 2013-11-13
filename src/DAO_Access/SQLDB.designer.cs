@@ -895,7 +895,7 @@ namespace DAO_Access
 		
 		private string _Status;
 		
-		private string _Consignee;
+		private string _TrayNo;
 		
 		private EntityRef<User> _User;
 		
@@ -949,8 +949,8 @@ namespace DAO_Access
     partial void OnShortBargeFeeChanged();
     partial void OnStatusChanging(string value);
     partial void OnStatusChanged();
-    partial void OnConsigneeChanging(string value);
-    partial void OnConsigneeChanged();
+    partial void OnTrayNoChanging(string value);
+    partial void OnTrayNoChanged();
     #endregion
 		
 		public TransportRecord()
@@ -1423,22 +1423,22 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Consignee", DbType="nvarchar(255)")]
-		public string Consignee
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrayNo", DbType="nvarchar(255)")]
+		public string TrayNo
 		{
 			get
 			{
-				return this._Consignee;
+				return this._TrayNo;
 			}
 			set
 			{
-				if ((this._Consignee != value))
+				if ((this._TrayNo != value))
 				{
-					this.OnConsigneeChanging(value);
+					this.OnTrayNoChanging(value);
 					this.SendPropertyChanging();
-					this._Consignee = value;
-					this.SendPropertyChanged("Consignee");
-					this.OnConsigneeChanged();
+					this._TrayNo = value;
+					this.SendPropertyChanged("TrayNo");
+					this.OnTrayNoChanged();
 				}
 			}
 		}
