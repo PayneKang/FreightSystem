@@ -40,7 +40,6 @@ namespace FreightSystem.Logics.Implementations
                                           CreatorUserID = x.CreatorUserID,
                                           Deductions = x.Deductions,
                                           DeliverDate = x.DeliverDate,
-                                          DeliverNumber = x.DeliverNumber,
                                           DeliverPrice = x.DeliverPrice,
                                           DeliverType = x.DeliverType,
                                           Driver = x.Driver,
@@ -66,7 +65,7 @@ namespace FreightSystem.Logics.Implementations
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
-                TransportRecord newRecord = new TransportRecord()
+                TransportRecords newRecord = new TransportRecords()
                 {
                     AccountPayble = model.AccountPayble,
                     CarLicense = model.CarLicense,
@@ -75,7 +74,6 @@ namespace FreightSystem.Logics.Implementations
                     CreatorUserID = model.CreatorUserID,
                     Deductions = model.Deductions,
                     DeliverDate = model.DeliverDate,
-                    DeliverNumber = model.DeliverNumber,
                     DeliverPrice = model.DeliverPrice,
                     DeliverType = model.DeliverType,
                     Driver = model.Driver,

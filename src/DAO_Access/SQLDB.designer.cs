@@ -33,15 +33,15 @@ namespace DAO_Access
     partial void InsertAccess(Access instance);
     partial void UpdateAccess(Access instance);
     partial void DeleteAccess(Access instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
-    partial void InsertRole(Role instance);
-    partial void UpdateRole(Role instance);
-    partial void DeleteRole(Role instance);
-    partial void InsertTransportRecord(TransportRecord instance);
-    partial void UpdateTransportRecord(TransportRecord instance);
-    partial void DeleteTransportRecord(TransportRecord instance);
+    partial void InsertUsers(Users instance);
+    partial void UpdateUsers(Users instance);
+    partial void DeleteUsers(Users instance);
+    partial void InsertRoles(Roles instance);
+    partial void UpdateRoles(Roles instance);
+    partial void DeleteRoles(Roles instance);
+    partial void InsertTransportRecords(TransportRecords instance);
+    partial void UpdateTransportRecords(TransportRecords instance);
+    partial void DeleteTransportRecords(TransportRecords instance);
     #endregion
 		
 		public SQLDBDataContext() : 
@@ -74,7 +74,7 @@ namespace DAO_Access
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Access> Accesses
+		public System.Data.Linq.Table<Access> Access
 		{
 			get
 			{
@@ -82,27 +82,27 @@ namespace DAO_Access
 			}
 		}
 		
-		public System.Data.Linq.Table<User> Users
+		public System.Data.Linq.Table<Users> Users
 		{
 			get
 			{
-				return this.GetTable<User>();
+				return this.GetTable<Users>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Role> Roles
+		public System.Data.Linq.Table<Roles> Roles
 		{
 			get
 			{
-				return this.GetTable<Role>();
+				return this.GetTable<Roles>();
 			}
 		}
 		
-		public System.Data.Linq.Table<TransportRecord> TransportRecords
+		public System.Data.Linq.Table<TransportRecords> TransportRecords
 		{
 			get
 			{
-				return this.GetTable<TransportRecord>();
+				return this.GetTable<TransportRecords>();
 			}
 		}
 	}
@@ -129,7 +129,7 @@ namespace DAO_Access
 		
 		private int _RoleID;
 		
-		private EntityRef<Role> _Role;
+		private EntityRef<Roles> _Roles;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -155,7 +155,7 @@ namespace DAO_Access
 		
 		public Access()
 		{
-			this._Role = default(EntityRef<Role>);
+			this._Roles = default(EntityRef<Roles>);
 			OnCreated();
 		}
 		
@@ -310,7 +310,7 @@ namespace DAO_Access
 			{
 				if ((this._RoleID != value))
 				{
-					if (this._Role.HasLoadedOrAssignedValue)
+					if (this._Roles.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -323,36 +323,36 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Access", Storage="_Role", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
-		public Role Role
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Access", Storage="_Roles", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
+		public Roles Roles
 		{
 			get
 			{
-				return this._Role.Entity;
+				return this._Roles.Entity;
 			}
 			set
 			{
-				Role previousValue = this._Role.Entity;
+				Roles previousValue = this._Roles.Entity;
 				if (((previousValue != value) 
-							|| (this._Role.HasLoadedOrAssignedValue == false)))
+							|| (this._Roles.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Role.Entity = null;
-						previousValue.Accesses.Remove(this);
+						this._Roles.Entity = null;
+						previousValue.Access.Remove(this);
 					}
-					this._Role.Entity = value;
+					this._Roles.Entity = value;
 					if ((value != null))
 					{
-						value.Accesses.Add(this);
+						value.Access.Add(this);
 						this._RoleID = value.RoleID;
 					}
 					else
 					{
 						this._RoleID = default(int);
 					}
-					this.SendPropertyChanged("Role");
+					this.SendPropertyChanged("Roles");
 				}
 			}
 		}
@@ -379,7 +379,7 @@ namespace DAO_Access
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Users : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -402,9 +402,9 @@ namespace DAO_Access
 		
 		private string _Name;
 		
-		private EntitySet<TransportRecord> _TransportRecords;
+		private EntitySet<TransportRecords> _TransportRecords;
 		
-		private EntityRef<Role> _Role;
+		private EntityRef<Roles> _Roles;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -430,10 +430,10 @@ namespace DAO_Access
     partial void OnNameChanged();
     #endregion
 		
-		public User()
+		public Users()
 		{
-			this._TransportRecords = new EntitySet<TransportRecord>(new Action<TransportRecord>(this.attach_TransportRecords), new Action<TransportRecord>(this.detach_TransportRecords));
-			this._Role = default(EntityRef<Role>);
+			this._TransportRecords = new EntitySet<TransportRecords>(new Action<TransportRecords>(this.attach_TransportRecords), new Action<TransportRecords>(this.detach_TransportRecords));
+			this._Roles = default(EntityRef<Roles>);
 			OnCreated();
 		}
 		
@@ -508,7 +508,7 @@ namespace DAO_Access
 			{
 				if ((this._RoleId != value))
 				{
-					if (this._Role.HasLoadedOrAssignedValue)
+					if (this._Roles.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -621,8 +621,8 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_TransportRecord", Storage="_TransportRecords", ThisKey="UserID", OtherKey="CreatorUserID")]
-		public EntitySet<TransportRecord> TransportRecords
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_TransportRecords", Storage="_TransportRecords", ThisKey="UserID", OtherKey="CreatorUserID")]
+		public EntitySet<TransportRecords> TransportRecords
 		{
 			get
 			{
@@ -634,26 +634,26 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_User", Storage="_Role", ThisKey="RoleId", OtherKey="RoleID", IsForeignKey=true)]
-		public Role Role
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Roles", ThisKey="RoleId", OtherKey="RoleID", IsForeignKey=true)]
+		public Roles Roles
 		{
 			get
 			{
-				return this._Role.Entity;
+				return this._Roles.Entity;
 			}
 			set
 			{
-				Role previousValue = this._Role.Entity;
+				Roles previousValue = this._Roles.Entity;
 				if (((previousValue != value) 
-							|| (this._Role.HasLoadedOrAssignedValue == false)))
+							|| (this._Roles.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Role.Entity = null;
+						this._Roles.Entity = null;
 						previousValue.Users.Remove(this);
 					}
-					this._Role.Entity = value;
+					this._Roles.Entity = value;
 					if ((value != null))
 					{
 						value.Users.Add(this);
@@ -663,7 +663,7 @@ namespace DAO_Access
 					{
 						this._RoleId = default(int);
 					}
-					this.SendPropertyChanged("Role");
+					this.SendPropertyChanged("Roles");
 				}
 			}
 		}
@@ -688,21 +688,21 @@ namespace DAO_Access
 			}
 		}
 		
-		private void attach_TransportRecords(TransportRecord entity)
+		private void attach_TransportRecords(TransportRecords entity)
 		{
 			this.SendPropertyChanging();
-			entity.User = this;
+			entity.Users = this;
 		}
 		
-		private void detach_TransportRecords(TransportRecord entity)
+		private void detach_TransportRecords(TransportRecords entity)
 		{
 			this.SendPropertyChanging();
-			entity.User = null;
+			entity.Users = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
-	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class Roles : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -711,9 +711,9 @@ namespace DAO_Access
 		
 		private string _RoleName;
 		
-		private EntitySet<Access> _Accesses;
+		private EntitySet<Access> _Access;
 		
-		private EntitySet<User> _Users;
+		private EntitySet<Users> _Users;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -725,10 +725,10 @@ namespace DAO_Access
     partial void OnRoleNameChanged();
     #endregion
 		
-		public Role()
+		public Roles()
 		{
-			this._Accesses = new EntitySet<Access>(new Action<Access>(this.attach_Accesses), new Action<Access>(this.detach_Accesses));
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+			this._Access = new EntitySet<Access>(new Action<Access>(this.attach_Access), new Action<Access>(this.detach_Access));
+			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
 			OnCreated();
 		}
 		
@@ -772,21 +772,21 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_Access", Storage="_Accesses", ThisKey="RoleID", OtherKey="RoleID")]
-		public EntitySet<Access> Accesses
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Access", Storage="_Access", ThisKey="RoleID", OtherKey="RoleID")]
+		public EntitySet<Access> Access
 		{
 			get
 			{
-				return this._Accesses;
+				return this._Access;
 			}
 			set
 			{
-				this._Accesses.Assign(value);
+				this._Access.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_User", Storage="_Users", ThisKey="RoleID", OtherKey="RoleId")]
-		public EntitySet<User> Users
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Users", ThisKey="RoleID", OtherKey="RoleId")]
+		public EntitySet<Users> Users
 		{
 			get
 			{
@@ -818,33 +818,33 @@ namespace DAO_Access
 			}
 		}
 		
-		private void attach_Accesses(Access entity)
+		private void attach_Access(Access entity)
 		{
 			this.SendPropertyChanging();
-			entity.Role = this;
+			entity.Roles = this;
 		}
 		
-		private void detach_Accesses(Access entity)
+		private void detach_Access(Access entity)
 		{
 			this.SendPropertyChanging();
-			entity.Role = null;
+			entity.Roles = null;
 		}
 		
-		private void attach_Users(User entity)
+		private void attach_Users(Users entity)
 		{
 			this.SendPropertyChanging();
-			entity.Role = this;
+			entity.Roles = this;
 		}
 		
-		private void detach_Users(User entity)
+		private void detach_Users(Users entity)
 		{
 			this.SendPropertyChanging();
-			entity.Role = null;
+			entity.Roles = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TransportRecords")]
-	public partial class TransportRecord : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class TransportRecords : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -855,9 +855,7 @@ namespace DAO_Access
 		
 		private string _ClientName;
 		
-		private System.Nullable<System.DateTime> _DeliverDate;
-		
-		private string _DeliverNumber;
+		private System.DateTime _DeliverDate;
 		
 		private string _Driver;
 		
@@ -865,11 +863,11 @@ namespace DAO_Access
 		
 		private string _PackageName;
 		
-		private System.Nullable<int> _Quantity;
+		private int _Quantity;
 		
 		private string _ToLocation;
 		
-		private System.Nullable<double> _Volume;
+		private double _Volume;
 		
 		private System.Nullable<double> _AccountPayble;
 		
@@ -897,7 +895,7 @@ namespace DAO_Access
 		
 		private string _TrayNo;
 		
-		private EntityRef<User> _User;
+		private EntityRef<Users> _Users;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -909,21 +907,19 @@ namespace DAO_Access
     partial void OnCarLicenseChanged();
     partial void OnClientNameChanging(string value);
     partial void OnClientNameChanged();
-    partial void OnDeliverDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDeliverDateChanging(System.DateTime value);
     partial void OnDeliverDateChanged();
-    partial void OnDeliverNumberChanging(string value);
-    partial void OnDeliverNumberChanged();
     partial void OnDriverChanging(string value);
     partial void OnDriverChanged();
     partial void OnFromLocationChanging(string value);
     partial void OnFromLocationChanged();
     partial void OnPackageNameChanging(string value);
     partial void OnPackageNameChanged();
-    partial void OnQuantityChanging(System.Nullable<int> value);
+    partial void OnQuantityChanging(int value);
     partial void OnQuantityChanged();
     partial void OnToLocationChanging(string value);
     partial void OnToLocationChanged();
-    partial void OnVolumeChanging(System.Nullable<double> value);
+    partial void OnVolumeChanging(double value);
     partial void OnVolumeChanged();
     partial void OnAccountPaybleChanging(System.Nullable<double> value);
     partial void OnAccountPaybleChanged();
@@ -953,9 +949,9 @@ namespace DAO_Access
     partial void OnTrayNoChanged();
     #endregion
 		
-		public TransportRecord()
+		public TransportRecords()
 		{
-			this._User = default(EntityRef<User>);
+			this._Users = default(EntityRef<Users>);
 			OnCreated();
 		}
 		
@@ -979,7 +975,7 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarLicense", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CarLicense", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string CarLicense
 		{
 			get
@@ -999,7 +995,7 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientName", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string ClientName
 		{
 			get
@@ -1019,8 +1015,8 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliverDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DeliverDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliverDate", DbType="DateTime NOT NULL")]
+		public System.DateTime DeliverDate
 		{
 			get
 			{
@@ -1039,27 +1035,7 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliverNumber", DbType="NVarChar(255)")]
-		public string DeliverNumber
-		{
-			get
-			{
-				return this._DeliverNumber;
-			}
-			set
-			{
-				if ((this._DeliverNumber != value))
-				{
-					this.OnDeliverNumberChanging(value);
-					this.SendPropertyChanging();
-					this._DeliverNumber = value;
-					this.SendPropertyChanged("DeliverNumber");
-					this.OnDeliverNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Driver", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Driver", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string Driver
 		{
 			get
@@ -1079,7 +1055,7 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FromLocation", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FromLocation", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string FromLocation
 		{
 			get
@@ -1099,7 +1075,7 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageName", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string PackageName
 		{
 			get
@@ -1119,8 +1095,8 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
-		public System.Nullable<int> Quantity
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
+		public int Quantity
 		{
 			get
 			{
@@ -1139,7 +1115,7 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ToLocation", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ToLocation", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string ToLocation
 		{
 			get
@@ -1159,8 +1135,8 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Volume", DbType="Float")]
-		public System.Nullable<double> Volume
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Volume", DbType="Float NOT NULL")]
+		public double Volume
 		{
 			get
 			{
@@ -1230,7 +1206,7 @@ namespace DAO_Access
 			{
 				if ((this._CreatorUserID != value))
 				{
-					if (this._User.HasLoadedOrAssignedValue)
+					if (this._Users.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1423,7 +1399,7 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrayNo", DbType="nvarchar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrayNo", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string TrayNo
 		{
 			get
@@ -1443,26 +1419,26 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_TransportRecord", Storage="_User", ThisKey="CreatorUserID", OtherKey="UserID", IsForeignKey=true)]
-		public User User
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_TransportRecords", Storage="_Users", ThisKey="CreatorUserID", OtherKey="UserID", IsForeignKey=true)]
+		public Users Users
 		{
 			get
 			{
-				return this._User.Entity;
+				return this._Users.Entity;
 			}
 			set
 			{
-				User previousValue = this._User.Entity;
+				Users previousValue = this._Users.Entity;
 				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._User.Entity = null;
+						this._Users.Entity = null;
 						previousValue.TransportRecords.Remove(this);
 					}
-					this._User.Entity = value;
+					this._Users.Entity = value;
 					if ((value != null))
 					{
 						value.TransportRecords.Add(this);
@@ -1472,7 +1448,7 @@ namespace DAO_Access
 					{
 						this._CreatorUserID = default(string);
 					}
-					this.SendPropertyChanged("User");
+					this.SendPropertyChanged("Users");
 				}
 			}
 		}

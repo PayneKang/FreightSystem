@@ -1,7 +1,7 @@
 ﻿@model FreightSystem.Models.TransportRecordListModel
 @using FreightSystem.Models;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "发货动态列表";
 }
 <div>
     @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business")
@@ -31,7 +31,33 @@
     <tfoot>
         <tr>
             <td colspan="5">
-            首页 上一页 当前第 [ @Model.PageIndex ] 页，共 [ @Model.TotalPage ] 页 下一页 尾页
+            @if(Model.PageIndex > 1){
+                
+                <a href="?">首页</a>
+                <a href="?page=@(Model.PageIndex - 1)">上一页</a>
+                    
+            }
+            else
+            {
+                <span>首页</span>
+                <span>上一页</span>
+                    
+            }
+            当前第 [ @Model.PageIndex ] 页，共 [ @Model.TotalPage ] 页
+            @if (Model.PageIndex < Model.TotalPage)
+            {
+
+                <a href="?page=@(Model.PageIndex + 1)">下一页</a>
+                <a href="?page=@Model.TotalPage">尾页</a>
+                    
+            }
+            else
+            {
+                
+                <span>下一页</span>
+                <span>尾页</span>
+                    
+            }
             </td>
         </tr>
     </tfoot>

@@ -428,10 +428,17 @@ input, textarea {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;
-    font-size: 1.2em;
-    margin: 5px 0 6px 0;
-    padding: 5px;
-    width: 300px;
+    font-size: 12px;
+    margin: 3px 0 4px 0;
+    padding: 3px;
+    width: 80px;
+}
+
+#newTransportForm th
+{
+    text-align:right;
+    font-size:12px;
+    padding:3px;
 }
 
 textarea {

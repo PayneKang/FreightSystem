@@ -1,7 +1,11 @@
 ﻿@model FreightSystem.Models.TransportRecordModel
 @{
-    ViewBag.Title = "NewTransportRecord";
+    ViewBag.Title = "新建发货动态记录";
 }
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
 
 <section id="newTransportForm">
 <h2>@ViewBag.ErrorMessage</h2>
@@ -9,64 +13,86 @@
     <fieldset>
     <table>
         <tr>
-            <th>日期</th>
-            <td>@Html.TextBoxFor(m=>m.DeliverDate)</td>
-            <th>客户</th>
-            <td>@Html.TextBoxFor(m=>m.ClientName)</td>
+            <th style="width:110px;">日期</th>
+            <td style="width:250px;">@Html.TextBoxFor(m => m.DeliverDate) *
+                @Html.ValidationMessageFor(m => m.DeliverDate)</td>
+            <th style="width:110px;">客户</th>
+            <td style="width:250px;">@Html.TextBoxFor(m => m.ClientName) *
+                @Html.ValidationMessageFor(m => m.ClientName)</td>
         </tr>
         <tr>
             <th>托编号</th>
-            <td>@Html.TextBoxFor(m=>m.TrayNo)</td>
+            <td>@Html.TextBoxFor(m => m.TrayNo) *
+                @Html.ValidationMessageFor(m => m.TrayNo)</td>
             <th>驾驶员</th>
-            <td>@Html.TextBoxFor(m=>m.Driver)</td>
+            <td>@Html.TextBoxFor(m => m.Driver) *
+                @Html.ValidationMessageFor(m => m.Driver)</td>
         </tr>
         <tr>
             <th>车牌号</th>
-            <td>@Html.TextBoxFor(m=>m.CarLicense)</td>
+            <td>@Html.TextBoxFor(m => m.CarLicense) *
+                @Html.ValidationMessageFor(m => m.CarLicense)</td>
             <th>物品名称</th>
-            <td>@Html.TextBoxFor(m=>m.PackageName)</td>
+            <td>@Html.TextBoxFor(m => m.PackageName) *
+                @Html.ValidationMessageFor(m => m.PackageName)</td>
         </tr>
         <tr>
             <th>体积（立方米）</th>
-            <td>@Html.TextBoxFor(m=>m.Volume)</td>
+            <td>@Html.TextBoxFor(m => m.Volume) *
+                @Html.ValidationMessageFor(m => m.Volume)</td>
             <th>件数（件）</th>
-            <td>@Html.TextBoxFor(m=>m.Quantity)</td>
+            <td>@Html.TextBoxFor(m => m.Quantity) *
+                @Html.ValidationMessageFor(m => m.Quantity)</td>
         </tr>
         <tr>
             <th>起运地</th>
-            <td>@Html.TextBoxFor(m=>m.FromLocation)</td>
+            <td>@Html.TextBoxFor(m => m.FromLocation) *
+                @Html.ValidationMessageFor(m => m.FromLocation)</td>
             <th>卸货地 / 单位</th>
-            <td>@Html.TextBoxFor(m=>m.ToLocation)</td>
+            <td>@Html.TextBoxFor(m => m.ToLocation) *
+                @Html.ValidationMessageFor(m => m.ToLocation)</td>
         </tr>
         <tr>
             <th>运费</th>
-            <td>@Html.TextBoxFor(m=>m.DeliverPrice)</td>
+            <td>@Html.TextBoxFor(m => m.DeliverPrice)
+                @Html.ValidationMessageFor(m => m.DeliverPrice)</td>
             <th>短驳费</th>
-            <td>@Html.TextBoxFor(m=>m.ShortBargeFee)</td>
+            <td>@Html.TextBoxFor(m => m.ShortBargeFee)
+                @Html.ValidationMessageFor(m => m.ShortBargeFee)</td>
         </tr>
         <tr>
             <th>装卸费</th>
-            <td>@Html.TextBoxFor(m=>m.HandlingFee)</td>
+            <td>@Html.TextBoxFor(m => m.HandlingFee)
+                @Html.ValidationMessageFor(m => m.HandlingFee)</td>
             <th>赔款</th>
-            <td>@Html.TextBoxFor(m => m.Reparations)</td>
+            <td>@Html.TextBoxFor(m => m.Reparations)
+                @Html.ValidationMessageFor(m => m.Reparations)</td>
         </tr>
         <tr>
             <th>扣款</th>
-            <td>@Html.TextBoxFor(m => m.Deductions)</td>
+            <td>@Html.TextBoxFor(m => m.Deductions)
+                @Html.ValidationMessageFor(m => m.Deductions)</td>
             <th>预付</th>
-            <td>@Html.TextBoxFor(m => m.PrePay)</td>
+            <td>@Html.TextBoxFor(m => m.PrePay)
+                @Html.ValidationMessageFor(m => m.PrePay)</td>
         </tr>
         <tr>
             <th>应付</th>
-            <td>@Html.TextBoxFor(m => m.AccountPayble)</td>
+            <td>@Html.TextBoxFor(m => m.AccountPayble)
+                @Html.ValidationMessageFor(m => m.AccountPayble)</td>
             <th>付款日</th>
-            <td>@Html.TextBoxFor(m => m.PayDate)</td>
+            <td>@Html.TextBoxFor(m => m.PayDate)
+                @Html.ValidationMessageFor(m => m.PayDate)</td>
         </tr>
         <tr>
             <th>专线</th>
-            <td>@Html.TextBoxFor(m => m.DeliverType)</td>
-            <th>备注</th>
-            <td>@Html.TextBoxFor(m => m.Comment)</td>
+            <td colspan="3">@Html.TextBoxFor(m => m.DeliverType)
+                @Html.ValidationMessageFor(m => m.DeliverType)</td>
+        </tr>
+        <tr>
+            <th style="vertical-align:top;">备注</th>
+            <td colspan="3">@Html.TextAreaFor(m => m.Comment, new {@Style="width:480px; height:80px;" })
+                @Html.ValidationMessageFor(m => m.Comment)</td>
         </tr>
     </table>
     <input type="submit" value="保存" />

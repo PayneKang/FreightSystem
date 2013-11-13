@@ -16,7 +16,7 @@ namespace FreightSystem.Logics.Implementations
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
-                User user = context.Users.FirstOrDefault(x => x.UserID == userID && x.Password == password);
+                Users user = context.Users.FirstOrDefault(x => x.UserID == userID && x.Password == password);
                 if (user == null)
                     return null;
                 return new UserModel()
@@ -36,7 +36,7 @@ namespace FreightSystem.Logics.Implementations
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
-                User target = context.Users.FirstOrDefault(x => x.UserID == user.UserID);
+                Users target = context.Users.FirstOrDefault(x => x.UserID == user.UserID);
                 if (target == null)
                     throw new ApplicationException("用户不存在");
                 target.Comment = user.Comment;
@@ -68,7 +68,7 @@ namespace FreightSystem.Logics.Implementations
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
-                User target = context.Users.FirstOrDefault(x => x.UserID == userID);
+                Users target = context.Users.FirstOrDefault(x => x.UserID == userID);
                 if (target == null)
                     throw new ApplicationException("用户不存在");
                 target.Password = newPassword;

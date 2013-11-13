@@ -50,6 +50,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="SQLDB.cs">
+      <DependentUpon>SQLDB.dbml</DependentUpon>
+    </Compile>
     <Compile Include="SQLDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
