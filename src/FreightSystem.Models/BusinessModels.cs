@@ -19,6 +19,7 @@ namespace FreightSystem.Models
 
         public string CarLicense { get; set; }
         public string ClientName { get; set; }
+        public string Consignee { get; set; }
         public DateTime? DeliverDate { get; set; }
         public string DeliverNumber { get; set; }
         public string Driver { get; set; }

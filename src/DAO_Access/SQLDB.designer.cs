@@ -895,6 +895,8 @@ namespace DAO_Access
 		
 		private string _Status;
 		
+		private string _Consignee;
+		
 		private EntityRef<User> _User;
 		
     #region 可扩展性方法定义
@@ -947,6 +949,8 @@ namespace DAO_Access
     partial void OnShortBargeFeeChanged();
     partial void OnStatusChanging(string value);
     partial void OnStatusChanged();
+    partial void OnConsigneeChanging(string value);
+    partial void OnConsigneeChanged();
     #endregion
 		
 		public TransportRecord()
@@ -1415,6 +1419,26 @@ namespace DAO_Access
 					this._Status = value;
 					this.SendPropertyChanged("Status");
 					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Consignee", DbType="nvarchar(255)")]
+		public string Consignee
+		{
+			get
+			{
+				return this._Consignee;
+			}
+			set
+			{
+				if ((this._Consignee != value))
+				{
+					this.OnConsigneeChanging(value);
+					this.SendPropertyChanging();
+					this._Consignee = value;
+					this.SendPropertyChanged("Consignee");
+					this.OnConsigneeChanged();
 				}
 			}
 		}

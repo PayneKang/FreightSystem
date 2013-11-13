@@ -61,6 +61,7 @@
       <Column Name="Reparations" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="ShortBargeFee" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Consignee" Type="System.String" DbType="nvarchar(255)" CanBeNull="true" />
       <Association Name="User_TransportRecord" Member="User" ThisKey="CreatorUserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
     </Type>
   </Table>

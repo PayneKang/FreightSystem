@@ -9,20 +9,28 @@
     <fieldset>
     <table>
         <tr>
+            <th>发货单位</th>
+            <td>@Html.TextBoxFor(m=>m.ClientName)</td>
+        </tr>
+        <tr>
+            <th>驾驶员</th>
+            <td>@Html.TextBoxFor(m=>m.Driver)</td>
+        </tr>
+        <tr>
             <th>日期</th>
             <td>@Html.TextBoxFor(m=>m.DeliverDate)</td>
         </tr>
         <tr>
+            <th>发货地点</th>
+            <td>@Html.TextBoxFor(m=>m.FromLocation)</td>
+        </tr>
+        <tr>
+            <th>收货方</th>
+            <td>@Html.TextBoxFor(m=>m.Consignee)</td>
+        </tr>
+        <tr>
             <th>车牌号</th>
             <td>@Html.TextBoxFor(m=>m.CarLicense)</td>
-        </tr>
-        <tr>
-            <th>司机</th>
-            <td>@Html.TextBoxFor(m=>m.Driver)</td>
-        </tr>
-        <tr>
-            <th>出发地</th>
-            <td>@Html.TextBoxFor(m=>m.FromLocation)</td>
         </tr>
         <tr>
             <th>目的地</th>
