@@ -1,0 +1,37 @@
+﻿@model FreightSystem.Models.UserListModel
+@using FreightSystem.Models
+@{
+    ViewBag.Title = "用户列表";
+}
+
+<h2>@ViewBag.Title</h2>
+<div>
+    @Html.ActionLink("新建用户", "NewUser", "Security")
+</div>
+<table cellpadding="3" cellspacing="1" border="1">
+    <thead>
+        <tr>
+            <th>用户名</th>
+            <th>角色</th>
+            <th>备注</th>
+            <th>所在地</th>
+            <th>姓名</th>
+            <th>注册时间</th>
+            <th>最近登陆时间 | IP</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (UserModel record in Model.ItemList)
+    {
+        <tr>
+            <td>@record.UserID</td>
+            <td>@record.Role.RoleName</td>
+            <td>@record.Comment</td>
+            <td>@record.Location</td>
+            <td>@record.Name</td>
+            <td>@record.CreateDateTime</td>
+            <td>@record.LastLoginTime | @record.LastLoginIP</td>
+        </tr>
+    }
+    </tbody>
+</table>

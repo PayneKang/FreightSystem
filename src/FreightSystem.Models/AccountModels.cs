@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace FreightSystem.Models
 {
@@ -18,11 +19,19 @@ namespace FreightSystem.Models
         public string LastLoginIP { get; set; }
         public RoleModel Role { get; set; }
     }
+    public class UserListModel{
+        public List<UserModel> ItemList { get; set; }
+    }
     public class RoleModel
     {
         public int RoleID { get; set; }
+        [Required(ErrorMessage = "角色名称必须填写")]
         public string RoleName { get; set; }
         public AccessModel[] Accesses { get; set; }
+    }
+    public class RoleListModel
+    {
+        public List<RoleModel> ItemList { get; set; }
     }
     public class AccessModel
     {

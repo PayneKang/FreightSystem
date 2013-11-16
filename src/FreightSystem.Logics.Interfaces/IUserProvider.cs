@@ -12,5 +12,9 @@ namespace FreightSystem.Logics.Interfaces
         List<UserModel> QueryUsers(int startIndex, int length, out int totalCount);
         void UpdateUser(UserModel user);
         void ChangePassword(string userID, string newPassword);
+        RoleListModel GetRoleList();
+        void InsertRoleModel(RoleModel role);
+        UserListModel GetUserList();
+        void InsertUserModel(UserModel user);
     }
 }

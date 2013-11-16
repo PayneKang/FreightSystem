@@ -1,0 +1,49 @@
+﻿@model FreightSystem.Models.UserModel
+@{
+    ViewBag.Title = "新建用户";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<section id="newTransportForm">
+<h2>@ViewBag.ErrorMessage</h2>
+@using (Html.BeginForm()) {
+    <fieldset>
+    <table>
+        <tr>
+            <th style="width:110px;">用户名</th>
+            <td style="width:250px;">@Html.TextBoxFor(m => m.UserID) *
+                @Html.ValidationMessageFor(m => m.UserID)</td>
+        </tr>
+        <tr>
+            <th>密码</th>
+            <td>@Html.TextBoxFor(m => m.Password) *
+                @Html.ValidationMessageFor(m => m.Password)</td>
+        </tr>
+        <tr>
+            <th>所在地</th>
+            <td>@Html.TextBoxFor(m => m.Location) *
+                @Html.ValidationMessageFor(m => m.Location)</td>
+        </tr>
+        <tr>
+            <th>姓名</th>
+            <td>@Html.TextBoxFor(m => m.Name) *
+                @Html.ValidationMessageFor(m => m.Name)</td>
+        </tr>
+        <tr>
+            <th>角色ID</th>
+            <td>@Html.TextBoxFor(m => m.RoleID) *
+                @Html.ValidationMessageFor(m => m.RoleID)</td>
+        </tr>
+        <tr>
+            <th>备注</th>
+            <td>@Html.TextBoxFor(m => m.Comment) 
+                @Html.ValidationMessageFor(m => m.Comment)</td>
+        </tr>
+    </table>
+    <input type="submit" value="保存" />
+    </fieldset>
+}
+</section>

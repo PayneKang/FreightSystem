@@ -75,5 +75,86 @@ namespace FreightSystem.Logics.Implementations
                 context.SubmitChanges();
             }
         }
+
+
+        public RoleListModel GetRoleList()
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                RoleListModel result = new RoleListModel();
+                result.ItemList = (from x in context.Roles
+                                select new RoleModel()
+                                {
+                                    RoleID = x.RoleID,
+                                    RoleName = x.RoleName
+                                }).ToList();
+                return result;
+            }
+        }
+
+
+        public void InsertRoleModel(RoleModel role)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                Roles r = new Roles()
+                {
+                    RoleName = role.RoleName
+                };
+                context.Roles.InsertOnSubmit(r);
+                context.SubmitChanges();
+            }
+        }
+
+
+        public UserListModel GetUserList()
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                UserListModel model = new UserListModel();
+                model.ItemList = (from x in context.Users
+                                  select new UserModel()
+                                  {
+                                      Comment = x.Comment,
+                                      CreateDateTime = x.CreateDateTime,
+                                      LastLoginIP = x.LastLoginIP,
+                                      LastLoginTime = x.LastLoginTime,
+                                      Location = x.Location,
+                                      Name = x.Name,
+                                      Password = x.Password,
+                                      RoleID = x.RoleId,
+                                      UserID = x.UserID,
+                                      Role = new RoleModel()
+                                      {
+                                          RoleID = x.Roles.RoleID,
+                                          RoleName = x.Roles.RoleName
+                                      }
+                                  }).ToList();
+                return model;
+            }
+        }
+
+
+        public void InsertUserModel(UserModel user)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                Users newUser = new Users()
+                {
+                    Comment = string.IsNullOrEmpty(user.Comment)? " ":user.Comment,
+                    CreateDateTime = DateTime.Now,
+                    LastLoginIP = string.Empty,
+                    LastLoginTime = DateTime.Now,
+                    Location = user.Location,
+                    Name = user.Location,
+                    Password = user.Password,
+                    RoleId = user.RoleID,
+                    UserID = user.UserID,
+                    
+                };
+                context.Users.InsertOnSubmit(newUser);
+                context.SubmitChanges();
+            }
+        }
     }
 }

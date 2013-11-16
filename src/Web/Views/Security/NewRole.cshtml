@@ -1,0 +1,24 @@
+﻿@model FreightSystem.Models.RoleModel
+@{
+    ViewBag.Title = "新建角色";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<section id="newTransportForm">
+<h2>@ViewBag.ErrorMessage</h2>
+@using (Html.BeginForm()) {
+    <fieldset>
+    <table>
+        <tr>
+            <th style="width:110px;">角色名称</th>
+            <td style="width:250px;">@Html.TextBoxFor(m => m.RoleName) *
+                @Html.ValidationMessageFor(m => m.RoleName)</td>
+        </tr>
+    </table>
+    <input type="submit" value="保存" />
+    </fieldset>
+}
+</section>

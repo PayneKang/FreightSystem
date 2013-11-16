@@ -19,6 +19,62 @@ namespace Web.Controllers
         #endregion
 
         #region Actions
+        [LoggedIn]
+        [HttpGet]
+        public ActionResult NewUser()
+        {
+            return View();
+        }
+        [LoggedIn]
+        [HttpPost]
+        public ActionResult NewUser(UserModel model)
+        {
+            try
+            {
+                userProvider.InsertUserModel(model);
+                return RedirectToAction("UserList", "Security");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+            }
+            return View(model);
+        }
+        [LoggedIn]
+        [HttpGet]
+        public ActionResult UserList(){
+            UserListModel model = userProvider.GetUserList();
+            return View(model);
+        }
+        [LoggedIn]
+        [HttpGet]
+        public ActionResult NewRole()
+        {
+            return View();
+        }
+        [LoggedIn]
+        [HttpPost]
+        public ActionResult NewRole(RoleModel model)
+        {
+            try
+            {
+                userProvider.InsertRoleModel(model);
+                return RedirectToAction("RoleList", "Security");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        [LoggedIn]
+        public ActionResult RoleList()
+        {
+            RoleListModel model = userProvider.GetRoleList();
+            return View(model); 
+        }
         [HttpGet]
         public ActionResult Login()
         {

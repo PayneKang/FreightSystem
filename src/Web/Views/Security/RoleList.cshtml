@@ -1,0 +1,27 @@
+﻿@model FreightSystem.Models.RoleListModel
+@using FreightSystem.Models
+@{
+    ViewBag.Title = "角色列表";
+}
+
+<h2>@ViewBag.Title</h2>
+<div>
+    @Html.ActionLink("新建角色", "NewRole", "Security")
+</div>
+<table cellpadding="3" cellspacing="1" border="1">
+    <thead>
+        <tr>
+            <th>角色ID</th>
+            <th>角色名称</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (RoleModel record in Model.ItemList)
+    {
+        <tr>
+            <td>@record.RoleID</td>
+            <td>@record.RoleName</td>
+        </tr>
+    }
+    </tbody>
+</table>
