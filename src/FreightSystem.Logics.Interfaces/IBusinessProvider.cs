@@ -8,7 +8,7 @@ namespace FreightSystem.Logics.Interfaces
 {
     public interface IBusinessProvider
     {
-        TransportRecordListModel QueryTransportModel(int pageIndex);
+        TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate, int pageIndex);
         void InsertTransprotModel(TransportRecordModel model);
     }
 }

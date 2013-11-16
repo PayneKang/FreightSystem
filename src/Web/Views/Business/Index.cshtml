@@ -1,40 +1,93 @@
 ﻿@model FreightSystem.Models.TransportRecordListModel
 @using FreightSystem.Models;
+@using FreightSystem.Models.Extra;
 @{
     ViewBag.Title = "发货动态列表";
 }
 <div>
     @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business")
 </div>
+@using (Html.BeginForm("Index", "Business", FormMethod.Get))
+{
+<table>
+    <tr>
+    <td>日期 @Html.TextBoxFor(x => x.DeliverDate)</td>    
+    <td>客户 @Html.TextBoxFor(x => x.ClientName)</td>   
+    <td><input type="submit" value="查询" /></td>    
+    </tr>
+</table>
+}
+<br />
 <table cellpadding="3" cellspacing="1" border="1">
     <thead>
         <tr>
             <th>日期</th>
-            <th>车牌号</th>
-            <th>司机</th>
-            <th>出发地</th>
-            <th>目的地</th>
+            <th>客户</th>
+            <th>托编号</th>
+            <th>驾驶员</th>
+            <th>车号</th>
+            <th>货物名称</th>
+            <th>体积</th>
+            <th>数量</th>
+            <th>起运地</th>
+            <th>卸货地</th>
+            <th>运费</th>
+            <th>短驳费</th>
+            <th>装卸费</th>
+            <th>赔款</th>
+            <th>扣款</th>
+            <th>预付款</th>
+            <th>应付款</th>
+            <th>付款日</th>
+            <th>专线</th>
+            <th>备注</th>
         </tr>
     </thead>
     <tbody>
     @foreach (TransportRecordModel record in Model.ItemList)
     {
-        <tr>
-            <td>@record.DeliverDate</td>
-            <td>@record.CarLicense</td>
+        <tr type="RecordTR" TRID="@record.ID">
+            <td><div class="actionLink">@record.DeliverDate.ToString("MM.dd")</div></td>
+            <td>@record.ClientName</td>
+            <td>@record.TrayNo</td>
             <td>@record.Driver</td>
+            <td>@record.CarLicense</td>
+            <td>@record.PackageName</td>
+            <td>@record.Volume</td>
+            <td>@record.Quantity</td>
             <td>@record.FromLocation</td>
             <td>@record.ToLocation</td>
+            <td>@record.DeliverPrice</td>
+            <td>@record.ShortBargeFee</td>
+            <td>@record.HandlingFee</td>
+            <td>@record.Reparations</td>
+            <td>@record.Deductions</td>
+            <td>@record.PrePay</td>
+            <td>@record.AccountPayble</td>
+            <td>
+                @if (record.PayDate != null)
+                {
+                    record.PayDate.Value.ToString("MM.dd");
+                }
+            </td>
+            <td>@record.DeliverType</td>
+            <td>@record.Comment</td>
+        </tr>
+        <tr style="display:none;" type="TRDetails" TRID="@record.ID">
+            <td colspan="20">
+            订单的详细信息
+            </td>
         </tr>
     }
     </tbody>
     <tfoot>
-        <tr>
-            <td colspan="5">
-            @if(Model.PageIndex > 1){
+        <tr class="pager">
+            <td colspan="20">
+            @if (Model.PageIndex > 1)
+            {
                 
-                <a href="?">首页</a>
-                <a href="?page=@(Model.PageIndex - 1)">上一页</a>
+                <a href="?DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">首页</a>
+                <a href="?page=@(Model.PageIndex - 1)&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">上一页</a>
                     
             }
             else
@@ -47,8 +100,8 @@
             @if (Model.PageIndex < Model.TotalPage)
             {
 
-                <a href="?page=@(Model.PageIndex + 1)">下一页</a>
-                <a href="?page=@Model.TotalPage">尾页</a>
+                <a href="?page=@(Model.PageIndex + 1)&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">下一页</a>
+                <a href="?page=@Model.TotalPage&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">尾页</a>
                     
             }
             else
@@ -62,3 +115,18 @@
         </tr>
     </tfoot>
 </table>
+<script language="javascript" type="text/javascript">
+    $("tr[type='RecordTR'] div[class='actionLink']").each(
+        function (index) {
+            $(this).click(
+                function () {
+                    
+                    var trid = $(this).parent().parent().attr("TRID");
+                    var detailtr = $("tr[type='TRDetails'][TRID='" + trid + "']");
+
+                    detailtr.slideToggle(0,false,null);
+                }
+            );
+        }
+    );
+</script>

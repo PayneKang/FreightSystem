@@ -22,9 +22,9 @@ namespace Web.Controllers
         }
 
         [LoggedIn]
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(TransportRecordListModel model, int page = 1)
         {
-            TransportRecordListModel model = businessProvider.QueryTransportModel(page);
+            model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate, page);
             return View(model);
         }
 

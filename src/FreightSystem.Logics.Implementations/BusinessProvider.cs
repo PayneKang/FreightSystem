@@ -12,11 +12,12 @@ namespace FreightSystem.Logics.Implementations
 {
     public class BusinessProvider : IBusinessProvider
     {
-        public TransportRecordListModel QueryTransportModel(int pageIndex)
+        public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate,int pageIndex)
         {
             TransportRecordListModel listModel = new TransportRecordListModel();
             if (pageIndex < 1)
                 pageIndex = 1;
+
             using (SQLDBDataContext context = new SQLDBDataContext()) {
 
                 int totalCount = context.TransportRecords.Count();
@@ -30,9 +31,19 @@ namespace FreightSystem.Logics.Implementations
                 if (pageIndex > listModel.TotalPage)
                     pageIndex = listModel.TotalPage;
                 int startIndex = (pageIndex - 1) * TransportRecordListModel.PageSize;
-                listModel.ItemList = (from x in context.TransportRecords.OrderByDescending(x=>x.ID).Skip(startIndex).Take(TransportRecordListModel.PageSize)
+                bool checkDeliverDate = deliverDate.HasValue;
+                DateTime dd = DateTime.MinValue;
+                if (checkDeliverDate)
+                    dd = deliverDate.Value;
+                listModel.ClientName = clientName;
+                listModel.DeliverDate = deliverDate;
+                listModel.ItemList = (from x in context.TransportRecords
+                                      orderby x.ID descending
+                                      where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
+                                      && (!checkDeliverDate || x.DeliverDate.Date == dd)
                                       select new TransportRecordModel()
                                       {
+                                          ID = x.ID,
                                           AccountPayble = x.AccountPayble,
                                           CarLicense = x.CarLicense,
                                           ClientName = x.ClientName,
@@ -55,7 +66,7 @@ namespace FreightSystem.Logics.Implementations
                                           ToLocation = x.ToLocation,
                                           Volume = x.Volume,
                                           TrayNo = x.TrayNo
-                                      }).ToList();
+                                      }).Skip(startIndex).Take(TransportRecordListModel.PageSize).ToList();
             }
             return listModel;
         }

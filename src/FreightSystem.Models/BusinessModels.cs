@@ -9,6 +9,8 @@ namespace FreightSystem.Models
     public class TransportRecordListModel
     {
         public const int PageSize = 20;
+        public string ClientName { get; set; }
+        public DateTime? DeliverDate { get; set; }
         public int PageIndex { get; set; }
         public int TotalCount { get; set; }
         public int TotalPage { get; set; }
@@ -17,6 +19,7 @@ namespace FreightSystem.Models
 
     public class TransportRecordModel
     {
+        public int ID { get; set; }
         [Required(ErrorMessage="车牌号必须填写")]
         public string CarLicense { get; set; }
         [Required(ErrorMessage = "客户必须填写")]
