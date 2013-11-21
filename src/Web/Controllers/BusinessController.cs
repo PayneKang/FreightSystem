@@ -20,6 +20,19 @@ namespace Web.Controllers
             this.businessProvider = new BusinessProvider();
             this.cacheProvider = new UserCacheProvider();
         }
+        [LoggedIn]
+        public ActionResult Export()
+        {
+            string clientName = RouteData.GetRequiredString("ClientName");
+            string deliverDate = RouteData.GetRequiredString("DeliverDate");
+            string id = Request["id"];
+            return View();
+        }
+
+        private string TryGetRequiredString(string parameterName)
+        {
+            return string.Empty;
+        }
 
         [LoggedIn]
         public ActionResult Index(TransportRecordListModel model, int page = 1)

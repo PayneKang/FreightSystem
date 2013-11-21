@@ -14,10 +14,17 @@ namespace Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Export",
+                url: "Business/Export/{DeliverDate}_{ClientName}.xls",
+                defaults: new { controller = "Business", action = "Export", ClientName = UrlParameter.Optional, DeliverDate = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Business", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

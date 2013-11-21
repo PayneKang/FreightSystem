@@ -13,10 +13,22 @@
     <tr>
     <td>日期 @Html.TextBoxFor(x => x.DeliverDate)</td>    
     <td>客户 @Html.TextBoxFor(x => x.ClientName)</td>   
-    <td><input type="submit" value="查询" /></td>    
+    <td><input type="submit" value="查询" /></td>
+    <td style="width:200px;"></td>
+    <td><input type="button" id="btnExport" value="导出到Excel" /></td>
     </tr>
 </table>
 }
+<script language="javascript" type="text/javascript">
+    $("#btnExport").click(
+        function () {
+            var deliverDate = $("#DeliverDate").val();
+            var clientName = $("#ClientName").val();
+            alert("deliver date : " + deliverDate + " ; client name: " + clientName);
+            window.open("/Business/Export/" + deliverDate + "_" + clientName + ".xls");
+        }
+    );
+</script>
 <br />
 <table cellpadding="3" cellspacing="1" border="1">
     <thead>
