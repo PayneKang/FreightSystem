@@ -15,7 +15,7 @@
     <td>客户 @Html.TextBoxFor(x => x.ClientName)</td>   
     <td><input type="submit" value="查询" /></td>
     <td style="width:200px;"></td>
-    <td><input type="button" id="btnExport" value="导出到Excel" /></td>
+    <td><input type="button" id="btnExport" value="导出日报表" /></td>
     </tr>
 </table>
 }
@@ -23,9 +23,14 @@
     $("#btnExport").click(
         function () {
             var deliverDate = $("#DeliverDate").val();
+            if (deliverDate == "") {
+                alert("必须选中日期后才能导出报表");
+                return;
+            }
             var clientName = $("#ClientName").val();
-            alert("deliver date : " + deliverDate + " ; client name: " + clientName);
-            window.open("/Business/Export/" + deliverDate + "_" + clientName + ".xls");
+            if (clientName == "")
+                clientName = "NA"
+            window.open("/Business/Export/ExcelReport/" + deliverDate + "_" + clientName + ".xls");
         }
     );
 </script>

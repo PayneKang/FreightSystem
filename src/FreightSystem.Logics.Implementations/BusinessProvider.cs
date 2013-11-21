@@ -20,7 +20,13 @@ namespace FreightSystem.Logics.Implementations
 
             using (SQLDBDataContext context = new SQLDBDataContext()) {
 
-                int totalCount = context.TransportRecords.Count();
+                bool checkDeliverDate = deliverDate.HasValue;
+                DateTime dd = DateTime.MinValue;
+                if (checkDeliverDate)
+                    dd = deliverDate.Value;
+
+                int totalCount = context.TransportRecords.Count(x=>(string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
+                                      && (!checkDeliverDate || x.DeliverDate.Date == dd));
                 listModel.TotalCount = totalCount;
                 listModel.TotalPage = totalCount / TransportRecordListModel.PageSize;
                 listModel.PageIndex = pageIndex;
@@ -31,10 +37,6 @@ namespace FreightSystem.Logics.Implementations
                 if (pageIndex > listModel.TotalPage)
                     pageIndex = listModel.TotalPage;
                 int startIndex = (pageIndex - 1) * TransportRecordListModel.PageSize;
-                bool checkDeliverDate = deliverDate.HasValue;
-                DateTime dd = DateTime.MinValue;
-                if (checkDeliverDate)
-                    dd = deliverDate.Value;
                 listModel.ClientName = clientName;
                 listModel.DeliverDate = deliverDate;
                 listModel.ItemList = (from x in context.TransportRecords
@@ -104,6 +106,56 @@ namespace FreightSystem.Logics.Implementations
                 context.TransportRecords.InsertOnSubmit(newRecord);
                 context.SubmitChanges();
             }
+        }
+
+
+        public TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate)
+        {
+            TransportRecordListModel listModel = new TransportRecordListModel();
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+
+                int totalCount = context.TransportRecords.Count(x => (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
+                                      && x.DeliverDate.Date == deliverDate);
+                listModel.TotalCount = totalCount;
+                if (totalCount % TransportRecordListModel.PageSize > 0)
+                    listModel.TotalPage++;
+                if (listModel.TotalPage < 1)
+                    listModel.TotalPage = 1;
+                listModel.ClientName = clientName;
+                listModel.DeliverDate = deliverDate;
+                listModel.ItemList = (from x in context.TransportRecords
+                                      orderby x.ID descending
+                                      where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
+                                      &&  x.DeliverDate.Date == deliverDate
+                                      select new TransportRecordModel()
+                                      {
+                                          ID = x.ID,
+                                          AccountPayble = x.AccountPayble,
+                                          CarLicense = x.CarLicense,
+                                          ClientName = x.ClientName,
+                                          Comment = x.Comment,
+                                          CreatorUserID = x.CreatorUserID,
+                                          Deductions = x.Deductions,
+                                          DeliverDate = x.DeliverDate,
+                                          DeliverPrice = x.DeliverPrice,
+                                          DeliverType = x.DeliverType,
+                                          Driver = x.Driver,
+                                          FromLocation = x.FromLocation,
+                                          HandlingFee = x.HandlingFee,
+                                          PackageName = x.PackageName,
+                                          PayDate = x.PayDate,
+                                          PrePay = x.PrePay,
+                                          Quantity = x.Quantity,
+                                          Reparations = x.Reparations,
+                                          ShortBargeFee = x.ShortBargeFee,
+                                          Status = x.Status,
+                                          ToLocation = x.ToLocation,
+                                          Volume = x.Volume,
+                                          TrayNo = x.TrayNo
+                                      }).ToList();
+            }
+            return listModel;
         }
     }
 }

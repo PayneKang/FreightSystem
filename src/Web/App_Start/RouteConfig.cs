@@ -15,7 +15,7 @@ namespace Web
 
             routes.MapRoute(
                 name: "Export",
-                url: "Business/Export/{DeliverDate}_{ClientName}.xls",
+                url: "Business/Export/ExcelReport/{DeliverDate}_{ClientName}.xls",
                 defaults: new { controller = "Business", action = "Export", ClientName = UrlParameter.Optional, DeliverDate = UrlParameter.Optional }
                 );
 

@@ -7,6 +7,7 @@ using Web.Filters;
 using FreightSystem.Models;
 using FreightSystem.Logics.Interfaces;
 using FreightSystem.Logics.Implementations;
+using System.Text;
 
 namespace Web.Controllers
 {
@@ -23,15 +24,29 @@ namespace Web.Controllers
         [LoggedIn]
         public ActionResult Export()
         {
-            string clientName = RouteData.GetRequiredString("ClientName");
-            string deliverDate = RouteData.GetRequiredString("DeliverDate");
-            string id = Request["id"];
-            return View();
+            string clientName = TryGetRequiredString("ClientName");
+            string deliverDate = TryGetRequiredString("DeliverDate");
+            DateTime dtDeliverDate;
+            if (!DateTime.TryParse(deliverDate, out dtDeliverDate))
+            {
+                ViewBag.ErrorMessage = "必须选中一个日期才能导出日报表";
+                return View("Error");
+            }
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.Charset = "GBK";
+            Response.ContentEncoding = Encoding.UTF8;
+            Response.AppendHeader("Content-Disposition", "attachment;filename=" + deliverDate + "_" + clientName + ".xls");
+            if (clientName == "NA")
+                clientName = string.Empty;
+            TransportRecordListModel model = businessProvider.QueryDailyTransportModel(clientName, dtDeliverDate);
+            return View(model);
         }
 
         private string TryGetRequiredString(string parameterName)
         {
-            return string.Empty;
+            if(!RouteData.Values.Keys.Contains(parameterName))
+                return string.Empty;
+            return RouteData.GetRequiredString(parameterName);
         }
 
         [LoggedIn]
