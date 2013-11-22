@@ -45,7 +45,7 @@ namespace DAO_Access
     #endregion
 		
 		public SQLDBDataContext() : 
-				base(global::DAO_Access.Properties.Settings.Default.FreightSystemDBConnectionString, mappingSource)
+				base(global::DAO_Access.Properties.Settings.Default.FreightSystemDBConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -402,8 +402,6 @@ namespace DAO_Access
 		
 		private string _Name;
 		
-		private EntitySet<TransportRecords> _TransportRecords;
-		
 		private EntityRef<Roles> _Roles;
 		
     #region 可扩展性方法定义
@@ -432,7 +430,6 @@ namespace DAO_Access
 		
 		public Users()
 		{
-			this._TransportRecords = new EntitySet<TransportRecords>(new Action<TransportRecords>(this.attach_TransportRecords), new Action<TransportRecords>(this.detach_TransportRecords));
 			this._Roles = default(EntityRef<Roles>);
 			OnCreated();
 		}
@@ -621,19 +618,6 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_TransportRecords", Storage="_TransportRecords", ThisKey="UserID", OtherKey="CreatorUserID")]
-		public EntitySet<TransportRecords> TransportRecords
-		{
-			get
-			{
-				return this._TransportRecords;
-			}
-			set
-			{
-				this._TransportRecords.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Roles", ThisKey="RoleId", OtherKey="RoleID", IsForeignKey=true)]
 		public Roles Roles
 		{
@@ -686,18 +670,6 @@ namespace DAO_Access
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_TransportRecords(TransportRecords entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = this;
-		}
-		
-		private void detach_TransportRecords(TransportRecords entity)
-		{
-			this.SendPropertyChanging();
-			entity.Users = null;
 		}
 	}
 	
@@ -873,8 +845,6 @@ namespace DAO_Access
 		
 		private string _Comment;
 		
-		private string _CreatorUserID;
-		
 		private System.Nullable<double> _Deductions;
 		
 		private System.Nullable<double> _DeliverPrice;
@@ -887,6 +857,8 @@ namespace DAO_Access
 		
 		private System.Nullable<double> _PrePay;
 		
+		private System.Nullable<double> _OilCard;
+		
 		private System.Nullable<double> _Reparations;
 		
 		private System.Nullable<double> _ShortBargeFee;
@@ -894,10 +866,6 @@ namespace DAO_Access
 		private string _Status;
 		
 		private string _TrayNo;
-		
-		private System.Nullable<double> _OilCard;
-		
-		private EntityRef<Users> _Users;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -927,8 +895,6 @@ namespace DAO_Access
     partial void OnAccountPaybleChanged();
     partial void OnCommentChanging(string value);
     partial void OnCommentChanged();
-    partial void OnCreatorUserIDChanging(string value);
-    partial void OnCreatorUserIDChanged();
     partial void OnDeductionsChanging(System.Nullable<double> value);
     partial void OnDeductionsChanged();
     partial void OnDeliverPriceChanging(System.Nullable<double> value);
@@ -941,6 +907,8 @@ namespace DAO_Access
     partial void OnPayDateChanged();
     partial void OnPrePayChanging(System.Nullable<double> value);
     partial void OnPrePayChanged();
+    partial void OnOilCardChanging(System.Nullable<double> value);
+    partial void OnOilCardChanged();
     partial void OnReparationsChanging(System.Nullable<double> value);
     partial void OnReparationsChanged();
     partial void OnShortBargeFeeChanging(System.Nullable<double> value);
@@ -949,13 +917,10 @@ namespace DAO_Access
     partial void OnStatusChanged();
     partial void OnTrayNoChanging(string value);
     partial void OnTrayNoChanged();
-    partial void OnOilCardChanging(System.Nullable<double> value);
-    partial void OnOilCardChanged();
     #endregion
 		
 		public TransportRecords()
 		{
-			this._Users = default(EntityRef<Users>);
 			OnCreated();
 		}
 		
@@ -1199,30 +1164,6 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatorUserID", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string CreatorUserID
-		{
-			get
-			{
-				return this._CreatorUserID;
-			}
-			set
-			{
-				if ((this._CreatorUserID != value))
-				{
-					if (this._Users.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCreatorUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._CreatorUserID = value;
-					this.SendPropertyChanged("CreatorUserID");
-					this.OnCreatorUserIDChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Deductions", DbType="Float")]
 		public System.Nullable<double> Deductions
 		{
@@ -1343,6 +1284,26 @@ namespace DAO_Access
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OilCard", DbType="Float")]
+		public System.Nullable<double> OilCard
+		{
+			get
+			{
+				return this._OilCard;
+			}
+			set
+			{
+				if ((this._OilCard != value))
+				{
+					this.OnOilCardChanging(value);
+					this.SendPropertyChanging();
+					this._OilCard = value;
+					this.SendPropertyChanged("OilCard");
+					this.OnOilCardChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Reparations", DbType="Float")]
 		public System.Nullable<double> Reparations
 		{
@@ -1419,60 +1380,6 @@ namespace DAO_Access
 					this._TrayNo = value;
 					this.SendPropertyChanged("TrayNo");
 					this.OnTrayNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OilCard", DbType="Float")]
-		public System.Nullable<double> OilCard
-		{
-			get
-			{
-				return this._OilCard;
-			}
-			set
-			{
-				if ((this._OilCard != value))
-				{
-					this.OnOilCardChanging(value);
-					this.SendPropertyChanging();
-					this._OilCard = value;
-					this.SendPropertyChanged("OilCard");
-					this.OnOilCardChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_TransportRecords", Storage="_Users", ThisKey="CreatorUserID", OtherKey="UserID", IsForeignKey=true)]
-		public Users Users
-		{
-			get
-			{
-				return this._Users.Entity;
-			}
-			set
-			{
-				Users previousValue = this._Users.Entity;
-				if (((previousValue != value) 
-							|| (this._Users.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Users.Entity = null;
-						previousValue.TransportRecords.Remove(this);
-					}
-					this._Users.Entity = value;
-					if ((value != null))
-					{
-						value.TransportRecords.Add(this);
-						this._CreatorUserID = value.UserID;
-					}
-					else
-					{
-						this._CreatorUserID = default(string);
-					}
-					this.SendPropertyChanged("Users");
 				}
 			}
 		}

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FreightSystemDB" Class="SQLDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=FreightSystemDB;User ID=sa" SettingsObjectName="DAO_Access.Properties.Settings" SettingsPropertyName="FreightSystemDBConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=FreightSystemDB;Persist Security Info=True;User ID=sa" SettingsObjectName="DAO_Access.Properties.Settings" SettingsPropertyName="FreightSystemDBConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Access" Member="Access">
     <Type Name="Access">
       <Column Name="AccessID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -24,7 +24,6 @@
       <Column Name="LastLoginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="LastLoginIP" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Association Name="Users_TransportRecords" Member="TransportRecords" ThisKey="UserID" OtherKey="CreatorUserID" Type="TransportRecords" />
       <Association Name="Roles_Users" Member="Roles" ThisKey="RoleId" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
     </Type>
   </Table>
@@ -50,19 +49,17 @@
       <Column Name="Volume" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="AccountPayble" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Comment" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CreatorUserID" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Deductions" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="DeliverPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="DeliverType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="HandlingFee" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="PayDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="PrePay" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="OilCard" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Reparations" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="ShortBargeFee" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="TrayNo" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="OilCard" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="Users_TransportRecords" Member="Users" ThisKey="CreatorUserID" OtherKey="UserID" Type="Users" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
