@@ -2,6 +2,16 @@
 @{
     ViewBag.Title = "新建发货动态记录";
 }
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(
+        function () {
+            var date = new Date();
+            var dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            $("#DeliverDate").val(dateString);
+        }
+    );
+</script>
 
 <hgroup class="title">
     <h1>@ViewBag.Title</h1>
@@ -37,14 +47,6 @@
                 @Html.ValidationMessageFor(m => m.PackageName)</td>
         </tr>
         <tr>
-            <th>体积（立方米）</th>
-            <td>@Html.TextBoxFor(m => m.Volume) *
-                @Html.ValidationMessageFor(m => m.Volume)</td>
-            <th>件数（件）</th>
-            <td>@Html.TextBoxFor(m => m.Quantity) *
-                @Html.ValidationMessageFor(m => m.Quantity)</td>
-        </tr>
-        <tr>
             <th>起运地</th>
             <td>@Html.TextBoxFor(m => m.FromLocation) *
                 @Html.ValidationMessageFor(m => m.FromLocation)</td>
@@ -56,9 +58,30 @@
             <th>运费</th>
             <td>@Html.TextBoxFor(m => m.DeliverPrice)
                 @Html.ValidationMessageFor(m => m.DeliverPrice)</td>
-            <th>短驳费</th>
-            <td>@Html.TextBoxFor(m => m.ShortBargeFee)
-                @Html.ValidationMessageFor(m => m.ShortBargeFee)</td>
+            <th>预付</th>
+            <td>@Html.TextBoxFor(m => m.PrePay)
+                @Html.ValidationMessageFor(m => m.PrePay)</td>
+        </tr>
+        <tr>
+            <th>油卡</th>
+            <td>@Html.TextBoxFor(m => m.OilCard)
+                @Html.ValidationMessageFor(m => m.OilCard)</td>
+            <th>专线</th>
+            <td>@Html.TextBoxFor(m => m.DeliverType)
+                @Html.ValidationMessageFor(m => m.DeliverType)</td>    
+        </tr>
+        <tr>
+            <th style="vertical-align:top;">备注</th>
+            <td colspan="3">@Html.TextAreaFor(m => m.Comment, new {@Style="width:480px; height:80px;" })
+                @Html.ValidationMessageFor(m => m.Comment)</td>
+        </tr>@*
+        <tr>
+            <th>体积（立方米）</th>
+            <td>@Html.TextBoxFor(m => m.Volume) *
+                @Html.ValidationMessageFor(m => m.Volume)</td>
+            <th>件数（件）</th>
+            <td>@Html.TextBoxFor(m => m.Quantity) *
+                @Html.ValidationMessageFor(m => m.Quantity)</td>
         </tr>
         <tr>
             <th>装卸费</th>
@@ -72,31 +95,18 @@
             <th>扣款</th>
             <td>@Html.TextBoxFor(m => m.Deductions)
                 @Html.ValidationMessageFor(m => m.Deductions)</td>
-            <th>预付</th>
-            <td>@Html.TextBoxFor(m => m.PrePay)
-                @Html.ValidationMessageFor(m => m.PrePay)</td>
-        </tr>
-        <tr>
-            <th>油卡</th>
-            <td>@Html.TextBoxFor(m => m.OilCard)
-                @Html.ValidationMessageFor(m => m.OilCard)</td>
-            <th>应付</th>
-            <td>@Html.TextBoxFor(m => m.AccountPayble)
-                @Html.ValidationMessageFor(m => m.AccountPayble)</td>                
+            <th>短驳费</th>
+            <td>@Html.TextBoxFor(m => m.ShortBargeFee)
+                @Html.ValidationMessageFor(m => m.ShortBargeFee)</td>
         </tr>
         <tr>
             <th>付款日</th>
             <td>@Html.TextBoxFor(m => m.PayDate)
                 @Html.ValidationMessageFor(m => m.PayDate)</td>
-            <th>专线</th>
-            <td>@Html.TextBoxFor(m => m.DeliverType)
-                @Html.ValidationMessageFor(m => m.DeliverType)</td>
-        </tr>
-        <tr>
-            <th style="vertical-align:top;">备注</th>
-            <td colspan="3">@Html.TextAreaFor(m => m.Comment, new {@Style="width:480px; height:80px;" })
-                @Html.ValidationMessageFor(m => m.Comment)</td>
-        </tr>
+            <th>应付</th>
+            <td>@Html.TextBoxFor(m => m.AccountPayble)
+                @Html.ValidationMessageFor(m => m.AccountPayble)</td>     
+        </tr>*@
     </table>
     <input type="submit" value="保存" />
     </fieldset>
