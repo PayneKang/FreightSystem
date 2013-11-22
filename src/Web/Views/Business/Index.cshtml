@@ -35,7 +35,7 @@
     );
 </script>
 <br />
-<table cellpadding="3" cellspacing="1" border="1">
+<table cellpadding="3" cellspacing="1" border="1" style="width:100%; text-align:center;">
     <thead>
         <tr>
             <th>日期</th>
@@ -48,16 +48,6 @@
             <th>数量</th>
             <th>起运地</th>
             <th>卸货地</th>
-            <th>运费</th>
-            <th>短驳费</th>
-            <th>装卸费</th>
-            <th>赔款</th>
-            <th>扣款</th>
-            <th>预付款</th>
-            <th>应付款</th>
-            <th>付款日</th>
-            <th>专线</th>
-            <th>备注</th>
         </tr>
     </thead>
     <tbody>
@@ -74,32 +64,32 @@
             <td>@record.Quantity</td>
             <td>@record.FromLocation</td>
             <td>@record.ToLocation</td>
-            <td>@record.DeliverPrice</td>
-            <td>@record.ShortBargeFee</td>
-            <td>@record.HandlingFee</td>
-            <td>@record.Reparations</td>
-            <td>@record.Deductions</td>
-            <td>@record.PrePay</td>
-            <td>@record.AccountPayble</td>
-            <td>
-                @if (record.PayDate != null)
-                {
-                    record.PayDate.Value.ToString("MM.dd");
-                }
-            </td>
-            <td>@record.DeliverType</td>
-            <td>@record.Comment</td>
         </tr>
         <tr style="display:none;" type="TRDetails" TRID="@record.ID">
-            <td colspan="20">
-            订单的详细信息
+            <td colspan="10">
+                运费：@record.DeliverPrice ；
+                短驳费：@record.ShortBargeFee ；
+                装卸费：@record.HandlingFee ；
+                赔款：@record.Reparations ；
+                扣款：@record.Deductions ；
+                预付款：@record.PrePay ；
+                油卡：@record.OilCard ；
+                应付款：@record.AccountPayble ；
+                付款日： 
+                @if (record.PayDate != null)
+                {
+                    record.PayDate.Value.ToString("MM.dd"); 
+                } ；
+                专线： @record.DeliverType ；
+                <br />
+                备注： @record.Comment ；
             </td>
         </tr>
     }
     </tbody>
     <tfoot>
         <tr class="pager">
-            <td colspan="20">
+            <td colspan="10">
             @if (Model.PageIndex > 1)
             {
                 

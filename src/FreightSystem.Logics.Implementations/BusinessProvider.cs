@@ -67,7 +67,8 @@ namespace FreightSystem.Logics.Implementations
                                           Status = x.Status,
                                           ToLocation = x.ToLocation,
                                           Volume = x.Volume,
-                                          TrayNo = x.TrayNo
+                                          TrayNo = x.TrayNo,
+                                          OilCard = x.OilCard
                                       }).Skip(startIndex).Take(TransportRecordListModel.PageSize).ToList();
             }
             return listModel;
@@ -101,7 +102,8 @@ namespace FreightSystem.Logics.Implementations
                     Status = model.Status,
                     ToLocation = model.ToLocation,
                     Volume = model.Volume,
-                    TrayNo = model.TrayNo
+                    TrayNo = model.TrayNo,
+                    OilCard = model.OilCard
                 };
                 context.TransportRecords.InsertOnSubmit(newRecord);
                 context.SubmitChanges();
@@ -152,7 +154,8 @@ namespace FreightSystem.Logics.Implementations
                                           Status = x.Status,
                                           ToLocation = x.ToLocation,
                                           Volume = x.Volume,
-                                          TrayNo = x.TrayNo
+                                          TrayNo = x.TrayNo,
+                                          OilCard = x.OilCard
                                       }).ToList();
             }
             return listModel;

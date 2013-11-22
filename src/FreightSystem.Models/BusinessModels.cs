@@ -50,6 +50,7 @@ namespace FreightSystem.Models
         public double? HandlingFee { get; set; }
         public DateTime? PayDate { get; set; }
         public double? PrePay { get; set; }
+        public double? OilCard { get; set; }
         public double? Reparations { get; set; }
         public double? ShortBargeFee { get; set; }
         public string Status { get; set; }

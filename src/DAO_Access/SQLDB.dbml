@@ -61,6 +61,7 @@
       <Column Name="ShortBargeFee" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="TrayNo" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="OilCard" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="Users_TransportRecords" Member="Users" ThisKey="CreatorUserID" OtherKey="UserID" Type="Users" IsForeignKey="true" />
     </Type>
   </Table>

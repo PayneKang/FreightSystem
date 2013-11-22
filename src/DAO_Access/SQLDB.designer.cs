@@ -895,6 +895,8 @@ namespace DAO_Access
 		
 		private string _TrayNo;
 		
+		private System.Nullable<double> _OilCard;
+		
 		private EntityRef<Users> _Users;
 		
     #region 可扩展性方法定义
@@ -947,6 +949,8 @@ namespace DAO_Access
     partial void OnStatusChanged();
     partial void OnTrayNoChanging(string value);
     partial void OnTrayNoChanged();
+    partial void OnOilCardChanging(System.Nullable<double> value);
+    partial void OnOilCardChanged();
     #endregion
 		
 		public TransportRecords()
@@ -1415,6 +1419,26 @@ namespace DAO_Access
 					this._TrayNo = value;
 					this.SendPropertyChanged("TrayNo");
 					this.OnTrayNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OilCard", DbType="Float")]
+		public System.Nullable<double> OilCard
+		{
+			get
+			{
+				return this._OilCard;
+			}
+			set
+			{
+				if ((this._OilCard != value))
+				{
+					this.OnOilCardChanging(value);
+					this.SendPropertyChanging();
+					this._OilCard = value;
+					this.SendPropertyChanged("OilCard");
+					this.OnOilCardChanged();
 				}
 			}
 		}

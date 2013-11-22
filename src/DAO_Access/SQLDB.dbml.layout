@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.875" name="SQLDB">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10" name="SQLDB">
   <DataContextMoniker Name="/SQLDBDataContext" />
   <nestedChildShapes>
     <classShape Id="18ac0bb0-1a4c-45d7-8a41-0205fdbb3bcc" absoluteBounds="3.5, 1.25, 2, 2.3356245930989585">
@@ -20,10 +20,10 @@
         <elementListCompartment Id="167f099d-318b-4f8d-88a8-eb92496b27c7" absoluteBounds="0.765, 5.335, 1.9700000000000002, 0.62950642903645826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="3b1d2894-cbd7-45d3-9504-ec491ed3858d" absoluteBounds="6.25, 4.375, 2, 5.2009200032552076">
+    <classShape Id="3b1d2894-cbd7-45d3-9504-ec491ed3858d" absoluteBounds="6.25, 4.375, 2, 5.3919396972656255">
       <DataClassMoniker Name="/SQLDBDataContext/TransportRecords" />
       <nestedChildShapes>
-        <elementListCompartment Id="2cf10182-d1a6-4f32-b857-8d1978939564" absoluteBounds="6.265, 4.835, 1.9700000000000002, 4.640920003255208" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2cf10182-d1a6-4f32-b857-8d1978939564" absoluteBounds="6.265, 4.835, 1.9700000000000002, 4.831939697265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(1.75 : 4.875); (1.75 : 2.41781229654948); (3.5 : 2.41781229654948)]" fixedFrom="NotFixed" fixedTo="NotFixed">

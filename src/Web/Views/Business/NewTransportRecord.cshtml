@@ -77,16 +77,19 @@
                 @Html.ValidationMessageFor(m => m.PrePay)</td>
         </tr>
         <tr>
+            <th>油卡</th>
+            <td>@Html.TextBoxFor(m => m.OilCard)
+                @Html.ValidationMessageFor(m => m.OilCard)</td>
             <th>应付</th>
             <td>@Html.TextBoxFor(m => m.AccountPayble)
-                @Html.ValidationMessageFor(m => m.AccountPayble)</td>
+                @Html.ValidationMessageFor(m => m.AccountPayble)</td>                
+        </tr>
+        <tr>
             <th>付款日</th>
             <td>@Html.TextBoxFor(m => m.PayDate)
                 @Html.ValidationMessageFor(m => m.PayDate)</td>
-        </tr>
-        <tr>
             <th>专线</th>
-            <td colspan="3">@Html.TextBoxFor(m => m.DeliverType)
+            <td>@Html.TextBoxFor(m => m.DeliverType)
                 @Html.ValidationMessageFor(m => m.DeliverType)</td>
         </tr>
         <tr>
