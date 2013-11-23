@@ -105,6 +105,14 @@ namespace DAO_Access
 				return this.GetTable<TransportRecords>();
 			}
 		}
+		
+		public System.Data.Linq.Table<TransportRecordsOptionHistory> TransportRecordsOptionHistory
+		{
+			get
+			{
+				return this.GetTable<TransportRecordsOptionHistory>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Access")]
@@ -1401,6 +1409,105 @@ namespace DAO_Access
 			if ((this.PropertyChanged != null))
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TransportRecordsOptionHistory")]
+	public partial class TransportRecordsOptionHistory
+	{
+		
+		private string _UserID;
+		
+		private int _TransportRecordID;
+		
+		private System.DateTime _LogDateTime;
+		
+		private string _Operation;
+		
+		private string _Description;
+		
+		public TransportRecordsOptionHistory()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					this._UserID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportRecordID", DbType="Int NOT NULL")]
+		public int TransportRecordID
+		{
+			get
+			{
+				return this._TransportRecordID;
+			}
+			set
+			{
+				if ((this._TransportRecordID != value))
+				{
+					this._TransportRecordID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogDateTime", DbType="Date NOT NULL")]
+		public System.DateTime LogDateTime
+		{
+			get
+			{
+				return this._LogDateTime;
+			}
+			set
+			{
+				if ((this._LogDateTime != value))
+				{
+					this._LogDateTime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Operation", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Operation
+		{
+			get
+			{
+				return this._Operation;
+			}
+			set
+			{
+				if ((this._Operation != value))
+				{
+					this._Operation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(500)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this._Description = value;
+				}
 			}
 		}
 	}
