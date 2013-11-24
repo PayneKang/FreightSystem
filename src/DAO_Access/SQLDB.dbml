@@ -13,6 +13,14 @@
       <Association Name="Roles_Access" Member="Roles" ThisKey="RoleID" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Roles">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Roles_Access" Member="Access" ThisKey="RoleID" OtherKey="RoleID" Type="Access" />
+      <Association Name="Roles_Users" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="Users" />
+    </Type>
+  </Table>
   <Table Name="dbo.Users" Member="Users">
     <Type Name="Users">
       <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -26,14 +34,6 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Association Name="Users_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="UserID" OtherKey="UserID" Type="TransportRecordsOptionHistory" />
       <Association Name="Roles_Users" Member="Roles" ThisKey="RoleId" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Roles" Member="Roles">
-    <Type Name="Roles">
-      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RoleName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="Roles_Access" Member="Access" ThisKey="RoleID" OtherKey="RoleID" Type="Access" />
-      <Association Name="Roles_Users" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="Users" />
     </Type>
   </Table>
   <Table Name="dbo.TransportRecords" Member="TransportRecords">
@@ -66,10 +66,10 @@
   </Table>
   <Table Name="dbo.TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory">
     <Type Name="TransportRecordsOptionHistory">
-      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="TransportRecordID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="LogDateTime" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="Operation" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TransportRecordID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="LogDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Operation" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
       <Association Name="Users_TransportRecordsOptionHistory" Member="Users" ThisKey="UserID" OtherKey="UserID" Type="Users" IsForeignKey="true" />

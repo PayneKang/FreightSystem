@@ -67,7 +67,13 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult NewTransportRecord(TransportRecordModel model)
         {
-            model.CreatorUserID = this.cacheProvider.GetCurrentLoggedUser().UserID;
+            model.HistoryItem = new List<TransportRecordsHistoryModel>();
+            model.HistoryItem.Add(new TransportRecordsHistoryModel()
+            {
+                Description = "创建动态单",
+                Operation = "创建",
+                UserID = this.cacheProvider.GetCurrentLoggedUser().UserID
+            });
             try
             {
                 businessProvider.InsertTransprotModel(model);

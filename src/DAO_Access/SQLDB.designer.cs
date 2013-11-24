@@ -33,15 +33,18 @@ namespace DAO_Access
     partial void InsertAccess(Access instance);
     partial void UpdateAccess(Access instance);
     partial void DeleteAccess(Access instance);
-    partial void InsertUsers(Users instance);
-    partial void UpdateUsers(Users instance);
-    partial void DeleteUsers(Users instance);
     partial void InsertRoles(Roles instance);
     partial void UpdateRoles(Roles instance);
     partial void DeleteRoles(Roles instance);
+    partial void InsertUsers(Users instance);
+    partial void UpdateUsers(Users instance);
+    partial void DeleteUsers(Users instance);
     partial void InsertTransportRecords(TransportRecords instance);
     partial void UpdateTransportRecords(TransportRecords instance);
     partial void DeleteTransportRecords(TransportRecords instance);
+    partial void InsertTransportRecordsOptionHistory(TransportRecordsOptionHistory instance);
+    partial void UpdateTransportRecordsOptionHistory(TransportRecordsOptionHistory instance);
+    partial void DeleteTransportRecordsOptionHistory(TransportRecordsOptionHistory instance);
     #endregion
 		
 		public SQLDBDataContext() : 
@@ -82,19 +85,19 @@ namespace DAO_Access
 			}
 		}
 		
-		public System.Data.Linq.Table<Users> Users
-		{
-			get
-			{
-				return this.GetTable<Users>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Roles> Roles
 		{
 			get
 			{
 				return this.GetTable<Roles>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Users> Users
+		{
+			get
+			{
+				return this.GetTable<Users>();
 			}
 		}
 		
@@ -386,6 +389,148 @@ namespace DAO_Access
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
+	public partial class Roles : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RoleID;
+		
+		private string _RoleName;
+		
+		private EntitySet<Access> _Access;
+		
+		private EntitySet<Users> _Users;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnRoleNameChanging(string value);
+    partial void OnRoleNameChanged();
+    #endregion
+		
+		public Roles()
+		{
+			this._Access = new EntitySet<Access>(new Action<Access>(this.attach_Access), new Action<Access>(this.detach_Access));
+			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(255)")]
+		public string RoleName
+		{
+			get
+			{
+				return this._RoleName;
+			}
+			set
+			{
+				if ((this._RoleName != value))
+				{
+					this.OnRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._RoleName = value;
+					this.SendPropertyChanged("RoleName");
+					this.OnRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Access", Storage="_Access", ThisKey="RoleID", OtherKey="RoleID")]
+		public EntitySet<Access> Access
+		{
+			get
+			{
+				return this._Access;
+			}
+			set
+			{
+				this._Access.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Users", ThisKey="RoleID", OtherKey="RoleId")]
+		public EntitySet<Users> Users
+		{
+			get
+			{
+				return this._Users;
+			}
+			set
+			{
+				this._Users.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Access(Access entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = this;
+		}
+		
+		private void detach_Access(Access entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = null;
+		}
+		
+		private void attach_Users(Users entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = this;
+		}
+		
+		private void detach_Users(Users entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
 	public partial class Users : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -409,6 +554,8 @@ namespace DAO_Access
 		private string _LastLoginIP;
 		
 		private string _Name;
+		
+		private EntitySet<TransportRecordsOptionHistory> _TransportRecordsOptionHistory;
 		
 		private EntityRef<Roles> _Roles;
 		
@@ -438,6 +585,7 @@ namespace DAO_Access
 		
 		public Users()
 		{
+			this._TransportRecordsOptionHistory = new EntitySet<TransportRecordsOptionHistory>(new Action<TransportRecordsOptionHistory>(this.attach_TransportRecordsOptionHistory), new Action<TransportRecordsOptionHistory>(this.detach_TransportRecordsOptionHistory));
 			this._Roles = default(EntityRef<Roles>);
 			OnCreated();
 		}
@@ -626,6 +774,19 @@ namespace DAO_Access
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_TransportRecordsOptionHistory", Storage="_TransportRecordsOptionHistory", ThisKey="UserID", OtherKey="UserID")]
+		public EntitySet<TransportRecordsOptionHistory> TransportRecordsOptionHistory
+		{
+			get
+			{
+				return this._TransportRecordsOptionHistory;
+			}
+			set
+			{
+				this._TransportRecordsOptionHistory.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Roles", ThisKey="RoleId", OtherKey="RoleID", IsForeignKey=true)]
 		public Roles Roles
 		{
@@ -679,147 +840,17 @@ namespace DAO_Access
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
-	public partial class Roles : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _RoleID;
-		
-		private string _RoleName;
-		
-		private EntitySet<Access> _Access;
-		
-		private EntitySet<Users> _Users;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRoleIDChanging(int value);
-    partial void OnRoleIDChanged();
-    partial void OnRoleNameChanging(string value);
-    partial void OnRoleNameChanged();
-    #endregion
-		
-		public Roles()
-		{
-			this._Access = new EntitySet<Access>(new Action<Access>(this.attach_Access), new Action<Access>(this.detach_Access));
-			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int RoleID
-		{
-			get
-			{
-				return this._RoleID;
-			}
-			set
-			{
-				if ((this._RoleID != value))
-				{
-					this.OnRoleIDChanging(value);
-					this.SendPropertyChanging();
-					this._RoleID = value;
-					this.SendPropertyChanged("RoleID");
-					this.OnRoleIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(255)")]
-		public string RoleName
-		{
-			get
-			{
-				return this._RoleName;
-			}
-			set
-			{
-				if ((this._RoleName != value))
-				{
-					this.OnRoleNameChanging(value);
-					this.SendPropertyChanging();
-					this._RoleName = value;
-					this.SendPropertyChanged("RoleName");
-					this.OnRoleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Access", Storage="_Access", ThisKey="RoleID", OtherKey="RoleID")]
-		public EntitySet<Access> Access
-		{
-			get
-			{
-				return this._Access;
-			}
-			set
-			{
-				this._Access.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Users", ThisKey="RoleID", OtherKey="RoleId")]
-		public EntitySet<Users> Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				this._Users.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Access(Access entity)
+		private void attach_TransportRecordsOptionHistory(TransportRecordsOptionHistory entity)
 		{
 			this.SendPropertyChanging();
-			entity.Roles = this;
+			entity.Users = this;
 		}
 		
-		private void detach_Access(Access entity)
+		private void detach_TransportRecordsOptionHistory(TransportRecordsOptionHistory entity)
 		{
 			this.SendPropertyChanging();
-			entity.Roles = null;
-		}
-		
-		private void attach_Users(Users entity)
-		{
-			this.SendPropertyChanging();
-			entity.Roles = this;
-		}
-		
-		private void detach_Users(Users entity)
-		{
-			this.SendPropertyChanging();
-			entity.Roles = null;
+			entity.Users = null;
 		}
 	}
 	
@@ -875,6 +906,8 @@ namespace DAO_Access
 		
 		private string _TrayNo;
 		
+		private EntitySet<TransportRecordsOptionHistory> _TransportRecordsOptionHistory;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -929,6 +962,7 @@ namespace DAO_Access
 		
 		public TransportRecords()
 		{
+			this._TransportRecordsOptionHistory = new EntitySet<TransportRecordsOptionHistory>(new Action<TransportRecordsOptionHistory>(this.attach_TransportRecordsOptionHistory), new Action<TransportRecordsOptionHistory>(this.detach_TransportRecordsOptionHistory));
 			OnCreated();
 		}
 		
@@ -1392,6 +1426,19 @@ namespace DAO_Access
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TransportRecords_TransportRecordsOptionHistory", Storage="_TransportRecordsOptionHistory", ThisKey="ID", OtherKey="TransportRecordID")]
+		public EntitySet<TransportRecordsOptionHistory> TransportRecordsOptionHistory
+		{
+			get
+			{
+				return this._TransportRecordsOptionHistory;
+			}
+			set
+			{
+				this._TransportRecordsOptionHistory.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1411,11 +1458,25 @@ namespace DAO_Access
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_TransportRecordsOptionHistory(TransportRecordsOptionHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.TransportRecords = this;
+		}
+		
+		private void detach_TransportRecordsOptionHistory(TransportRecordsOptionHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.TransportRecords = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TransportRecordsOptionHistory")]
-	public partial class TransportRecordsOptionHistory
+	public partial class TransportRecordsOptionHistory : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private string _UserID;
 		
@@ -1427,11 +1488,34 @@ namespace DAO_Access
 		
 		private string _Description;
 		
+		private EntityRef<TransportRecords> _TransportRecords;
+		
+		private EntityRef<Users> _Users;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIDChanging(string value);
+    partial void OnUserIDChanged();
+    partial void OnTransportRecordIDChanging(int value);
+    partial void OnTransportRecordIDChanged();
+    partial void OnLogDateTimeChanging(System.DateTime value);
+    partial void OnLogDateTimeChanged();
+    partial void OnOperationChanging(string value);
+    partial void OnOperationChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
 		public TransportRecordsOptionHistory()
 		{
+			this._TransportRecords = default(EntityRef<TransportRecords>);
+			this._Users = default(EntityRef<Users>);
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string UserID
 		{
 			get
@@ -1442,12 +1526,20 @@ namespace DAO_Access
 			{
 				if ((this._UserID != value))
 				{
+					if (this._Users.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
 					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportRecordID", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportRecordID", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int TransportRecordID
 		{
 			get
@@ -1458,12 +1550,20 @@ namespace DAO_Access
 			{
 				if ((this._TransportRecordID != value))
 				{
+					if (this._TransportRecords.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTransportRecordIDChanging(value);
+					this.SendPropertyChanging();
 					this._TransportRecordID = value;
+					this.SendPropertyChanged("TransportRecordID");
+					this.OnTransportRecordIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogDateTime", DbType="Date NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LogDateTime", DbType="DateTime NOT NULL", IsPrimaryKey=true)]
 		public System.DateTime LogDateTime
 		{
 			get
@@ -1474,12 +1574,16 @@ namespace DAO_Access
 			{
 				if ((this._LogDateTime != value))
 				{
+					this.OnLogDateTimeChanging(value);
+					this.SendPropertyChanging();
 					this._LogDateTime = value;
+					this.SendPropertyChanged("LogDateTime");
+					this.OnLogDateTimeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Operation", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Operation", DbType="NVarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string Operation
 		{
 			get
@@ -1490,7 +1594,11 @@ namespace DAO_Access
 			{
 				if ((this._Operation != value))
 				{
+					this.OnOperationChanging(value);
+					this.SendPropertyChanging();
 					this._Operation = value;
+					this.SendPropertyChanged("Operation");
+					this.OnOperationChanged();
 				}
 			}
 		}
@@ -1506,8 +1614,100 @@ namespace DAO_Access
 			{
 				if ((this._Description != value))
 				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
 					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TransportRecords_TransportRecordsOptionHistory", Storage="_TransportRecords", ThisKey="TransportRecordID", OtherKey="ID", IsForeignKey=true)]
+		public TransportRecords TransportRecords
+		{
+			get
+			{
+				return this._TransportRecords.Entity;
+			}
+			set
+			{
+				TransportRecords previousValue = this._TransportRecords.Entity;
+				if (((previousValue != value) 
+							|| (this._TransportRecords.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TransportRecords.Entity = null;
+						previousValue.TransportRecordsOptionHistory.Remove(this);
+					}
+					this._TransportRecords.Entity = value;
+					if ((value != null))
+					{
+						value.TransportRecordsOptionHistory.Add(this);
+						this._TransportRecordID = value.ID;
+					}
+					else
+					{
+						this._TransportRecordID = default(int);
+					}
+					this.SendPropertyChanged("TransportRecords");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Users_TransportRecordsOptionHistory", Storage="_Users", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
+		public Users Users
+		{
+			get
+			{
+				return this._Users.Entity;
+			}
+			set
+			{
+				Users previousValue = this._Users.Entity;
+				if (((previousValue != value) 
+							|| (this._Users.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Users.Entity = null;
+						previousValue.TransportRecordsOptionHistory.Remove(this);
+					}
+					this._Users.Entity = value;
+					if ((value != null))
+					{
+						value.TransportRecordsOptionHistory.Add(this);
+						this._UserID = value.UserID;
+					}
+					else
+					{
+						this._UserID = default(string);
+					}
+					this.SendPropertyChanged("Users");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

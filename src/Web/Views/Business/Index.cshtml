@@ -83,6 +83,17 @@
                 专线： @record.DeliverType ；
                 <br />
                 备注： @record.Comment ；
+                <br />
+                @if (record.HistoryItem != null)
+                {
+                    <ul style="list-style:none;border:solid 1px #CCC;">
+                    @foreach (TransportRecordsHistoryModel history in record.HistoryItem)
+                    {
+                        <li>
+                        @history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation] @history.Description 操作人：@history.User.UserID
+                        </li>
+                    }</ul>
+                }
             </td>
         </tr>
     }

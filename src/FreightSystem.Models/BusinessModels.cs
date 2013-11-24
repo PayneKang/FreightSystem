@@ -43,7 +43,6 @@ namespace FreightSystem.Models
         public double Volume { get; set; }
         public double? AccountPayble { get; set; }
         public string Comment { get; set; }
-        public string CreatorUserID { get; set; }
         public double? Deductions { get; set; }
         public double? DeliverPrice { get; set; }
         public string DeliverType { get; set; }

@@ -67,7 +67,34 @@ namespace FreightSystem.Logics.Implementations
                                           ToLocation = x.ToLocation,
                                           Volume = x.Volume,
                                           TrayNo = x.TrayNo,
-                                          OilCard = x.OilCard
+                                          OilCard = x.OilCard,
+                                          HistoryItem = (from y in x.TransportRecordsOptionHistory
+                                                         select new TransportRecordsHistoryModel()
+                                                         {
+                                                             Description = y.Description,
+                                                             LogDateTime = y.LogDateTime,
+                                                             Operation = y.Operation,
+                                                             TransportRecordID = y.TransportRecordID,
+                                                             UserID = y.UserID,
+                                                             User = new UserModel()
+                                                             {
+
+                                                                 Comment = y.Users.Comment,
+                                                                 CreateDateTime = y.Users.CreateDateTime,
+                                                                 LastLoginIP = y.Users.LastLoginIP,
+                                                                 LastLoginTime = y.Users.LastLoginTime,
+                                                                 Location = y.Users.Location,
+                                                                 Name = y.Users.Name,
+                                                                 Password = y.Users.Password,
+                                                                 RoleID = y.Users.RoleId,
+                                                                 UserID = y.Users.UserID,
+                                                                 Role = new RoleModel()
+                                                                 {
+                                                                     RoleID = y.Users.Roles.RoleID,
+                                                                     RoleName = y.Users.Roles.RoleName
+                                                                 }
+                                                             }
+                                                         }).ToList()
                                       }).Skip(startIndex).Take(TransportRecordListModel.PageSize).ToList();
             }
             return listModel;
@@ -102,7 +129,17 @@ namespace FreightSystem.Logics.Implementations
                     Volume = model.Volume,
                     TrayNo = model.TrayNo,
                     OilCard = model.OilCard
+
                 };
+                newRecord.TransportRecordsOptionHistory.AddRange(from x in model.HistoryItem
+                                                                 select new TransportRecordsOptionHistory()
+                                                                 {
+                                                                     Description = x.Description,
+                                                                     LogDateTime = DateTime.Now,
+                                                                     Operation = x.Operation,
+                                                                     TransportRecordID = newRecord.ID,
+                                                                     UserID = x.UserID
+                                                                 });
                 context.TransportRecords.InsertOnSubmit(newRecord);
                 context.SubmitChanges();
             }
