@@ -19,6 +19,7 @@
       <Column Name="RoleName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="Roles_Access" Member="Access" ThisKey="RoleID" OtherKey="RoleID" Type="Access" />
       <Association Name="Roles_Users" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="Users" />
+      <Association Name="Roles_MenuAccess" Member="MenuAccess" ThisKey="RoleID" OtherKey="RoleID" Type="MenuAccess" />
     </Type>
   </Table>
   <Table Name="dbo.Users" Member="Users">
@@ -73,6 +74,23 @@
       <Column Name="Description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
       <Association Name="Users_TransportRecordsOptionHistory" Member="Users" ThisKey="UserID" OtherKey="UserID" Type="Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MenuAccess" Member="MenuAccess">
+    <Type Name="MenuAccess">
+      <Column Name="MenuCode" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Roles_MenuAccess" Member="Roles" ThisKey="RoleID" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
+      <Association Name="MenuItem_MenuAccess" Member="MenuItem" ThisKey="MenuCode" OtherKey="MenuCode" Type="MenuItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MenuItem" Member="MenuItem">
+    <Type Name="MenuItem">
+      <Column Name="MenuCode" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MenuText" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Link" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="OrderIndex" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="MenuItem_MenuAccess" Member="MenuAccess" ThisKey="MenuCode" OtherKey="MenuCode" Type="MenuAccess" />
     </Type>
   </Table>
 </Database>

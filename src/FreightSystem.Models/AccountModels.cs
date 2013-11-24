@@ -27,7 +27,15 @@ namespace FreightSystem.Models
         public int RoleID { get; set; }
         [Required(ErrorMessage = "角色名称必须填写")]
         public string RoleName { get; set; }
-        public AccessModel[] Accesses { get; set; }
+        public List<AccessModel> Accesses { get; set; }
+        public List<MenuItemModel> Menus { get; set; }
+    }
+    public class MenuItemModel
+    {
+        public string MenuCode { get; set; }
+        public string MenuText { get; set; }
+        public string Link { get; set; }
+        public int OrderIndex { get; set; }
     }
     public class RoleListModel
     {

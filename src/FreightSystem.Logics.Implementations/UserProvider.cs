@@ -27,7 +27,24 @@ namespace FreightSystem.Logics.Implementations
                     Name = user.Name,
                     Password = user.Password,
                     RoleID = user.RoleId,
-                    UserID = user.UserID
+                    UserID = user.UserID,
+                    LastLoginIP = user.LastLoginIP,
+                    LastLoginTime = user.LastLoginTime,
+                    Role = new RoleModel()
+                    {
+                        RoleID = user.Roles.RoleID,
+                        RoleName = user.Roles.RoleName,
+                        Menus = (from x in user.Roles.MenuAccess
+                                 orderby x.MenuItem.OrderIndex
+                                 select new MenuItemModel()
+                                 {
+                                     Link = x.MenuItem.Link,
+                                     MenuCode = x.MenuItem.MenuCode,
+                                     MenuText = x.MenuItem.MenuText,
+                                     OrderIndex = x.MenuItem.OrderIndex
+                                 }).ToList()
+
+                    }
                 };
             }
         }

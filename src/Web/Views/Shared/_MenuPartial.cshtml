@@ -1,10 +1,13 @@
-﻿@if (ViewBag.LoggedUser != null)
+﻿@using FreightSystem.Models
+@if (ViewBag.LoggedUser != null)
 {
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("单据页", "Index", "Business")</li>
-                            <li>@Html.ActionLink("角色管理", "RoleList", "Security")</li>
-                            <li>@Html.ActionLink("用户管理", "UserList", "Security")</li>
-                        </ul>
-                    </nav>
+    UserModel loggedUser = ViewBag.LoggedUser;
+    <nav>
+        <ul id="menu">
+            @foreach (MenuItemModel menu in loggedUser.Role.Menus)
+            {
+            <li><a href="@menu.Link" name="@menu.MenuCode">@menu.MenuText</a></li>
+            }
+        </ul>
+    </nav>
 }

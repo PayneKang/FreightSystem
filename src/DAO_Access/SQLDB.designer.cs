@@ -45,6 +45,12 @@ namespace DAO_Access
     partial void InsertTransportRecordsOptionHistory(TransportRecordsOptionHistory instance);
     partial void UpdateTransportRecordsOptionHistory(TransportRecordsOptionHistory instance);
     partial void DeleteTransportRecordsOptionHistory(TransportRecordsOptionHistory instance);
+    partial void InsertMenuAccess(MenuAccess instance);
+    partial void UpdateMenuAccess(MenuAccess instance);
+    partial void DeleteMenuAccess(MenuAccess instance);
+    partial void InsertMenuItem(MenuItem instance);
+    partial void UpdateMenuItem(MenuItem instance);
+    partial void DeleteMenuItem(MenuItem instance);
     #endregion
 		
 		public SQLDBDataContext() : 
@@ -114,6 +120,22 @@ namespace DAO_Access
 			get
 			{
 				return this.GetTable<TransportRecordsOptionHistory>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MenuAccess> MenuAccess
+		{
+			get
+			{
+				return this.GetTable<MenuAccess>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MenuItem> MenuItem
+		{
+			get
+			{
+				return this.GetTable<MenuItem>();
 			}
 		}
 	}
@@ -403,6 +425,8 @@ namespace DAO_Access
 		
 		private EntitySet<Users> _Users;
 		
+		private EntitySet<MenuAccess> _MenuAccess;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -417,6 +441,7 @@ namespace DAO_Access
 		{
 			this._Access = new EntitySet<Access>(new Action<Access>(this.attach_Access), new Action<Access>(this.detach_Access));
 			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
+			this._MenuAccess = new EntitySet<MenuAccess>(new Action<MenuAccess>(this.attach_MenuAccess), new Action<MenuAccess>(this.detach_MenuAccess));
 			OnCreated();
 		}
 		
@@ -486,6 +511,19 @@ namespace DAO_Access
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_MenuAccess", Storage="_MenuAccess", ThisKey="RoleID", OtherKey="RoleID")]
+		public EntitySet<MenuAccess> MenuAccess
+		{
+			get
+			{
+				return this._MenuAccess;
+			}
+			set
+			{
+				this._MenuAccess.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -525,6 +563,18 @@ namespace DAO_Access
 		}
 		
 		private void detach_Users(Users entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = null;
+		}
+		
+		private void attach_MenuAccess(MenuAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = this;
+		}
+		
+		private void detach_MenuAccess(MenuAccess entity)
 		{
 			this.SendPropertyChanging();
 			entity.Roles = null;
@@ -1709,6 +1759,336 @@ namespace DAO_Access
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MenuAccess")]
+	public partial class MenuAccess : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _MenuCode;
+		
+		private int _RoleID;
+		
+		private EntityRef<Roles> _Roles;
+		
+		private EntityRef<MenuItem> _MenuItem;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMenuCodeChanging(string value);
+    partial void OnMenuCodeChanged();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    #endregion
+		
+		public MenuAccess()
+		{
+			this._Roles = default(EntityRef<Roles>);
+			this._MenuItem = default(EntityRef<MenuItem>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MenuCode", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MenuCode
+		{
+			get
+			{
+				return this._MenuCode;
+			}
+			set
+			{
+				if ((this._MenuCode != value))
+				{
+					if (this._MenuItem.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMenuCodeChanging(value);
+					this.SendPropertyChanging();
+					this._MenuCode = value;
+					this.SendPropertyChanged("MenuCode");
+					this.OnMenuCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					if (this._Roles.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_MenuAccess", Storage="_Roles", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
+		public Roles Roles
+		{
+			get
+			{
+				return this._Roles.Entity;
+			}
+			set
+			{
+				Roles previousValue = this._Roles.Entity;
+				if (((previousValue != value) 
+							|| (this._Roles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Roles.Entity = null;
+						previousValue.MenuAccess.Remove(this);
+					}
+					this._Roles.Entity = value;
+					if ((value != null))
+					{
+						value.MenuAccess.Add(this);
+						this._RoleID = value.RoleID;
+					}
+					else
+					{
+						this._RoleID = default(int);
+					}
+					this.SendPropertyChanged("Roles");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MenuItem_MenuAccess", Storage="_MenuItem", ThisKey="MenuCode", OtherKey="MenuCode", IsForeignKey=true)]
+		public MenuItem MenuItem
+		{
+			get
+			{
+				return this._MenuItem.Entity;
+			}
+			set
+			{
+				MenuItem previousValue = this._MenuItem.Entity;
+				if (((previousValue != value) 
+							|| (this._MenuItem.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MenuItem.Entity = null;
+						previousValue.MenuAccess.Remove(this);
+					}
+					this._MenuItem.Entity = value;
+					if ((value != null))
+					{
+						value.MenuAccess.Add(this);
+						this._MenuCode = value.MenuCode;
+					}
+					else
+					{
+						this._MenuCode = default(string);
+					}
+					this.SendPropertyChanged("MenuItem");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MenuItem")]
+	public partial class MenuItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _MenuCode;
+		
+		private string _MenuText;
+		
+		private string _Link;
+		
+		private int _OrderIndex;
+		
+		private EntitySet<MenuAccess> _MenuAccess;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnMenuCodeChanging(string value);
+    partial void OnMenuCodeChanged();
+    partial void OnMenuTextChanging(string value);
+    partial void OnMenuTextChanged();
+    partial void OnLinkChanging(string value);
+    partial void OnLinkChanged();
+    partial void OnOrderIndexChanging(int value);
+    partial void OnOrderIndexChanged();
+    #endregion
+		
+		public MenuItem()
+		{
+			this._MenuAccess = new EntitySet<MenuAccess>(new Action<MenuAccess>(this.attach_MenuAccess), new Action<MenuAccess>(this.detach_MenuAccess));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MenuCode", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string MenuCode
+		{
+			get
+			{
+				return this._MenuCode;
+			}
+			set
+			{
+				if ((this._MenuCode != value))
+				{
+					this.OnMenuCodeChanging(value);
+					this.SendPropertyChanging();
+					this._MenuCode = value;
+					this.SendPropertyChanged("MenuCode");
+					this.OnMenuCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MenuText", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string MenuText
+		{
+			get
+			{
+				return this._MenuText;
+			}
+			set
+			{
+				if ((this._MenuText != value))
+				{
+					this.OnMenuTextChanging(value);
+					this.SendPropertyChanging();
+					this._MenuText = value;
+					this.SendPropertyChanged("MenuText");
+					this.OnMenuTextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Link", DbType="VarChar(500) NOT NULL", CanBeNull=false)]
+		public string Link
+		{
+			get
+			{
+				return this._Link;
+			}
+			set
+			{
+				if ((this._Link != value))
+				{
+					this.OnLinkChanging(value);
+					this.SendPropertyChanging();
+					this._Link = value;
+					this.SendPropertyChanged("Link");
+					this.OnLinkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderIndex", DbType="Int NOT NULL")]
+		public int OrderIndex
+		{
+			get
+			{
+				return this._OrderIndex;
+			}
+			set
+			{
+				if ((this._OrderIndex != value))
+				{
+					this.OnOrderIndexChanging(value);
+					this.SendPropertyChanging();
+					this._OrderIndex = value;
+					this.SendPropertyChanged("OrderIndex");
+					this.OnOrderIndexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MenuItem_MenuAccess", Storage="_MenuAccess", ThisKey="MenuCode", OtherKey="MenuCode")]
+		public EntitySet<MenuAccess> MenuAccess
+		{
+			get
+			{
+				return this._MenuAccess;
+			}
+			set
+			{
+				this._MenuAccess.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_MenuAccess(MenuAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.MenuItem = this;
+		}
+		
+		private void detach_MenuAccess(MenuAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.MenuItem = null;
 		}
 	}
 }
