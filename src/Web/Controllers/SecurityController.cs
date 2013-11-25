@@ -50,6 +50,8 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult NewRole()
         {
+            List<MenuItemModel> menus = userProvider.GetAllMenuItem();
+            ViewBag.AllMenu = menus;
             return View();
         }
         [LoggedIn]
@@ -58,6 +60,17 @@ namespace Web.Controllers
         {
             try
             {
+                string menus = Request["Menus"];
+                List<MenuItemModel> allmenu = userProvider.GetAllMenuItem();
+                model.Menus = (from x in allmenu
+                               where menus.Contains(x.MenuCode)
+                               select new MenuItemModel()
+                               {
+                                   Link = x.Link,
+                                   MenuCode = x.MenuCode,
+                                   MenuText = x.MenuText,
+                                   OrderIndex = x.OrderIndex
+                               }).ToList();
                 userProvider.InsertRoleModel(model);
                 return RedirectToAction("RoleList", "Security");
             }

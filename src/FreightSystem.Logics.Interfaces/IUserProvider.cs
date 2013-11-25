@@ -16,5 +16,6 @@ namespace FreightSystem.Logics.Interfaces
         void InsertRoleModel(RoleModel role);
         UserListModel GetUserList();
         void InsertUserModel(UserModel user);
+        List<MenuItemModel> GetAllMenuItem();
     }
 }

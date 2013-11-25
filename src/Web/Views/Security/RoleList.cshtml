@@ -13,6 +13,8 @@
         <tr>
             <th>角色ID</th>
             <th>角色名称</th>
+            <th>菜单项</th>
+            <th>编辑</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +23,20 @@
         <tr>
             <td>@record.RoleID</td>
             <td>@record.RoleName</td>
+            <td>
+                @if (record.Menus != null)
+                {
+                <ul style="list-style:none; margin:0; padding:0;">
+                @foreach (MenuItemModel menu in record.Menus)
+                {
+                    <li>@menu.MenuText</li>
+                }
+                </ul>
+                }
+            </td>
+            <td>
+                <a href="/Security/RoleMgr/@record.RoleID">编辑</a>
+            </td>
         </tr>
     }
     </tbody>

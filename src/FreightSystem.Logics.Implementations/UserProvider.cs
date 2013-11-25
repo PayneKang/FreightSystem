@@ -100,11 +100,20 @@ namespace FreightSystem.Logics.Implementations
             {
                 RoleListModel result = new RoleListModel();
                 result.ItemList = (from x in context.Roles
-                                select new RoleModel()
-                                {
-                                    RoleID = x.RoleID,
-                                    RoleName = x.RoleName
-                                }).ToList();
+                                   select new RoleModel()
+                                   {
+                                       RoleID = x.RoleID,
+                                       RoleName = x.RoleName,
+                                       Menus = (from menu in x.MenuAccess
+                                                orderby menu.MenuItem.OrderIndex
+                                                select new MenuItemModel()
+                                                {
+                                                    Link = menu.MenuItem.Link,
+                                                    MenuCode = menu.MenuItem.MenuCode,
+                                                    MenuText = menu.MenuItem.MenuText,
+                                                    OrderIndex = menu.MenuItem.OrderIndex
+                                                }).ToList()
+                                   }).ToList();
                 return result;
             }
         }
@@ -116,8 +125,17 @@ namespace FreightSystem.Logics.Implementations
             {
                 Roles r = new Roles()
                 {
-                    RoleName = role.RoleName
+                    RoleName = role.RoleName,
                 };
+                r.MenuAccess = new System.Data.Linq.EntitySet<MenuAccess>();
+                r.MenuAccess.AddRange(
+                    from x in role.Menus
+                    select new MenuAccess()
+                    {
+                        MenuCode = x.MenuCode,
+                        RoleID = r.RoleID
+                    }
+                    );
                 context.Roles.InsertOnSubmit(r);
                 context.SubmitChanges();
             }
@@ -171,6 +189,25 @@ namespace FreightSystem.Logics.Implementations
                 };
                 context.Users.InsertOnSubmit(newUser);
                 context.SubmitChanges();
+            }
+        }
+
+
+        public List<MenuItemModel> GetAllMenuItem()
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                return (
+                        from x in context.MenuItem
+                        orderby x.OrderIndex
+                        select new MenuItemModel()
+                        {
+                            Link = x.Link,
+                            MenuText = x.MenuText,
+                            MenuCode = x.MenuCode,
+                            OrderIndex = x.OrderIndex
+                        }
+                       ).ToList();
             }
         }
     }
