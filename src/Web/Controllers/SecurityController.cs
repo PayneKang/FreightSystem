@@ -60,17 +60,7 @@ namespace Web.Controllers
         {
             try
             {
-                string menus = Request["Menus"];
-                List<MenuItemModel> allmenu = userProvider.GetAllMenuItem();
-                model.Menus = (from x in allmenu
-                               where menus.Contains(x.MenuCode)
-                               select new MenuItemModel()
-                               {
-                                   Link = x.Link,
-                                   MenuCode = x.MenuCode,
-                                   MenuText = x.MenuText,
-                                   OrderIndex = x.OrderIndex
-                               }).ToList();
+                model.Menus = GetSelectedMenuItem();
                 userProvider.InsertRoleModel(model);
                 return RedirectToAction("RoleList", "Security");
             }
@@ -194,6 +184,21 @@ namespace Web.Controllers
             {
                 return RedirectToAction("Index", "Business");
             }
+        }
+
+        private List<MenuItemModel> GetSelectedMenuItem()
+        {
+            string menus = Request["Menus"];
+            List<MenuItemModel> allmenu = userProvider.GetAllMenuItem();
+            return (from x in allmenu
+                    where menus.Contains(x.MenuCode)
+                    select new MenuItemModel()
+                    {
+                        Link = x.Link,
+                        MenuCode = x.MenuCode,
+                        MenuText = x.MenuText,
+                        OrderIndex = x.OrderIndex
+                    }).ToList();
         }
     }
 }
