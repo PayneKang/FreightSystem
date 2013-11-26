@@ -24,8 +24,8 @@
         </tr>
         <tr>
             <th>所在地</th>
-            <td>@Html.TextBoxFor(m => m.Location) *
-                @Html.ValidationMessageFor(m => m.Location)</td>
+            <td>@Html.DropDownListFor(m => m.AreaID, (List<SelectListItem>)ViewBag.AllArea) *
+                @Html.ValidationMessageFor(m => m.AreaID)</td>
         </tr>
         <tr>
             <th>姓名</th>

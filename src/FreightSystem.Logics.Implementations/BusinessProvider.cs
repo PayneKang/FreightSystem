@@ -83,7 +83,12 @@ namespace FreightSystem.Logics.Implementations
                                                                  CreateDateTime = y.Users.CreateDateTime,
                                                                  LastLoginIP = y.Users.LastLoginIP,
                                                                  LastLoginTime = y.Users.LastLoginTime,
-                                                                 Location = y.Users.Location,
+                                                                 AreaID = y.Users.AreaID,
+                                                                 Area = new BusinessAreaModel()
+                                                                 {
+                                                                     AreaName = y.Users.BusinessArea.AreaName,
+                                                                     ID = y.Users.BusinessArea.ID
+                                                                 },
                                                                  Name = y.Users.Name,
                                                                  Password = y.Users.Password,
                                                                  RoleID = y.Users.RoleId,
@@ -193,6 +198,20 @@ namespace FreightSystem.Logics.Implementations
                                       }).ToList();
             }
             return listModel;
+        }
+
+
+        public List<BusinessAreaModel> ListAllArea()
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                return (from x in context.BusinessArea
+                        select new BusinessAreaModel()
+                        {
+                            ID = x.ID,
+                            AreaName = x.AreaName
+                        }).ToList();
+            }
         }
     }
 }

@@ -23,7 +23,11 @@ namespace FreightSystem.Logics.Implementations
                 {
                     Comment = user.Comment,
                     CreateDateTime = user.CreateDateTime,
-                    Location = user.Location,
+                    AreaID = user.AreaID,
+                    Area = new BusinessAreaModel(){
+                         AreaName = user.BusinessArea.AreaName,
+                         ID = user.BusinessArea.ID
+                    },
                     Name = user.Name,
                     Password = user.Password,
                     RoleID = user.RoleId,
@@ -59,7 +63,7 @@ namespace FreightSystem.Logics.Implementations
                 target.Comment = user.Comment;
                 target.LastLoginIP = user.LastLoginIP;
                 target.LastLoginTime = user.LastLoginTime;
-                target.Location = user.Location;
+                target.AreaID = user.AreaID;
                 target.Name = user.Name;
                 target.RoleId = user.RoleID;
                 context.SubmitChanges();
@@ -154,7 +158,12 @@ namespace FreightSystem.Logics.Implementations
                                       CreateDateTime = x.CreateDateTime,
                                       LastLoginIP = x.LastLoginIP,
                                       LastLoginTime = x.LastLoginTime,
-                                      Location = x.Location,
+                                      AreaID = x.AreaID,
+                                      Area = new BusinessAreaModel()
+                                      {
+                                          AreaName = x.BusinessArea.AreaName,
+                                          ID = x.BusinessArea.ID
+                                      },
                                       Name = x.Name,
                                       Password = x.Password,
                                       RoleID = x.RoleId,
@@ -180,8 +189,8 @@ namespace FreightSystem.Logics.Implementations
                     CreateDateTime = DateTime.Now,
                     LastLoginIP = string.Empty,
                     LastLoginTime = DateTime.Now,
-                    Location = user.Location,
-                    Name = user.Location,
+                    AreaID = user.AreaID,
+                    Name = user.Name,
                     Password = user.Password,
                     RoleId = user.RoleID,
                     UserID = user.UserID,

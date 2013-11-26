@@ -8,7 +8,8 @@ namespace FreightSystem.Models
 {
     public class UserModel
     {
-        public string Location { get; set; }
+        public BusinessAreaModel Area { get; set; }
+        public int AreaID { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public int RoleID { get; set; }

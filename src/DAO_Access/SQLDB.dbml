@@ -18,23 +18,8 @@
       <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="RoleName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="Roles_Access" Member="Access" ThisKey="RoleID" OtherKey="RoleID" Type="Access" />
-      <Association Name="Roles_Users" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="Users" />
       <Association Name="Roles_MenuAccess" Member="MenuAccess" ThisKey="RoleID" OtherKey="RoleID" Type="MenuAccess" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="Users">
-      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="CreateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="Location" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="LastLoginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="LastLoginIP" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Association Name="Users_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="UserID" OtherKey="UserID" Type="TransportRecordsOptionHistory" />
-      <Association Name="Roles_Users" Member="Roles" ThisKey="RoleId" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
+      <Association Name="Roles_Users" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="Users" />
     </Type>
   </Table>
   <Table Name="dbo.TransportRecords" Member="TransportRecords">
@@ -91,6 +76,29 @@
       <Column Name="Link" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="OrderIndex" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="MenuItem_MenuAccess" Member="MenuAccess" ThisKey="MenuCode" OtherKey="MenuCode" Type="MenuAccess" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="Users">
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="CreateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AreaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginIP" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Users_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="UserID" OtherKey="UserID" Type="TransportRecordsOptionHistory" />
+      <Association Name="Roles_Users" Member="Roles" ThisKey="RoleId" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
+      <Association Name="BusinessArea_Users" Member="BusinessArea" ThisKey="AreaID" OtherKey="ID" Type="BusinessArea" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BusinessArea" Member="BusinessArea">
+    <Type Name="BusinessArea">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AreaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="BusinessArea_Users" Member="Users" ThisKey="ID" OtherKey="AreaID" Type="Users" />
     </Type>
   </Table>
 </Database>

@@ -67,4 +67,10 @@ namespace FreightSystem.Models
         public string Operation { get; set; }
         public string Description { get; set; }
     }
+
+    public class BusinessAreaModel
+    {
+        public int ID { get; set; }
+        public string AreaName { get; set; }
+    }
 }

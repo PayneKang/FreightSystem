@@ -15,6 +15,7 @@ namespace Web.Controllers
         #region Properties
         IUserCacheProvider cacheProvider = new UserCacheProvider();
         IUserProvider userProvider = new UserProvider();
+        IBusinessProvider businessProvider = new BusinessProvider();
         private const string AllowedPwdCharactors = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         #endregion
 
@@ -23,6 +24,12 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult NewUser()
         {
+            ViewBag.AllArea = (from x in businessProvider.ListAllArea()
+                               select new SelectListItem()
+                               {
+                                   Text = x.AreaName,
+                                   Value = x.ID.ToString()
+                               }).ToList();
             return View();
         }
         [LoggedIn]
