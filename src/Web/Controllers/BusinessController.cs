@@ -61,7 +61,7 @@ namespace Web.Controllers
             return View(areas);
         }
 
-        [LoggedIn]
+        [LoggedIn(CheckAccess: true, AccessCode: "EXPORT")]
         public ActionResult Export()
         {
             string clientName = TryGetRequiredString("ClientName");
@@ -89,21 +89,22 @@ namespace Web.Controllers
             return RouteData.GetRequiredString(parameterName);
         }
 
-        [LoggedIn]
+        [LoggedIn(CheckAccess: true, AccessCode: "ALLRDLIST")]
         public ActionResult Index(TransportRecordListModel model, int page = 1)
         {
             model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate, page);
             return View(model);
         }
 
-        [LoggedIn]
+
+        [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpGet]
         public ActionResult NewTransportRecord()
         {
             return View();
         }
 
-        [LoggedIn]
+        [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpPost]
         public ActionResult NewTransportRecord(TransportRecordModel model)
         {

@@ -20,7 +20,7 @@ namespace Web.Controllers
         #endregion
 
         #region Actions
-        [LoggedIn]
+        [LoggedIn(CheckAccess:true,AccessCode:"USERMGR")]
         [HttpGet]
         public ActionResult NewUser()
         {
@@ -32,7 +32,7 @@ namespace Web.Controllers
                                }).ToList();
             return View();
         }
-        [LoggedIn]
+        [LoggedIn(CheckAccess: true, AccessCode: "USERMGR")]
         [HttpPost]
         public ActionResult NewUser(UserModel model)
         {
@@ -47,13 +47,13 @@ namespace Web.Controllers
             }
             return View(model);
         }
-        [LoggedIn]
+        [LoggedIn(CheckAccess: true, AccessCode: "USERMGR")]
         [HttpGet]
         public ActionResult UserList(){
             UserListModel model = userProvider.GetUserList();
             return View(model);
         }
-        [LoggedIn]
+        [LoggedIn(CheckAccess: true, AccessCode: "ROLEMGR")]
         [HttpGet]
         public ActionResult NewRole()
         {
@@ -61,7 +61,7 @@ namespace Web.Controllers
             ViewBag.AllMenu = menus;
             return View();
         }
-        [LoggedIn]
+        [LoggedIn(CheckAccess: true, AccessCode: "ROLEMGR")]
         [HttpPost]
         public ActionResult NewRole(RoleModel model)
         {
@@ -79,7 +79,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        [LoggedIn]
+        [LoggedIn(CheckAccess: true, AccessCode: "ROLEMGR")]
         public ActionResult RoleList()
         {
             RoleListModel model = userProvider.GetRoleList();
