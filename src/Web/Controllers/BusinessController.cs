@@ -89,13 +89,12 @@ namespace Web.Controllers
             return RouteData.GetRequiredString(parameterName);
         }
 
-        [LoggedIn(CheckAccess: true, AccessCode: "ALLRDLIST")]
+        [LoggedIn(CheckAccess: true, AccessCode: "TOTALRDLIST")]
         public ActionResult Index(TransportRecordListModel model, int page = 1)
         {
             model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate, page);
             return View(model);
         }
-
 
         [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpGet]

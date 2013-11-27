@@ -71,7 +71,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public List<UserModel> QueryUsers(int startIndex, int length,out int totalCount)
+        public List<UserModel> QueryUsers(int startIndex, int length, out int totalCount)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -132,6 +132,7 @@ namespace FreightSystem.Logics.Implementations
                 Roles r = new Roles()
                 {
                     RoleName = role.RoleName,
+                    AccessList = role.AccessList
                 };
                 r.MenuAccess = new System.Data.Linq.EntitySet<MenuAccess>();
                 r.MenuAccess.AddRange(
@@ -187,7 +188,7 @@ namespace FreightSystem.Logics.Implementations
             {
                 Users newUser = new Users()
                 {
-                    Comment = string.IsNullOrEmpty(user.Comment)? " ":user.Comment,
+                    Comment = string.IsNullOrEmpty(user.Comment) ? " " : user.Comment,
                     CreateDateTime = DateTime.Now,
                     LastLoginIP = string.Empty,
                     LastLoginTime = DateTime.Now,
@@ -196,7 +197,7 @@ namespace FreightSystem.Logics.Implementations
                     Password = user.Password,
                     RoleId = user.RoleID,
                     UserID = user.UserID,
-                    
+
                 };
                 context.Users.InsertOnSubmit(newUser);
                 context.SubmitChanges();
@@ -219,6 +220,62 @@ namespace FreightSystem.Logics.Implementations
                             OrderIndex = x.OrderIndex
                         }
                        ).ToList();
+            }
+        }
+
+
+        public RoleModel FindRole(int roleId)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                return (from x in context.Roles
+                        where x.RoleID == roleId
+                        select new RoleModel()
+                        {
+                            AccessList = x.AccessList,
+                            RoleID = x.RoleID,
+                            RoleName = x.RoleName,
+                            Menus = (from menu in x.MenuAccess
+                                     orderby menu.MenuItem.OrderIndex
+                                     select new MenuItemModel()
+                                     {
+                                         Link = menu.MenuItem.Link,
+                                         MenuCode = menu.MenuItem.MenuCode,
+                                         MenuText = menu.MenuItem.MenuText,
+                                         OrderIndex = menu.MenuItem.OrderIndex
+                                     }).ToList()
+                        }).FirstOrDefault();
+            }
+        }
+
+        public void UpdateRoleModel(RoleModel role)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                Roles target = context.Roles.FirstOrDefault(x => x.RoleID == role.RoleID);
+                if (target == null)
+                    throw new Exception("要编辑的角色不存在");
+                target.AccessList = role.AccessList;
+                target.RoleName = role.RoleName;
+                string[] selectedMenuCode = (from x in role.Menus
+                                            select x.MenuCode).ToArray();
+
+                string[] newSelectedMenuCode = (from x in role.Menus
+                                               where target.MenuAccess.Count(y=>y.MenuCode == x.MenuCode) == 0
+                                                   select x.MenuCode).ToArray();
+
+                string[] allMenuCode = (from x in context.MenuItem
+                                        select x.MenuCode).ToArray();
+
+                string[] unselectedMenuCode = allMenuCode.Where(x => !selectedMenuCode.Contains(x)).ToArray();
+                context.MenuAccess.DeleteAllOnSubmit(context.MenuAccess.Where(x => x.RoleID == role.RoleID && unselectedMenuCode.Contains(x.MenuCode)));
+                context.MenuAccess.InsertAllOnSubmit(from x in newSelectedMenuCode
+                                                     select new MenuAccess()
+                                                     {
+                                                         MenuCode = x,
+                                                         RoleID = role.RoleID
+                                                     });
+                context.SubmitChanges();
             }
         }
     }

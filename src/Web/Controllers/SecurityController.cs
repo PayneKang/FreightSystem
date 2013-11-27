@@ -115,6 +115,10 @@ namespace Web.Controllers
                 return View();
             }
             cacheProvider.SaveUser(user);
+            if (user.Role.AccessList.Contains("ALLRDLIST"))
+                return View("Index","Business");
+            if (user.Role.AccessList.Contains("LOCALRDLIST"))
+                return View("LocalTransportRecordList","Business");
             return RedirectToLocal(returnUrl);
         }
 
@@ -171,6 +175,28 @@ namespace Web.Controllers
             }
             return View();
         }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "ROLEMGR")]
+        [HttpGet]
+        public ActionResult RoleMgr()
+        {
+            int roleID;
+            int.TryParse(RouteData.GetRequiredString("id"), out roleID);
+            List<MenuItemModel> menus = userProvider.GetAllMenuItem();
+            ViewBag.AllMenu = menus;
+            RoleModel role = userProvider.FindRole(roleID);
+            return View(role);
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "ROLEMGR")]
+        [HttpPost]
+        public ActionResult RoleMgr(RoleModel model)
+        {
+            model.Menus = GetSelectedMenuItem();
+            userProvider.UpdateRoleModel(model);
+            return RedirectToAction("RoleMgr", "Security");
+        }
+
         #endregion
 
         private bool ValidateString(string source, string allowCharactors)

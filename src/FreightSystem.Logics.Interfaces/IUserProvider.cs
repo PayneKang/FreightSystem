@@ -13,6 +13,8 @@ namespace FreightSystem.Logics.Interfaces
         void UpdateUser(UserModel user);
         void ChangePassword(string userID, string newPassword);
         RoleListModel GetRoleList();
+        RoleModel FindRole(int roleId);
+        void UpdateRoleModel(RoleModel role);
         void InsertRoleModel(RoleModel role);
         UserListModel GetUserList();
         void InsertUserModel(UserModel user);

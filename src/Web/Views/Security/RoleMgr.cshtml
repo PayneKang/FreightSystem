@@ -1,7 +1,7 @@
 ﻿@using FreightSystem.Models;
 @model FreightSystem.Models.RoleModel
 @{
-    ViewBag.Title = "新建角色";
+    ViewBag.Title = "编辑角色";
 }
 
 <hgroup class="title">
@@ -11,6 +11,7 @@
 <section id="newTransportForm">
 <h2>@ViewBag.ErrorMessage</h2>
 @using (Html.BeginForm()) {
+    @Html.HiddenFor(m=>m.RoleID)
     <fieldset>
     <table>
         <tr>
@@ -24,7 +25,16 @@
                 <ul>
                 @foreach (MenuItemModel menu in ViewBag.AllMenu)
                 {
-                    <li><input type="checkbox" name="Menus" value="@menu.MenuCode" /> @menu.MenuText </li>
+                    <li> 
+                    @if (Model.Menus.Exists(x => x.MenuCode == menu.MenuCode))
+                    { 
+                        <input type="checkbox" name="Menus" value="@menu.MenuCode" checked="checked" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="Menus" value="@menu.MenuCode"/>
+                    }
+                    @menu.MenuText </li>
                 }
                 </ul>
             </td>
