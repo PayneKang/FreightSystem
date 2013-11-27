@@ -1,27 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FreightSystemDB" Class="SQLDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=FreightSystemDB;Persist Security Info=True;User ID=sa" SettingsObjectName="DAO_Access.Properties.Settings" SettingsPropertyName="FreightSystemDBConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Access" Member="Access">
-    <Type Name="Access">
-      <Column Name="AccessID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CanCreate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="CanDelete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="CanUpdate" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="CanQuery" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="ModelName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="PropertyName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Roles_Access" Member="Roles" ThisKey="RoleID" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Roles" Member="Roles">
-    <Type Name="Roles">
-      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="RoleName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="Roles_Access" Member="Access" ThisKey="RoleID" OtherKey="RoleID" Type="Access" />
-      <Association Name="Roles_MenuAccess" Member="MenuAccess" ThisKey="RoleID" OtherKey="RoleID" Type="MenuAccess" />
-      <Association Name="Roles_Users" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="Users" />
-    </Type>
-  </Table>
   <Table Name="dbo.TransportRecords" Member="TransportRecords">
     <Type Name="TransportRecords">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -65,8 +43,8 @@
     <Type Name="MenuAccess">
       <Column Name="MenuCode" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Roles_MenuAccess" Member="Roles" ThisKey="RoleID" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
       <Association Name="MenuItem_MenuAccess" Member="MenuItem" ThisKey="MenuCode" OtherKey="MenuCode" Type="MenuItem" IsForeignKey="true" />
+      <Association Name="Roles_MenuAccess" Member="Roles" ThisKey="RoleID" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MenuItem" Member="MenuItem">
@@ -90,8 +68,8 @@
       <Column Name="LastLoginIP" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Association Name="Users_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="UserID" OtherKey="UserID" Type="TransportRecordsOptionHistory" />
-      <Association Name="Roles_Users" Member="Roles" ThisKey="RoleId" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
       <Association Name="BusinessArea_Users" Member="BusinessArea" ThisKey="AreaID" OtherKey="ID" Type="BusinessArea" IsForeignKey="true" />
+      <Association Name="Roles_Users" Member="Roles" ThisKey="RoleId" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.BusinessArea" Member="BusinessArea">
@@ -99,6 +77,15 @@
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="AreaName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="BusinessArea_Users" Member="Users" ThisKey="ID" OtherKey="AreaID" Type="Users" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Roles" Member="Roles">
+    <Type Name="Roles">
+      <Column Name="RoleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="AccessList" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="Roles_MenuAccess" Member="MenuAccess" ThisKey="RoleID" OtherKey="RoleID" Type="MenuAccess" />
+      <Association Name="Roles_Users" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="Users" />
     </Type>
   </Table>
 </Database>

@@ -12,7 +12,20 @@ namespace Web.Filters
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public sealed class LoggedInAttribute : ActionFilterAttribute
     {
+        private bool _checkAccess = false;
+        private string _accessCode = string.Empty;
+        private const string ERR_ACCESS_DENIED = "权限不足";
+        public LoggedInAttribute()
+        {
+        }
+        public LoggedInAttribute(bool CheckAccess,string AccessCode):this()
+        {
+            _checkAccess = true;
+            _accessCode = AccessCode;
+        }
+
         IUserCacheProvider provider = new UserCacheProvider();
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             UserModel loggedUser = provider.GetCurrentLoggedUser();
@@ -21,8 +34,23 @@ namespace Web.Filters
                 filterContext.Result = new RedirectResult("/Security/Login");
                 return;
             }
-            filterContext.Controller.ViewBag.LoggedUser = loggedUser;
-            base.OnActionExecuting(filterContext);
+
+            if (!_checkAccess)
+            {
+                filterContext.Controller.ViewBag.LoggedUser = loggedUser;
+                base.OnActionExecuting(filterContext);
+                return;
+            }
+
+            if (loggedUser.Role.Accesses.Exists(x => x.ModelName == _accessCode))
+            {
+                filterContext.Controller.ViewBag.LoggedUser = loggedUser;
+                base.OnActionExecuting(filterContext);
+                return;
+            }
+
+            filterContext.Result = new RedirectResult(string.Format("/Error/DisplayError?errmsg={0}", ERR_ACCESS_DENIED));
+            return;
         }
     }
 }

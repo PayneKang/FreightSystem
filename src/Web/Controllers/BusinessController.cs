@@ -21,6 +21,13 @@ namespace Web.Controllers
             this.businessProvider = new BusinessProvider();
             this.cacheProvider = new UserCacheProvider();
         }
+
+        [LoggedIn(CheckAccess:true, AccessCode:"AREAMGR")]
+        public ActionResult AreaList()
+        {
+            return View();
+        }
+
         [LoggedIn]
         public ActionResult Export()
         {

@@ -30,12 +30,6 @@ namespace DAO_Access
 		
     #region 可扩展性方法定义
     partial void OnCreated();
-    partial void InsertAccess(Access instance);
-    partial void UpdateAccess(Access instance);
-    partial void DeleteAccess(Access instance);
-    partial void InsertRoles(Roles instance);
-    partial void UpdateRoles(Roles instance);
-    partial void DeleteRoles(Roles instance);
     partial void InsertTransportRecords(TransportRecords instance);
     partial void UpdateTransportRecords(TransportRecords instance);
     partial void DeleteTransportRecords(TransportRecords instance);
@@ -54,6 +48,9 @@ namespace DAO_Access
     partial void InsertBusinessArea(BusinessArea instance);
     partial void UpdateBusinessArea(BusinessArea instance);
     partial void DeleteBusinessArea(BusinessArea instance);
+    partial void InsertRoles(Roles instance);
+    partial void UpdateRoles(Roles instance);
+    partial void DeleteRoles(Roles instance);
     #endregion
 		
 		public SQLDBDataContext() : 
@@ -84,22 +81,6 @@ namespace DAO_Access
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Access> Access
-		{
-			get
-			{
-				return this.GetTable<Access>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Roles> Roles
-		{
-			get
-			{
-				return this.GetTable<Roles>();
-			}
 		}
 		
 		public System.Data.Linq.Table<TransportRecords> TransportRecords
@@ -149,446 +130,13 @@ namespace DAO_Access
 				return this.GetTable<BusinessArea>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Access")]
-	public partial class Access : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _AccessID;
-		
-		private bool _CanCreate;
-		
-		private bool _CanDelete;
-		
-		private bool _CanUpdate;
-		
-		private bool _CanQuery;
-		
-		private string _ModelName;
-		
-		private string _PropertyName;
-		
-		private int _RoleID;
-		
-		private EntityRef<Roles> _Roles;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnAccessIDChanging(int value);
-    partial void OnAccessIDChanged();
-    partial void OnCanCreateChanging(bool value);
-    partial void OnCanCreateChanged();
-    partial void OnCanDeleteChanging(bool value);
-    partial void OnCanDeleteChanged();
-    partial void OnCanUpdateChanging(bool value);
-    partial void OnCanUpdateChanged();
-    partial void OnCanQueryChanging(bool value);
-    partial void OnCanQueryChanged();
-    partial void OnModelNameChanging(string value);
-    partial void OnModelNameChanged();
-    partial void OnPropertyNameChanging(string value);
-    partial void OnPropertyNameChanged();
-    partial void OnRoleIDChanging(int value);
-    partial void OnRoleIDChanged();
-    #endregion
-		
-		public Access()
-		{
-			this._Roles = default(EntityRef<Roles>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int AccessID
+		public System.Data.Linq.Table<Roles> Roles
 		{
 			get
 			{
-				return this._AccessID;
+				return this.GetTable<Roles>();
 			}
-			set
-			{
-				if ((this._AccessID != value))
-				{
-					this.OnAccessIDChanging(value);
-					this.SendPropertyChanging();
-					this._AccessID = value;
-					this.SendPropertyChanged("AccessID");
-					this.OnAccessIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanCreate", DbType="Bit NOT NULL")]
-		public bool CanCreate
-		{
-			get
-			{
-				return this._CanCreate;
-			}
-			set
-			{
-				if ((this._CanCreate != value))
-				{
-					this.OnCanCreateChanging(value);
-					this.SendPropertyChanging();
-					this._CanCreate = value;
-					this.SendPropertyChanged("CanCreate");
-					this.OnCanCreateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanDelete", DbType="Bit NOT NULL")]
-		public bool CanDelete
-		{
-			get
-			{
-				return this._CanDelete;
-			}
-			set
-			{
-				if ((this._CanDelete != value))
-				{
-					this.OnCanDeleteChanging(value);
-					this.SendPropertyChanging();
-					this._CanDelete = value;
-					this.SendPropertyChanged("CanDelete");
-					this.OnCanDeleteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanUpdate", DbType="Bit NOT NULL")]
-		public bool CanUpdate
-		{
-			get
-			{
-				return this._CanUpdate;
-			}
-			set
-			{
-				if ((this._CanUpdate != value))
-				{
-					this.OnCanUpdateChanging(value);
-					this.SendPropertyChanging();
-					this._CanUpdate = value;
-					this.SendPropertyChanged("CanUpdate");
-					this.OnCanUpdateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CanQuery", DbType="Bit NOT NULL")]
-		public bool CanQuery
-		{
-			get
-			{
-				return this._CanQuery;
-			}
-			set
-			{
-				if ((this._CanQuery != value))
-				{
-					this.OnCanQueryChanging(value);
-					this.SendPropertyChanging();
-					this._CanQuery = value;
-					this.SendPropertyChanged("CanQuery");
-					this.OnCanQueryChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ModelName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ModelName
-		{
-			get
-			{
-				return this._ModelName;
-			}
-			set
-			{
-				if ((this._ModelName != value))
-				{
-					this.OnModelNameChanging(value);
-					this.SendPropertyChanging();
-					this._ModelName = value;
-					this.SendPropertyChanged("ModelName");
-					this.OnModelNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PropertyName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string PropertyName
-		{
-			get
-			{
-				return this._PropertyName;
-			}
-			set
-			{
-				if ((this._PropertyName != value))
-				{
-					this.OnPropertyNameChanging(value);
-					this.SendPropertyChanging();
-					this._PropertyName = value;
-					this.SendPropertyChanged("PropertyName");
-					this.OnPropertyNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int NOT NULL")]
-		public int RoleID
-		{
-			get
-			{
-				return this._RoleID;
-			}
-			set
-			{
-				if ((this._RoleID != value))
-				{
-					if (this._Roles.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRoleIDChanging(value);
-					this.SendPropertyChanging();
-					this._RoleID = value;
-					this.SendPropertyChanged("RoleID");
-					this.OnRoleIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Access", Storage="_Roles", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
-		public Roles Roles
-		{
-			get
-			{
-				return this._Roles.Entity;
-			}
-			set
-			{
-				Roles previousValue = this._Roles.Entity;
-				if (((previousValue != value) 
-							|| (this._Roles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Roles.Entity = null;
-						previousValue.Access.Remove(this);
-					}
-					this._Roles.Entity = value;
-					if ((value != null))
-					{
-						value.Access.Add(this);
-						this._RoleID = value.RoleID;
-					}
-					else
-					{
-						this._RoleID = default(int);
-					}
-					this.SendPropertyChanged("Roles");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
-	public partial class Roles : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _RoleID;
-		
-		private string _RoleName;
-		
-		private EntitySet<Access> _Access;
-		
-		private EntitySet<MenuAccess> _MenuAccess;
-		
-		private EntitySet<Users> _Users;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnRoleIDChanging(int value);
-    partial void OnRoleIDChanged();
-    partial void OnRoleNameChanging(string value);
-    partial void OnRoleNameChanged();
-    #endregion
-		
-		public Roles()
-		{
-			this._Access = new EntitySet<Access>(new Action<Access>(this.attach_Access), new Action<Access>(this.detach_Access));
-			this._MenuAccess = new EntitySet<MenuAccess>(new Action<MenuAccess>(this.attach_MenuAccess), new Action<MenuAccess>(this.detach_MenuAccess));
-			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int RoleID
-		{
-			get
-			{
-				return this._RoleID;
-			}
-			set
-			{
-				if ((this._RoleID != value))
-				{
-					this.OnRoleIDChanging(value);
-					this.SendPropertyChanging();
-					this._RoleID = value;
-					this.SendPropertyChanged("RoleID");
-					this.OnRoleIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(255)")]
-		public string RoleName
-		{
-			get
-			{
-				return this._RoleName;
-			}
-			set
-			{
-				if ((this._RoleName != value))
-				{
-					this.OnRoleNameChanging(value);
-					this.SendPropertyChanging();
-					this._RoleName = value;
-					this.SendPropertyChanged("RoleName");
-					this.OnRoleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Access", Storage="_Access", ThisKey="RoleID", OtherKey="RoleID")]
-		public EntitySet<Access> Access
-		{
-			get
-			{
-				return this._Access;
-			}
-			set
-			{
-				this._Access.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_MenuAccess", Storage="_MenuAccess", ThisKey="RoleID", OtherKey="RoleID")]
-		public EntitySet<MenuAccess> MenuAccess
-		{
-			get
-			{
-				return this._MenuAccess;
-			}
-			set
-			{
-				this._MenuAccess.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Users", ThisKey="RoleID", OtherKey="RoleId")]
-		public EntitySet<Users> Users
-		{
-			get
-			{
-				return this._Users;
-			}
-			set
-			{
-				this._Users.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Access(Access entity)
-		{
-			this.SendPropertyChanging();
-			entity.Roles = this;
-		}
-		
-		private void detach_Access(Access entity)
-		{
-			this.SendPropertyChanging();
-			entity.Roles = null;
-		}
-		
-		private void attach_MenuAccess(MenuAccess entity)
-		{
-			this.SendPropertyChanging();
-			entity.Roles = this;
-		}
-		
-		private void detach_MenuAccess(MenuAccess entity)
-		{
-			this.SendPropertyChanging();
-			entity.Roles = null;
-		}
-		
-		private void attach_Users(Users entity)
-		{
-			this.SendPropertyChanging();
-			entity.Roles = this;
-		}
-		
-		private void detach_Users(Users entity)
-		{
-			this.SendPropertyChanging();
-			entity.Roles = null;
 		}
 	}
 	
@@ -1460,9 +1008,9 @@ namespace DAO_Access
 		
 		private int _RoleID;
 		
-		private EntityRef<Roles> _Roles;
-		
 		private EntityRef<MenuItem> _MenuItem;
+		
+		private EntityRef<Roles> _Roles;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -1476,8 +1024,8 @@ namespace DAO_Access
 		
 		public MenuAccess()
 		{
-			this._Roles = default(EntityRef<Roles>);
 			this._MenuItem = default(EntityRef<MenuItem>);
+			this._Roles = default(EntityRef<Roles>);
 			OnCreated();
 		}
 		
@@ -1529,40 +1077,6 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_MenuAccess", Storage="_Roles", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
-		public Roles Roles
-		{
-			get
-			{
-				return this._Roles.Entity;
-			}
-			set
-			{
-				Roles previousValue = this._Roles.Entity;
-				if (((previousValue != value) 
-							|| (this._Roles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Roles.Entity = null;
-						previousValue.MenuAccess.Remove(this);
-					}
-					this._Roles.Entity = value;
-					if ((value != null))
-					{
-						value.MenuAccess.Add(this);
-						this._RoleID = value.RoleID;
-					}
-					else
-					{
-						this._RoleID = default(int);
-					}
-					this.SendPropertyChanged("Roles");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="MenuItem_MenuAccess", Storage="_MenuItem", ThisKey="MenuCode", OtherKey="MenuCode", IsForeignKey=true)]
 		public MenuItem MenuItem
 		{
@@ -1593,6 +1107,40 @@ namespace DAO_Access
 						this._MenuCode = default(string);
 					}
 					this.SendPropertyChanged("MenuItem");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_MenuAccess", Storage="_Roles", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
+		public Roles Roles
+		{
+			get
+			{
+				return this._Roles.Entity;
+			}
+			set
+			{
+				Roles previousValue = this._Roles.Entity;
+				if (((previousValue != value) 
+							|| (this._Roles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Roles.Entity = null;
+						previousValue.MenuAccess.Remove(this);
+					}
+					this._Roles.Entity = value;
+					if ((value != null))
+					{
+						value.MenuAccess.Add(this);
+						this._RoleID = value.RoleID;
+					}
+					else
+					{
+						this._RoleID = default(int);
+					}
+					this.SendPropertyChanged("Roles");
 				}
 			}
 		}
@@ -1806,9 +1354,9 @@ namespace DAO_Access
 		
 		private EntitySet<TransportRecordsOptionHistory> _TransportRecordsOptionHistory;
 		
-		private EntityRef<Roles> _Roles;
-		
 		private EntityRef<BusinessArea> _BusinessArea;
+		
+		private EntityRef<Roles> _Roles;
 		
     #region 可扩展性方法定义
     partial void OnLoaded();
@@ -1837,8 +1385,8 @@ namespace DAO_Access
 		public Users()
 		{
 			this._TransportRecordsOptionHistory = new EntitySet<TransportRecordsOptionHistory>(new Action<TransportRecordsOptionHistory>(this.attach_TransportRecordsOptionHistory), new Action<TransportRecordsOptionHistory>(this.detach_TransportRecordsOptionHistory));
-			this._Roles = default(EntityRef<Roles>);
 			this._BusinessArea = default(EntityRef<BusinessArea>);
+			this._Roles = default(EntityRef<Roles>);
 			OnCreated();
 		}
 		
@@ -2043,40 +1591,6 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Roles", ThisKey="RoleId", OtherKey="RoleID", IsForeignKey=true)]
-		public Roles Roles
-		{
-			get
-			{
-				return this._Roles.Entity;
-			}
-			set
-			{
-				Roles previousValue = this._Roles.Entity;
-				if (((previousValue != value) 
-							|| (this._Roles.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Roles.Entity = null;
-						previousValue.Users.Remove(this);
-					}
-					this._Roles.Entity = value;
-					if ((value != null))
-					{
-						value.Users.Add(this);
-						this._RoleId = value.RoleID;
-					}
-					else
-					{
-						this._RoleId = default(int);
-					}
-					this.SendPropertyChanged("Roles");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="BusinessArea_Users", Storage="_BusinessArea", ThisKey="AreaID", OtherKey="ID", IsForeignKey=true)]
 		public BusinessArea BusinessArea
 		{
@@ -2107,6 +1621,40 @@ namespace DAO_Access
 						this._AreaID = default(int);
 					}
 					this.SendPropertyChanged("BusinessArea");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Roles", ThisKey="RoleId", OtherKey="RoleID", IsForeignKey=true)]
+		public Roles Roles
+		{
+			get
+			{
+				return this._Roles.Entity;
+			}
+			set
+			{
+				Roles previousValue = this._Roles.Entity;
+				if (((previousValue != value) 
+							|| (this._Roles.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Roles.Entity = null;
+						previousValue.Users.Remove(this);
+					}
+					this._Roles.Entity = value;
+					if ((value != null))
+					{
+						value.Users.Add(this);
+						this._RoleId = value.RoleID;
+					}
+					else
+					{
+						this._RoleId = default(int);
+					}
+					this.SendPropertyChanged("Roles");
 				}
 			}
 		}
@@ -2255,6 +1803,172 @@ namespace DAO_Access
 		{
 			this.SendPropertyChanging();
 			entity.BusinessArea = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Roles")]
+	public partial class Roles : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _RoleID;
+		
+		private string _RoleName;
+		
+		private string _AccessList;
+		
+		private EntitySet<MenuAccess> _MenuAccess;
+		
+		private EntitySet<Users> _Users;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnRoleNameChanging(string value);
+    partial void OnRoleNameChanged();
+    partial void OnAccessListChanging(string value);
+    partial void OnAccessListChanged();
+    #endregion
+		
+		public Roles()
+		{
+			this._MenuAccess = new EntitySet<MenuAccess>(new Action<MenuAccess>(this.attach_MenuAccess), new Action<MenuAccess>(this.detach_MenuAccess));
+			this._Users = new EntitySet<Users>(new Action<Users>(this.attach_Users), new Action<Users>(this.detach_Users));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(255)")]
+		public string RoleName
+		{
+			get
+			{
+				return this._RoleName;
+			}
+			set
+			{
+				if ((this._RoleName != value))
+				{
+					this.OnRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._RoleName = value;
+					this.SendPropertyChanged("RoleName");
+					this.OnRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessList", DbType="NVarChar(500)")]
+		public string AccessList
+		{
+			get
+			{
+				return this._AccessList;
+			}
+			set
+			{
+				if ((this._AccessList != value))
+				{
+					this.OnAccessListChanging(value);
+					this.SendPropertyChanging();
+					this._AccessList = value;
+					this.SendPropertyChanged("AccessList");
+					this.OnAccessListChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_MenuAccess", Storage="_MenuAccess", ThisKey="RoleID", OtherKey="RoleID")]
+		public EntitySet<MenuAccess> MenuAccess
+		{
+			get
+			{
+				return this._MenuAccess;
+			}
+			set
+			{
+				this._MenuAccess.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Roles_Users", Storage="_Users", ThisKey="RoleID", OtherKey="RoleId")]
+		public EntitySet<Users> Users
+		{
+			get
+			{
+				return this._Users;
+			}
+			set
+			{
+				this._Users.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_MenuAccess(MenuAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = this;
+		}
+		
+		private void detach_MenuAccess(MenuAccess entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = null;
+		}
+		
+		private void attach_Users(Users entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = this;
+		}
+		
+		private void detach_Users(Users entity)
+		{
+			this.SendPropertyChanging();
+			entity.Roles = null;
 		}
 	}
 }
