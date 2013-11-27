@@ -22,10 +22,43 @@ namespace Web.Controllers
             this.cacheProvider = new UserCacheProvider();
         }
 
-        [LoggedIn(CheckAccess:true, AccessCode:"AREAMGR")]
+        [LoggedIn(CheckAccess: true, AccessCode: "AREAMGR")]
+        [HttpGet]
         public ActionResult AreaList()
         {
-            return View();
+            List<BusinessAreaModel> areas = businessProvider.ListAllArea();
+            return View(areas);
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "AREAMGR")]
+        [HttpPost]
+        public ActionResult AreaList(string newArea)
+        {
+            // Create new area
+            string newarea = Request["newarea"];
+            List<BusinessAreaModel> areas;
+            if (string.IsNullOrEmpty(newarea))
+            {
+                ViewBag.ErrorMessage = "请输入正确的地点";
+
+                // List all area
+                areas = businessProvider.ListAllArea();
+                return View(areas);
+            }
+
+            try{
+                businessProvider.InsertNewArea(newarea);
+            }catch(Exception ex){
+                ViewBag.ErrorMessage = ex.Message;
+
+                // List all area
+                areas = businessProvider.ListAllArea();
+                return View(areas);
+            }
+
+            // List all area
+            areas = businessProvider.ListAllArea();
+            return View(areas);
         }
 
         [LoggedIn]

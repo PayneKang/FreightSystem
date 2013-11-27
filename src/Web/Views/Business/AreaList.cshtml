@@ -1,5 +1,43 @@
-﻿@{
-    ViewBag.Title = "AreaList";
+﻿@using FreightSystem.Models;
+@model List<BusinessAreaModel>
+@{
+    ViewBag.Title = "地域列表";
 }
-
-<h2>AreaList</h2>
+<style>
+    #AreaList
+    {
+        padding:0px;
+        margin:0px;
+        list-style:none;
+    }
+    #AreaList li
+    {
+        float:left;
+        padding:3px 5px 3px 5px;
+        width:100px;
+        border:solid 1px Black;
+        margin:1px;
+        text-align:center;
+    }
+</style>
+<h2>地区列表</h2>
+<div style="width:100%; overflow:auto;">
+<ul id="AreaList">
+@foreach (BusinessAreaModel area in Model)
+{
+    <li>@area.AreaName</li>
+}
+</ul>
+</div><br /><br />
+<div style="font-weight:bold;">@ViewBag.ErrorMessage</div>
+<div>
+@using(Html.BeginForm()){
+<table>
+    <tr>
+        <th>地区名称</th>
+        <td><input type="text" name="newarea" /></td>
+        <td><input type="submit" value="创建" /></td>
+    </tr>
+</table>
+}
+</div>

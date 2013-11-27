@@ -213,5 +213,23 @@ namespace FreightSystem.Logics.Implementations
                         }).ToList();
             }
         }
+
+
+        public void InsertNewArea(string newArea)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                if (context.BusinessArea.Count(x => x.AreaName == newArea) > 0)
+                {
+                    throw new Exception("输入的地区名已经存在");
+                }
+                BusinessArea area = new BusinessArea()
+                {
+                     AreaName = newArea
+                };
+                context.BusinessArea.InsertOnSubmit(area);
+                context.SubmitChanges();
+            }
+        }
     }
 }

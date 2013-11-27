@@ -24,9 +24,10 @@ namespace FreightSystem.Logics.Implementations
                     Comment = user.Comment,
                     CreateDateTime = user.CreateDateTime,
                     AreaID = user.AreaID,
-                    Area = new BusinessAreaModel(){
-                         AreaName = user.BusinessArea.AreaName,
-                         ID = user.BusinessArea.ID
+                    Area = new BusinessAreaModel()
+                    {
+                        AreaName = user.BusinessArea.AreaName,
+                        ID = user.BusinessArea.ID
                     },
                     Name = user.Name,
                     Password = user.Password,
@@ -46,8 +47,8 @@ namespace FreightSystem.Logics.Implementations
                                      MenuCode = x.MenuItem.MenuCode,
                                      MenuText = x.MenuItem.MenuText,
                                      OrderIndex = x.MenuItem.OrderIndex
-                                 }).ToList()
-
+                                 }).ToList(),
+                        AccessList = user.Roles.AccessList
                     }
                 };
             }
@@ -116,7 +117,8 @@ namespace FreightSystem.Logics.Implementations
                                                     MenuCode = menu.MenuItem.MenuCode,
                                                     MenuText = menu.MenuItem.MenuText,
                                                     OrderIndex = menu.MenuItem.OrderIndex
-                                                }).ToList()
+                                                }).ToList(),
+                                       AccessList = x.AccessList
                                    }).ToList();
                 return result;
             }

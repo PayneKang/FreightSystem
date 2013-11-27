@@ -28,7 +28,7 @@ namespace FreightSystem.Models
         public int RoleID { get; set; }
         [Required(ErrorMessage = "角色名称必须填写")]
         public string RoleName { get; set; }
-        public List<AccessModel> Accesses { get; set; }
+        public string AccessList { get; set; }
         public List<MenuItemModel> Menus { get; set; }
     }
     public class MenuItemModel
@@ -41,17 +41,6 @@ namespace FreightSystem.Models
     public class RoleListModel
     {
         public List<RoleModel> ItemList { get; set; }
-    }
-    public class AccessModel
-    {
-        public int AccessID { get; set; }
-        public bool CanCreate { get; set; }
-        public bool CanDelete { get; set; }
-        public bool CanUpdate { get; set; }
-        public bool CanQuery { get; set; }
-        public string ModelName { get; set; }
-        public string PropertyName { get; set; }
-        public int RoleID { get; set; }
     }
     public class LoginModel
     {

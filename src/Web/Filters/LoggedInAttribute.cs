@@ -14,6 +14,7 @@ namespace Web.Filters
     {
         private bool _checkAccess = false;
         private string _accessCode = string.Empty;
+        private const string ALLACCESS = "ALL";
         private const string ERR_ACCESS_DENIED = "权限不足";
         public LoggedInAttribute()
         {
@@ -42,7 +43,13 @@ namespace Web.Filters
                 return;
             }
 
-            if (loggedUser.Role.Accesses.Exists(x => x.ModelName == _accessCode))
+            if (loggedUser.Role.AccessList == null)
+            {
+                filterContext.Result = new RedirectResult(string.Format("/Error/DisplayError?errmsg={0}", ERR_ACCESS_DENIED));
+                return;
+            }
+
+            if (loggedUser.Role.AccessList.Contains(_accessCode) || loggedUser.Role.AccessList.Contains(ALLACCESS))
             {
                 filterContext.Controller.ViewBag.LoggedUser = loggedUser;
                 base.OnActionExecuting(filterContext);
