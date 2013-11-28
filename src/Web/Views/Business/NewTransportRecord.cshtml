@@ -80,7 +80,7 @@
             <th style="vertical-align:top;">所在业务区域</th>
             <td colspan="3">
                 @Html.LabelFor(x=>x.BusinessArea,((UserModel)ViewBag.LoggedUser).Area.AreaName)
-                @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName);
+                @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
             </td>
         </tr>
         @*

@@ -160,9 +160,12 @@ namespace FreightSystem.Logics.Implementations
                 DateTime dd = DateTime.MinValue;
                 if (checkDeliverDate)
                     dd = deliverDate.Value;
+                string areaName = string.Empty;
+                if (area != null)
+                    areaName = area.AreaName;
 
                 int totalCount = context.TransportRecords.Count(x => (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
-                                      && (!checkDeliverDate || x.DeliverDate.Date == dd) && (area==null || x.BusinessArea == area.AreaName));
+                                      && (!checkDeliverDate || x.DeliverDate.Date == dd) && (string.IsNullOrEmpty(areaName) || x.BusinessArea == areaName));
                 listModel.TotalCount = totalCount;
                 listModel.TotalPage = totalCount / TransportRecordListModel.PageSize;
                 listModel.PageIndex = pageIndex;
@@ -179,7 +182,7 @@ namespace FreightSystem.Logics.Implementations
                                       orderby x.ID descending
                                       where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
                                       && (!checkDeliverDate || x.DeliverDate.Date == dd)
-                                      && (area == null || x.BusinessArea == area.AreaName)
+                                      && (string.IsNullOrEmpty(areaName) || x.BusinessArea == areaName)
                                       select new TransportRecordModel()
                                       {
                                           ID = x.ID,
@@ -241,6 +244,12 @@ namespace FreightSystem.Logics.Implementations
                                       }).Skip(startIndex).Take(TransportRecordListModel.PageSize).ToList();
             }
             return listModel;
+        }
+
+
+        public TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate, BusinessAreaModel area)
+        {
+            throw new NotImplementedException();
         }
     }
 }

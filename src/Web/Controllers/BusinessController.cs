@@ -82,6 +82,27 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [LoggedIn(CheckAccess: true, AccessCode: "EXPORT")]
+        public ActionResult ExcelLocalReport()
+        {
+            string clientName = TryGetRequiredString("ClientName");
+            string deliverDate = TryGetRequiredString("DeliverDate");
+            DateTime dtDeliverDate;
+            if (!DateTime.TryParse(deliverDate, out dtDeliverDate))
+            {
+                ViewBag.ErrorMessage = "必须选中一个日期才能导出日报表";
+                return View("Error");
+            }
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.Charset = "GBK";
+            Response.ContentEncoding = Encoding.UTF8;
+            Response.AppendHeader("Content-Disposition", "attachment;filename=" + deliverDate + "_" + clientName + ".xls");
+            if (clientName == "NA")
+                clientName = string.Empty;
+            TransportRecordListModel model = businessProvider.QueryDailyTransportModel(clientName, dtDeliverDate);
+            return View(model);
+        }
+
         private string TryGetRequiredString(string parameterName)
         {
             if(!RouteData.Values.Keys.Contains(parameterName))
