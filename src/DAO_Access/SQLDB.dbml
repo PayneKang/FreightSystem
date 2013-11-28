@@ -1,33 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FreightSystemDB" Class="SQLDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=FreightSystemDB;Persist Security Info=True;User ID=sa" SettingsObjectName="DAO_Access.Properties.Settings" SettingsPropertyName="FreightSystemDBConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.TransportRecords" Member="TransportRecords">
-    <Type Name="TransportRecords">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CarLicense" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="ClientName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="DeliverDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Driver" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="FromLocation" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="PackageName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ToLocation" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="Volume" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="AccountPayble" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Deductions" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="DeliverPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="DeliverType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="HandlingFee" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="PayDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="PrePay" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="OilCard" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Reparations" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="ShortBargeFee" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="TrayNo" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordsOptionHistory" />
-    </Type>
-  </Table>
   <Table Name="dbo.TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory">
     <Type Name="TransportRecordsOptionHistory">
       <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -35,8 +7,8 @@
       <Column Name="LogDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Operation" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
       <Association Name="Users_TransportRecordsOptionHistory" Member="Users" ThisKey="UserID" OtherKey="UserID" Type="Users" IsForeignKey="true" />
+      <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MenuAccess" Member="MenuAccess">
@@ -86,6 +58,35 @@
       <Column Name="AccessList" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Association Name="Roles_MenuAccess" Member="MenuAccess" ThisKey="RoleID" OtherKey="RoleID" Type="MenuAccess" />
       <Association Name="Roles_Users" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="Users" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransportRecords" Member="TransportRecords">
+    <Type Name="TransportRecords">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CarLicense" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ClientName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="DeliverDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Driver" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FromLocation" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PackageName" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ToLocation" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Volume" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="AccountPayble" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Deductions" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DeliverPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DeliverType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="HandlingFee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PayDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PrePay" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="OilCard" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Reparations" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ShortBargeFee" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="TrayNo" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="BusinessArea" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordsOptionHistory" />
     </Type>
   </Table>
 </Database>

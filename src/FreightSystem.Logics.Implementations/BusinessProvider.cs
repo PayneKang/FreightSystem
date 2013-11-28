@@ -14,95 +14,7 @@ namespace FreightSystem.Logics.Implementations
     {
         public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate,int pageIndex)
         {
-            TransportRecordListModel listModel = new TransportRecordListModel();
-            if (pageIndex < 1)
-                pageIndex = 1;
-
-            using (SQLDBDataContext context = new SQLDBDataContext()) {
-
-                bool checkDeliverDate = deliverDate.HasValue;
-                DateTime dd = DateTime.MinValue;
-                if (checkDeliverDate)
-                    dd = deliverDate.Value;
-
-                int totalCount = context.TransportRecords.Count(x=>(string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
-                                      && (!checkDeliverDate || x.DeliverDate.Date == dd));
-                listModel.TotalCount = totalCount;
-                listModel.TotalPage = totalCount / TransportRecordListModel.PageSize;
-                listModel.PageIndex = pageIndex;
-                if (totalCount % TransportRecordListModel.PageSize > 0)
-                    listModel.TotalPage++;
-                if (listModel.TotalPage < 1)
-                    listModel.TotalPage = 1;
-                if (pageIndex > listModel.TotalPage)
-                    pageIndex = listModel.TotalPage;
-                int startIndex = (pageIndex - 1) * TransportRecordListModel.PageSize;
-                listModel.ClientName = clientName;
-                listModel.DeliverDate = deliverDate;
-                listModel.ItemList = (from x in context.TransportRecords
-                                      orderby x.ID descending
-                                      where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
-                                      && (!checkDeliverDate || x.DeliverDate.Date == dd)
-                                      select new TransportRecordModel()
-                                      {
-                                          ID = x.ID,
-                                          AccountPayble = x.AccountPayble,
-                                          CarLicense = x.CarLicense,
-                                          ClientName = x.ClientName,
-                                          Comment = x.Comment,
-                                          Deductions = x.Deductions,
-                                          DeliverDate = x.DeliverDate,
-                                          DeliverPrice = x.DeliverPrice,
-                                          DeliverType = x.DeliverType,
-                                          Driver = x.Driver,
-                                          FromLocation = x.FromLocation,
-                                          HandlingFee = x.HandlingFee,
-                                          PackageName = x.PackageName,
-                                          PayDate = x.PayDate,
-                                          PrePay = x.PrePay,
-                                          Quantity = x.Quantity,
-                                          Reparations = x.Reparations,
-                                          ShortBargeFee = x.ShortBargeFee,
-                                          Status = x.Status,
-                                          ToLocation = x.ToLocation,
-                                          Volume = x.Volume,
-                                          TrayNo = x.TrayNo,
-                                          OilCard = x.OilCard,
-                                          HistoryItem = (from y in x.TransportRecordsOptionHistory
-                                                         select new TransportRecordsHistoryModel()
-                                                         {
-                                                             Description = y.Description,
-                                                             LogDateTime = y.LogDateTime,
-                                                             Operation = y.Operation,
-                                                             TransportRecordID = y.TransportRecordID,
-                                                             UserID = y.UserID,
-                                                             User = new UserModel()
-                                                             {
-
-                                                                 Comment = y.Users.Comment,
-                                                                 CreateDateTime = y.Users.CreateDateTime,
-                                                                 LastLoginIP = y.Users.LastLoginIP,
-                                                                 LastLoginTime = y.Users.LastLoginTime,
-                                                                 AreaID = y.Users.AreaID,
-                                                                 Area = new BusinessAreaModel()
-                                                                 {
-                                                                     AreaName = y.Users.BusinessArea.AreaName,
-                                                                     ID = y.Users.BusinessArea.ID
-                                                                 },
-                                                                 Name = y.Users.Name,
-                                                                 Password = y.Users.Password,
-                                                                 RoleID = y.Users.RoleId,
-                                                                 UserID = y.Users.UserID,
-                                                                 Role = new RoleModel()
-                                                                 {
-                                                                     RoleID = y.Users.Roles.RoleID,
-                                                                     RoleName = y.Users.Roles.RoleName
-                                                                 }
-                                                             }
-                                                         }).ToList()
-                                      }).Skip(startIndex).Take(TransportRecordListModel.PageSize).ToList();
-            }
-            return listModel;
+            return QueryTransportModel(clientName, deliverDate, pageIndex, null);
         }
 
 
@@ -133,7 +45,8 @@ namespace FreightSystem.Logics.Implementations
                     ToLocation = model.ToLocation,
                     Volume = model.Volume,
                     TrayNo = model.TrayNo,
-                    OilCard = model.OilCard
+                    OilCard = model.OilCard,
+                    BusinessArea = model.BusinessArea
 
                 };
                 newRecord.TransportRecordsOptionHistory.AddRange(from x in model.HistoryItem
@@ -169,7 +82,7 @@ namespace FreightSystem.Logics.Implementations
                 listModel.ItemList = (from x in context.TransportRecords
                                       orderby x.ID descending
                                       where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
-                                      &&  x.DeliverDate.Date == deliverDate
+                                      && x.DeliverDate.Date == deliverDate
                                       select new TransportRecordModel()
                                       {
                                           ID = x.ID,
@@ -194,7 +107,8 @@ namespace FreightSystem.Logics.Implementations
                                           ToLocation = x.ToLocation,
                                           Volume = x.Volume,
                                           TrayNo = x.TrayNo,
-                                          OilCard = x.OilCard
+                                          OilCard = x.OilCard,
+                                          BusinessArea = x.BusinessArea
                                       }).ToList();
             }
             return listModel;
@@ -230,6 +144,103 @@ namespace FreightSystem.Logics.Implementations
                 context.BusinessArea.InsertOnSubmit(area);
                 context.SubmitChanges();
             }
+        }
+
+
+        public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate, int pageIndex, BusinessAreaModel area)
+        {
+            TransportRecordListModel listModel = new TransportRecordListModel();
+            if (pageIndex < 1)
+                pageIndex = 1;
+
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+
+                bool checkDeliverDate = deliverDate.HasValue;
+                DateTime dd = DateTime.MinValue;
+                if (checkDeliverDate)
+                    dd = deliverDate.Value;
+
+                int totalCount = context.TransportRecords.Count(x => (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
+                                      && (!checkDeliverDate || x.DeliverDate.Date == dd) && (area==null || x.BusinessArea == area.AreaName));
+                listModel.TotalCount = totalCount;
+                listModel.TotalPage = totalCount / TransportRecordListModel.PageSize;
+                listModel.PageIndex = pageIndex;
+                if (totalCount % TransportRecordListModel.PageSize > 0)
+                    listModel.TotalPage++;
+                if (listModel.TotalPage < 1)
+                    listModel.TotalPage = 1;
+                if (pageIndex > listModel.TotalPage)
+                    pageIndex = listModel.TotalPage;
+                int startIndex = (pageIndex - 1) * TransportRecordListModel.PageSize;
+                listModel.ClientName = clientName;
+                listModel.DeliverDate = deliverDate;
+                listModel.ItemList = (from x in context.TransportRecords
+                                      orderby x.ID descending
+                                      where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
+                                      && (!checkDeliverDate || x.DeliverDate.Date == dd)
+                                      && (area == null || x.BusinessArea == area.AreaName)
+                                      select new TransportRecordModel()
+                                      {
+                                          ID = x.ID,
+                                          AccountPayble = x.AccountPayble,
+                                          CarLicense = x.CarLicense,
+                                          ClientName = x.ClientName,
+                                          Comment = x.Comment,
+                                          Deductions = x.Deductions,
+                                          DeliverDate = x.DeliverDate,
+                                          DeliverPrice = x.DeliverPrice,
+                                          DeliverType = x.DeliverType,
+                                          Driver = x.Driver,
+                                          FromLocation = x.FromLocation,
+                                          HandlingFee = x.HandlingFee,
+                                          PackageName = x.PackageName,
+                                          PayDate = x.PayDate,
+                                          PrePay = x.PrePay,
+                                          Quantity = x.Quantity,
+                                          Reparations = x.Reparations,
+                                          ShortBargeFee = x.ShortBargeFee,
+                                          Status = x.Status,
+                                          ToLocation = x.ToLocation,
+                                          Volume = x.Volume,
+                                          TrayNo = x.TrayNo,
+                                          OilCard = x.OilCard,
+                                          BusinessArea = x.BusinessArea,
+                                          HistoryItem = (from y in x.TransportRecordsOptionHistory
+                                                         select new TransportRecordsHistoryModel()
+                                                         {
+                                                             Description = y.Description,
+                                                             LogDateTime = y.LogDateTime,
+                                                             Operation = y.Operation,
+                                                             TransportRecordID = y.TransportRecordID,
+                                                             UserID = y.UserID,
+                                                             User = new UserModel()
+                                                             {
+
+                                                                 Comment = y.Users.Comment,
+                                                                 CreateDateTime = y.Users.CreateDateTime,
+                                                                 LastLoginIP = y.Users.LastLoginIP,
+                                                                 LastLoginTime = y.Users.LastLoginTime,
+                                                                 AreaID = y.Users.AreaID,
+                                                                 Area = new BusinessAreaModel()
+                                                                 {
+                                                                     AreaName = y.Users.BusinessArea.AreaName,
+                                                                     ID = y.Users.BusinessArea.ID
+                                                                 },
+                                                                 Name = y.Users.Name,
+                                                                 Password = y.Users.Password,
+                                                                 RoleID = y.Users.RoleId,
+                                                                 UserID = y.Users.UserID,
+                                                                 Role = new RoleModel()
+                                                                 {
+                                                                     RoleID = y.Users.Roles.RoleID,
+                                                                     RoleName = y.Users.Roles.RoleName
+                                                                 }
+                                                             }
+                                                         }).ToList()
+                                      }).Skip(startIndex).Take(TransportRecordListModel.PageSize).ToList();
+            }
+            return listModel;
         }
     }
 }

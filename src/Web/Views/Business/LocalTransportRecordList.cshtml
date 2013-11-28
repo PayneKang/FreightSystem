@@ -7,7 +7,7 @@
 <div>
     @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business")
 </div>
-@using (Html.BeginForm("Index", "Business", FormMethod.Get))
+@using (Html.BeginForm("LocalTransportRecordList", "Business", FormMethod.Get))
 {
 <table>
     <tr>
@@ -30,10 +30,12 @@
             var clientName = $("#ClientName").val();
             if (clientName == "")
                 clientName = "NA"
-            window.open("/Business/Export/ExcelReport/" + deliverDate + "_" + clientName + ".xls");
+            window.open("/Business/Export/ExcelLocalReport/" + deliverDate + "_" + clientName + ".xls");
         }
     );
 </script>
+<br />
+<div>您所在的地区是 @(((UserModel)ViewBag.LoggedUser).Area.AreaName), 下面是你所在地区的数据列表</div>
 <br />
 <table cellpadding="3" cellspacing="1" border="1" style="width:100%; text-align:center;">
     <thead>
@@ -140,11 +142,11 @@
         function (index) {
             $(this).click(
                 function () {
-                    
+
                     var trid = $(this).parent().parent().attr("TRID");
                     var detailtr = $("tr[type='TRDetails'][TRID='" + trid + "']");
 
-                    detailtr.slideToggle(0,false,null);
+                    detailtr.slideToggle(0, false, null);
                 }
             );
         }

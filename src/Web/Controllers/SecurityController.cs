@@ -115,10 +115,10 @@ namespace Web.Controllers
                 return View();
             }
             cacheProvider.SaveUser(user);
-            if (user.Role.AccessList.Contains("ALLRDLIST"))
-                return View("Index","Business");
+            if (user.Role.AccessList.Contains("TOTALRDLIST"))
+                return RedirectToAction("Index","Business");
             if (user.Role.AccessList.Contains("LOCALRDLIST"))
-                return View("LocalTransportRecordList","Business");
+                return RedirectToAction("LocalTransportRecordList", "Business");
             return RedirectToLocal(returnUrl);
         }
 
@@ -194,7 +194,7 @@ namespace Web.Controllers
         {
             model.Menus = GetSelectedMenuItem();
             userProvider.UpdateRoleModel(model);
-            return RedirectToAction("RoleMgr", "Security");
+            return RedirectToAction("RoleList", "Security");
         }
 
         #endregion
@@ -222,7 +222,11 @@ namespace Web.Controllers
         private List<MenuItemModel> GetSelectedMenuItem()
         {
             string menus = Request["Menus"];
+            if (string.IsNullOrEmpty(menus))
+                return new List<MenuItemModel>();
             List<MenuItemModel> allmenu = userProvider.GetAllMenuItem();
+            if (allmenu == null)
+                return new List<MenuItemModel>();
             return (from x in allmenu
                     where menus.Contains(x.MenuCode)
                     select new MenuItemModel()

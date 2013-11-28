@@ -89,6 +89,13 @@ namespace Web.Controllers
             return RouteData.GetRequiredString(parameterName);
         }
 
+        [LoggedIn(CheckAccess: true, AccessCode: "LOCALRDLIST")]
+        public ActionResult LocalTransportRecordList(TransportRecordListModel model, int page = 1)
+        {
+            model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate, page, ((UserModel)ViewBag.LoggedUser).Area);
+            return View(model);
+        }
+
         [LoggedIn(CheckAccess: true, AccessCode: "TOTALRDLIST")]
         public ActionResult Index(TransportRecordListModel model, int page = 1)
         {
@@ -108,6 +115,7 @@ namespace Web.Controllers
         public ActionResult NewTransportRecord(TransportRecordModel model)
         {
             model.HistoryItem = new List<TransportRecordsHistoryModel>();
+            model.BusinessArea = Request["businessarea"];
             model.HistoryItem.Add(new TransportRecordsHistoryModel()
             {
                 Description = "创建动态单",
@@ -117,6 +125,9 @@ namespace Web.Controllers
             try
             {
                 businessProvider.InsertTransprotModel(model);
+                UserModel currUser = ViewBag.LoggedUser;
+                if (currUser.Role.AccessList.Contains("LOCALRDLIST"))
+                    return RedirectToAction("LocalTransportRecordList", "Business");
                 return RedirectToAction("Index", "Business");
             }
             catch (Exception ex)

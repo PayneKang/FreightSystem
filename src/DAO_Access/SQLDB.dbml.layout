@@ -1,26 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 12.75" name="SQLDB">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 13.125" name="SQLDB">
   <DataContextMoniker Name="/SQLDBDataContext" />
   <nestedChildShapes>
-    <classShape Id="b7f48fd3-f7d1-4e8a-8cd7-cb6f72f6da6f" absoluteBounds="6.75, 7.25, 2, 5.2009200032552076">
-      <DataClassMoniker Name="/SQLDBDataContext/TransportRecords" />
-      <nestedChildShapes>
-        <elementListCompartment Id="3b7a8e61-1b8e-4d77-9911-4269370d40f1" absoluteBounds="6.765, 7.71, 1.9700000000000002, 4.640920003255208" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="2a94e02b-0195-4a69-9057-e09f2b7c34d4" absoluteBounds="6.875, 5.125, 2, 1.7625655110677081">
       <DataClassMoniker Name="/SQLDBDataContext/TransportRecordsOptionHistory" />
       <nestedChildShapes>
         <elementListCompartment Id="1e4b1816-70e7-4e0d-9ea7-739128d33b26" absoluteBounds="6.89, 5.585, 1.9700000000000002, 1.2025655110677083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.8125 : 7.25); (7.8125 : 6.88756551106771)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/SQLDBDataContext/TransportRecords/TransportRecords_TransportRecordsOptionHistory" />
-      <nodes>
-        <classShapeMoniker Id="b7f48fd3-f7d1-4e8a-8cd7-cb6f72f6da6f" />
-        <classShapeMoniker Id="2a94e02b-0195-4a69-9057-e09f2b7c34d4" />
-      </nodes>
-    </associationConnector>
     <classShape Id="cd84c9de-75e0-4d19-9924-828a04dfc748" absoluteBounds="0.625, 7.25, 2, 1.1895064290364581">
       <DataClassMoniker Name="/SQLDBDataContext/MenuAccess" />
       <nestedChildShapes>
@@ -84,6 +71,19 @@
       <nodes>
         <classShapeMoniker Id="943038d4-4845-443d-a121-89dd8c50c7ad" />
         <classShapeMoniker Id="8d489c3c-6331-4706-bd06-4cb45eb8f9f3" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="6218f97b-e871-4f1c-aea9-33ad640057f7" absoluteBounds="6.875, 7.5, 2, 5.3919396972656246">
+      <DataClassMoniker Name="/SQLDBDataContext/TransportRecords" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c2e870da-fc6b-47f4-a0de-7e701a15bfe9" absoluteBounds="6.8900000000000006, 7.9600000000000009, 1.9700000000000002, 4.831939697265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.875 : 7.5); (7.875 : 6.88756551106771)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SQLDBDataContext/TransportRecords/TransportRecords_TransportRecordsOptionHistory" />
+      <nodes>
+        <classShapeMoniker Id="6218f97b-e871-4f1c-aea9-33ad640057f7" />
+        <classShapeMoniker Id="2a94e02b-0195-4a69-9057-e09f2b7c34d4" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
