@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
 
 namespace FreightSystem.Models
@@ -20,7 +18,8 @@ namespace FreightSystem.Models
         public string LastLoginIP { get; set; }
         public RoleModel Role { get; set; }
     }
-    public class UserListModel{
+    public class UserListModel
+    {
         public List<UserModel> ItemList { get; set; }
     }
     public class RoleModel
@@ -37,6 +36,9 @@ namespace FreightSystem.Models
         public string MenuText { get; set; }
         public string Link { get; set; }
         public int OrderIndex { get; set; }
+        public string Controller { get; set; }
+        public string Action { get; set; }
+        public bool IsCurrent { get; set; }
     }
     public class RoleListModel
     {
@@ -47,7 +49,8 @@ namespace FreightSystem.Models
         public string Username { get; set; }
         public string Password { get; set; }
     }
-    public class ChangePasswordModel {
+    public class ChangePasswordModel
+    {
         public string OldPassword { get; set; }
         public string NewPassword { get; set; }
         public string ConfirmPassword { get; set; }

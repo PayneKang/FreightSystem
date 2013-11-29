@@ -3,10 +3,17 @@
 {
     UserModel loggedUser = ViewBag.LoggedUser;
     <nav>
-        <ul id="menu">
+        <ul id="menu" class="nav nav-tabs">
             @foreach (MenuItemModel menu in loggedUser.Role.Menus)
             {
-            <li><a href="@menu.Link" name="@menu.MenuCode">@menu.MenuText</a></li>
+                if (menu.IsCurrent)
+                {
+                    <li class="active"><a href="@menu.Link" name="@menu.MenuCode">@menu.MenuText</a></li>
+                }
+                else
+                {
+                     <li class="disabled"><a href="@menu.Link" name="@menu.MenuCode">@menu.MenuText</a></li>
+                }
             }
         </ul>
     </nav>

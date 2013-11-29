@@ -7,17 +7,16 @@
 <div>
     @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business")
 </div>
-@using (Html.BeginForm("Index", "Business", FormMethod.Get))
+@using (Html.BeginForm("Index", "Business", FormMethod.Get, new { @class = "form-search" }))
 {
-<table>
-    <tr>
-    <td>日期 @Html.TextBoxFor(x => x.DeliverDate)</td>    
-    <td>客户 @Html.TextBoxFor(x => x.ClientName)</td>   
-    <td><input type="submit" value="查询" /></td>
-    <td style="width:200px;"></td>
-    <td><input type="button" id="btnExport" value="导出日报表" /></td>
-    </tr>
-</table>
+    <div>
+        日期 @Html.TextBoxFor(x => x.DeliverDate, new { @class = "input-medium search-query" })
+        客户 @Html.TextBoxFor(x => x.ClientName, new { @class = "input-medium search-query" })
+        <button type="submit" class="btn">
+            查询</button>
+        <button type="submit" class="btn" id="btnExport">
+            导出日报表</button>
+    </div>
 }
 <script language="javascript" type="text/javascript">
     $("#btnExport").click(
@@ -35,116 +34,183 @@
     );
 </script>
 <br />
-<table cellpadding="3" cellspacing="1" border="1" style="width:100%; text-align:center;">
-    <thead>
-        <tr>
-            <th>日期</th>
-            <th>客户</th>
-            <th>托编号</th>
-            <th>驾驶员</th>
-            <th>车号</th>
-            <th>货物名称</th>
-            <th>体积</th>
-            <th>数量</th>
-            <th>起运地</th>
-            <th>卸货地</th>
-            <th>业务区域</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (TransportRecordModel record in Model.ItemList)
-    {
-        <tr type="RecordTR" TRID="@record.ID">
-            <td><div class="actionLink">@record.DeliverDate.ToString("MM.dd")</div></td>
-            <td>@record.ClientName</td>
-            <td>@record.TrayNo</td>
-            <td>@record.Driver</td>
-            <td>@record.CarLicense</td>
-            <td>@record.PackageName</td>
-            <td>@record.Volume</td>
-            <td>@record.Quantity</td>
-            <td>@record.FromLocation</td>
-            <td>@record.ToLocation</td>
-            <td>@record.BusinessArea</td>
-        </tr>
-        <tr style="display:none;" type="TRDetails" TRID="@record.ID">
-            <td colspan="11">
-                运费：@record.DeliverPrice ；
-                短驳费：@record.ShortBargeFee ；
-                装卸费：@record.HandlingFee ；
-                赔款：@record.Reparations ；
-                扣款：@record.Deductions ；
-                预付款：@record.PrePay ；
-                油卡：@record.OilCard ；
-                应付款：@record.AccountPayble ；
-                付款日： 
-                @if (record.PayDate != null)
+<div class="view">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    日期
+                </th>
+                <th>
+                    客户
+                </th>
+                <th>
+                    托编号
+                </th>
+                <th>
+                    驾驶员
+                </th>
+                <th>
+                    车号
+                </th>
+                <th>
+                    货物名称
+                </th>
+                <th>
+                    体积
+                </th>
+                <th>
+                    数量
+                </th>
+                <th>
+                    起运地
+                </th>
+                <th>
+                    卸货地
+                </th>
+                <th>
+                    业务区域
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (TransportRecordModel record in Model.ItemList)
+            {
+                if ((record.ID % 2) == 0)
                 {
-                    record.PayDate.Value.ToString("MM.dd"); 
-                } ；
-                专线： @record.DeliverType ；
-                <br />
-                备注： @record.Comment ；
-                <br />
-                @if (record.HistoryItem != null)
-                {
-                    <ul style="list-style:none;border:solid 1px #CCC;">
-                    @foreach (TransportRecordsHistoryModel history in record.HistoryItem)
-                    {
-                        <li>
-                        @history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation] @history.Description 操作人：@history.User.UserID
-                        </li>
-                    }</ul>
+                <tr type="RecordTR" trid="@record.ID" class="info">
+                    <td>
+                        <div class="actionLink">@record.DeliverDate.ToString("MM.dd")</div>
+                    </td>
+                    <td>@record.ClientName
+                    </td>
+                    <td>@record.TrayNo
+                    </td>
+                    <td>@record.Driver
+                    </td>
+                    <td>@record.CarLicense
+                    </td>
+                    <td>@record.PackageName
+                    </td>
+                    <td>@record.Volume
+                    </td>
+                    <td>@record.Quantity
+                    </td>
+                    <td>@record.FromLocation
+                    </td>
+                    <td>@record.ToLocation
+                    </td>
+                    <td>@record.BusinessArea
+                    </td>
+                </tr>
                 }
-            </td>
-        </tr>
-    }
-    </tbody>
-    <tfoot>
-        <tr class="pager">
-            <td colspan="11">
-            @if (Model.PageIndex > 1)
-            {
+                else
+                {
+                <tr type="RecordTR" trid="@record.ID" >
+                    <td>
+                        <div class="actionLink">@record.DeliverDate.ToString("MM.dd")</div>
+                    </td>
+                    <td>@record.ClientName
+                    </td>
+                    <td>@record.TrayNo
+                    </td>
+                    <td>@record.Driver
+                    </td>
+                    <td>@record.CarLicense
+                    </td>
+                    <td>@record.PackageName
+                    </td>
+                    <td>@record.Volume
+                    </td>
+                    <td>@record.Quantity
+                    </td>
+                    <td>@record.FromLocation
+                    </td>
+                    <td>@record.ToLocation
+                    </td>
+                    <td>@record.BusinessArea
+                    </td>
+                </tr>
+                }
+               
+                <tr style="display:none;" type="TRDetails" TRID="@record.ID">
+                    <td colspan="11">
+                        运费：@record.DeliverPrice ； 短驳费：@record.ShortBargeFee ； 装卸费：@record.HandlingFee ；
+                        赔款：@record.Reparations ； 扣款：@record.Deductions ； 预付款：@record.PrePay ； 油卡：@record.OilCard
+                        ； 应付款：@record.AccountPayble ； 付款日：
+                        @if (record.PayDate != null)
+                        {
+                            record.PayDate.Value.ToString("MM.dd");
+                        }
+                        ； 专线： @record.DeliverType ；
+                        <br />
+                        备注： @record.Comment ；
+                        <br />
+                        @if (record.HistoryItem != null)
+                        {
+                            <ul style="list-style: none; border: solid 1px #CCC;">
+                                @foreach (TransportRecordsHistoryModel history in record.HistoryItem)
+                                {
+                                    <li>
+                                        @history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation] @history.Description
+                                        操作人：@history.User.UserID
+                                    </li>
+                                }</ul>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr class="pager">
+                <td colspan="11">
+                    @if (Model.PageIndex > 1)
+                    {
                 
-                <a href="?DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">首页</a>
-                <a href="?page=@(Model.PageIndex - 1)&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">上一页</a>
+                        <a href="?DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">
+                            首页</a>
+                        <a href="?page=@(Model.PageIndex - 1)&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">
+                            上一页</a>
                     
-            }
-            else
-            {
-                <span>首页</span>
-                <span>上一页</span>
+                    }
+                    else
+                    {
+                        <span>首页</span>
+                        <span>上一页</span>
                     
-            }
-            当前第 [ @Model.PageIndex ] 页，共 [ @Model.TotalPage ] 页
-            @if (Model.PageIndex < Model.TotalPage)
-            {
+                    }
+                    当前第 [ @Model.PageIndex ] 页，共 [ @Model.TotalPage ] 页
+                    @if (Model.PageIndex < Model.TotalPage)
+                    {
 
-                <a href="?page=@(Model.PageIndex + 1)&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">下一页</a>
-                <a href="?page=@Model.TotalPage&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">尾页</a>
+                        <a href="?page=@(Model.PageIndex + 1)&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">
+                            下一页</a>
+                        <a href="?page=@Model.TotalPage&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">
+                            尾页</a>
                     
-            }
-            else
-            {
+                    }
+                    else
+                    {
                 
-                <span>下一页</span>
-                <span>尾页</span>
+                        <span>下一页</span>
+                        <span>尾页</span>
                     
-            }
-            </td>
-        </tr>
-    </tfoot>
-</table>
+                    }
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 <script language="javascript" type="text/javascript">
     $("tr[type='RecordTR'] div[class='actionLink']").each(
         function (index) {
             $(this).click(
                 function () {
-                    
+
                     var trid = $(this).parent().parent().attr("TRID");
                     var detailtr = $("tr[type='TRDetails'][TRID='" + trid + "']");
 
-                    detailtr.slideToggle(0,false,null);
+                    detailtr.slideToggle(0, false, null);
                 }
             );
         }
