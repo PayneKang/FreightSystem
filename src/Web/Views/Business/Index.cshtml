@@ -131,20 +131,22 @@
                     </td>
                 </tr>
                 }
-               
                 <tr style="display:none;" type="TRDetails" TRID="@record.ID">
                     <td colspan="11">
-                        运费：@record.DeliverPrice ； 短驳费：@record.ShortBargeFee ； 装卸费：@record.HandlingFee ；
-                        赔款：@record.Reparations ； 扣款：@record.Deductions ； 预付款：@record.PrePay ； 油卡：@record.OilCard
-                        ； 应付款：@record.AccountPayble ； 付款日：
-                        @if (record.PayDate != null)
-                        {
-                            record.PayDate.Value.ToString("MM.dd");
-                        }
-                        ； 专线： @record.DeliverType ；
-                        <br />
-                        备注： @record.Comment ；
-                        <br />
+                        <div class="row">
+                            运费<input type="text" value="@record.DeliverPrice" readonly="readonly" class="span1">
+                            短驳费：@record.ShortBargeFee ； 装卸费：@record.HandlingFee ； 赔款：@record.Reparations ； 扣款：@record.Deductions
+                            ； 预付款：@record.PrePay ； 油卡：@record.OilCard
+                            ； 应付款：@record.AccountPayble ； 付款日：
+                            @if (record.PayDate != null)
+                            {
+                                record.PayDate.Value.ToString("MM.dd");
+                            }
+                            ； 专线： @record.DeliverType ；
+                            <br />
+                            备注： @record.Comment ；
+                            <br />
+                        </div>
                         @if (record.HistoryItem != null)
                         {
                             <ul style="list-style: none; border: solid 1px #CCC;">
@@ -165,35 +167,28 @@
                 <td colspan="11">
                     @if (Model.PageIndex > 1)
                     {
-                
                         <a href="?DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">
                             首页</a>
                         <a href="?page=@(Model.PageIndex - 1)&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">
                             上一页</a>
-                    
                     }
                     else
                     {
                         <span>首页</span>
                         <span>上一页</span>
-                    
                     }
                     当前第 [ @Model.PageIndex ] 页，共 [ @Model.TotalPage ] 页
                     @if (Model.PageIndex < Model.TotalPage)
                     {
-
                         <a href="?page=@(Model.PageIndex + 1)&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">
                             下一页</a>
                         <a href="?page=@Model.TotalPage&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">
                             尾页</a>
-                    
                     }
                     else
                     {
-                
                         <span>下一页</span>
                         <span>尾页</span>
-                    
                     }
                 </td>
             </tr>
@@ -205,10 +200,8 @@
         function (index) {
             $(this).click(
                 function () {
-
                     var trid = $(this).parent().parent().attr("TRID");
                     var detailtr = $("tr[type='TRDetails'][TRID='" + trid + "']");
-
                     detailtr.slideToggle(0, false, null);
                 }
             );

@@ -4,7 +4,6 @@
     ViewBag.Title = "新建发货动态记录";
 }
 <script language="javascript" type="text/javascript">
-
     $(document).ready(
         function () {
             var date = new Date();
@@ -13,19 +12,17 @@
         }
     );
 </script>
-
-<hgroup class="title">
-    <h1>@ViewBag.Title</h1>
-</hgroup>
-
+<h4>@ViewBag.Title</h4>
 <section id="newTransportForm">
-<h2>@ViewBag.ErrorMessage</h2>
-@using (Html.BeginForm()) {
+<h4>@ViewBag.ErrorMessage</h4>
+<br />
+@using (Html.BeginForm())
+{
     <fieldset>
     <table>
         <tr>
             <th style="width:110px;">日期</th>
-            <td style="width:250px;">@Html.TextBoxFor(m => m.DeliverDate) *
+            <td style="width:250px;">@Html.TextBoxFor(m => m.DeliverDate, new { @type = "text" }) *
                 @Html.ValidationMessageFor(m => m.DeliverDate)</td>
             <th style="width:110px;">客户</th>
             <td style="width:250px;">@Html.TextBoxFor(m => m.ClientName) *
@@ -73,13 +70,13 @@
         </tr>
         <tr>
             <th style="vertical-align:top;">备注</th>
-            <td colspan="3">@Html.TextAreaFor(m => m.Comment, new {@Style="width:480px; height:80px;" })
+            <td colspan="3">@Html.TextAreaFor(m => m.Comment, new { @Style = "width:480px; height:80px;" })
                 @Html.ValidationMessageFor(m => m.Comment)</td>
         </tr>
         <tr>
             <th style="vertical-align:top;">所在业务区域</th>
             <td colspan="3">
-                @Html.LabelFor(x=>x.BusinessArea,((UserModel)ViewBag.LoggedUser).Area.AreaName)
+                @Html.LabelFor(x => x.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName)
                 @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
             </td>
         </tr>
