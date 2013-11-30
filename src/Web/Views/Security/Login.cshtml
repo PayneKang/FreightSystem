@@ -2,26 +2,22 @@
 @{
     ViewBag.Title = "登录系统";
 }
-<hgroup class="title">
-    <h1>@ViewBag.Title</h1>
-</hgroup>
-
-
-<section id="loginForm">
-<h2>@ViewBag.ErrorMessage</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    <fieldset>
-        <ol>
-            <li>
-                <div>用户名</div>
-                @Html.TextBoxFor(m => m.Username)
-            </li>
-            <li>
-                <div>密码</div>
-                @Html.PasswordFor(m => m.Password)
-            </li>
-        </ol>
-        <input type="submit" value="登录" />
-    </fieldset>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{   
+    <br />
+    <br />
+    <h4>
+        欢迎登陆 <small>》 物流单据管理系统</small>
+    </h4>
+    <div class="control-group">
+        @Html.TextBoxFor(m => m.Username, new { @type = "text", @placeholder = "请输入用户名" })
+    </div>
+    <div class="control-group">
+        @Html.PasswordFor(m => m.Password, new { @type = "password", @placeholder = "请输入密码" })
+    </div>
+    <h2>@ViewBag.ErrorMessage</h2>
+    <div class="control-group">
+        <button type="submit" value="" class="btn btn-primary btn-large btn-block">
+            登录</button>
+    </div>
 }
-</section>

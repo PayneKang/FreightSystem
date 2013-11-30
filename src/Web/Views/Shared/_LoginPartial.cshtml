@@ -1,9 +1,13 @@
-﻿@if (ViewBag.LoggedUser != null) {
-    <text>
-        你好，@ViewBag.LoggedUser.Name @Html.ActionLink("修改密码","ChangePassword","Security") | @Html.ActionLink("注销","Logout","Security")
+﻿@if (ViewBag.LoggedUser != null)
+{
+    <text> 你好，@ViewBag.LoggedUser.Name @Html.ActionLink("修改密码", "ChangePassword", "Security")
+    | @Html.ActionLink("注销", "Logout", "Security")
     </text>
-} else {
-    <ul>
-        <li>@Html.ActionLink("登录", "Login", "Security")</li>
-    </ul>
+}
+else
+{
+    @*<div class="btn-group">
+        <button class="btn">
+            @Html.ActionLink("登录", "Login", "Security")</button>
+    </div>*@
 }

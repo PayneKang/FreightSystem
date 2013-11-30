@@ -12,39 +12,38 @@
     <script src="/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="/Scripts/jquery.validate.js"></script>
     <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="/Scripts/prettify.js"></script>
 </head>
 <body>
-    @*<div class="row-fluid">
-		<div class="span12">
-			<form class="form-search">
-			</form>
-		</div>
-	</div>*@
-    <header>
-        <div class="container-fluid">
-            <div class="float-left">
-                <h1>@Html.ActionLink("杭州汇鑫物流有限公司", "Index", "Business", new { @class = "button small" })</h1>
-            </div>
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
-                @Html.Partial("_MenuPartial")
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <header>
+                    <div class="pull-right">
+                        <section id="login">
+                            @Html.Partial("_LoginPartial")
+                        </section>
+                    </div>
+                    <h2>@Html.ActionLink("杭州汇鑫物流有限公司", "Index", "Business")</h2>
+                    <br />
+                    <div class="span12 pull-right">
+                        @Html.Partial("_MenuPartial")    
+                    </div>
+                </header>
+                <div id="body">
+                    @RenderSection("featured", required: false)
+                    <section class="content-wrapper main-content clear-fix">
+                        @RenderBody()
+                    </section>
+                </div>
+                <footer>
+                    <div class="pull-left">
+                        <br />
+                        <p class="label">&copy; @DateTime.Now.Year 八月工作室</p>
+                    </div>
+                </footer>
             </div>
         </div>
-    </header>
-    <div id="body">
-        @RenderSection("featured", required: false)
-        <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
-        </section>
     </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; @DateTime.Now.Year</p>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

@@ -4,18 +4,17 @@
 @{
     ViewBag.Title = "发货动态列表";
 }
-<div>
-    @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business")
-</div>
 @using (Html.BeginForm("Index", "Business", FormMethod.Get, new { @class = "form-search" }))
 {
     <div>
         日期 @Html.TextBoxFor(x => x.DeliverDate, new { @class = "input-medium search-query" })
-        客户 @Html.TextBoxFor(x => x.ClientName, new { @class = "input-medium search-query" })
+        &nbsp;&nbsp;客户 @Html.TextBoxFor(x => x.ClientName, new { @class = "input-medium search-query" })
+        &nbsp;&nbsp;
         <button type="submit" class="btn">
             查询</button>
-        <button type="submit" class="btn" id="btnExport">
+        <button type="submit" class="btn pull-right" id="btnExport">
             导出日报表</button>
+        @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business", new { @class = "btn pull-right right-space" })
     </div>
 }
 <script language="javascript" type="text/javascript">
