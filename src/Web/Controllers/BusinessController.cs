@@ -183,5 +183,25 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [LoggedIn(CheckAccess: true, AccessCode: "")]
+        [HttpGet]
+        public ActionResult FillTransportRecord() {
+            string sid = TryGetRequiredString("id");
+            int id;
+            if(!int.TryParse(sid,out id)){
+                ViewBag.ErrorMessage = "请正确选择要编辑的纪录";
+                return View("Error");
+            }
+            TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
+            return View(model);
+        }
+        [LoggedIn(CheckAccess: true, AccessCode: "")]
+        [HttpPost]
+        public ActionResult FillTransportRecord(TransportRecordModel model)
+        {
+            businessProvider.UpdateTransportModel(model.ID, model.TrayNo, model.Volume, model.Quantity);
+            return View(model);
+        }
+
     }
 }

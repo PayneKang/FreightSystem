@@ -293,5 +293,59 @@ namespace FreightSystem.Logics.Implementations
             }
             return listModel;
         }
+
+
+        public TransportRecordModel GetTransportRecordModel(int id)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                return (from x in context.TransportRecords
+                        where x.ID == id
+                        select new TransportRecordModel()
+                        {
+                            ID = x.ID,
+                            AccountPayble = x.AccountPayble,
+                            CarLicense = x.CarLicense,
+                            ClientName = x.ClientName,
+                            Comment = x.Comment,
+                            Deductions = x.Deductions,
+                            DeliverDate = x.DeliverDate,
+                            DeliverPrice = x.DeliverPrice,
+                            DeliverType = x.DeliverType,
+                            Driver = x.Driver,
+                            FromLocation = x.FromLocation,
+                            HandlingFee = x.HandlingFee,
+                            PackageName = x.PackageName,
+                            PayDate = x.PayDate,
+                            PrePay = x.PrePay,
+                            Quantity = x.Quantity,
+                            Reparations = x.Reparations,
+                            ShortBargeFee = x.ShortBargeFee,
+                            Status = x.Status,
+                            ToLocation = x.ToLocation,
+                            Volume = x.Volume,
+                            TrayNo = x.TrayNo,
+                            OilCard = x.OilCard,
+                            BusinessArea = x.BusinessArea
+                        }).FirstOrDefault();
+            }
+        }
+
+
+        public void UpdateTransportModel(int id, string trayNo, double volume, int quantity)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecords record = context.TransportRecords.FirstOrDefault(x => x.ID == id);
+                if (record == null)
+                {
+                    throw new ApplicationException("要修改的记录不存在");
+                }
+                record.TrayNo = trayNo;
+                record.Volume = volume;
+                record.Quantity = quantity;
+                context.SubmitChanges();
+            }
+        }
     }
 }

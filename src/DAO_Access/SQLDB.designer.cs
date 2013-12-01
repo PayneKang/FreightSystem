@@ -1910,7 +1910,7 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrayNo", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrayNo", DbType="NVarChar(255) NOT NULL")]
 		public string TrayNo
 		{
 			get

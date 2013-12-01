@@ -16,5 +16,7 @@ namespace FreightSystem.Logics.Interfaces
         void InsertTransprotModel(TransportRecordModel model);
         void InsertNewArea(string newArea);
         List<BusinessAreaModel> ListAllArea();
+        TransportRecordModel GetTransportRecordModel(int id);
+        void UpdateTransportModel(int id, string trayNo, double volume, int quantity);
     }
 }
