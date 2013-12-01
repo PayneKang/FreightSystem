@@ -5,20 +5,19 @@
     ViewBag.Title = "发货动态列表";
     UserModel loggedUser = (UserModel)ViewBag.LoggedUser;
 }
-<div>
-    @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business")
-</div>
+<script language="javascript" type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
 @using (Html.BeginForm("LocalTransportRecordList", "Business", FormMethod.Get))
 {
-<table>
-    <tr>
-    <td>日期 @Html.TextBoxFor(x => x.DeliverDate)</td>    
-    <td>客户 @Html.TextBoxFor(x => x.ClientName)</td>   
-    <td><input type="submit" value="查询" /></td>
-    <td style="width:200px;"></td>
-    <td><input type="button" id="btnExport" value="导出日报表" /></td>
-    </tr>
-</table>
+    <div>
+        日期 @Html.TextBoxFor(x => x.DeliverDate, new { @class = "input-medium search-query Wdate", @onClick = "WdatePicker()" })
+        &nbsp;&nbsp;客户 @Html.TextBoxFor(x => x.ClientName, new { @class = "input-medium search-query" })
+        &nbsp;&nbsp;
+        <button type="submit" class="btn">
+            查询</button>
+        <button type="submit" class="btn pull-right" id="btnExport">
+            导出日报表</button>
+        @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business", new { @class = "btn pull-right right-space" })
+    </div>
 }
 <script language="javascript" type="text/javascript">
     $("#btnExport").click(
@@ -71,7 +70,8 @@
             <td>@record.ToLocation</td>
             <td>@record.BusinessArea</td>
             <td>
-                @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD")) { 
+                @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
+                { 
                     <a href="/Business/FillTransportRecord/@record.ID">补充信息</a>
                 }
             </td>
@@ -89,7 +89,7 @@
                 付款日： 
                 @if (record.PayDate != null)
                 {
-                    record.PayDate.Value.ToString("MM.dd"); 
+                    record.PayDate.Value.ToString("MM.dd");
                 } ；
                 专线： @record.DeliverType ；
                 <br />

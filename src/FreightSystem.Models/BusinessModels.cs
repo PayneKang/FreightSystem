@@ -74,4 +74,11 @@ namespace FreightSystem.Models
         public int ID { get; set; }
         public string AreaName { get; set; }
     }
+
+    public class MonthlyReportModel
+    {
+        [Required(ErrorMessage="年月必须设定")]
+        public string YearMonth { get; set; }
+        public List<TransportRecordModel> ItemList { get; set; }
+    }
 }

@@ -12,6 +12,7 @@ namespace FreightSystem.Logics.Interfaces
         TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate, int pageIndex,BusinessAreaModel area);
         TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate);
         TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate, BusinessAreaModel area);
+        MonthlyReportModel QueryTransportModel(string clientName, DateTime fromDate, DateTime toDate);
         void InsertTransprotModel(TransportRecordModel model);
         void InsertNewArea(string newArea);
         List<BusinessAreaModel> ListAllArea();

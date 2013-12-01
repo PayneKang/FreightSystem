@@ -4,10 +4,11 @@
 @{
     ViewBag.Title = "发货动态列表";
 }
+<script language="javascript" type="text/javascript" src="Scripts/My97DatePicker/WdatePicker.js"></script>
 @using (Html.BeginForm("Index", "Business", FormMethod.Get, new { @class = "form-search" }))
 {
     <div>
-        日期 @Html.TextBoxFor(x => x.DeliverDate, new { @class = "input-medium search-query" })
+        日期 @Html.TextBoxFor(x => x.DeliverDate, new { @class = "input-medium search-query Wdate", @onClick="WdatePicker()"})
         &nbsp;&nbsp;客户 @Html.TextBoxFor(x => x.ClientName, new { @class = "input-medium search-query" })
         &nbsp;&nbsp;
         <button type="submit" class="btn">

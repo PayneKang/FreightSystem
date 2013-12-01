@@ -103,6 +103,31 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [LoggedIn(CheckAccess: true, AccessCode: "EXPORT")]
+        [HttpGet]
+        public ActionResult ExcelMonthlyReport()
+        {
+            return View();
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "EXPORT")]
+        [HttpPost]
+        public ActionResult ExcelMonthlyReport(MonthlyReportModel model)
+        {
+            DateTime fromDate;
+            if (!DateTime.TryParse(model.YearMonth+"-01", out fromDate))
+            {
+                ViewBag.ErrorMessage = "必须选中一个月份才能导出月份报表";
+                return View("Error");
+            }
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.Charset = "GBK";
+            Response.ContentEncoding = Encoding.UTF8;
+            Response.AppendHeader("Content-Disposition", "attachment;filename=" + model.YearMonth + ".xls");
+            model = businessProvider.QueryTransportModel(string.Empty, fromDate, fromDate.AddMonths(1).AddDays(-1));
+            return View("ExportMonthlyReport", model);
+        }
+
         private string TryGetRequiredString(string parameterName)
         {
             if(!RouteData.Values.Keys.Contains(parameterName))

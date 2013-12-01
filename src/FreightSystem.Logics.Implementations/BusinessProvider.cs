@@ -251,5 +251,47 @@ namespace FreightSystem.Logics.Implementations
         {
             throw new NotImplementedException();
         }
+
+
+        public MonthlyReportModel QueryTransportModel(string clientName, DateTime fromDate, DateTime toDate)
+        {
+            MonthlyReportModel listModel = new MonthlyReportModel();
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+
+                listModel.ItemList = (from x in context.TransportRecords
+                                      orderby x.ID descending
+                                      where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
+                                      && x.DeliverDate.Date >= fromDate && x.DeliverDate <= toDate
+                                      select new TransportRecordModel()
+                                      {
+                                          ID = x.ID,
+                                          AccountPayble = x.AccountPayble,
+                                          CarLicense = x.CarLicense,
+                                          ClientName = x.ClientName,
+                                          Comment = x.Comment,
+                                          Deductions = x.Deductions,
+                                          DeliverDate = x.DeliverDate,
+                                          DeliverPrice = x.DeliverPrice,
+                                          DeliverType = x.DeliverType,
+                                          Driver = x.Driver,
+                                          FromLocation = x.FromLocation,
+                                          HandlingFee = x.HandlingFee,
+                                          PackageName = x.PackageName,
+                                          PayDate = x.PayDate,
+                                          PrePay = x.PrePay,
+                                          Quantity = x.Quantity,
+                                          Reparations = x.Reparations,
+                                          ShortBargeFee = x.ShortBargeFee,
+                                          Status = x.Status,
+                                          ToLocation = x.ToLocation,
+                                          Volume = x.Volume,
+                                          TrayNo = x.TrayNo,
+                                          OilCard = x.OilCard,
+                                          BusinessArea = x.BusinessArea
+                                      }).ToList();
+            }
+            return listModel;
+        }
     }
 }
