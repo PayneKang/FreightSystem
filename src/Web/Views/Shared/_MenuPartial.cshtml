@@ -2,17 +2,36 @@
 @if (ViewBag.LoggedUser != null)
 {
     UserModel loggedUser = ViewBag.LoggedUser;
-    <ul id="menu" class="nav nav-tabs">
-        @foreach (MenuItemModel menu in loggedUser.Role.Menus)
-        {
-            if (menu.IsCurrent)
-            {
-            <li class="active"><a href="@menu.Link" name="@menu.MenuCode">@menu.MenuText</a></li>
-            }
-            else
-            {
-            <li class="disabled"><a href="@menu.Link" name="@menu.MenuCode">@menu.MenuText</a></li>
-            }
-        }
-    </ul>
+    <nav class="top-bar">
+        <ul class="title-area">
+            <!-- Title Area -->
+            <li class="name">
+                <h1><a href="#">@Html.ActionLink("杭州汇鑫物流有限公司", "Index", "Business")</a></h1>
+            </li>
+            <li class="toggle-topbar menu-icon">
+                <a href="#"><span>menu</span></a>
+            </li>
+        </ul>
+        <section class="top-bar-section">
+            <!-- Right Nav Section -->
+            <ul class="right">
+                @foreach (MenuItemModel menu in loggedUser.Role.Menus)
+                {
+                    <li class="divider"></li>
+                    <li><a href="@menu.Link" name="@menu.MenuCode">@menu.MenuText</a></li>
+                }
+                <li class="has-dropdown not-click active">
+                    @if (ViewBag.LoggedUser != null)
+                    {
+                        <a href="#">你好，@ViewBag.LoggedUser.Name</a>
+                        <ul class="dropdown"><li class="title back js-generated"><h5><a href="#">Back</a></h5></li>
+                            <li>@Html.ActionLink("修改密码", "ChangePassword", "Security")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("注销", "Logout", "Security")</li>
+                        </ul>
+                    }
+                </li>
+            </ul>
+        </section>
+    </nav>  
 }

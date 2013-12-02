@@ -36,9 +36,6 @@ namespace FreightSystem.Models
         public string MenuText { get; set; }
         public string Link { get; set; }
         public int OrderIndex { get; set; }
-        public string Controller { get; set; }
-        public string Action { get; set; }
-        public bool IsCurrent { get; set; }
     }
     public class RoleListModel
     {

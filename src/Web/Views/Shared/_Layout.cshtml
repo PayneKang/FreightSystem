@@ -6,7 +6,8 @@
     <title>@ViewBag.Title - 物流单据管理系统</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-    <link href="/Content/bootstrap-combined.min.css" rel="stylesheet" />
+    <link href="/Content/foundation.css" rel="stylesheet" />
+    <link href="/Content/normalize.css" rel="stylesheet" />
     <script src="/Scripts/modernizr-2.5.3.js"></script>
     <script src="/Scripts/jquery-1.7.1.js"></script>
     <script src="/Scripts/jquery.unobtrusive-ajax.js"></script>
@@ -15,35 +16,25 @@
     <script src="/Scripts/prettify.js"></script>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span12">
-                <header>
-                    <div class="pull-right">
-                        <section id="login">
-                            @Html.Partial("_LoginPartial")
-                        </section>
-                    </div>
-                    <h2>@Html.ActionLink("杭州汇鑫物流有限公司", "Index", "Business")</h2>
-                    <br />
-                    <div class="span12 pull-right">
-                        @Html.Partial("_MenuPartial")    
-                    </div>
-                </header>
-                <div id="body">
-                    @RenderSection("featured", required: false)
-                    <section class="content-wrapper main-content clear-fix">
-                        @RenderBody()
-                    </section>
-                </div>
-                <footer>
-                    <div class="pull-left">
-                        <br />
-                        <p class="label">&copy; @DateTime.Now.Year 八月工作室</p>
-                    </div>
-                </footer>
-            </div>
+    <!-- Header and Nav -->
+    <div class="row">
+        <div class="large-12 columns">
+            @Html.Partial("_MenuPartial")
         </div>
     </div>
+    <!-- End header and Nav -->
+    <div class="row">
+        <div class="large-12 columns">
+            @RenderSection("featured", required: false)
+            <section>@RenderBody()</section>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="row">
+        <div class="large-12 columns">  
+            <hr />
+            <p class="label">&copy; @DateTime.Now.Year XXXX工作室</p>
+        </div>
+    </footer>
 </body>
 </html>
