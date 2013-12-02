@@ -6,26 +6,32 @@
 }
 <script language="javascript" type="text/javascript" src="Scripts/My97DatePicker/WdatePicker.js"></script>
 @using (Html.BeginForm("Index", "Business", FormMethod.Get))
-{
+{ 
     <div class="panel">
-        <div class="large-2 columns">
-            <label>
-                日期</label>
-            @Html.TextBoxFor(x => x.DeliverDate, new { @onClick = "WdatePicker()" })
-        </div>
-        <div class="large-2 columns">
-            <label>
-                客户</label>
-            @Html.TextBoxFor(x => x.ClientName)
-        </div>
-        <div>
-            <label style="visibility: hidden">
-                位置调整</label>
-            <button type="submit" class="button tiny">
-                查询</button>
-            <button type="submit" class="button tiny" id="btnExport">
-                导出日报表</button>
-            @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business", new { @class = "button tiny right" })
+        <div class="row">
+            <div class="small-0 columns">
+                <label for="right-label" class="right inline">
+                    日期</label>
+            </div>
+            <div class="small-2 columns">
+                @Html.TextBoxFor(x => x.DeliverDate, new { @onClick = "WdatePicker()", @type = "text" })
+            </div>
+            <div class="small-0 columns">
+                <label for="right-label" class="right inline">
+                    客户</label>
+            </div>
+            <div class="small-2 columns">
+                @Html.TextBoxFor(x => x.ClientName, new { @type = "text" })
+            </div>
+            <div class="small-2 columns">
+                <button type="submit" class="button tiny">
+                    查询</button>
+                <button type="submit" class="button tiny" id="btnExport">
+                    导出日报表</button>
+            </div>
+            <div class="small-2 columns">
+                @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business", new { @class = "button tiny right" })
+            </div>
         </div>
     </div>
 }
@@ -44,7 +50,7 @@
         }
     );
 </script>
-<table class="large-12 table-hover">
+<table class="large-12 table-hover table-cell-spacing"">
     <thead>
         <tr>
             <th>

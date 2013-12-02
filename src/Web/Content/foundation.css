@@ -281,6 +281,9 @@ select {
     padding-right: 0.9375rem;
     float: left; }
 
+  .small-0 {
+    position: relative;
+    width: 5%;  }
   .small-1 {
     position: relative;
     width: 8.33333%; }
@@ -2163,8 +2166,11 @@ button, .button {
   border-style: solid;
   border-width: 1px;
   border-color: #d9d9d9;
-  margin-bottom: 1.25rem;
-  padding: 1.25rem;
+  margin-bottom: 0rem;
+  padding-top:1rem;
+  padding-bottom:-1rem;
+  padding-left:1rem;
+  padding-right:1rem;
   background: #f2f2f2; }
   .panel > :first-child {
     margin-top: 0; }
@@ -4158,6 +4164,9 @@ table {
   background: white;
   margin-bottom: 1.25rem;
   border: solid 1px #dddddd; }
+.table-cell-spacing {
+  border-collapse: separate;
+  border-spacing: 2px; }
   table thead,
   table tfoot {
     background: whitesmoke;

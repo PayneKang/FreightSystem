@@ -3,51 +3,48 @@
 @{
     ViewBag.Title = "编辑角色";
 }
-
-<hgroup class="title">
-    <h1>@ViewBag.Title</h1>
-</hgroup>
-
 <section id="newTransportForm">
-<h2>@ViewBag.ErrorMessage</h2>
-@using (Html.BeginForm()) {
-    @Html.HiddenFor(m=>m.RoleID)
-    <fieldset>
-    <table>
-        <tr>
-            <th style="width:110px;">角色名称</th>
-            <td style="width:250px;">@Html.TextBoxFor(m => m.RoleName) *
-                @Html.ValidationMessageFor(m => m.RoleName)</td>
-        </tr>
-        <tr>
-            <th style="width:110px;">菜单项</th>
-            <td style="width:250px;">
-                <ul>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.RoleID)
+   <fieldset class="large-4">
+    <legend>@ViewBag.Title</legend>
+    <div class="row">
+        <br />
+        <div class="large-10 columns large-offset-1">
+            <label>角色名称</label>
+            @Html.TextBoxFor(m => m.RoleName, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
+            @Html.ValidationMessageFor(m => m.RoleName)
+        </div>
+        <div class="large-10 columns large-offset-1">
+            <label>菜单项</label>
+                <ul class="side-nav">
                 @foreach (MenuItemModel menu in ViewBag.AllMenu)
                 {
-                    <li> 
-                    @if (Model.Menus.Exists(x => x.MenuCode == menu.MenuCode))
-                    { 
-                        <input type="checkbox" name="Menus" value="@menu.MenuCode" checked="checked" />
-                    }
-                    else
-                    {
-                        <input type="checkbox" name="Menus" value="@menu.MenuCode"/>
-                    }
-                    @menu.MenuText </li>
+                        <li> 
+                        @if (Model.Menus.Exists(x => x.MenuCode == menu.MenuCode))
+                        { 
+                            <input type="checkbox" name="Menus" value="@menu.MenuCode" checked="checked" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="Menus" value="@menu.MenuCode"/>
+                        }
+                        @menu.MenuText </li>
                 }
                 </ul>
-            </td>
-        </tr>
-        <tr>
-            <th>权限</th>
-            <td>
-                @Html.TextAreaFor(m => m.AccessList) *
-                @Html.ValidationMessageFor(m => m.AccessList)
-            </td>
-        </tr>
-    </table>
-    <input type="submit" value="保存" />
+        </div>
+        <div class="large-11 columns large-offset-1">
+            <label>权限</label>
+            @Html.TextAreaFor(m => m.AccessList, new { @style = "width:75%; height:75px;", @placeholder = "必填" }) 
+            @Html.ValidationMessageFor(m => m.AccessList)
+        </div>
+        <div class="large-11 columns">
+            <button type="submit" class="button tiny" style="margin-top:1rem">保存</button>
+        </div>
+    </div>
+    @ViewBag.ErrorMessage
     </fieldset>
 }
 </section>

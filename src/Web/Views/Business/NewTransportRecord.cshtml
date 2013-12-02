@@ -12,78 +12,93 @@
         }
     );
 </script>
-<h4>@ViewBag.Title</h4>
 <section id="newTransportForm">
-<h4>@ViewBag.ErrorMessage</h4>
 <br />
 @using (Html.BeginForm())
 {
-<fieldset>
+<fieldset class="large-6">
+    <legend>@ViewBag.Title</legend>
+    <div class="row">
+        <br />
+        <div class="large-6 columns">
+            <label>日期</label>
+            @Html.TextBoxFor(m => m.DeliverDate, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
+            @Html.ValidationMessageFor(m => m.DeliverDate)
+        </div>
+        <div class="large-6 columns">
+            <label>客户</label>
+            @Html.TextBoxFor(m => m.ClientName, new { @type = "text", @style = "width:80%", @placeholder = "必填" })
+            @Html.ValidationMessageFor(m => m.ClientName)
+        </div>
+        <div class="large-6 columns">
+            <label>托编号</label>
+            @Html.TextBoxFor(m => m.TrayNo, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
+            @Html.ValidationMessageFor(m => m.TrayNo)
+        </div>
+        <div class="large-6 columns">
+            <label>驾驶员</label>
+            @Html.TextBoxFor(m => m.Driver, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
+            @Html.ValidationMessageFor(m => m.Driver)
+        </div>
+        <div class="large-6 columns">
+            <label>车牌号</label>
+            @Html.TextBoxFor(m => m.CarLicense, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
+            @Html.ValidationMessageFor(m => m.CarLicense)
+        </div>
+        <div class="large-6 columns">
+            <label>物品名称</label>
+            @Html.TextBoxFor(m => m.PackageName, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
+            @Html.ValidationMessageFor(m => m.PackageName)
+        </div>
+        <div class="large-6 columns">
+            <label>起运地</label>
+            @Html.TextBoxFor(m => m.FromLocation, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
+            @Html.ValidationMessageFor(m => m.FromLocation)
+        </div>
+        <div class="large-6 columns">
+            <label>卸货地 / 单位</label>
+            @Html.TextBoxFor(m => m.ToLocation, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
+            @Html.ValidationMessageFor(m => m.ToLocation)
+        </div>
+        <div class="large-6 columns">
+            <label>运费</label>
+            @Html.TextBoxFor(m => m.DeliverPrice, new { @type = "text", @style = "width:80%" })
+            @Html.ValidationMessageFor(m => m.DeliverPrice)
+        </div>
+        <div class="large-6 columns">
+            <label>预付</label>
+            @Html.TextBoxFor(m => m.PrePay, new { @type = "text", @style = "width:80%" })
+            @Html.ValidationMessageFor(m => m.PrePay)
+        </div>
+        <div class="large-6 columns">
+            <label>油卡</label>
+            @Html.TextBoxFor(m => m.OilCard, new { @type = "text", @style = "width:80%" })
+            @Html.ValidationMessageFor(m => m.OilCard)
+        </div>
+        <div class="large-6 columns">
+            <label>专线</label>
+            @Html.TextBoxFor(m => m.DeliverType, new { @type = "text", @style = "width:80%" })
+            @Html.ValidationMessageFor(m => m.DeliverType)
+        </div>
+        <div class="large-12 columns">
+            <label>备注</label>
+            @Html.TextAreaFor(m => m.Comment, new { @style = "width:90%; height:80px;" })
+            @Html.ValidationMessageFor(m => m.Comment)
+        </div>
+        <div class="large-3 columns">
+            <label style="padding-top:1rem">所在业务区域： </label>
+        </div>
+        <div class="large-2 columns">
+            @Html.LabelFor(m => m.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName, new { @class = "left", @style = "padding-top:1rem" }) 
+            @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
+        </div>
+        <div class="large-3 columns">
+            <button type="submit" class="button tiny" style="margin-top:1rem" >保存</button>
+        </div>
+    </div>
+
+    @*
     <table style="width:50%;">
-        <tr>
-            <th class="table-left-align">日期</th>
-            <td style="width:20%;">@Html.TextBoxFor(m => m.DeliverDate, new { @type = "text", @style = "width:60%" }) *
-                @Html.ValidationMessageFor(m => m.DeliverDate)</td>
-            <th class="table-left-align">客户</th>
-            <td style="width:20%;">@Html.TextBoxFor(m => m.ClientName, new { @type = "text", @style = "width:60%" }) *
-                @Html.ValidationMessageFor(m => m.ClientName)</td>
-        </tr>
-        <tr>
-            <th class="table-left-align">托编号</th>
-            <td>@Html.TextBoxFor(m => m.TrayNo, new { @type = "text", @style = "width:60%" }) *
-                @Html.ValidationMessageFor(m => m.TrayNo)</td>
-            <th class="table-left-align">驾驶员</th>
-            <td>@Html.TextBoxFor(m => m.Driver, new { @type = "text", @style = "width:60%" }) *
-                @Html.ValidationMessageFor(m => m.Driver)</td>
-        </tr>
-        <tr>
-            <th class="table-left-align">车牌号</th>
-            <td>@Html.TextBoxFor(m => m.CarLicense, new { @type = "text", @style = "width:60%" }) *
-                @Html.ValidationMessageFor(m => m.CarLicense)</td>
-            <th class="table-left-align">物品名称</th>
-            <td>@Html.TextBoxFor(m => m.PackageName, new { @type = "text", @style = "width:60%" }) *
-                @Html.ValidationMessageFor(m => m.PackageName)</td>
-        </tr>
-        <tr>
-            <th class="table-left-align">起运地</th>
-            <td>@Html.TextBoxFor(m => m.FromLocation, new { @type = "text", @style = "width:60%" }) *
-                @Html.ValidationMessageFor(m => m.FromLocation)</td>
-            <th class="table-left-align">卸货地 / 单位</th>
-            <td>@Html.TextBoxFor(m => m.ToLocation, new { @type = "text", @style = "width:60%" }) *
-                @Html.ValidationMessageFor(m => m.ToLocation)</td>
-        </tr>
-        <tr>
-            <th class="table-left-align">运费</th>
-            <td>@Html.TextBoxFor(m => m.DeliverPrice, new { @type = "text", @style = "width:60%" })
-                @Html.ValidationMessageFor(m => m.DeliverPrice)</td>
-            <th class="table-left-align">预付</th>
-            <td>@Html.TextBoxFor(m => m.PrePay, new { @type = "text", @style = "width:60%" })
-                @Html.ValidationMessageFor(m => m.PrePay)</td>
-        </tr>
-        <tr>
-            <th class="table-left-align">油卡</th>
-            <td>@Html.TextBoxFor(m => m.OilCard, new { @type = "text", @style = "width:60%" })
-                @Html.ValidationMessageFor(m => m.OilCard)</td>
-            <th class="table-left-align">专线</th>
-            <td>@Html.TextBoxFor(m => m.DeliverType, new { @type = "text", @style = "width:60%" })
-                @Html.ValidationMessageFor(m => m.DeliverType)</td>    
-        </tr>
-        <tr>
-            <th  class="table-left-align" style="vertical-align:top;">备注</th>
-            <td colspan="3">@Html.TextAreaFor(m => m.Comment, new { @style = "width:84%; height:80px;" })
-                @Html.ValidationMessageFor(m => m.Comment)</td>
-        </tr>
-        <tr>
-            <th class="table-left-align" style="vertical-align:top;">所在业务区域</th>
-            <td colspan="2">
-                @Html.LabelFor(m => m.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName)
-                @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
-            </td>
-            <td align="center">
-                <button type="submit" class="btn">保存</button>
-            </td>
-        </tr>
-        @*
         <tr>
             <th>体积（立方米）</th>
             <td>@Html.TextBoxFor(m => m.Volume) *
@@ -116,8 +131,9 @@
             <td>@Html.TextBoxFor(m => m.AccountPayble)
                 @Html.ValidationMessageFor(m => m.AccountPayble)</td>     
         </tr>
-        *@
     </table>
+    *@
+    @ViewBag.ErrorMessage
 </fieldset>
 }
 </section>

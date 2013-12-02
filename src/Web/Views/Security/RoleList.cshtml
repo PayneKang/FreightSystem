@@ -3,43 +3,60 @@
 @{
     ViewBag.Title = "角色列表";
 }
-
-<h2>@ViewBag.Title</h2>
-<div>
-    @Html.ActionLink("新建角色", "NewRole", "Security")
-</div>
-<table cellpadding="3" cellspacing="1" border="1">
-    <thead>
-        <tr>
-            <th>角色ID</th>
-            <th>角色名称</th>
-            <th>菜单项</th>
-            <th>权限</th>
-            <th>编辑</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (RoleModel record in Model.ItemList)
-    {
-        <tr>
-            <td>@record.RoleID</td>
-            <td>@record.RoleName</td>
-            <td>
-                @if (record.Menus != null)
-                {
-                <ul style="list-style:none; margin:0; padding:0;">
-                @foreach (MenuItemModel menu in record.Menus)
-                {
-                    <li>@menu.MenuText</li>
-                }
-                </ul>
-                }
-            </td>
-            <td>@record.AccessList</td>
-            <td>
-                <a href="/Security/RoleMgr/@record.RoleID">编辑</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<br />
+<fieldset class="large-6">
+    <legend>@ViewBag.Title >> @Html.ActionLink("新建角色", "NewRole", "Security")</legend>
+    <div class="row">
+        <br />
+        <div class="large-12 columns">
+            <table class="table-cell-spacing">
+                <thead>
+                    <tr>
+                        <th>
+                            角色ID
+                        </th>
+                        <th>
+                            角色名称
+                        </th>
+                        <th>
+                            菜单项
+                        </th>
+                        <th>
+                            权限
+                        </th>
+                        <th>
+                            编辑
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (RoleModel record in Model.ItemList)
+                    {
+                        <tr>
+                            <td>@record.RoleID
+                            </td>
+                            <td>@record.RoleName
+                            </td>
+                            <td>
+                                @if (record.Menus != null)
+                                {
+                                    <ul style="list-style: none; margin: 0; padding: 0;">
+                                        @foreach (MenuItemModel menu in record.Menus)
+                                        {
+                                            <li>@menu.MenuText</li>
+                                        }
+                                    </ul>
+                                }
+                            </td>
+                            <td>@record.AccessList
+                            </td>
+                            <td>
+                                <a href="/Security/RoleMgr/@record.RoleID">编辑</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</fieldset>
