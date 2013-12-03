@@ -2,16 +2,26 @@
 @{
     ViewBag.Title = "导出月份报表";
 }
-
-<h2>@ViewBag.Title</h2>
-
 <script language="javascript" type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
-@using (Html.BeginForm("ExcelMonthlyReport", "Business",FormMethod.Post, new { @class = "form-search" }))
+<br />
+@using (Html.BeginForm("ExcelMonthlyReport", "Business", FormMethod.Post))
 {
-    <div style="width:400px;">
-        日期 @Html.TextBoxFor(x => x.YearMonth, new { @class = "input-medium search-query Wdate", @onClick = "WdatePicker({dateFmt:'yyyy-MM'})" })
-        <button type="submit" class="btn pull-right" id="btnExport">导出月报表</button>
-        <br />
-        @Html.ValidationMessageFor(x => x.YearMonth)
-    </div>
+    <fieldset class="large-5">
+        <legend>@ViewBag.Title</legend>
+        <div class="row">
+            <br />
+            <div class="large-6 columns large-offset-1">
+                <label>
+                    日期</label>
+                @Html.TextBoxFor(x => x.YearMonth, new { @onClick = "WdatePicker({dateFmt:'yyyy-MM'})" })
+                @Html.ValidationMessageFor(x => x.YearMonth)
+            </div>
+            <div class="large-5 columns">
+                <label style="visibility: hidden">
+                    样式调整</label>
+                <button type="submit" class="button tiny" id="btnExport">
+                    导出月报表</button>
+            </div>
+        </div>
+    </fieldset>
 }

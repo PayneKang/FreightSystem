@@ -2,48 +2,49 @@
 @{
     ViewBag.Title = "新建用户";
 }
-
-<hgroup class="title">
-    <h1>@ViewBag.Title</h1>
-</hgroup>
-
 <section id="newTransportForm">
-<h2>@ViewBag.ErrorMessage</h2>
-@using (Html.BeginForm()) {
-    <fieldset>
-    <table>
-        <tr>
-            <th style="width:110px;">用户名</th>
-            <td style="width:250px;">@Html.TextBoxFor(m => m.UserID) *
-                @Html.ValidationMessageFor(m => m.UserID)</td>
-        </tr>
-        <tr>
-            <th>密码</th>
-            <td>@Html.TextBoxFor(m => m.Password) *
-                @Html.ValidationMessageFor(m => m.Password)</td>
-        </tr>
-        <tr>
-            <th>所在地</th>
-            <td>@Html.DropDownListFor(m => m.AreaID, (List<SelectListItem>)ViewBag.AllArea) *
-                @Html.ValidationMessageFor(m => m.AreaID)</td>
-        </tr>
-        <tr>
-            <th>姓名</th>
-            <td>@Html.TextBoxFor(m => m.Name) *
-                @Html.ValidationMessageFor(m => m.Name)</td>
-        </tr>
-        <tr>
-            <th>角色ID</th>
-            <td>@Html.TextBoxFor(m => m.RoleID) *
-                @Html.ValidationMessageFor(m => m.RoleID)</td>
-        </tr>
-        <tr>
-            <th>备注</th>
-            <td>@Html.TextBoxFor(m => m.Comment) 
-                @Html.ValidationMessageFor(m => m.Comment)</td>
-        </tr>
-    </table>
-    <input type="submit" value="保存" />
+<br />
+@using (Html.BeginForm())
+{
+    <fieldset class="large-4">
+    <legend>@ViewBag.Title</legend>
+    <div class="row">
+        <br />
+        <div class="large-10 columns large-offset-1">
+            <label>用户名</label>
+            @Html.TextBoxFor(m => m.UserID, new { @type = "text", @style = "width:80%", @placeholder = "必填" })
+            @Html.ValidationMessageFor(m => m.UserID)
+        </div>
+        <div class="large-10 columns large-offset-1">
+            <label>密码</label>
+            @Html.TextBoxFor(m => m.Password, new { @type = "password", @style = "width:80%", @placeholder = "必填" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <div class="large-10 columns large-offset-1">
+            <label>所在地</label>
+            @Html.DropDownListFor(m => m.AreaID, (List<SelectListItem>)ViewBag.AllArea, new { @style = "width:80%;margin-bottom:1rem;", @placeholder = "必填" })
+            @Html.ValidationMessageFor(m => m.AreaID)
+        </div>
+        <div class="large-10 columns large-offset-1">
+            <label>姓名</label>
+            @Html.TextBoxFor(m => m.Name, new { @type = "text", @style = "width:80%", @placeholder = "必填" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="large-10 columns large-offset-1">
+            <label>角色ID</label>
+            @Html.TextBoxFor(m => m.RoleID, new { @type = "text", @style = "width:80%", @placeholder = "必填" })
+            @Html.ValidationMessageFor(m => m.RoleID)
+        </div>
+        <div class="large-10 columns large-offset-1">
+            <label>备注</label>
+            @Html.TextBoxFor(m => m.Comment, new { @type = "text", @style = "width:80%"})
+            @Html.ValidationMessageFor(m => m.Comment)
+        </div>
+        <div class="large-11 columns">
+            <button type="submit" class="button tiny" style="margin-top:1rem">保存</button>
+        </div>
+    </div>
+    @ViewBag.ErrorMessage
     </fieldset>
 }
 </section>
