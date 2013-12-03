@@ -22,43 +22,43 @@
         <br />
         <div class="large-6 columns">
             <label>日期</label>
-            @Html.TextBoxFor(m => m.DeliverDate, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
-            @Html.ValidationMessageFor(m => m.DeliverDate)
+            @Html.TextBoxFor(m => m.DeliverDate, new { @type = "text", @style = "width:80%;margin-bottom:0px", @placeholder = "必填" }) 
+            <small class="error" style="width:80%">@Html.ValidationMessageFor(m => m.DeliverDate)</small>
         </div>
         <div class="large-6 columns">
             <label>客户</label>
-            @Html.TextBoxFor(m => m.ClientName, new { @type = "text", @style = "width:80%", @placeholder = "必填" })
-            @Html.ValidationMessageFor(m => m.ClientName)
+            @Html.TextBoxFor(m => m.ClientName, new { @type = "text", @style = "width:80%;margin-bottom:0px", @placeholder = "必填" })
+             <small class="error" style="width:80%">@Html.ValidationMessageFor(m => m.ClientName)</small>
         </div>
         <div class="large-6 columns">
             <label>托编号</label>
-            @Html.TextBoxFor(m => m.TrayNo, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
-            @Html.ValidationMessageFor(m => m.TrayNo)
+            @Html.TextBoxFor(m => m.TrayNo, new { @type = "text", @style = "width:80%;margin-bottom:0px", @placeholder = "必填" }) 
+            <small class="error" style="width:80%">@Html.ValidationMessageFor(m => m.TrayNo)</small>
         </div>
         <div class="large-6 columns">
             <label>驾驶员</label>
-            @Html.TextBoxFor(m => m.Driver, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
-            @Html.ValidationMessageFor(m => m.Driver)
+            @Html.TextBoxFor(m => m.Driver, new { @type = "text", @style = "width:80%;margin-bottom:0px", @placeholder = "必填" }) 
+            <small class="error" style="width:80%">@Html.ValidationMessageFor(m => m.Driver)</small>
         </div>
         <div class="large-6 columns">
             <label>车牌号</label>
-            @Html.TextBoxFor(m => m.CarLicense, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
-            @Html.ValidationMessageFor(m => m.CarLicense)
+            @Html.TextBoxFor(m => m.CarLicense, new { @type = "text", @style = "width:80%;margin-bottom:0px", @placeholder = "必填" }) 
+            <small class="error" style="width:80%">@Html.ValidationMessageFor(m => m.CarLicense)</small>
         </div>
         <div class="large-6 columns">
             <label>物品名称</label>
-            @Html.TextBoxFor(m => m.PackageName, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
-            @Html.ValidationMessageFor(m => m.PackageName)
+            @Html.TextBoxFor(m => m.PackageName, new { @type = "text", @style = "width:80%;margin-bottom:0px", @placeholder = "必填" }) 
+            <small class="error" style="width:80%">@Html.ValidationMessageFor(m => m.PackageName)</small>
         </div>
         <div class="large-6 columns">
             <label>起运地</label>
-            @Html.TextBoxFor(m => m.FromLocation, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
-            @Html.ValidationMessageFor(m => m.FromLocation)
+            @Html.TextBoxFor(m => m.FromLocation, new { @type = "text", @style = "width:80%;margin-bottom:0px", @placeholder = "必填" }) 
+            <small class="error" style="width:80%">@Html.ValidationMessageFor(m => m.FromLocation)</small>
         </div>
         <div class="large-6 columns">
             <label>卸货地 / 单位</label>
-            @Html.TextBoxFor(m => m.ToLocation, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
-            @Html.ValidationMessageFor(m => m.ToLocation)
+            @Html.TextBoxFor(m => m.ToLocation, new { @type = "text", @style = "width:80%;margin-bottom:0px", @placeholder = "必填" }) 
+            <small class="error" style="width:80%">@Html.ValidationMessageFor(m => m.ToLocation)</small>
         </div>
         <div class="large-6 columns">
             <label>运费</label>
