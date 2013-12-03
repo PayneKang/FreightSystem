@@ -14,7 +14,7 @@
                     日期</label>
             </div>
             <div class="small-2 columns">
-                @Html.TextBoxFor(x => x.DeliverDate, new { @onClick = "WdatePicker()", @type = "text"})
+                @Html.TextBoxFor(x => x.DeliverDate, new { @onClick = "WdatePicker()", @type = "text" })
             </div>
             <div class="small-0 columns">
                 <label for="right-label" class="right inline">
@@ -50,7 +50,7 @@
         }
     );
 </script>
-<table class="large-12 table-hover table-cell-spacing"">
+<table class="large-12 table-hover table-cell-spacing">
     <thead>
         <tr>
             <th>
@@ -150,29 +150,79 @@
             <tr style="display:none;" type="TRDetails" TRID="@record.ID">
                 <td colspan="11">
                     <div class="row">
-                        运费<input type="text" value="@record.DeliverPrice" readonly="readonly" class="span1">
-                        短驳费：@record.ShortBargeFee ； 装卸费：@record.HandlingFee ； 赔款：@record.Reparations ； 扣款：@record.Deductions
-                        ； 预付款：@record.PrePay ； 油卡：@record.OilCard
-                        ； 应付款：@record.AccountPayble ； 付款日：
-                        @if (record.PayDate != null)
-                        {
-                            record.PayDate.Value.ToString("MM.dd");
-                        }
-                        ； 专线： @record.DeliverType ；
-                        <br />
-                        备注： @record.Comment ；
-                        <br />
+                        <div class="large-1 columns">
+                            <label>
+                                运费</label>
+                            <input type="text" value="@record.DeliverPrice" readonly="readonly" />
+                        </div>
+                        <div class="large-1 columns">
+                            <label>
+                                短驳费</label>
+                            <input type="text" value="@record.ShortBargeFee" readonly="readonly" />
+                        </div>
+                        <div class="large-1 columns">
+                            <label>
+                                装卸费</label>
+                            <input type="text" value="@record.HandlingFee" readonly="readonly" />
+                        </div>
+                        <div class="large-1 columns">
+                            <label>
+                                赔款</label>
+                            <input type="text" value="@record.Reparations" readonly="readonly" />
+                        </div>
+                        <div class="large-1 columns">
+                            <label>
+                                扣款</label>
+                            <input type="text" value="@record.Deductions" readonly="readonly" />
+                        </div>
+                        <div class="large-1 columns">
+                            <label>
+                                预付款</label>
+                            <input type="text" value="@record.PrePay" readonly="readonly" />
+                        </div>
+                        <div class="large-1 columns">
+                            <label>
+                                油卡</label>
+                            <input type="text" value="@record.OilCard" readonly="readonly" />
+                        </div>
+                        <div class="large-1 columns">
+                            <label>
+                                应付款</label>
+                            <input type="text" value="@record.AccountPayble" readonly="readonly" />
+                        </div>
+                        <div class="large-1 columns">
+                            <label>
+                                付款日</label>
+                            @if (record.PayDate != null)
+                            {
+                                <input type="text" value="@record.PayDate.Value.ToString("MM.dd")" readonly="readonly" />
+                            }
+                            else
+                            { 
+                                <input type="text" value="" readonly="readonly" />
+                            }
+                        </div>
+                        <div class="large-1 columns">
+                            <label>
+                                专线</label>
+                            <input type="text" value="@record.DeliverType" readonly="readonly" />
+                        </div>
+                        <div class="large-2 columns">
+                            <label>
+                                备注</label>
+                            <input type="text" value="@record.Comment" readonly="readonly" />
+                        </div>
                     </div>
                     @if (record.HistoryItem != null)
                     {
-                        <ul style="list-style: none; border: solid 1px #CCC;">
+                        <ul>
                             @foreach (TransportRecordsHistoryModel history in record.HistoryItem)
                             {
-                                <li>
-                                    @history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation] @history.Description
-                                    操作人：@history.User.UserID
-                                </li>
-                            }</ul>
+                                <li><small>@history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation]
+                                    @history.Description
+                                    操作人：@history.User.UserID</small> </li>
+                            }
+                        </ul>
                     }
                 </td>
             </tr>
