@@ -13,17 +13,21 @@
     <script src="/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="/Scripts/jquery.validate.js"></script>
     <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="/Scripts/jquery.js"></script>
+    <script src="/Scripts/foundation/foundation.js"></script>
+    <script src="/Scripts/foundation/foundation.magellan.js"></script>
     <script src="/Scripts/prettify.js"></script>
 </head>
 <body>
     <!-- Header and Nav -->
     <div class="row">
-        <div class="large-12 columns">
+        <div class="large-12 columns fixed" data-magellan-expedition="fixed" style="position: fixed;
+            top: 0px;">
             @Html.Partial("_MenuPartial")
         </div>
     </div>
     <!-- End header and Nav -->
-    <div class="row">
+    <div class="row" style="margin-top: 4.1rem">
         <div class="large-12 columns">
             @RenderSection("featured", required: false)
             <section>@RenderBody()</section>

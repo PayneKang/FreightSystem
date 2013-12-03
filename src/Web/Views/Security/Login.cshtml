@@ -2,36 +2,44 @@
 @{
     ViewBag.Title = "登录系统";
 }
-<nav class="top-bar">
-    <ul class="title-area">
-        <!-- Title Area -->
-        <li class="name">
-            <h1><a href="#">@Html.ActionLink("杭州汇鑫物流有限公司", "Index", "Business")</a></h1>
-        </li>
-        <li class="toggle-topbar menu-icon">
-            <a href="#"><span>menu</span></a>
-        </li>
-    </ul>
-</nav>
+<div class="row">
+    <div class="large-12 columns fixed" data-magellan-expedition="fixed" style="position: fixed;
+        top: 0px;">
+        <nav class="top-bar">
+            <ul class="title-area">
+                <!-- Title Area -->
+                <li class="name">
+                    <h1><a href="#">@Html.ActionLink("杭州汇鑫物流有限公司", "Index", "Business")</a></h1>
+                </li>
+                <li class="toggle-topbar menu-icon">
+                    <a href="#"><span>menu</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
 <br />
-<br />
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
-{   
-    <fieldset class="large-4">
-        <legend>欢迎登陆 <small>>> 物流单据管理系统</small></legend>
-        <div class="row">
-            <br />
-            <div class="large-10 columns large-offset-1">
-                @Html.TextBoxFor(m => m.Username, new { @type = "text", @placeholder = "请输入用户名" })
-            </div>
-            <div class="large-10 columns large-offset-1">
-                @Html.PasswordFor(m => m.Password, new { @type = "password", @placeholder = "请输入密码" })
-            </div>
-            <div class="large-11 columns">
-                <button type="submit" value="" class="button tiny">
-                    登录</button>
-            </div>
-        </div>
-        @ViewBag.ErrorMessage
-    </fieldset>
-}
+<div class="row">
+    <div class="large-12 columns">
+        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+        {   
+            <fieldset class="large-4">
+                <legend>欢迎登陆 <small>>> 物流单据管理系统</small></legend>
+                <div class="row">
+                    <br />
+                    <div class="large-10 columns large-offset-1">
+                        @Html.TextBoxFor(m => m.Username, new { @type = "text", @placeholder = "请输入用户名" })
+                    </div>
+                    <div class="large-10 columns large-offset-1">
+                        @Html.PasswordFor(m => m.Password, new { @type = "password", @placeholder = "请输入密码" })
+                    </div>
+                    <div class="large-11 columns">
+                        <button type="submit" value="" class="button tiny">
+                            登录</button>
+                    </div>
+                </div>
+                @ViewBag.ErrorMessage
+            </fieldset>
+        }
+    </div>
+</div>
