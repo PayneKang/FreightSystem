@@ -4,7 +4,6 @@
     ViewBag.Title = "FillTransportRecord";
 }
 <br />
-
 <script language="javascript" type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
 @using (Html.BeginForm())
 {
@@ -117,28 +116,27 @@
                     @Html.LabelFor(x => x.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName)
                     @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
                 </td>
-                    <th>
-                        托编号
-                    </th>
-                    <td>
-                        @Model.TrayNo
-                    </td>
+                <th>
+                    托编号
+                </th>
+                <td>
+                    @Model.TrayNo
+                </td>
             </tr>
-            
-                <tr>
-                    <th>
-                        体积
-                    </th>
-                    <td>
-                        @Model.Volume
-                    </td>
-                    <th>
-                        数量
-                    </th>
-                    <td>
-                        @Model.Quantity
-                    </td>
-                </tr>
+            <tr>
+                <th>
+                    体积
+                </th>
+                <td>
+                    @Model.Volume
+                </td>
+                <th>
+                    数量
+                </th>
+                <td>
+                    @Model.Quantity
+                </td>
+            </tr>
             @if (!Model.PayDate.HasValue)
             {
                 <tr>
