@@ -31,7 +31,10 @@
                     导出日报表</button>
             </div>
             <div class="small-2 columns">
-                @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business", new { @class = "button tiny right" })
+                @if (loggedUser.Role.AccessList.Contains("NEWRD") || loggedUser.Role.AccessList.Contains("ALL"))
+                {
+                    @Html.ActionLink("新建发货记录", "NewTransportRecord", "Business", new { @class = "button tiny right" })
+                }
             </div>
         </div>
     </div>
@@ -126,6 +129,10 @@
                     {
                         <a href="/Business/PrintTR/@record.ID">打印此单据</a>
                     }
+                    @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
+                    {
+                        <a href="/Business/FillCa/@record.ID">补充财务信息</a>
+                    }
                 </td>
             </tr>
             }
@@ -159,6 +166,10 @@
                     @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
                         <a href="/Business/PrintTR/@record.ID">打印此单据</a>
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
+                    {
+                        <a href="/Business/FillCa/@record.ID">补充财务信息</a>
                     }
                 </td>
             </tr>
