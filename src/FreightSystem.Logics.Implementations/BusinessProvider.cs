@@ -347,5 +347,21 @@ namespace FreightSystem.Logics.Implementations
                 context.SubmitChanges();
             }
         }
+
+
+        public void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecords record = context.TransportRecords.FirstOrDefault(x => x.ID == id);
+                if (record == null)
+                {
+                    throw new ApplicationException("要修改的记录不存在");
+                }
+                record.PayDate = paymentDate;
+                record.AccountPayble = accountPayable;
+                context.SubmitChanges();
+            }
+        }
     }
 }
