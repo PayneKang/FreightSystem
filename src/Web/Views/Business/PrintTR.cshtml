@@ -1,0 +1,17 @@
+﻿@model FreightSystem.Models.TransportRecordModel
+@{ Layout = null; }
+<div style="position:absolute; top:120px; left:80px;">@Model.TrayNo</div>
+<div style="position:absolute; top:120px; left:580px;">@Model.DeliverDate.Year</div>
+<div style="position:absolute; top:120px; left:640px;">@(Model.DeliverDate.Month + 1)</div>
+<div style="position:absolute; top:120px; left:680px;">@Model.DeliverDate.Day</div>
+
+<div style="position:absolute; top:160px; left:80px;">@Model.ClientName</div>
+<div style="position:absolute; top:200px; left:80px;">@Model.PackageName</div>
+<div style="position:absolute; top:200px; left:380px;">@Model.Quantity</div>
+<div style="position:absolute; top:200px; left:540px;">@Model.FromLocation</div>
+<div style="position:absolute; top:200px; left:680px;">@Model.ToLocation</div>
+
+<div style="position:absolute; top:400px; left:80px;">@Model.Driver</div>
+<div style="position:absolute; top:400px; left:280px;">@Model.CarLicense</div>
+
+<div style="position:absolute; top:400px; left:680px; width:200px; height:200px; overflow:hidden;">@Model.Comment 123</div>

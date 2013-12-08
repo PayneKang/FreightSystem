@@ -227,5 +227,13 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [LoggedIn(CheckAccess:true, AccessCode: "PRINT")]
+        [HttpGet]
+        public ActionResult PrintTR(int id)
+        {
+            TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
+            return View(model);
+        }
+
     }
 }
