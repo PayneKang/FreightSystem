@@ -43,6 +43,7 @@
             replace = $.parseJSON(container.attr("data-valmsg-replace")) !== false;
 
         container.removeClass("field-validation-valid").addClass("field-validation-error");
+        container.parent().css("padding","0.375rem 0.5625rem 0.5625rem");
         error.data("unobtrusiveContainer", container);
 
         if (replace) {
@@ -74,6 +75,7 @@
 
         if (container) {
             container.addClass("field-validation-valid").removeClass("field-validation-error");
+            container.parent().css("padding","0rem");
             error.removeData("unobtrusiveContainer");
 
             if (replace) {

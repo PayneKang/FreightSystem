@@ -4537,14 +4537,15 @@ fieldset {
 
 span.error, small.error {
   display: block;
-  padding: 0.375rem 0.5625rem 0.5625rem;
+  /*padding: 0.375rem 0.5625rem 0.5625rem;*/
   margin-top: -1px;
   margin-bottom: 1rem;
   font-size: 0.75rem;
   font-weight: normal;
   font-style: italic;
   background: #f04124;
-  color: white; }
+  color: white;
+}
 
 .error input,
 .error textarea,

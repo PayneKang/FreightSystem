@@ -106,6 +106,7 @@
   <ItemGroup>
     <Compile Include="App_Start\DBConfig.cs" />
     <Compile Include="Controllers\BusinessController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Filters\LoggedInAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -314,6 +315,9 @@
   <ItemGroup>
     <Content Include="Views\Business\PrintTR.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\DisplayError.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -330,7 +334,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>63091</DevelopmentServerPort>
+          <DevelopmentServerPort>63863</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
