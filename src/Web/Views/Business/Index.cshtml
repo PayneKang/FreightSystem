@@ -165,11 +165,11 @@
                 <td>
                     @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
-                        <a href="/Business/PrintTR/@record.ID"> 【打印此单据】    </a>
+                        <a href="/Business/PrintTR/@record.ID">【打印此单据】</a>
                     }
                     @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
-                        <a href="/Business/FillCa/@record.ID"> 【补充财务信息</a>
+                        <a href="/Business/FillCa/@record.ID">【补充财务信息】</a>
                     }
                 </td>
             </tr>
