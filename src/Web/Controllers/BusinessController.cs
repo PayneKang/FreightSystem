@@ -201,7 +201,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult FillTransportRecord(TransportRecordModel model)
         {
-            businessProvider.UpdateTransportModel(model.ID, model.TrayNo, model.Volume, model.Quantity);
+            businessProvider.UpdateTransportModel(model.ID, model.TrayNo, model.Volume, model.Quantity, this.cacheProvider.GetCurrentLoggedUser().UserID);
             return View(model);
         }
 
@@ -223,7 +223,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult FillCa(TransportRecordModel model)
         {
-            businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate.Value, model.AccountPayble.Value);
+            businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate.Value, model.AccountPayble.Value, this.cacheProvider.GetCurrentLoggedUser().UserID);
             return View(model);
         }
 

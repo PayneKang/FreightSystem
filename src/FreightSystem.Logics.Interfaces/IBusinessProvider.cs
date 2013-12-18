@@ -17,7 +17,7 @@ namespace FreightSystem.Logics.Interfaces
         void InsertNewArea(string newArea);
         List<BusinessAreaModel> ListAllArea();
         TransportRecordModel GetTransportRecordModel(int id);
-        void UpdateTransportModel(int id, string trayNo, double volume, int quantity);
-        void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable);
+        void UpdateTransportModel(int id, string trayNo, double volume, int quantity,string userID);
+        void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable,string userID);
     }
 }

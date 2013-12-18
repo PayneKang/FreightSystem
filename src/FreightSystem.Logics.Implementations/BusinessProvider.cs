@@ -210,6 +210,7 @@ namespace FreightSystem.Logics.Implementations
                                           OilCard = x.OilCard,
                                           BusinessArea = x.BusinessArea,
                                           HistoryItem = (from y in x.TransportRecordsOptionHistory
+                                                         orderby y.LogDateTime
                                                          select new TransportRecordsHistoryModel()
                                                          {
                                                              Description = y.Description,
@@ -332,7 +333,7 @@ namespace FreightSystem.Logics.Implementations
         }
 
 
-        public void UpdateTransportModel(int id, string trayNo, double volume, int quantity)
+        public void UpdateTransportModel(int id, string trayNo, double volume, int quantity,string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -344,12 +345,20 @@ namespace FreightSystem.Logics.Implementations
                 record.TrayNo = trayNo;
                 record.Volume = volume;
                 record.Quantity = quantity;
+                record.TransportRecordsOptionHistory.Add(
+                    new TransportRecordsOptionHistory()
+                    {
+                        Description = string.Format("更新单据内容，新内容 托编号:{0} 体积： {1} 数量：{2}", trayNo, volume, quantity),
+                        LogDateTime = DateTime.Now,
+                        Operation = "更新",
+                        UserID = userID
+                    });
                 context.SubmitChanges();
             }
         }
 
 
-        public void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable)
+        public void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable,string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -360,6 +369,14 @@ namespace FreightSystem.Logics.Implementations
                 }
                 record.PayDate = paymentDate;
                 record.AccountPayble = accountPayable;
+                record.TransportRecordsOptionHistory.Add(
+                    new TransportRecordsOptionHistory()
+                    {
+                        Description = string.Format("财务补充单据内容，新内容 付款日:{0} 应付金额： {1} ", paymentDate, accountPayable),
+                        LogDateTime = DateTime.Now,
+                        Operation = "更新",
+                        UserID = userID
+                    });
                 context.SubmitChanges();
             }
         }
