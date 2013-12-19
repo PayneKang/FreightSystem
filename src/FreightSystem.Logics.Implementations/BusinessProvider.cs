@@ -12,11 +12,10 @@ namespace FreightSystem.Logics.Implementations
 {
     public class BusinessProvider : IBusinessProvider
     {
-        public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate,int pageIndex)
+        public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate, int pageIndex)
         {
             return QueryTransportModel(clientName, deliverDate, pageIndex, null);
         }
-
 
         public void InsertTransprotModel(TransportRecordModel model)
         {
@@ -46,8 +45,10 @@ namespace FreightSystem.Logics.Implementations
                     Volume = model.Volume,
                     TrayNo = model.TrayNo,
                     OilCard = model.OilCard,
-                    BusinessArea = model.BusinessArea
-
+                    BusinessArea = model.BusinessArea,
+                    Error = model.Error,
+                    Paid = model.Paid,
+                    Received = model.Received
                 };
                 newRecord.TransportRecordsOptionHistory.AddRange(from x in model.HistoryItem
                                                                  select new TransportRecordsOptionHistory()
@@ -62,7 +63,6 @@ namespace FreightSystem.Logics.Implementations
                 context.SubmitChanges();
             }
         }
-
 
         public TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate)
         {
@@ -108,12 +108,14 @@ namespace FreightSystem.Logics.Implementations
                                           Volume = x.Volume,
                                           TrayNo = x.TrayNo,
                                           OilCard = x.OilCard,
-                                          BusinessArea = x.BusinessArea
+                                          BusinessArea = x.BusinessArea,
+                                          Error = x.Error,
+                                          Received = x.Received,
+                                          Paid = x.Paid
                                       }).ToList();
             }
             return listModel;
         }
-
 
         public List<BusinessAreaModel> ListAllArea()
         {
@@ -127,8 +129,7 @@ namespace FreightSystem.Logics.Implementations
                         }).ToList();
             }
         }
-
-
+        
         public void InsertNewArea(string newArea)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
@@ -139,14 +140,13 @@ namespace FreightSystem.Logics.Implementations
                 }
                 BusinessArea area = new BusinessArea()
                 {
-                     AreaName = newArea
+                    AreaName = newArea
                 };
                 context.BusinessArea.InsertOnSubmit(area);
                 context.SubmitChanges();
             }
         }
-
-
+        
         public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate, int pageIndex, BusinessAreaModel area)
         {
             TransportRecordListModel listModel = new TransportRecordListModel();
@@ -209,6 +209,9 @@ namespace FreightSystem.Logics.Implementations
                                           TrayNo = x.TrayNo,
                                           OilCard = x.OilCard,
                                           BusinessArea = x.BusinessArea,
+                                          Error = x.Error,
+                                          Paid = x.Paid,
+                                          Received = x.Received,
                                           HistoryItem = (from y in x.TransportRecordsOptionHistory
                                                          orderby y.LogDateTime
                                                          select new TransportRecordsHistoryModel()
@@ -247,12 +250,10 @@ namespace FreightSystem.Logics.Implementations
             return listModel;
         }
 
-
         public TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate, BusinessAreaModel area)
         {
             throw new NotImplementedException();
         }
-
 
         public MonthlyReportModel QueryTransportModel(string clientName, DateTime fromDate, DateTime toDate)
         {
@@ -289,12 +290,14 @@ namespace FreightSystem.Logics.Implementations
                                           Volume = x.Volume,
                                           TrayNo = x.TrayNo,
                                           OilCard = x.OilCard,
-                                          BusinessArea = x.BusinessArea
+                                          BusinessArea = x.BusinessArea,
+                                          Error = x.Error,
+                                          Paid = x.Paid,
+                                          Received = x.Received
                                       }).ToList();
             }
             return listModel;
         }
-
 
         public TransportRecordModel GetTransportRecordModel(int id)
         {
@@ -327,13 +330,15 @@ namespace FreightSystem.Logics.Implementations
                             Volume = x.Volume,
                             TrayNo = x.TrayNo,
                             OilCard = x.OilCard,
-                            BusinessArea = x.BusinessArea
+                            BusinessArea = x.BusinessArea,
+                            Error = x.Error,
+                            Paid = x.Paid,
+                            Received = x.Received
                         }).FirstOrDefault();
             }
         }
 
-
-        public void UpdateTransportModel(int id, string trayNo, double volume, int quantity,string userID)
+        public void UpdateTransportModel(int id, string trayNo, double volume, int quantity, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -357,8 +362,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-
-        public void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable,string userID)
+        public void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -375,6 +379,72 @@ namespace FreightSystem.Logics.Implementations
                         Description = string.Format("财务补充单据内容，新内容 付款日:{0} 应付金额： {1} ", paymentDate, accountPayable),
                         LogDateTime = DateTime.Now,
                         Operation = "更新",
+                        UserID = userID
+                    });
+                context.SubmitChanges();
+            }
+        }
+        
+        public void UpdateTransportErrorStatus(int id, bool error,string userID)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecords record = context.TransportRecords.FirstOrDefault(x => x.ID == id);
+                if (record == null)
+                {
+                    throw new ApplicationException("要修改的记录不存在");
+                }
+                record.Error = error;
+                record.TransportRecordsOptionHistory.Add(
+                    new TransportRecordsOptionHistory()
+                    {
+                        Description = string.Format("修改异常状态为{0}", error?"异常":"正常"),
+                        LogDateTime = DateTime.Now,
+                        Operation = "修改异常状态",
+                        UserID = userID
+                    });
+                context.SubmitChanges();
+            }
+        }
+
+        public void UpdateTransportPaidStatus(int id, bool paid,string userID)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecords record = context.TransportRecords.FirstOrDefault(x => x.ID == id);
+                if (record == null)
+                {
+                    throw new ApplicationException("要修改的记录不存在");
+                }
+                record.Paid = paid;
+                record.TransportRecordsOptionHistory.Add(
+                    new TransportRecordsOptionHistory()
+                    {
+                        Description = string.Format("修改结算状态为{0}", paid ? "结算" : "未结算"),
+                        LogDateTime = DateTime.Now,
+                        Operation = "修改结算状态",
+                        UserID = userID
+                    });
+                context.SubmitChanges();
+            }
+        }
+
+        public void UpdateTransportReceivedStatus(int id, bool received,string userID)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecords record = context.TransportRecords.FirstOrDefault(x => x.ID == id);
+                if (record == null)
+                {
+                    throw new ApplicationException("要修改的记录不存在");
+                }
+                record.Received = received;
+                record.TransportRecordsOptionHistory.Add(
+                    new TransportRecordsOptionHistory()
+                    {
+                        Description = string.Format("修改到货状态为{0}", received ? "到货" : "未到货"),
+                        LogDateTime = DateTime.Now,
+                        Operation = "修改到货状态",
                         UserID = userID
                     });
                 context.SubmitChanges();

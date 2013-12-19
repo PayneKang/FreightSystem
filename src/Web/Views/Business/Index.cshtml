@@ -91,6 +91,15 @@
                 业务区域
             </th>
             <th>
+                到货状态
+            </th>
+            <th>
+                结算状态
+            </th>
+            <th>
+                异常状态
+            </th>
+            <th>
                 操作
             </th>
         </tr>
@@ -123,6 +132,56 @@
                 <td>@record.ToLocation
                 </td>
                 <td>@record.BusinessArea
+                </td>
+                <td>
+                    @if (record.Received)
+                    {
+                        <div>到货</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdateReceived/@record.ID?received=false" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
+                    else
+                    {
+                        <div style="color:Red;">未到货</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdateReceived/@record.ID?received=true" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (record.Paid)
+                    {
+                        <div>结算</div>
+                    }
+                    else
+                    {
+                        <div style="color:Red;">未结算</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdatePaid/@record.ID" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (record.Error)
+                    {
+                        <div style="color:Red;">异常</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdateErr/@record.ID?error=false" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
+                    else
+                    {
+                        <div>正常</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdateErr/@record.ID?error=true" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
                 </td>
                 <td>
                     @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
@@ -161,6 +220,56 @@
                 <td>@record.ToLocation
                 </td>
                 <td>@record.BusinessArea
+                </td>
+                <td>
+                    @if (record.Received)
+                    {
+                        <div>到货</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdateReceived/@record.ID?received=false" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
+                    else
+                    {
+                        <div style="color:Red;">未到货</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdateReceived/@record.ID?received=true" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (record.Paid)
+                    {
+                        <div>结算</div>
+                    }
+                    else
+                    {
+                        <div style="color:Red;">未结算</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdatePaid/@record.ID" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
+                </td>
+                <td>
+                    @if (record.Error)
+                    {
+                        <div style="color:Red;">异常</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdateErr/@record.ID?error=false" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
+                    else
+                    {
+                        <div>正常</div>
+                        if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <div><a href="/Business/UpdateErr/@record.ID?error=true" onclick="return confirm('确定修改？');">修改</a></div>
+                        }
+                    }
                 </td>
                 <td>
                     @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))

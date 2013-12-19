@@ -84,8 +84,11 @@
       <Column Name="Reparations" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="ShortBargeFee" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="TrayNo" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="true" />
+      <Column Name="TrayNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="BusinessArea" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Error" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Received" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Paid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordsOptionHistory" />
     </Type>
   </Table>

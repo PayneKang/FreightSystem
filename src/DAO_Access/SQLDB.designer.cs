@@ -1408,6 +1408,12 @@ namespace DAO_Access
 		
 		private string _BusinessArea;
 		
+		private bool _Error;
+		
+		private bool _Received;
+		
+		private bool _Paid;
+		
 		private EntitySet<TransportRecordsOptionHistory> _TransportRecordsOptionHistory;
 		
     #region 可扩展性方法定义
@@ -1462,6 +1468,12 @@ namespace DAO_Access
     partial void OnTrayNoChanged();
     partial void OnBusinessAreaChanging(string value);
     partial void OnBusinessAreaChanged();
+    partial void OnErrorChanging(bool value);
+    partial void OnErrorChanged();
+    partial void OnReceivedChanging(bool value);
+    partial void OnReceivedChanged();
+    partial void OnPaidChanging(bool value);
+    partial void OnPaidChanged();
     #endregion
 		
 		public TransportRecords()
@@ -1910,7 +1922,7 @@ namespace DAO_Access
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrayNo", DbType="NVarChar(255) NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrayNo", DbType="NVarChar(255)")]
 		public string TrayNo
 		{
 			get
@@ -1946,6 +1958,66 @@ namespace DAO_Access
 					this._BusinessArea = value;
 					this.SendPropertyChanged("BusinessArea");
 					this.OnBusinessAreaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Error", DbType="Bit NOT NULL")]
+		public bool Error
+		{
+			get
+			{
+				return this._Error;
+			}
+			set
+			{
+				if ((this._Error != value))
+				{
+					this.OnErrorChanging(value);
+					this.SendPropertyChanging();
+					this._Error = value;
+					this.SendPropertyChanged("Error");
+					this.OnErrorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Received", DbType="Bit NOT NULL")]
+		public bool Received
+		{
+			get
+			{
+				return this._Received;
+			}
+			set
+			{
+				if ((this._Received != value))
+				{
+					this.OnReceivedChanging(value);
+					this.SendPropertyChanging();
+					this._Received = value;
+					this.SendPropertyChanged("Received");
+					this.OnReceivedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Paid", DbType="Bit NOT NULL")]
+		public bool Paid
+		{
+			get
+			{
+				return this._Paid;
+			}
+			set
+			{
+				if ((this._Paid != value))
+				{
+					this.OnPaidChanging(value);
+					this.SendPropertyChanging();
+					this._Paid = value;
+					this.SendPropertyChanged("Paid");
+					this.OnPaidChanged();
 				}
 			}
 		}

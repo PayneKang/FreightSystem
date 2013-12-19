@@ -56,6 +56,9 @@ namespace FreightSystem.Models
         [Required(ErrorMessage = "托盘号必须填写")]
         public string TrayNo { get; set; }
         public string BusinessArea { get; set; }
+        public bool Error { get; set; }
+        public bool Received { get; set; }
+        public bool Paid { get; set; }
         public List<TransportRecordsHistoryModel> HistoryItem { get; set; }
     }
 

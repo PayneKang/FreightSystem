@@ -227,7 +227,7 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [LoggedIn(CheckAccess:true, AccessCode: "PRINT")]
+        [LoggedIn(CheckAccess: true, AccessCode: "PRINT")]
         [HttpGet]
         public ActionResult PrintTR(int id)
         {
@@ -235,5 +235,68 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTPAID")]
+        [HttpGet]
+        public ActionResult UpdatePaid(int id)
+        {
+            string returnUrl = Request["returnUrl"];
+            UserModel user = this.cacheProvider.GetCurrentLoggedUser();
+            businessProvider.UpdateTransportPaidStatus(id, true, user.UserID);
+
+            if (user.Role.AccessList.Contains("TOTALRDLIST"))
+                return RedirectToAction("Index", "Business");
+            if (user.Role.AccessList.Contains("LOCALRDLIST"))
+                return RedirectToAction("LocalTransportRecordList", "Business");
+            return RedirectToLocal(returnUrl);
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTERR")]
+        [HttpGet]
+        public ActionResult UpdateErr(int id)
+        {
+            string returnUrl = Request["returnUrl"];
+            string error = Request["error"];
+            bool berr = true;
+            bool.TryParse(error, out berr);
+            UserModel user = this.cacheProvider.GetCurrentLoggedUser();
+            businessProvider.UpdateTransportErrorStatus(id, berr, user.UserID);
+
+            if (user.Role.AccessList.Contains("TOTALRDLIST"))
+                return RedirectToAction("Index", "Business");
+            if (user.Role.AccessList.Contains("LOCALRDLIST"))
+                return RedirectToAction("LocalTransportRecordList", "Business");
+            return RedirectToLocal(returnUrl);
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTREV")]
+        [HttpGet]
+        public ActionResult UpdateReceived(int id)
+        {
+            string returnUrl = Request["returnUrl"];
+            string received = Request["received"];
+            bool breceived = true;
+            bool.TryParse(received, out breceived);
+            UserModel user = this.cacheProvider.GetCurrentLoggedUser();
+            businessProvider.UpdateTransportReceivedStatus(id, breceived, user.UserID);
+
+            if (user.Role.AccessList.Contains("TOTALRDLIST"))
+                return RedirectToAction("Index", "Business");
+            if (user.Role.AccessList.Contains("LOCALRDLIST"))
+                return RedirectToAction("LocalTransportRecordList", "Business");
+            return RedirectToLocal(returnUrl);
+        }
+
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Business");
+            }
+        }
     }
 }

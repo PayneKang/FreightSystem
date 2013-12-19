@@ -19,5 +19,8 @@ namespace FreightSystem.Logics.Interfaces
         TransportRecordModel GetTransportRecordModel(int id);
         void UpdateTransportModel(int id, string trayNo, double volume, int quantity,string userID);
         void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable,string userID);
+        void UpdateTransportErrorStatus(int id, bool error,string userID);
+        void UpdateTransportPaidStatus(int id, bool paid,string userID);
+        void UpdateTransportReceivedStatus(int id, bool received, string userID);
     }
 }
