@@ -91,6 +91,9 @@
                 业务区域
             </th>
             <th>
+                专线
+            </th>
+            <th>
                 操作
             </th>
         </tr>
@@ -123,6 +126,8 @@
                 <td>@record.ToLocation
                 </td>
                 <td>@record.BusinessArea
+                </td>
+                <td>@record.DeliverType
                 </td>
                 <td>
                     @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
@@ -158,16 +163,18 @@
                 </td>
                 <td>@record.BusinessArea
                 </td>
+                <td>@record.DeliverType
+                </td>
                 <td>
                     @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
                     { 
-                        <a href="/Business/FillTransportRecord/@record.ID">【补充信息】</a>
+                        <a href="/Business/FillTransportRecord/@record.ID">补充信息</a>
                     }
                 </td>
             </tr>
             }
             <tr style="display:none;" type="TRDetails" TRID="@record.ID">
-                <td colspan="12">
+                <td colspan="13">
                     <div class="row">
                         <div class="large-1 columns">
                             <label>
@@ -214,7 +221,7 @@
                                 付款日</label>
                             @if (record.PayDate != null)
                             {
-                                <input type="text" value="@record.PayDate.Value.ToString("MM.dd")" readonly="readonly" />
+                                <input type="text" value="@record.PayDate.Value.ToString("yyyy-MM-dd")" readonly="readonly" />
                             }
                             else
                             { 
@@ -223,8 +230,15 @@
                         </div>
                         <div class="large-1 columns">
                             <label>
-                                专线</label>
-                            <input type="text" value="@record.DeliverType" readonly="readonly" />
+                                到货日期</label>
+                            @if (record.ReceivedDate != null)
+                            {
+                                <input type="text" value="@record.ReceivedDate.Value.ToString("yyyy-MM-dd")" readonly="readonly" />
+                            }
+                            else
+                            { 
+                                <input type="text" value="" readonly="readonly" />
+                            }
                         </div>
                         <div class="large-2 columns">
                             <label>
@@ -249,7 +263,7 @@
     </tbody>
     <tfoot>
         <tr class="pagination">
-            <td colspan="12">
+            <td colspan="13">
                 @if (Model.PageIndex > 1)
                 {
                     <a href="?DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">

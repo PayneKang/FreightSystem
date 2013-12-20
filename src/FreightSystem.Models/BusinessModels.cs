@@ -8,7 +8,7 @@ namespace FreightSystem.Models
 {
     public class TransportRecordListModel
     {
-        public const int PageSize = 20;
+        public const int PageSize = 50;
         public string ClientName { get; set; }
         public DateTime? DeliverDate { get; set; }
         public int PageIndex { get; set; }

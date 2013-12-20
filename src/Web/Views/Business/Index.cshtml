@@ -91,16 +91,19 @@
                 业务区域
             </th>
             <th>
-                到货状态|日期
+                专线
+            </th>
+            <th>
+                操作
+            </th>
+            <th>
+                到货状态
             </th>
             <th>
                 结算状态
             </th>
             <th>
                 异常状态
-            </th>
-            <th>
-                操作
             </th>
         </tr>
     </thead>
@@ -133,64 +136,64 @@
                 </td>
                 <td>@record.BusinessArea
                 </td>
+                <td>@record.DeliverType
+                </td>
+                <td>
+                    @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
+                    {
+                        <a href="/Business/PrintTR/@record.ID">打印此单据</a>
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
+                    {
+                        <a href="/Business/FillCa/@record.ID">&nbsp;&nbsp;补充财务信息</a>
+                    }
+                </td>
                 <td>
                     @if (record.Received)
                     {
-                        <div>到货 | @if(record.ReceivedDate.HasValue){<span>@record.ReceivedDate.Value.ToString("yyyy-MM-dd")</span>}</div> 
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdateReceived/@record.ID">修改</a></div>
+                        <a class="button tiny radius" href="/Business/UpdateReceived/@record.ID">已到货</a>
                         }
                     }
                     else
                     {
-                        <div style="color:Red;">未到货 | @if(record.ReceivedDate.HasValue){<span>@record.ReceivedDate.Value.ToString("yyyy-MM-dd")</span>}</div>
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdateReceived/@record.ID">修改</a></div>
+                        <a class="button tiny alert radius" href="/Business/UpdateReceived/@record.ID">未到货</a>
                         }
                     }
                 </td>
                 <td>
                     @if (record.Paid)
                     {
-                        <div>结算</div>
+                        <a class="button tiny disabled radius">已结算</a>
                     }
                     else
                     {
-                        <div style="color:Red;">未结算</div>
                         if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdatePaid/@record.ID" onclick="return confirm('确定修改？');">修改</a></div>
+                        <a class="button tiny alert radius" href="/Business/UpdatePaid/@record.ID" onclick="return confirm('确定修改？');">
+                            未结算</a>
                         }
                     }
                 </td>
                 <td>
                     @if (record.Error)
                     {
-                        <div style="color:Red;">异常</div>
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdateErr/@record.ID?error=false" onclick="return confirm('确定修改？');">修改</a></div>
+                        <a class="button tiny alert radius" href="/Business/UpdateErr/@record.ID?error=false" onclick="return confirm('确定修改？');">
+                            异常</a>
                         }
                     }
                     else
                     {
-                        <div>正常</div>
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdateErr/@record.ID?error=true" onclick="return confirm('确定修改？');">修改</a></div>
+                        <a class="button tiny radius" href="/Business/UpdateErr/@record.ID?error=true" onclick="return confirm('确定修改？');">
+                            正常</a>
                         }
-                    }
-                </td>
-                <td>
-                    @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
-                    {
-                        <a href="/Business/PrintTR/@record.ID">【打印此单据】</a>
-                    }
-                    @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
-                    {
-                        <a href="/Business/FillCa/@record.ID">【补充财务信息】</a>
                     }
                 </td>
             </tr>
@@ -221,70 +224,70 @@
                 </td>
                 <td>@record.BusinessArea
                 </td>
+                <td>@record.DeliverType
+                </td>
+                <td>
+                    @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
+                    {
+                        <a href="/Business/PrintTR/@record.ID">打印此单据</a>
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
+                    {
+                        <a href="/Business/FillCa/@record.ID">&nbsp;&nbsp;补充财务信息</a>
+                    }
+                </td>
                 <td>
                     @if (record.Received)
                     {
-                        <div>到货 | @if(record.ReceivedDate.HasValue){<span>@record.ReceivedDate.Value.ToString("yyyy-MM-dd")</span>}</div> 
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdateReceived/@record.ID">修改</a></div>
+                        <a class="button tiny radius" href="/Business/UpdateReceived/@record.ID">已到货</a>
                         }
                     }
                     else
                     {
-                        <div style="color:Red;">未到货 | @if(record.ReceivedDate.HasValue){<span>@record.ReceivedDate.Value.ToString("yyyy-MM-dd")</span>}</div>
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdateReceived/@record.ID">修改</a></div>
+                        <a class="button tiny alert radius" href="/Business/UpdateReceived/@record.ID">未到货</a>
                         }
                     }
                 </td>
                 <td>
                     @if (record.Paid)
                     {
-                        <div>结算</div>
+                        <a class="button tiny disabled radius">已结算</a>
                     }
                     else
                     {
-                        <div style="color:Red;">未结算</div>
                         if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdatePaid/@record.ID" onclick="return confirm('确定修改？');">修改</a></div>
+                        <a class="button tiny alert radius" href="/Business/UpdatePaid/@record.ID" onclick="return confirm('确定修改？');">
+                            未结算</a>
                         }
                     }
                 </td>
                 <td>
                     @if (record.Error)
                     {
-                        <div style="color:Red;">异常</div>
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdateErr/@record.ID?error=false" onclick="return confirm('确定修改？');">修改</a></div>
+                        <a class="button tiny alert radius" href="/Business/UpdateErr/@record.ID?error=false" onclick="return confirm('确定修改？');">
+                            异常</a>
                         }
                     }
                     else
                     {
-                        <div>正常</div>
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <div><a href="/Business/UpdateErr/@record.ID?error=true" onclick="return confirm('确定修改？');">修改</a></div>
+                        <a class="button tiny radius" href="/Business/UpdateErr/@record.ID?error=true" onclick="return confirm('确定修改？');">
+                            正常</a>
                         }
-                    }
-                </td>
-                <td>
-                    @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
-                    {
-                        <a href="/Business/PrintTR/@record.ID">【打印此单据】</a>
-                    }
-                    @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
-                    {
-                        <a href="/Business/FillCa/@record.ID">【补充财务信息】</a>
                     }
                 </td>
             </tr>
             }
             <tr style="display:none;" type="TRDetails" TRID="@record.ID">
-                <td colspan="15">
+                <td colspan="16">
                     <div class="row">
                         <div class="large-1 columns">
                             <label>
@@ -331,7 +334,7 @@
                                 付款日</label>
                             @if (record.PayDate != null)
                             {
-                                <input type="text" value="@record.PayDate.Value.ToString("MM.dd")" readonly="readonly" />
+                                <input type="text" value="@record.PayDate.Value.ToString("yyyy-MM-dd")" readonly="readonly" />
                             }
                             else
                             { 
@@ -340,8 +343,15 @@
                         </div>
                         <div class="large-1 columns">
                             <label>
-                                专线</label>
-                            <input type="text" value="@record.DeliverType" readonly="readonly" />
+                                到货日期</label>
+                            @if (record.ReceivedDate != null)
+                            {
+                                <input type="text" value="@record.ReceivedDate.Value.ToString("yyyy-MM-dd")" readonly="readonly" />
+                            }
+                            else
+                            { 
+                                <input type="text" value="" readonly="readonly" />
+                            }
                         </div>
                         <div class="large-2 columns">
                             <label>
@@ -366,7 +376,7 @@
     </tbody>
     <tfoot>
         <tr class="pagination">
-            <td colspan="12">
+            <td colspan="16">
                 @if (Model.PageIndex > 1)
                 {
                     <a href="?DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">

@@ -1472,7 +1472,7 @@ meta.foundation-mq-topbar {
   height: 45px;
   line-height: 45px;
   position: relative;
-  background: #333333;
+  background: #e74c3c;
   margin-bottom: 0; }
   .top-bar ul {
     margin-bottom: 0;
@@ -1570,7 +1570,7 @@ meta.foundation-mq-topbar {
     margin: 0; }
   .top-bar-section .divider,
   .top-bar-section [role="separator"] {
-    border-top: solid 1px #1a1a1a;
+    border-top: solid 1px #f4d03f;
     clear: both;
     height: 1px;
     width: 100%; }
@@ -1583,7 +1583,7 @@ meta.foundation-mq-topbar {
     font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     font-size: 0.8125rem;
     font-weight: normal;
-    background: #333333; }
+    background: #e74c3c; }
     .top-bar-section ul li > a.button {
       background: #008cba;
       font-size: 0.8125rem;
@@ -1604,13 +1604,13 @@ meta.foundation-mq-topbar {
       .top-bar-section ul li > a.button.alert:hover {
         background: #d32a0e; }
   .top-bar-section ul li:hover > a {
-    background: #272727;
+    background: #ec7063;
     color: white; }
   .top-bar-section ul li.active > a {
-    background: #008cba;
+    background: #c0392b;
     color: white; }
     .top-bar-section ul li.active > a:hover {
-      background: #0079a1; }
+      background: #e67e22; }
   .top-bar-section .has-form {
     padding: 15px; }
   .top-bar-section .has-dropdown {
@@ -1665,7 +1665,7 @@ meta.foundation-mq-topbar {
 
 @media only screen and (min-width: 40.063em) {
   .top-bar {
-    background: #333333;
+    background: #e74c3c;
     *zoom: 1;
     overflow: visible; }
     .top-bar:before, .top-bar:after {
@@ -1711,9 +1711,9 @@ meta.foundation-mq-topbar {
     .top-bar-section li a:not(.button) {
       padding: 0 15px;
       line-height: 45px;
-      background: #333333; }
+      background: #e74c3c; }
       .top-bar-section li a:not(.button):hover {
-        background: #272727; }
+        background: #f1c40f; }
     .top-bar-section .has-dropdown > a {
       padding-right: 35px !important; }
       .top-bar-section .has-dropdown > a:after {
@@ -1748,7 +1748,7 @@ meta.foundation-mq-topbar {
         line-height: 1;
         white-space: nowrap;
         padding: 12px 15px;
-        background: #333333; }
+        background: #f39c12; }
       .top-bar-section .dropdown li label {
         white-space: nowrap;
         background: #333333; }
@@ -1758,7 +1758,7 @@ meta.foundation-mq-topbar {
     .top-bar-section > ul > .divider, .top-bar-section > ul > [role="separator"] {
       border-bottom: none;
       border-top: none;
-      border-right: solid 1px #4d4d4d;
+      border-right: solid 1px #ec7063;
       clear: none;
       height: 45px;
       width: 0; }
@@ -1901,7 +1901,7 @@ button, .button {
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: normal;
   line-height: normal;
-  margin: 0 0 1.25rem;
+  /*margin: 0 0 1.25rem;*/
   position: relative;
   text-decoration: none;
   text-align: center;
