@@ -334,7 +334,7 @@
                                 付款日</label>
                             @if (record.PayDate != null)
                             {
-                                <input type="text" value="@record.PayDate.Value.ToString("yyyy-MM-dd")" readonly="readonly" />
+                                <input type="text" value="@record.PayDate.Value.ToString("MM.dd.yyyy")" readonly="readonly" />
                             }
                             else
                             { 
@@ -346,7 +346,7 @@
                                 到货日期</label>
                             @if (record.ReceivedDate != null)
                             {
-                                <input type="text" value="@record.ReceivedDate.Value.ToString("yyyy-MM-dd")" readonly="readonly" />
+                                <input type="text" value="@record.ReceivedDate.Value.ToString("MM.dd.yyyy")" readonly="readonly" />
                             }
                             else
                             { 
