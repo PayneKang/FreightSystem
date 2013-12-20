@@ -272,18 +272,22 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult UpdateReceived(int id)
         {
+            TransportRecordModel model = this.businessProvider.GetTransportRecordModel(id);
+            return View(model);
+        }
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTREV")]
+        [HttpPost]
+        public ActionResult UpdateReceived(TransportRecordModel model)
+        {
             string returnUrl = Request["returnUrl"];
             string received = Request["received"];
             bool breceived = true;
             bool.TryParse(received, out breceived);
             UserModel user = this.cacheProvider.GetCurrentLoggedUser();
-            businessProvider.UpdateTransportReceivedStatus(id, breceived, user.UserID);
+            businessProvider.UpdateTransportReceivedStatus(model.ID, model.Received, model.ReceivedDate.Value, user.UserID);
 
-            if (user.Role.AccessList.Contains("TOTALRDLIST"))
-                return RedirectToAction("Index", "Business");
-            if (user.Role.AccessList.Contains("LOCALRDLIST"))
-                return RedirectToAction("LocalTransportRecordList", "Business");
-            return RedirectToLocal(returnUrl);
+            ViewBag.Message = "更新到货状态成功";
+            return View(model);
         }
 
 

@@ -58,6 +58,7 @@ namespace FreightSystem.Models
         public string BusinessArea { get; set; }
         public bool Error { get; set; }
         public bool Received { get; set; }
+        public DateTime? ReceivedDate { get; set; }
         public bool Paid { get; set; }
         public List<TransportRecordsHistoryModel> HistoryItem { get; set; }
     }

@@ -1412,6 +1412,8 @@ namespace DAO_Access
 		
 		private bool _Received;
 		
+		private System.Nullable<System.DateTime> _ReceivedDate;
+		
 		private bool _Paid;
 		
 		private EntitySet<TransportRecordsOptionHistory> _TransportRecordsOptionHistory;
@@ -1472,6 +1474,8 @@ namespace DAO_Access
     partial void OnErrorChanged();
     partial void OnReceivedChanging(bool value);
     partial void OnReceivedChanged();
+    partial void OnReceivedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnReceivedDateChanged();
     partial void OnPaidChanging(bool value);
     partial void OnPaidChanged();
     #endregion
@@ -1998,6 +2002,26 @@ namespace DAO_Access
 					this._Received = value;
 					this.SendPropertyChanged("Received");
 					this.OnReceivedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceivedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ReceivedDate
+		{
+			get
+			{
+				return this._ReceivedDate;
+			}
+			set
+			{
+				if ((this._ReceivedDate != value))
+				{
+					this.OnReceivedDateChanging(value);
+					this.SendPropertyChanging();
+					this._ReceivedDate = value;
+					this.SendPropertyChanged("ReceivedDate");
+					this.OnReceivedDateChanged();
 				}
 			}
 		}

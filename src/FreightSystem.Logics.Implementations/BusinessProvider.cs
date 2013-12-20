@@ -48,7 +48,8 @@ namespace FreightSystem.Logics.Implementations
                     BusinessArea = model.BusinessArea,
                     Error = model.Error,
                     Paid = model.Paid,
-                    Received = model.Received
+                    Received = model.Received,
+                    ReceivedDate = model.ReceivedDate
                 };
                 newRecord.TransportRecordsOptionHistory.AddRange(from x in model.HistoryItem
                                                                  select new TransportRecordsOptionHistory()
@@ -111,7 +112,8 @@ namespace FreightSystem.Logics.Implementations
                                           BusinessArea = x.BusinessArea,
                                           Error = x.Error,
                                           Received = x.Received,
-                                          Paid = x.Paid
+                                          Paid = x.Paid,
+                                          ReceivedDate = x.ReceivedDate
                                       }).ToList();
             }
             return listModel;
@@ -212,6 +214,7 @@ namespace FreightSystem.Logics.Implementations
                                           Error = x.Error,
                                           Paid = x.Paid,
                                           Received = x.Received,
+                                          ReceivedDate = x.ReceivedDate,
                                           HistoryItem = (from y in x.TransportRecordsOptionHistory
                                                          orderby y.LogDateTime
                                                          select new TransportRecordsHistoryModel()
@@ -293,7 +296,8 @@ namespace FreightSystem.Logics.Implementations
                                           BusinessArea = x.BusinessArea,
                                           Error = x.Error,
                                           Paid = x.Paid,
-                                          Received = x.Received
+                                          Received = x.Received,
+                                          ReceivedDate = x.ReceivedDate
                                       }).ToList();
             }
             return listModel;
@@ -333,7 +337,8 @@ namespace FreightSystem.Logics.Implementations
                             BusinessArea = x.BusinessArea,
                             Error = x.Error,
                             Paid = x.Paid,
-                            Received = x.Received
+                            Received = x.Received,
+                            ReceivedDate = x.ReceivedDate
                         }).FirstOrDefault();
             }
         }
@@ -429,7 +434,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public void UpdateTransportReceivedStatus(int id, bool received,string userID)
+        public void UpdateTransportReceivedStatus(int id, bool received, DateTime receivedDate,string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -439,10 +444,11 @@ namespace FreightSystem.Logics.Implementations
                     throw new ApplicationException("要修改的记录不存在");
                 }
                 record.Received = received;
+                record.ReceivedDate = receivedDate;
                 record.TransportRecordsOptionHistory.Add(
                     new TransportRecordsOptionHistory()
                     {
-                        Description = string.Format("修改到货状态为{0}", received ? "到货" : "未到货"),
+                        Description = string.Format("修改到货状态为{0},日期 {1}", received ? "到货" : "未到货", receivedDate.ToString("yyyy-MM-dd")),
                         LogDateTime = DateTime.Now,
                         Operation = "修改到货状态",
                         UserID = userID

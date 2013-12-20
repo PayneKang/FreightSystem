@@ -88,6 +88,7 @@
       <Column Name="BusinessArea" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="Error" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Received" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ReceivedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Paid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordsOptionHistory" />
     </Type>

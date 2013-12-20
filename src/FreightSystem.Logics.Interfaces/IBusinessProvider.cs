@@ -21,6 +21,6 @@ namespace FreightSystem.Logics.Interfaces
         void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable,string userID);
         void UpdateTransportErrorStatus(int id, bool error,string userID);
         void UpdateTransportPaidStatus(int id, bool paid,string userID);
-        void UpdateTransportReceivedStatus(int id, bool received, string userID);
+        void UpdateTransportReceivedStatus(int id, bool received,DateTime receivedDate, string userID);
     }
 }
