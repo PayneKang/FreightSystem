@@ -11,6 +11,9 @@ namespace FreightSystem.Models
         public const int PageSize = 50;
         public string ClientName { get; set; }
         public DateTime? DeliverDate { get; set; }
+        public string Received { get; set; }
+        public string Paid { get; set; }
+        public string Error { get; set; }
         public int PageIndex { get; set; }
         public int TotalCount { get; set; }
         public int TotalPage { get; set; }

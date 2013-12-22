@@ -9,12 +9,12 @@ using System.Data;
 using System.Data.OleDb;
 
 namespace FreightSystem.Logics.Implementations
-{
+{  
     public class BusinessProvider : IBusinessProvider
     {
-        public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate, int pageIndex)
+        public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate,string received,string paid,string error, int pageIndex)
         {
-            return QueryTransportModel(clientName, deliverDate, pageIndex, null);
+            return QueryTransportModel(clientName, deliverDate,received, paid,error, pageIndex, null);
         }
 
         public void InsertTransprotModel(TransportRecordModel model)
@@ -65,7 +65,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate)
+        public TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate,string received,string paid,string error)
         {
             TransportRecordListModel listModel = new TransportRecordListModel();
             using (SQLDBDataContext context = new SQLDBDataContext())
@@ -84,6 +84,9 @@ namespace FreightSystem.Logics.Implementations
                                       orderby x.ID descending
                                       where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
                                       && x.DeliverDate.Date == deliverDate
+                                      && ((received == "Y" && x.Received) || (received == "N" && !x.Received) || (received != "Y" && received != "N"))
+                                      && ((paid == "Y" && x.Paid) || (paid == "N" && !x.Paid) || (paid != "Y" && paid != "N"))
+                                      && ((error == "Y" && x.Error) || (error == "N" && !x.Error) || (error != "Y" && error != "N"))
                                       select new TransportRecordModel()
                                       {
                                           ID = x.ID,
@@ -149,7 +152,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
         
-        public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate, int pageIndex, BusinessAreaModel area)
+        public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate,string received,string paid,string error, int pageIndex, BusinessAreaModel area)
         {
             TransportRecordListModel listModel = new TransportRecordListModel();
             if (pageIndex < 1)
@@ -185,6 +188,9 @@ namespace FreightSystem.Logics.Implementations
                                       where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
                                       && (!checkDeliverDate || x.DeliverDate.Date == dd)
                                       && (string.IsNullOrEmpty(areaName) || x.BusinessArea == areaName)
+                                      && ((received == "Y" && x.Received) || (received == "N" && !x.Received) || (received != "Y" && received != "N"))
+                                      && ((paid == "Y" && x.Paid) || (paid == "N" && !x.Paid) || (paid != "Y" && paid != "N"))
+                                      && ((error == "Y" && x.Error) || (error == "N" && !x.Error) || (error != "Y" && error != "N"))
                                       select new TransportRecordModel()
                                       {
                                           ID = x.ID,
@@ -253,12 +259,12 @@ namespace FreightSystem.Logics.Implementations
             return listModel;
         }
 
-        public TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate, BusinessAreaModel area)
+        public TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate,string received,string paid,string error, BusinessAreaModel area)
         {
             throw new NotImplementedException();
         }
 
-        public MonthlyReportModel QueryTransportModel(string clientName, DateTime fromDate, DateTime toDate)
+        public MonthlyReportModel QueryTransportModel(string clientName,string received,string paid,string error, DateTime fromDate, DateTime toDate)
         {
             MonthlyReportModel listModel = new MonthlyReportModel();
             using (SQLDBDataContext context = new SQLDBDataContext())
@@ -268,6 +274,9 @@ namespace FreightSystem.Logics.Implementations
                                       orderby x.ID descending
                                       where (string.IsNullOrEmpty(clientName) || x.ClientName == clientName)
                                       && x.DeliverDate.Date >= fromDate && x.DeliverDate <= toDate
+                                      && ((received == "Y" && x.Received) || (received == "N" && !x.Received) || (received != "Y" && received != "N"))
+                                      && ((paid == "Y" && x.Paid) || (paid == "N" && !x.Paid) || (paid != "Y" && paid != "N"))
+                                      && ((error == "Y" && x.Error) || (error == "N" && !x.Error) || (error != "Y" && error != "N"))
                                       select new TransportRecordModel()
                                       {
                                           ID = x.ID,

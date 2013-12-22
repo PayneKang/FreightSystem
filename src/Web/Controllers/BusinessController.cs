@@ -66,6 +66,9 @@ namespace Web.Controllers
         {
             string clientName = TryGetRequiredString("ClientName");
             string deliverDate = TryGetRequiredString("DeliverDate");
+            string received = TryGetRequiredString("received");
+            string paid = TryGetRequiredString("paid");
+            string error = TryGetRequiredString("error");
             DateTime dtDeliverDate;
             if (!DateTime.TryParse(deliverDate, out dtDeliverDate))
             {
@@ -78,7 +81,7 @@ namespace Web.Controllers
             Response.AppendHeader("Content-Disposition", "attachment;filename=" + deliverDate + "_" + clientName + ".xls");
             if (clientName == "NA")
                 clientName = string.Empty;
-            TransportRecordListModel model = businessProvider.QueryDailyTransportModel(clientName, dtDeliverDate);
+            TransportRecordListModel model = businessProvider.QueryDailyTransportModel(clientName, dtDeliverDate,received,paid,error);
             return View(model);
         }
 
@@ -87,6 +90,9 @@ namespace Web.Controllers
         {
             string clientName = TryGetRequiredString("ClientName");
             string deliverDate = TryGetRequiredString("DeliverDate");
+            string received = TryGetRequiredString("received");
+            string paid = TryGetRequiredString("paid");
+            string error = TryGetRequiredString("error");
             DateTime dtDeliverDate;
             if (!DateTime.TryParse(deliverDate, out dtDeliverDate))
             {
@@ -99,7 +105,7 @@ namespace Web.Controllers
             Response.AppendHeader("Content-Disposition", "attachment;filename=" + deliverDate + "_" + clientName + ".xls");
             if (clientName == "NA")
                 clientName = string.Empty;
-            TransportRecordListModel model = businessProvider.QueryDailyTransportModel(clientName, dtDeliverDate);
+            TransportRecordListModel model = businessProvider.QueryDailyTransportModel(clientName, dtDeliverDate,received,paid,error);
             return View(model);
         }
 
@@ -124,7 +130,7 @@ namespace Web.Controllers
             Response.Charset = "GBK";
             Response.ContentEncoding = Encoding.UTF8;
             Response.AppendHeader("Content-Disposition", "attachment;filename=" + model.YearMonth + ".xls");
-            model = businessProvider.QueryTransportModel(string.Empty, fromDate, fromDate.AddMonths(1).AddDays(-1));
+            model = businessProvider.QueryTransportModel(string.Empty, "ALL", "ALL", "ALL", fromDate, fromDate.AddMonths(1).AddDays(-1));
             return View("ExportMonthlyReport", model);
         }
 
@@ -138,14 +144,14 @@ namespace Web.Controllers
         [LoggedIn(CheckAccess: true, AccessCode: "LOCALRDLIST")]
         public ActionResult LocalTransportRecordList(TransportRecordListModel model, int page = 1)
         {
-            model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate, page, ((UserModel)ViewBag.LoggedUser).Area);
+            model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate,model.Received,model.Paid,model.Error, page, ((UserModel)ViewBag.LoggedUser).Area);
             return View(model);
         }
 
         [LoggedIn(CheckAccess: true, AccessCode: "TOTALRDLIST")]
         public ActionResult Index(TransportRecordListModel model, int page = 1)
         {
-            model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate, page);
+            model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate, model.Received, model.Paid, model.Error, page);
             return View(model);
         }
 
