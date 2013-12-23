@@ -283,15 +283,23 @@ select {
 
   .small-0 {
     position: relative;
-    width: 6%;  }
+    width: 5%;  }
     
   .small-1 {
     position: relative;
     width: 8.33333%; }
     
+  .small-1-5 {
+    position: relative;
+    width: 10%; }
+    
   .small-2 {
     position: relative;
     width: 16.66667%; }
+    
+  .small-2-5 {
+    position: relative;
+    width: 12%; }   
     
   .small-3 {
     position: relative;
