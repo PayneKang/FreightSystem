@@ -376,7 +376,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public void UpdateTransportPaymentData(int id, DateTime paymentDate, double accountPayable, string userID)
+        public void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayable, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {

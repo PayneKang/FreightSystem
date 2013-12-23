@@ -229,7 +229,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult FillCa(TransportRecordModel model)
         {
-            businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate.Value, model.AccountPayble.Value, this.cacheProvider.GetCurrentLoggedUser().UserID);
+            businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate, model.AccountPayble, this.cacheProvider.GetCurrentLoggedUser().UserID);
             return View(model);
         }
 
