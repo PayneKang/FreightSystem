@@ -211,7 +211,7 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [LoggedIn(CheckAccess: true, AccessCode: "FILLCA")]
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTPAID")]
         [HttpGet]
         public ActionResult FillCa()
         {
@@ -225,7 +225,7 @@ namespace Web.Controllers
             TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
             return View(model);
         }
-        [LoggedIn(CheckAccess: true, AccessCode: "FILLCA")]
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTPAID")]
         [HttpPost]
         public ActionResult FillCa(TransportRecordModel model)
         {

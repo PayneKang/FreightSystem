@@ -156,7 +156,7 @@
                 <td>@record.DeliverType
                 </td>
                 <td>
-                    @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
+                    @if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
                         <a class="button tiny radius" href="/Business/FillCa/@record.ID">补充财务信息</a>
                     }
@@ -184,7 +184,7 @@
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny alert radius" href="/Business/UpdatePaid/@record.ID" onclick="return confirm('确定修改？');">
+                        <a class="button tiny alert radius" href="/Business/FillCa/@record.ID" onclick="return confirm('确定修改？');">
                             未结算</a>
                         }
                     }
@@ -242,7 +242,7 @@
                 <td>@record.DeliverType
                 </td>
                 <td>
-                    @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
+                    @if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
                         <a class="button tiny radius" href="/Business/FillCa/@record.ID">补充财务信息</a>
                     }
