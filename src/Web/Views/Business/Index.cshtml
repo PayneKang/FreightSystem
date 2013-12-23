@@ -122,15 +122,6 @@
             <th>
                 操作
             </th>
-            <th>
-                到货状态
-            </th>
-            <th>
-                结算状态
-            </th>
-            <th>
-                异常状态
-            </th>
         </tr>
     </thead>
     <tbody>
@@ -167,14 +158,13 @@
                 <td>
                     @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
-                        <a href="/Business/PrintTR/@record.ID">打印此单据</a>
+                        <a class="button tiny radius success" href="/Business/PrintTR/@record.ID">打印此单据</a>
                     }
                     @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
-                        <a href="/Business/FillCa/@record.ID">&nbsp;&nbsp;补充财务信息</a>
+                        <a class="button tiny radius" href="/Business/FillCa/@record.ID">&nbsp;&nbsp;补充财务信息</a>
                     }
-                </td>
-                <td>
+                    &nbsp;&nbsp;
                     @if (record.Received)
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
@@ -189,8 +179,7 @@
                         <a class="button tiny alert radius" href="/Business/UpdateReceived/@record.ID">未到货</a>
                         }
                     }
-                </td>
-                <td>
+                    &nbsp;&nbsp;
                     @if (record.Paid)
                     {
                         <a class="button tiny disabled radius">已结算</a>
@@ -203,8 +192,7 @@
                             未结算</a>
                         }
                     }
-                </td>
-                <td>
+                    &nbsp;&nbsp;
                     @if (record.Error)
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
@@ -255,14 +243,13 @@
                 <td>
                     @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
-                        <a href="/Business/PrintTR/@record.ID">打印此单据</a>
+                        <a class="button tiny radius success" href="/Business/PrintTR/@record.ID">打印此单据</a>
                     }
                     @if (loggedUser.Role.AccessList.Contains("FILLCA") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
-                        <a href="/Business/FillCa/@record.ID">&nbsp;&nbsp;补充财务信息</a>
+                        <a class="button tiny radius" href="/Business/FillCa/@record.ID">&nbsp;&nbsp;补充财务信息</a>
                     }
-                </td>
-                <td>
+                    &nbsp;&nbsp;
                     @if (record.Received)
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
@@ -277,8 +264,7 @@
                         <a class="button tiny alert radius" href="/Business/UpdateReceived/@record.ID">未到货</a>
                         }
                     }
-                </td>
-                <td>
+                    &nbsp;&nbsp;
                     @if (record.Paid)
                     {
                         <a class="button tiny disabled radius">已结算</a>
@@ -291,8 +277,7 @@
                             未结算</a>
                         }
                     }
-                </td>
-                <td>
+                    &nbsp;&nbsp;
                     @if (record.Error)
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
@@ -313,7 +298,7 @@
             </tr>
             }
             <tr style="display:none;" type="TRDetails" TRID="@record.ID">
-                <td colspan="16">
+                <td colspan="13">
                     <div class="row">
                         <div class="large-1 columns">
                             <label>
@@ -402,7 +387,7 @@
     </tbody>
     <tfoot>
         <tr class="pagination">
-            <td colspan="16">
+            <td colspan="13">
                 @if (Model.PageIndex > 1)
                 {
                     <a href="?DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">
