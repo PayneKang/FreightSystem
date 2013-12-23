@@ -14,55 +14,44 @@
                 <label for="right-label" class="right inline">
                     日期</label>
             </div>
-            <div class="small-2 columns">
+            <div class="small-1-5 columns">
                 @Html.TextBoxFor(x => x.DeliverDate, new { @onClick = "WdatePicker()", @type = "text" })
             </div>
             <div class="small-0 columns">
                 <label for="right-label" class="right inline">
                     客户</label>
             </div>
-            <div class="small-2 columns">
+            <div class="small-1-5 columns">
                 @Html.TextBoxFor(x => x.ClientName, new { @type = "text" })
             </div>
-            <div class="small-0 columns">
-                <label for="right-label" class="right inline">
-                    到货状态</label>
-            </div>
-            <div class="small-2 columns">
+            <div class="small-1 columns">
                 @Html.DropDownListFor(m => m.Received,
                     new List<SelectListItem> { 
                         new SelectListItem(){ Text = "所有", Value="ALL"}
                         , new SelectListItem(){Text = "未到货", Value = "N"}
                         , new SelectListItem(){Text = "到货", Value = "Y"}  
-                    }, new {@style = "width:80px;" })
+                    }, new { @class = "tiny radius dropdown" })
             </div>
-            <div class="small-0 columns">
-                <label for="right-label" class="right inline">
-                    结算状态</label>
-            </div>
-            <div class="small-2 columns">
-                @Html.DropDownListFor(m => m.Paid, 
+            <div class="small-1 columns">
+                @Html.DropDownListFor(m => m.Paid,
                     new List<SelectListItem> { 
                         new SelectListItem(){ Text = "所有", Value="ALL"}
                         , new SelectListItem(){Text = "未结算", Value = "N"}
                         , new SelectListItem(){Text = "已结算", Value = "Y"}  
-                    }, new { @style = "width:80px;" })
+                    }, new { @class = "tiny radius dropdown" })
             </div>
-            <div class="small-0 columns">
-                <label for="right-label" class="right inline">
-                    异常状态</label>
-            </div>
-            <div class="small-2 columns">
-                @Html.DropDownListFor(m => m.Error, 
+            <div class="small-1 columns">
+                @Html.DropDownListFor(m => m.Error,
                     new List<SelectListItem> { 
                         new SelectListItem(){ Text = "所有", Value="ALL"}
                         , new SelectListItem(){Text = "正常", Value = "N"}
                         , new SelectListItem(){Text = "异常", Value = "Y"}  
-                    }, new { @style = "width:80px;" })
+                    }, new { @class = "tiny radius dropdown" })
             </div>
-            <div class="small-3 columns">
+            <div class="small-1 columns">
                 <button type="submit" class="button tiny">
-                    查询</button>
+                    查询</button></div>
+            <div class="small-2 columns">
                 <button type="submit" class="button tiny" id="btnExport">
                     导出日报表</button>
             </div>
