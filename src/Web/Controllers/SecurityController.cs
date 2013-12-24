@@ -59,6 +59,8 @@ namespace Web.Controllers
         {
             List<MenuItemModel> menus = userProvider.GetAllMenuItem();
             ViewBag.AllMenu = menus;
+            List<FuncItemModel> funcs = userProvider.GetAllFuncItem();
+            ViewBag.AllFunc = funcs;
             return View();
         }
         [LoggedIn(CheckAccess: true, AccessCode: "ROLEMGR")]
@@ -68,6 +70,7 @@ namespace Web.Controllers
             try
             {
                 model.Menus = GetSelectedMenuItem();
+                model.AccessList = GetSelectedFuncItem();
                 userProvider.InsertRoleModel(model);
                 return RedirectToAction("RoleList", "Security");
             }
@@ -83,6 +86,13 @@ namespace Web.Controllers
         public ActionResult RoleList()
         {
             RoleListModel model = userProvider.GetRoleList();
+            List<FuncItemModel> funcs = userProvider.GetAllFuncItem();
+            foreach (RoleModel role in model.ItemList)
+            {
+                foreach(FuncItemModel func in funcs){
+                    role.AccessList = role.AccessList.Replace(func.FuncCode, string.Format(" {0} ",func.FuncText));
+                }
+            }
             return View(model); 
         }
         [HttpGet]
@@ -184,6 +194,8 @@ namespace Web.Controllers
             int.TryParse(RouteData.GetRequiredString("id"), out roleID);
             List<MenuItemModel> menus = userProvider.GetAllMenuItem();
             ViewBag.AllMenu = menus;
+            List<FuncItemModel> funcs = userProvider.GetAllFuncItem();
+            ViewBag.AllFunc = funcs;
             RoleModel role = userProvider.FindRole(roleID);
             return View(role);
         }
@@ -193,6 +205,7 @@ namespace Web.Controllers
         public ActionResult RoleMgr(RoleModel model)
         {
             model.Menus = GetSelectedMenuItem();
+            model.AccessList = GetSelectedFuncItem();
             userProvider.UpdateRoleModel(model);
             return RedirectToAction("RoleList", "Security");
         }
@@ -236,6 +249,11 @@ namespace Web.Controllers
                         MenuText = x.MenuText,
                         OrderIndex = x.OrderIndex
                     }).ToList();
+        }
+
+        private string GetSelectedFuncItem()
+        {
+            return Request["funcs"].Replace(",", "|");
         }
     }
 }

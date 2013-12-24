@@ -93,4 +93,10 @@
       <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordsOptionHistory" />
     </Type>
   </Table>
+  <Table Name="dbo.FuncItem" Member="FuncItem">
+    <Type Name="FuncItem">
+      <Column Name="FuncCode" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FuncText" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
 </Database>

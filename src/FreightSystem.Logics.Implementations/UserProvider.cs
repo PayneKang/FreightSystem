@@ -278,5 +278,17 @@ namespace FreightSystem.Logics.Implementations
                 context.SubmitChanges();
             }
         }
+        public List<FuncItemModel> GetAllFuncItem()
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                return (from x in context.FuncItem
+                        select new FuncItemModel()
+                        {
+                            FuncCode = x.FuncCode,
+                            FuncText = x.FuncText
+                        }).ToList();
+            }
+        }
     }
 }

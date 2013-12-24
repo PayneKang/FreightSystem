@@ -51,6 +51,9 @@ namespace DAO_Access
     partial void InsertTransportRecords(TransportRecords instance);
     partial void UpdateTransportRecords(TransportRecords instance);
     partial void DeleteTransportRecords(TransportRecords instance);
+    partial void InsertFuncItem(FuncItem instance);
+    partial void UpdateFuncItem(FuncItem instance);
+    partial void DeleteFuncItem(FuncItem instance);
     #endregion
 		
 		public SQLDBDataContext() : 
@@ -136,6 +139,14 @@ namespace DAO_Access
 			get
 			{
 				return this.GetTable<TransportRecords>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FuncItem> FuncItem
+		{
+			get
+			{
+				return this.GetTable<FuncItem>();
 			}
 		}
 	}
@@ -2089,6 +2100,92 @@ namespace DAO_Access
 		{
 			this.SendPropertyChanging();
 			entity.TransportRecords = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FuncItem")]
+	public partial class FuncItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _FuncCode;
+		
+		private string _FuncText;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFuncCodeChanging(string value);
+    partial void OnFuncCodeChanged();
+    partial void OnFuncTextChanging(string value);
+    partial void OnFuncTextChanged();
+    #endregion
+		
+		public FuncItem()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FuncCode", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string FuncCode
+		{
+			get
+			{
+				return this._FuncCode;
+			}
+			set
+			{
+				if ((this._FuncCode != value))
+				{
+					this.OnFuncCodeChanging(value);
+					this.SendPropertyChanging();
+					this._FuncCode = value;
+					this.SendPropertyChanged("FuncCode");
+					this.OnFuncCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FuncText", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string FuncText
+		{
+			get
+			{
+				return this._FuncText;
+			}
+			set
+			{
+				if ((this._FuncText != value))
+				{
+					this.OnFuncTextChanging(value);
+					this.SendPropertyChanging();
+					this._FuncText = value;
+					this.SendPropertyChanged("FuncText");
+					this.OnFuncTextChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

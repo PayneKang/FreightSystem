@@ -52,4 +52,9 @@ namespace FreightSystem.Models
         public string NewPassword { get; set; }
         public string ConfirmPassword { get; set; }
     }
+    public class FuncItemModel
+    {
+        public string FuncCode { get; set; }
+        public string FuncText { get; set; }
+    }
 }

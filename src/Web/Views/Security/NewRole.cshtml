@@ -27,8 +27,12 @@
         </div>
         <div class="large-11 columns large-offset-1">
             <label>权限</label>
-            @Html.TextAreaFor(m => m.AccessList, new { @style = "width:75%; height:75px;", @placeholder = "必填" }) 
-            @Html.ValidationMessageFor(m => m.AccessList)
+            <ul class="side-nav">
+                @foreach (FuncItemModel func in ViewBag.AllFunc)
+                {
+                    <li><input type="checkbox" name="Funcs" value="@func.FuncCode"/> @func.FuncText </li>
+                }
+            </ul>    
         </div>
         <div class="large-11 columns">
             <button type="submit" class="button tiny" style="margin-top:1rem">保存</button>
