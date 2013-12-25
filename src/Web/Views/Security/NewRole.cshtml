@@ -7,30 +7,36 @@
 <br />
 @using (Html.BeginForm())
 {
-    <fieldset class="large-4">
-    <legend>@ViewBag.Title</legend>
+<fieldset class="large-4">
+<legend>@ViewBag.Title</legend>
     <div class="row">
         <br />
         <div class="large-10 columns large-offset-1">
             <label>角色名称</label>
-            @Html.TextBoxFor(m => m.RoleName, new { @type = "text", @style = "width:80%", @placeholder = "必填" }) 
-            @Html.ValidationMessageFor(m => m.RoleName)
+            @Html.TextBoxFor(m => m.RoleName, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" }) 
+            <small class="error">@Html.ValidationMessageFor(m => m.RoleName)</small>
         </div>
+    </div>
+    <br />
+    <div class="row">
         <div class="large-10 columns large-offset-1">
             <label>菜单项</label>
             <ul class="side-nav">
                 @foreach (MenuItemModel menu in ViewBag.AllMenu)
                 {
-                    <li><input type="checkbox" name="Menus" value="@menu.MenuCode" /> @menu.MenuText </li>
+                    <li class="large-6 large-offset-1 left"><input type="checkbox" name="Menus" value="@menu.MenuCode" /> @menu.MenuText </li>
                 }
                 </ul>
         </div>
-        <div class="large-11 columns large-offset-1">
+    </div>
+    <br />
+    <div class="row">
+        <div class="large-10 columns large-offset-1">
             <label>权限</label>
             <ul class="side-nav">
                 @foreach (FuncItemModel func in ViewBag.AllFunc)
                 {
-                    <li><input type="checkbox" name="Funcs" value="@func.FuncCode"/> @func.FuncText </li>
+                    <li class="large-6 large-offset-1 left"><input type="checkbox" name="Funcs" value="@func.FuncCode"/> @func.FuncText </li>
                 }
             </ul>    
         </div>
@@ -38,7 +44,8 @@
             <button type="submit" class="button tiny" style="margin-top:1rem">保存</button>
         </div>
     </div>
-    @ViewBag.ErrorMessage
-    </fieldset>
+    <br />
+    <label>@ViewBag.ErrorMessage</label>
+</fieldset>
 }
 </section>

@@ -145,14 +145,14 @@
                     </th>
                     <td>
                         @Html.TextBoxFor(x => x.PayDate, new { @onClick = "WdatePicker()", @style = "margin-bottom:-0.5rem" })
-                        @Html.ValidationMessageFor(x => x.PayDate)
+                        <small class="error">@Html.ValidationMessageFor(x => x.PayDate)</small>
                     </td>
                     <th>
                         应付金额
                     </th>
                     <td>
                         @Html.TextBoxFor(x => x.AccountPayble, new { @style = "margin-bottom:-0.5rem" })
-                        @Html.ValidationMessageFor(x => x.AccountPayble)
+                        <small class="error">@Html.ValidationMessageFor(x => x.AccountPayble)</small>
                     </td>
                 </tr>
                 <tr>
