@@ -63,6 +63,9 @@ namespace FreightSystem.Models
         public bool Received { get; set; }
         public DateTime? ReceivedDate { get; set; }
         public bool Paid { get; set; }
+        public double ShouldPayPrice { get {
+            return 0f;
+        } }
         public List<TransportRecordsHistoryModel> HistoryItem { get; set; }
     }
 

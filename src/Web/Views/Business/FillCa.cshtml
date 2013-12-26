@@ -137,9 +137,25 @@
                     @Model.Quantity
                 </td>
             </tr>
-            @if (!Model.PayDate.HasValue)
+            @if (!Model.Paid)
             {
                 <tr>
+                    <th>扣款</th>
+                    <td>
+                        @Html.TextBoxFor(x => x.Deductions, new { @style = "margin-bottom:-0.5rem" })
+                        <small class="error">@Html.ValidationMessageFor(x => x.Deductions)</small>
+                    </td>
+                    <th>赔款</th>
+                    <td>
+                        @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:-0.5rem" })
+                        <small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
+                    </td>
+                </tr>
+                <tr>
+                    <th>应付金额</th>
+                    <td>
+                        <div id="shouldPay"></div>
+                    </td>
                     <th>
                         付款日期
                     </th>
@@ -147,22 +163,41 @@
                         @Html.TextBoxFor(x => x.PayDate, new { @onClick = "WdatePicker()", @style = "margin-bottom:-0.5rem" })
                         <small class="error">@Html.ValidationMessageFor(x => x.PayDate)</small>
                     </td>
-                    <th>
-                        应付金额
-                    </th>
-                    <td>
-                        @Html.TextBoxFor(x => x.AccountPayble, new { @style = "margin-bottom:-0.5rem" })
-                        <small class="error">@Html.ValidationMessageFor(x => x.AccountPayble)</small>
-                    </td>
                 </tr>
                 <tr>
                     <th>
                         <input type="submit" class="button tiny" value="保存" />
                     </th>
                 </tr>
+                <script language="javascript" type="text/javascript">
+                    var CalculateShouldPayPrice = function () {
+                        var shouldpayvalue = 0;
+                        //calculate should pay
+                        $("#shouldPay").html(shouldpayvalue);
+                    }
+                    $(document).ready(function () {
+                        CalculateShouldPayPrice();
+                    });
+                </script>
             }
             else
             {
+                <tr>
+                    <th>扣款</th>
+                    <td>
+                        @Model.Deductions
+                    </td>
+                    <th>赔款</th>
+                    <td>
+                        @Model.Reparations
+                    </td>
+                </tr>
+                <tr>
+                    <th>应付</th>
+                    <td colspan="3">
+                        @Model.ShouldPayPrice
+                    </td>
+                </tr>
                 <tr>
                     <th>
                         付款日期
