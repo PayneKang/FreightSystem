@@ -61,6 +61,11 @@
             <small class="error">@Html.ValidationMessageFor(m => m.DeliverPrice)</small>
         </div>
         <div class="large-5 large-offset-0-1 columns">
+            <label>短驳费</label>
+            @Html.TextBoxFor(m => m.ShortBargeFee, new { @type = "text", @style = "margin-bottom:0px" })
+            <small class="error">@Html.ValidationMessageFor(m => m.ShortBargeFee)</small>
+        </div>
+        <div class="large-5 large-offset-0-1 columns">
             <label>预付</label>
             @Html.TextBoxFor(m => m.PrePay, new { @type = "text", @style = "margin-bottom:0px" })
             <small class="error">@Html.ValidationMessageFor(m => m.PrePay)</small>
@@ -71,7 +76,7 @@
             <small class="error">@Html.ValidationMessageFor(m => m.OilCard)</small>
         </div>
         <div class="large-5 large-offset-0-1 columns">
-            <label>专线</label>
+            <label>司机电话</label>
             @Html.TextBoxFor(m => m.DeliverType, new { @type = "text", @style = "margin-bottom:0px" })
             <small class="error">@Html.ValidationMessageFor(m => m.DeliverType)</small>
         </div>
