@@ -275,7 +275,7 @@ namespace Web.Controllers
             bool breceived = true;
             bool.TryParse(received, out breceived);
             UserModel user = this.cacheProvider.GetCurrentLoggedUser();
-            businessProvider.UpdateTransportReceivedStatus(model.ID, model.Received, model.ReceivedDate.Value, user.UserID);
+            businessProvider.UpdateTransportReceivedStatus(model.ID, model.Received, model.ReceivedDate, user.UserID);
 
             ViewBag.Message = "更新到货状态成功";
             return View(model);

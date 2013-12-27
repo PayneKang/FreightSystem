@@ -424,7 +424,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public void UpdateTransportReceivedStatus(int id, bool received, DateTime receivedDate,string userID)
+        public void UpdateTransportReceivedStatus(int id, bool received, DateTime? receivedDate,string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -438,7 +438,7 @@ namespace FreightSystem.Logics.Implementations
                 record.TransportRecordsOptionHistory.Add(
                     new TransportRecordsOptionHistory()
                     {
-                        Description = string.Format("修改到货状态为{0},日期 {1}", received ? "到货" : "未到货", receivedDate.ToString("yyyy-MM-dd")),
+                        Description = string.Format("修改到货状态为{0},日期 {1}", received ? "到货" : "未到货", receivedDate),
                         LogDateTime = DateTime.Now,
                         Operation = "修改到货状态",
                         UserID = userID

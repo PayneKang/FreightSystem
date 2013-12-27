@@ -174,7 +174,7 @@
                 </tr>
                 <tr>
                     <th>
-                        <input type="submit" class="button tiny" value="保存" />
+                        <input id="submitBtn" type="submit" class="button tiny" value="保存" />
                     </th>
                 </tr>
                 <script language="javascript" type="text/javascript">
@@ -186,6 +186,8 @@
                     $(document).ready(function () {
                         CalculateShouldPayPrice();
                     });
+                    $("#submitBtn").click(function () {
+                     })
                 </script>
             }
             else
@@ -211,7 +213,9 @@
                         付款日期
                     </th>
                     <td>
-                        @Model.PayDate.Value.ToString("yyyy-MM-dd")
+                        @if(Model.PayDate.HasValue){
+                            <div>Model.PayDate.Value.ToString("yyyy-MM-dd")</div>
+                        }
                     </td>
                     <th>
                         应付金额
