@@ -166,6 +166,14 @@
                 </tr>
                 <tr>
                     <th>
+                        已结算
+                    </th>
+                    <td>
+                        @Html.CheckBoxFor(m=>m.Paid)
+                    </td>
+                </tr>
+                <tr>
+                    <th>
                         <input type="submit" class="button tiny" value="保存" />
                     </th>
                 </tr>
@@ -210,6 +218,14 @@
                     </th>
                     <td>
                         @Model.AccountPayble
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        已结算
+                    </th>
+                    <td>
+                        已结算
                     </td>
                 </tr>
             }

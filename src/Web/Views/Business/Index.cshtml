@@ -177,7 +177,7 @@
                     }
                     @if (record.Paid)
                     {
-                        <div class="button tiny disabled radius">已结算</div>
+                        <div class="button tiny radius" style="cursor:inherit; background-color:#999;">已结算</div>
                     }
                     else
                     {
@@ -185,7 +185,9 @@
                         {
                         <a class="button tiny alert radius" href="/Business/FillCa/@record.ID" onclick="return confirm('确定修改？');">
                             未结算</a>
-                        }else{                            
+                        }
+                        else
+                        {                            
                         <div class="button tiny alert radius" style=" cursor:inherit; background-color:#999;">未结算</div>
                         }
                     }
@@ -196,7 +198,9 @@
                         <a class="button tiny alert radius" href="/Business/UpdateErr/@record.ID?error=false" onclick="return confirm('确定修改？');">
                             异常</a>
                         
-                        }else{                            
+                        }
+                        else
+                        {                            
                         <div class="button tiny alert radius" style=" cursor:inherit; background-color:#999;">异常</div>
                         }
                     }
@@ -207,7 +211,9 @@
                         <a class="button tiny radius" href="/Business/UpdateErr/@record.ID?error=true" onclick="return confirm('确定修改？');">
                             正常</a>
                         
-                        }else{                            
+                        }
+                        else
+                        {                            
                         <div class="button tiny radius" style=" cursor:inherit; background-color:#999;">正常</div>
                         }
                     }
@@ -275,7 +281,7 @@
                     }
                     @if (record.Paid)
                     {
-                        <div class="button tiny disabled radius">已结算</div>
+                        <div class="button tiny radius" style="cursor:inherit; background-color:#999;">已结算</div>
                     }
                     else
                     {

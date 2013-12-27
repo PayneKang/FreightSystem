@@ -229,7 +229,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult FillCa(TransportRecordModel model)
         {
-            businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate, model.AccountPayble, this.cacheProvider.GetCurrentLoggedUser().UserID);
+            businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate, model.AccountPayble, model.Deductions, model.Reparations, model.Paid, this.cacheProvider.GetCurrentLoggedUser().UserID);
             return View(model);
         }
 
@@ -240,22 +240,7 @@ namespace Web.Controllers
             TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
             return View(model);
         }
-
-        [LoggedIn(CheckAccess: true, AccessCode: "UPDTPAID")]
-        [HttpGet]
-        public ActionResult UpdatePaid(int id)
-        {
-            string returnUrl = Request["returnUrl"];
-            UserModel user = this.cacheProvider.GetCurrentLoggedUser();
-            businessProvider.UpdateTransportPaidStatus(id, true, user.UserID);
-
-            if (user.Role.AccessList.Contains("TOTALRDLIST"))
-                return RedirectToAction("Index", "Business");
-            if (user.Role.AccessList.Contains("LOCALRDLIST"))
-                return RedirectToAction("LocalTransportRecordList", "Business");
-            return RedirectToLocal(returnUrl);
-        }
-
+        
         [LoggedIn(CheckAccess: true, AccessCode: "UPDTERR")]
         [HttpGet]
         public ActionResult UpdateErr(int id)

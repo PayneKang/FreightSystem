@@ -376,7 +376,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayable, string userID)
+        public void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayable, double? deductions, double? reparations, bool paid, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -387,6 +387,9 @@ namespace FreightSystem.Logics.Implementations
                 }
                 record.PayDate = paymentDate;
                 record.AccountPayble = accountPayable;
+                record.Deductions = deductions;
+                record.Reparations = reparations;
+                record.Paid = paid;
                 record.TransportRecordsOptionHistory.Add(
                     new TransportRecordsOptionHistory()
                     {
@@ -415,28 +418,6 @@ namespace FreightSystem.Logics.Implementations
                         Description = string.Format("修改异常状态为{0}", error?"异常":"正常"),
                         LogDateTime = DateTime.Now,
                         Operation = "修改异常状态",
-                        UserID = userID
-                    });
-                context.SubmitChanges();
-            }
-        }
-
-        public void UpdateTransportPaidStatus(int id, bool paid,string userID)
-        {
-            using (SQLDBDataContext context = new SQLDBDataContext())
-            {
-                TransportRecords record = context.TransportRecords.FirstOrDefault(x => x.ID == id);
-                if (record == null)
-                {
-                    throw new ApplicationException("要修改的记录不存在");
-                }
-                record.Paid = paid;
-                record.TransportRecordsOptionHistory.Add(
-                    new TransportRecordsOptionHistory()
-                    {
-                        Description = string.Format("修改结算状态为{0}", paid ? "结算" : "未结算"),
-                        LogDateTime = DateTime.Now,
-                        Operation = "修改结算状态",
                         UserID = userID
                     });
                 context.SubmitChanges();
