@@ -155,9 +155,68 @@
                 <td>@record.DeliverType
                 </td>
                 <td>
+                    @if (record.Received)
+                    {
+                        if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <a class="button tiny radius" href="/Business/UpdateReceived/@record.ID">已到货</a>
+                        }
+                        else{
+                        <div class="button tiny radius" style=" cursor:inherit; background-color:#999;">已到货</div>
+                        }
+                    }
+                    else
+                    {
+                        if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <a class="button tiny alert radius" href="/Business/UpdateReceived/@record.ID">未到货</a>
+                        }else{                            
+                        <div class="button tiny alert radius" style=" cursor:inherit; background-color:#999;">未到货</div>
+                        }
+                    }
+                    @if (record.Paid)
+                    {
+                        <div class="button tiny disabled radius">已结算</div>
+                    }
+                    else
+                    {
+                        if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <a class="button tiny alert radius" href="/Business/FillCa/@record.ID" onclick="return confirm('确定修改？');">
+                            未结算</a>
+                        }else{                            
+                        <div class="button tiny alert radius" style=" cursor:inherit; background-color:#999;">未结算</div>
+                        }
+                    }
+                    @if (record.Error)
+                    {
+                        if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <a class="button tiny alert radius" href="/Business/UpdateErr/@record.ID?error=false" onclick="return confirm('确定修改？');">
+                            异常</a>
+                        
+                        }else{                            
+                        <div class="button tiny alert radius" style=" cursor:inherit; background-color:#999;">异常</div>
+                        }
+                    }
+                    else
+                    {
+                        if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
+                        {
+                        <a class="button tiny radius" href="/Business/UpdateErr/@record.ID?error=true" onclick="return confirm('确定修改？');">
+                            正常</a>
+                        
+                        }else{                            
+                        <div class="button tiny radius" style=" cursor:inherit; background-color:#999;">正常</div>
+                        }
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
+                    {
+                        <a class="button tiny radius success" href="/Business/PrintTR/@record.ID">打印</a>
+                    }
                     @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
                     { 
-                        <a href="/Business/FillTransportRecord/@record.ID">补充信息</a>
+                        <a class="button tiny radius"  href="/Business/FillTransportRecord/@record.ID">补充信息</a>
                     }
                 </td>
             </tr>

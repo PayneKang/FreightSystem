@@ -125,9 +125,9 @@ namespace Web.Controllers
                 return View();
             }
             cacheProvider.SaveUser(user);
-            if (user.Role.AccessList.Contains("TOTALRDLIST"))
-                return RedirectToAction("Index","Business");
-            return RedirectToAction("LocalTransportRecordList", "Business");
+            if (user.Role.AccessList.Contains("LOCALRDLIST"))
+                return RedirectToAction("LocalTransportRecordList", "Business");
+            return RedirectToAction("Index", "Business");
         }
 
         [HttpGet]
