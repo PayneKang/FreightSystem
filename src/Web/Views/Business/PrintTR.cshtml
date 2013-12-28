@@ -1,5 +1,6 @@
 ﻿@model FreightSystem.Models.TransportRecordModel
 @{ Layout = null; }
+<div style="position:absolute; top:-10px; left:-50px; width:100%;">
 <div style="position:absolute; top:80px; left:80px;">@Model.TrayNo</div>
 <div style="position:absolute; top:80px; left:540px;">@Model.DeliverDate.Year</div>
 <div style="position:absolute; top:80px; left:600px;">@(Model.DeliverDate.Month + 1)</div>
@@ -15,3 +16,4 @@
 <div style="position:absolute; top:430px; left:200px;">@Model.CarLicense</div>
 
 <div style="position:absolute; top:400px; left:680px; width:200px; height:200px; overflow:hidden;">@Model.Comment 123</div>
+</div>
