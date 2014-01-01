@@ -325,6 +325,30 @@ namespace Web.Controllers
             return View(clients);
         }
 
+        [LoggedIn(CheckAccess: true, AccessCode: "CLTMGR")]
+        [HttpGet]
+        public ActionResult ClientMgr(int id)
+        {
+            ClientModel client = businessProvider.GetClient(id);
+            return View(client);
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "CLTMGR")]
+        [HttpPost]
+        public ActionResult ClientMgr(ClientModel client)
+        {
+            try
+            {
+                businessProvider.UpdateClientInformation(client);
+                ViewBag.Message = "编辑成功";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+            }
+            return View(client);
+        }
+
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

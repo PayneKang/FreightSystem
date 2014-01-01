@@ -29,6 +29,9 @@
                         <th>
                             创建时间
                         </th>
+                        <th>
+                            编辑
+                        </th>
                     </tr>
                     @foreach (ClientModel client in Model)
                     {
@@ -42,6 +45,9 @@
                             <td>@client.IndexMonth
                             </td>
                             <td>@client.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
+                            </td>
+                            <td>
+                                <a href="/Business/ClientMgr/@client.ID">编辑</a>
                             </td>
                         </tr>
                     }

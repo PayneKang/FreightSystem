@@ -486,5 +486,41 @@ namespace FreightSystem.Logics.Implementations
                         }).ToList();
             }
         }
+
+
+        public ClientModel GetClient(int id)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                if (context.Client.Count(x => x.ID == id) == 0)
+                    return null;
+
+                return (from x in context.Client
+                        where x.ID == id
+                        select new ClientModel()
+                        {
+                            ClientName = x.ClientName,
+                            CreateTime = x.CreateTime,
+                            Index = x.Index,
+                            ID = x.ID,
+                            IndexMonth = x.IndexMonth,
+                            ShortName = x.ShortName
+                        }).FirstOrDefault();
+            }
+        }
+
+
+        public void UpdateClientInformation(ClientModel client)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                Client update = context.Client.FirstOrDefault(x => x.ID == client.ID);
+                if (update == null)
+                    throw new ApplicationException("要修改的客户信息不存在");
+                update.ClientName = client.ClientName;
+                update.ShortName = client.ShortName;
+                context.SubmitChanges();
+            }
+        }
     }
 }
