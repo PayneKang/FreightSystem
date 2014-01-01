@@ -280,7 +280,12 @@ namespace Web.Controllers
             ViewBag.Message = "更新到货状态成功";
             return View(model);
         }
-
+        [LoggedIn(CheckAccess: true, AccessCode: "CLTMGR")]
+        [HttpGet]
+        public ActionResult ClientList()
+        {
+            return View();
+        }
 
         private ActionResult RedirectToLocal(string returnUrl)
         {
