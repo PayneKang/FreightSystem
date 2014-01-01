@@ -91,4 +91,14 @@ namespace FreightSystem.Models
         public string YearMonth { get; set; }
         public List<TransportRecordModel> ItemList { get; set; }
     }
+
+    public class ClientModel
+    {
+        public int ID { get; set; }
+        public string ClientName { get; set; }
+        public string ShortName { get; set; }
+        public int IndexMonth { get; set; }
+        public int Index { get; set; }
+        public DateTime CreateTime { get; set; }
+    }
 }
