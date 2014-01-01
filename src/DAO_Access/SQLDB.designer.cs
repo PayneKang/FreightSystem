@@ -54,6 +54,9 @@ namespace DAO_Access
     partial void InsertFuncItem(FuncItem instance);
     partial void UpdateFuncItem(FuncItem instance);
     partial void DeleteFuncItem(FuncItem instance);
+    partial void InsertClient(Client instance);
+    partial void UpdateClient(Client instance);
+    partial void DeleteClient(Client instance);
     #endregion
 		
 		public SQLDBDataContext() : 
@@ -147,6 +150,14 @@ namespace DAO_Access
 			get
 			{
 				return this.GetTable<FuncItem>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Client> Client
+		{
+			get
+			{
+				return this.GetTable<Client>();
 			}
 		}
 	}
@@ -2164,6 +2175,188 @@ namespace DAO_Access
 					this._FuncText = value;
 					this.SendPropertyChanged("FuncText");
 					this.OnFuncTextChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
+	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _ClientName;
+		
+		private string _ShortName;
+		
+		private int _IndexMonth;
+		
+		private int _Index;
+		
+		private System.DateTime _CreateTime;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnClientNameChanging(string value);
+    partial void OnClientNameChanged();
+    partial void OnShortNameChanging(string value);
+    partial void OnShortNameChanged();
+    partial void OnIndexMonthChanging(int value);
+    partial void OnIndexMonthChanged();
+    partial void OnIndexChanging(int value);
+    partial void OnIndexChanged();
+    partial void OnCreateTimeChanging(System.DateTime value);
+    partial void OnCreateTimeChanged();
+    #endregion
+		
+		public Client()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string ClientName
+		{
+			get
+			{
+				return this._ClientName;
+			}
+			set
+			{
+				if ((this._ClientName != value))
+				{
+					this.OnClientNameChanging(value);
+					this.SendPropertyChanging();
+					this._ClientName = value;
+					this.SendPropertyChanged("ClientName");
+					this.OnClientNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(2) NOT NULL", CanBeNull=false)]
+		public string ShortName
+		{
+			get
+			{
+				return this._ShortName;
+			}
+			set
+			{
+				if ((this._ShortName != value))
+				{
+					this.OnShortNameChanging(value);
+					this.SendPropertyChanging();
+					this._ShortName = value;
+					this.SendPropertyChanged("ShortName");
+					this.OnShortNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndexMonth", DbType="Int NOT NULL")]
+		public int IndexMonth
+		{
+			get
+			{
+				return this._IndexMonth;
+			}
+			set
+			{
+				if ((this._IndexMonth != value))
+				{
+					this.OnIndexMonthChanging(value);
+					this.SendPropertyChanging();
+					this._IndexMonth = value;
+					this.SendPropertyChanged("IndexMonth");
+					this.OnIndexMonthChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Index]", Storage="_Index", DbType="Int NOT NULL")]
+		public int Index
+		{
+			get
+			{
+				return this._Index;
+			}
+			set
+			{
+				if ((this._Index != value))
+				{
+					this.OnIndexChanging(value);
+					this.SendPropertyChanging();
+					this._Index = value;
+					this.SendPropertyChanged("Index");
+					this.OnIndexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime CreateTime
+		{
+			get
+			{
+				return this._CreateTime;
+			}
+			set
+			{
+				if ((this._CreateTime != value))
+				{
+					this.OnCreateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._CreateTime = value;
+					this.SendPropertyChanged("CreateTime");
+					this.OnCreateTimeChanged();
 				}
 			}
 		}
