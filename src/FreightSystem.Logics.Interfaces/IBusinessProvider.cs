@@ -22,5 +22,6 @@ namespace FreightSystem.Logics.Interfaces
         void UpdateTransportErrorStatus(int id, bool error,string userID);
         void UpdateTransportReceivedStatus(int id, bool received,DateTime? receivedDate, string userID);
         void InsertClient(ClientModel client);
+        List<ClientModel> QueryClient();
     }
 }

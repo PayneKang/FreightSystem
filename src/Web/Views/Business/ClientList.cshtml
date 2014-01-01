@@ -1,5 +1,69 @@
-﻿@{
+﻿@using FreightSystem.Models;
+@{
     ViewBag.Title = "ClientList";
 }
-
-<h2>ClientList</h2>
+@model List<ClientModel>
+@{
+    ViewBag.Title = "客户列表";
+}
+<br />
+<div style="width: 800px;">
+    <div class="row">
+        <br />
+        <div class="large-10 columns large-offset-1">
+            <div style="overflow: auto; width:100%;">
+                <table class="listTable" style="width: 100%;">
+                    <tr>
+                        <th>
+                            客户名称
+                        </th>
+                        <th>
+                            客户简写
+                        </th>
+                        <th>
+                            编号月份
+                        </th>
+                        <th>
+                            当前编号
+                        </th>
+                        <th>
+                            创建时间
+                        </th>
+                    </tr>
+                    @foreach (ClientModel client in Model)
+                    {
+                        <tr>
+                            <td>@client.ClientName
+                            </td>
+                            <td>@client.ShortName
+                            </td>
+                            <td>@(client.IndexMonth + 1)
+                            </td>
+                            <td>@client.IndexMonth
+                            </td>
+                            <td>@client.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            <div class="large-10 columns large-offset-1" style="color:Red;">@ViewBag.ErrorMessage</div>
+            <div class="large-10 columns large-offset-1">
+                <label>
+                    客户名称</label>
+                <input type="text" name="clientname" style="width: 80%" />
+            </div>
+            <div class="large-10 columns large-offset-1">
+                <label>
+                    客户简写</label>
+                <input type="text" name="shortname" style="width: 60px;" />
+            </div>
+            <div class="large-11 columns">
+                <input type="submit" class="button tiny" value="创建" />
+            </div>
+            <br />
+        }
+    </div>

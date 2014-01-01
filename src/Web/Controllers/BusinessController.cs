@@ -284,7 +284,45 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult ClientList()
         {
-            return View();
+            List<ClientModel> clients = businessProvider.QueryClient();
+            return View(clients);
+        }
+        [LoggedIn(CheckAccess: true, AccessCode: "CLTMGR")]
+        [HttpPost]
+        public ActionResult ClientList(string clientname,string shortname)
+        {
+            string clientName = Request["clientname"];
+            string shortName = Request["shortname"];
+            bool foundErr = false;
+            if(string.IsNullOrEmpty(clientName)){
+                ViewBag.ErrorMessage += "客户名为空\r\n";
+                foundErr = true;
+            }
+            if (string.IsNullOrEmpty(shortName))
+            {
+                ViewBag.ErrorMessage += "客户简写为空\r\n";
+                foundErr = true;
+            }
+            try
+            {
+                if (!foundErr)
+                {
+                    ClientModel newclient = new ClientModel()
+                    {
+                        ClientName = clientName,
+                        ShortName = shortName
+                    };
+                    businessProvider.InsertClient(newclient);
+                    return RedirectToAction("ClientList", "Business");
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage += ex.Message;
+            }
+            
+            List<ClientModel> clients = businessProvider.QueryClient();
+            return View(clients);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)

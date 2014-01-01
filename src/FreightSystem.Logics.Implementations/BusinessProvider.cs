@@ -468,5 +468,23 @@ namespace FreightSystem.Logics.Implementations
                 context.SubmitChanges();
             }
         }
+
+
+        public List<ClientModel> QueryClient()
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                return (from x in context.Client
+                        select new ClientModel()
+                        {
+                            ClientName = x.ClientName,
+                            CreateTime = x.CreateTime,
+                            IndexMonth = x.IndexMonth,
+                            ID = x.ID,
+                            Index = x.Index,
+                            ShortName = x.ShortName
+                        }).ToList();
+            }
+        }
     }
 }
