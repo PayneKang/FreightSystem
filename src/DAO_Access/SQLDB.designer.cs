@@ -57,6 +57,9 @@ namespace DAO_Access
     partial void InsertClient(Client instance);
     partial void UpdateClient(Client instance);
     partial void DeleteClient(Client instance);
+    partial void InsertTransportRecordDetail(TransportRecordDetail instance);
+    partial void UpdateTransportRecordDetail(TransportRecordDetail instance);
+    partial void DeleteTransportRecordDetail(TransportRecordDetail instance);
     #endregion
 		
 		public SQLDBDataContext() : 
@@ -158,6 +161,14 @@ namespace DAO_Access
 			get
 			{
 				return this.GetTable<Client>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TransportRecordDetail> TransportRecordDetail
+		{
+			get
+			{
+				return this.GetTable<TransportRecordDetail>();
 			}
 		}
 	}
@@ -1440,6 +1451,8 @@ namespace DAO_Access
 		
 		private EntitySet<TransportRecordsOptionHistory> _TransportRecordsOptionHistory;
 		
+		private EntitySet<TransportRecordDetail> _TransportRecordDetail;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1505,6 +1518,7 @@ namespace DAO_Access
 		public TransportRecords()
 		{
 			this._TransportRecordsOptionHistory = new EntitySet<TransportRecordsOptionHistory>(new Action<TransportRecordsOptionHistory>(this.attach_TransportRecordsOptionHistory), new Action<TransportRecordsOptionHistory>(this.detach_TransportRecordsOptionHistory));
+			this._TransportRecordDetail = new EntitySet<TransportRecordDetail>(new Action<TransportRecordDetail>(this.attach_TransportRecordDetail), new Action<TransportRecordDetail>(this.detach_TransportRecordDetail));
 			OnCreated();
 		}
 		
@@ -2081,6 +2095,19 @@ namespace DAO_Access
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TransportRecords_TransportRecordDetail", Storage="_TransportRecordDetail", ThisKey="ID", OtherKey="TransportRecordID")]
+		public EntitySet<TransportRecordDetail> TransportRecordDetail
+		{
+			get
+			{
+				return this._TransportRecordDetail;
+			}
+			set
+			{
+				this._TransportRecordDetail.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2108,6 +2135,18 @@ namespace DAO_Access
 		}
 		
 		private void detach_TransportRecordsOptionHistory(TransportRecordsOptionHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.TransportRecords = null;
+		}
+		
+		private void attach_TransportRecordDetail(TransportRecordDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.TransportRecords = this;
+		}
+		
+		private void detach_TransportRecordDetail(TransportRecordDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.TransportRecords = null;
@@ -2357,6 +2396,205 @@ namespace DAO_Access
 					this._CreateTime = value;
 					this.SendPropertyChanged("CreateTime");
 					this.OnCreateTimeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TransportRecordDetail")]
+	public partial class TransportRecordDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _ID;
+		
+		private string _PackageName;
+		
+		private int _Quantity;
+		
+		private System.Nullable<double> _Volume;
+		
+		private int _TransportRecordID;
+		
+		private EntityRef<TransportRecords> _TransportRecords;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(long value);
+    partial void OnIDChanged();
+    partial void OnPackageNameChanging(string value);
+    partial void OnPackageNameChanged();
+    partial void OnQuantityChanging(int value);
+    partial void OnQuantityChanged();
+    partial void OnVolumeChanging(System.Nullable<double> value);
+    partial void OnVolumeChanged();
+    partial void OnTransportRecordIDChanging(int value);
+    partial void OnTransportRecordIDChanged();
+    #endregion
+		
+		public TransportRecordDetail()
+		{
+			this._TransportRecords = default(EntityRef<TransportRecords>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string PackageName
+		{
+			get
+			{
+				return this._PackageName;
+			}
+			set
+			{
+				if ((this._PackageName != value))
+				{
+					this.OnPackageNameChanging(value);
+					this.SendPropertyChanging();
+					this._PackageName = value;
+					this.SendPropertyChanged("PackageName");
+					this.OnPackageNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
+		public int Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Volume", DbType="Float")]
+		public System.Nullable<double> Volume
+		{
+			get
+			{
+				return this._Volume;
+			}
+			set
+			{
+				if ((this._Volume != value))
+				{
+					this.OnVolumeChanging(value);
+					this.SendPropertyChanging();
+					this._Volume = value;
+					this.SendPropertyChanged("Volume");
+					this.OnVolumeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportRecordID", DbType="Int NOT NULL")]
+		public int TransportRecordID
+		{
+			get
+			{
+				return this._TransportRecordID;
+			}
+			set
+			{
+				if ((this._TransportRecordID != value))
+				{
+					if (this._TransportRecords.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTransportRecordIDChanging(value);
+					this.SendPropertyChanging();
+					this._TransportRecordID = value;
+					this.SendPropertyChanged("TransportRecordID");
+					this.OnTransportRecordIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TransportRecords_TransportRecordDetail", Storage="_TransportRecords", ThisKey="TransportRecordID", OtherKey="ID", IsForeignKey=true)]
+		public TransportRecords TransportRecords
+		{
+			get
+			{
+				return this._TransportRecords.Entity;
+			}
+			set
+			{
+				TransportRecords previousValue = this._TransportRecords.Entity;
+				if (((previousValue != value) 
+							|| (this._TransportRecords.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TransportRecords.Entity = null;
+						previousValue.TransportRecordDetail.Remove(this);
+					}
+					this._TransportRecords.Entity = value;
+					if ((value != null))
+					{
+						value.TransportRecordDetail.Add(this);
+						this._TransportRecordID = value.ID;
+					}
+					else
+					{
+						this._TransportRecordID = default(int);
+					}
+					this.SendPropertyChanged("TransportRecords");
 				}
 			}
 		}

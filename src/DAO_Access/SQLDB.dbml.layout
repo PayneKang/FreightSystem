@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 13.875" name="SQLDB">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 13.25, 14.25" name="SQLDB">
   <DataContextMoniker Name="/SQLDBDataContext" />
   <nestedChildShapes>
     <classShape Id="2a94e02b-0195-4a69-9057-e09f2b7c34d4" absoluteBounds="6.875, 5.125, 2, 1.7625655110677081">
@@ -98,5 +98,18 @@
         <elementListCompartment Id="3c8573f4-455a-4434-82ec-d8642996dc7d" absoluteBounds="4.265, 12.085, 1.9700000000000002, 1.393585205078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="d056f664-98a6-4044-8a69-320d8fec24f7" absoluteBounds="11, 12.25, 2, 1.7625655110677081">
+      <DataClassMoniker Name="/SQLDBDataContext/TransportRecordDetail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="664209f5-8159-424d-aa0f-6d832f8b6f9c" absoluteBounds="11.015, 12.71, 1.9700000000000002, 1.2025655110677083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.25 : 12.9530092366536); (11 : 12.9530092366536)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SQLDBDataContext/TransportRecords/TransportRecords_TransportRecordDetail" />
+      <nodes>
+        <classShapeMoniker Id="4a98c356-390e-426c-9e83-6366df67fc38" />
+        <classShapeMoniker Id="d056f664-98a6-4044-8a69-320d8fec24f7" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
