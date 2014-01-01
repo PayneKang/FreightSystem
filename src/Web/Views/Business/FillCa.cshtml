@@ -7,8 +7,11 @@
 <script language="javascript" type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
 @using (Html.BeginForm())
 {
+    @Html.HiddenFor(m => m.Error)
+    @Html.HiddenFor(m => m.Received)
     <fieldset class="large-5">
         <legend>补充货物信息</legend>
+        <div style="color:Red;">@ViewBag.ErrorMessage</div>
         <table style="border: 0px">
             <tr>
                 <th class="large-3">
@@ -142,19 +145,19 @@
                 <tr>
                     <th>扣款</th>
                     <td>
-                        @Html.TextBoxFor(x => x.Deductions, new { @style = "margin-bottom:-0.5rem" })
+                        @Html.TextBoxFor(x => x.Deductions, new { @style = "margin-bottom:-0.5rem", @onchange = "CalculateShouldPayPrice();" })
                         <small class="error">@Html.ValidationMessageFor(x => x.Deductions)</small>
                     </td>
                     <th>赔款</th>
                     <td>
-                        @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:-0.5rem" })
+                        @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:-0.5rem", @onchange = "CalculateShouldPayPrice();" })
                         <small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
                     </td>
                 </tr>
                 <tr>
                     <th>应付金额</th>
                     <td>
-                        <div id="shouldPay"></div>
+                        @Html.TextBoxFor(x => x.AccountPayble, new { @style = "margin-bottom:-0.5rem" })
                     </td>
                     <th>
                         付款日期
@@ -169,7 +172,7 @@
                         已结算
                     </th>
                     <td>
-                        @Html.CheckBoxFor(m=>m.Paid)
+                        @Html.CheckBoxFor(m => m.Paid)
                     </td>
                 </tr>
                 <tr>
@@ -181,7 +184,14 @@
                     var CalculateShouldPayPrice = function () {
                         var shouldpayvalue = 0;
                         //calculate should pay
-                        $("#shouldPay").html(shouldpayvalue);
+                        var price = $("#DeliverPrice").val();
+                        var prepay = $("#PrePay").val();
+                        var oilcard = $("#OilCard").val();
+                        var deductions = $("#Deductions").val();
+                        var reparations = $("#Reparations").val();
+
+                        shouldpayvalue = price - prepay - oilcard - deductions - reparations;
+                        $("#AccountPayble").val(shouldpayvalue);
                     }
                     $(document).ready(function () {
                         CalculateShouldPayPrice();
@@ -213,15 +223,10 @@
                         付款日期
                     </th>
                     <td>
-                        @if(Model.PayDate.HasValue){
-                            <div>Model.PayDate.Value.ToString("yyyy-MM-dd")</div>
+                        @if (Model.PayDate.HasValue)
+                        {
+                            <div>@Model.PayDate.Value.ToString("yyyy-MM-dd")</div>
                         }
-                    </td>
-                    <th>
-                        应付金额
-                    </th>
-                    <td>
-                        @Model.AccountPayble
                     </td>
                 </tr>
                 <tr>

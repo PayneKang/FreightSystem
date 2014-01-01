@@ -237,6 +237,12 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult FillCa(TransportRecordModel model)
         {
+            if (model.Paid && (model.Error || !model.Received))
+            {
+                ViewBag.ErrorMessage = "错误：必须已到货并且无错误的单据才能进行结算操作";
+                model.Paid = false;
+                return View(model);
+            }
             businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate, model.AccountPayble, model.Deductions, model.Reparations, model.Paid, this.cacheProvider.GetCurrentLoggedUser().UserID);
             return View(model);
         }

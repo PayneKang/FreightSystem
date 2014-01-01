@@ -378,7 +378,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayable, double? deductions, double? reparations, bool paid, string userID)
+        public void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayble, double? deductions, double? reparations, bool paid, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -388,14 +388,14 @@ namespace FreightSystem.Logics.Implementations
                     throw new ApplicationException("要修改的记录不存在");
                 }
                 record.PayDate = paymentDate;
-                record.AccountPayble = accountPayable;
+                record.AccountPayble = accountPayble;
                 record.Deductions = deductions;
                 record.Reparations = reparations;
                 record.Paid = paid;
                 record.TransportRecordsOptionHistory.Add(
                     new TransportRecordsOptionHistory()
                     {
-                        Description = string.Format("财务补充单据内容，新内容 付款日:{0} 应付金额： {1} ", paymentDate, accountPayable),
+                        Description = string.Format("财务补充单据内容，新内容 赔款：{0} 扣款:{1} 付款日:{2} 应付金额： {3} ",reparations,deductions, paymentDate,accountPayble),
                         LogDateTime = DateTime.Now,
                         Operation = "更新",
                         UserID = userID
