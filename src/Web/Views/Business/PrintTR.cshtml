@@ -1,19 +1,20 @@
 ﻿@model FreightSystem.Models.TransportRecordModel
 @{ Layout = null; }
-<div style="position:absolute; top:-10px; left:-50px; width:100%;">
-<div style="position:absolute; top:80px; left:80px;">@Model.TrayNo</div>
-<div style="position:absolute; top:80px; left:540px;">@Model.DeliverDate.Year</div>
-<div style="position:absolute; top:80px; left:600px;">@(Model.DeliverDate.Month + 1)</div>
-<div style="position:absolute; top:80px; left:640px;">@Model.DeliverDate.Day</div>
+<div style="position:absolute; top:10px; left:30px; width:100%;">
+<div style="position:absolute; top:42px; left:5px;">@Model.TrayNo</div>
+<div style="position:absolute; top:42px; left:366px;">@Model.DeliverDate.Year</div>
+<div style="position:absolute; top:42px; left:426px;">@(Model.DeliverDate.Month + 1)</div>
+<div style="position:absolute; top:42px; left:476px;">@Model.DeliverDate.Day</div>
 
-<div style="position:absolute; top:140px; left:80px;">@Model.ClientName</div>
-<div style="position:absolute; top:210px; left:80px;">@Model.PackageName</div>
-<div style="position:absolute; top:210px; left:380px;">@Model.Quantity</div>
-<div style="position:absolute; top:210px; left:520px;">@Model.FromLocation</div>
-<div style="position:absolute; top:210px; left:660px;">@Model.ToLocation</div>
+<div style="position:absolute; top:100px; left:0px;">@Model.ClientName</div>
+<div style="position:absolute; top:162px; left:0px;">@Model.PackageName</div>
+<div style="position:absolute; top:162px; left:220px;">@Model.Volume</div>
+<div style="position:absolute; top:162px; left:255px;">@Model.Quantity</div>
+<div style="position:absolute; top:162px; left:320px;">@Model.FromLocation</div>
+<div style="position:absolute; top:162px; left:520px;">@Model.ToLocation</div>
 
-<div style="position:absolute; top:430px; left:80px;">@Model.Driver</div>
-<div style="position:absolute; top:430px; left:200px;">@Model.CarLicense</div>
+<div style="position:absolute; top:340px; left:0px;">@Model.Driver</div>
+<div style="position:absolute; top:340px; left:80px;">@Model.CarLicense</div>
 
-<div style="position:absolute; top:400px; left:680px; width:200px; height:200px; overflow:hidden;">@Model.Comment 123</div>
+<div style="position:absolute; top:340px; left:500px; width:200px; height:200px; overflow:hidden;">@Model.Comment 123</div>
 </div>
