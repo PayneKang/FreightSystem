@@ -1978,11 +1978,11 @@ button, .button {
     font-size: 0.8125rem;
     /*     @else                            { font-size: $padding - rem-calc(2); } */ }
   button.tiny, .button.tiny {
-    padding-top: 0.625rem;
-    padding-right: 1.25rem;
-    padding-bottom: 0.6875rem;
-    padding-left: 1.25rem;
-    font-size: 0.8125rem;
+    padding-top: 0.6rem;
+    padding-right: 1rem;
+    padding-bottom: 0.6rem;
+    padding-left: 1rem;
+    font-size: 0.84rem;
     /*     @else                            { font-size: $padding - rem-calc(2); } */ }
   button.expand, .button.expand {
     padding-right: 0;
