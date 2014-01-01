@@ -144,6 +144,7 @@ namespace Web.Controllers
         [LoggedIn(CheckAccess: true, AccessCode: "LOCALRDLIST")]
         public ActionResult LocalTransportRecordList(TransportRecordListModel model, int page = 1)
         {
+            ViewBag.Clients = CreateClientListForQuery();
             model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate,model.Received,model.Paid,model.Error, page, ((UserModel)ViewBag.LoggedUser).Area);
             return View(model);
         }
@@ -151,6 +152,7 @@ namespace Web.Controllers
         [LoggedIn(CheckAccess: true, AccessCode: "TOTALRDLIST")]
         public ActionResult Index(TransportRecordListModel model, int page = 1)
         {
+            ViewBag.Clients = CreateClientListForQuery(); 
             model = businessProvider.QueryTransportModel(model.ClientName, model.DeliverDate, model.Received, model.Paid, model.Error, page);
             return View(model);
         }
@@ -159,6 +161,12 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult NewTransportRecord()
         {
+            ViewBag.Clients = (from x in businessProvider.QueryClient()
+                              select new SelectListItem()
+                              {
+                                  Text = x.ClientName,
+                                  Value = x.ClientName
+                              }).ToList();
             return View();
         }
 
@@ -359,6 +367,23 @@ namespace Web.Controllers
             {
                 return RedirectToAction("Index", "Business");
             }
+        }
+        private List<SelectListItem> CreateClientListForQuery()
+        {
+            List<SelectListItem> clients = new List<SelectListItem>() { 
+                new SelectListItem(){
+                     Selected = true,
+                      Text = "所有",
+                       Value = ""
+                }
+            };
+            clients.AddRange((from x in businessProvider.QueryClient()
+                              select new SelectListItem()
+                              {
+                                  Text = x.ClientName,
+                                  Value = x.ClientName
+                              }).ToList());
+            return clients;
         }
     }
 }
