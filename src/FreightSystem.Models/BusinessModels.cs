@@ -67,6 +67,7 @@ namespace FreightSystem.Models
             return 0f;
         } }
         public List<TransportRecordsHistoryModel> HistoryItem { get; set; }
+        public List<TransportRecordDetailModel> DetailItem { get; set; }
     }
 
     public class TransportRecordsHistoryModel
@@ -100,5 +101,13 @@ namespace FreightSystem.Models
         public int IndexMonth { get; set; }
         public int Index { get; set; }
         public DateTime CreateTime { get; set; }
+    }
+    public class TransportRecordDetailModel
+    {
+        public long ID { get; set; }
+        public string PackageName { get; set; }
+        public int Quantity { get; set; }
+        public double? Volume { get; set; }
+        public int TransportRecordID { get; set; }
     }
 }
