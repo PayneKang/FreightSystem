@@ -446,5 +446,27 @@ namespace FreightSystem.Logics.Implementations
                 context.SubmitChanges();
             }
         }
+
+
+        public void InsertClient(ClientModel client)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                if (context.Client.Count(x => x.ClientName == client.ClientName) > 0)
+                {
+                    throw new ApplicationException("同名客户已经存在");
+                }
+                Client newclient = new Client()
+                {
+                    ClientName = client.ClientName,
+                    CreateTime = DateTime.Now,
+                    Index = 1,
+                    IndexMonth = DateTime.Now.Month,
+                    ShortName = client.ShortName
+                };
+                context.Client.InsertOnSubmit(newclient);
+                context.SubmitChanges();
+            }
+        }
     }
 }
