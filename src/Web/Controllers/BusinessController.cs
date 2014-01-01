@@ -215,7 +215,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult FillTransportRecord(TransportRecordModel model)
         {
-            businessProvider.UpdateTransportModel(model.ID, model.TrayNo, model.Volume, model.Quantity, this.cacheProvider.GetCurrentLoggedUser().UserID);
+            businessProvider.UpdateTransportModel(model.ID, model.TrayNo, model.Volume, model.Quantity,model.DeliverPrice, model.ShortBargeFee, this.cacheProvider.GetCurrentLoggedUser().UserID);
             return View(model);
         }
 

@@ -58,16 +58,6 @@
             <small class="error">@Html.ValidationMessageFor(m => m.ToLocation)</small>
         </div>
         <div class="large-5 large-offset-0-1 columns">
-            <label>运费</label>
-            @Html.TextBoxFor(m => m.DeliverPrice, new { @type = "text", @style = "margin-bottom:0px" })
-            <small class="error">@Html.ValidationMessageFor(m => m.DeliverPrice)</small>
-        </div>
-        <div class="large-5 large-offset-0-1 columns">
-            <label>短驳费</label>
-            @Html.TextBoxFor(m => m.ShortBargeFee, new { @type = "text", @style = "margin-bottom:0px" })
-            <small class="error">@Html.ValidationMessageFor(m => m.ShortBargeFee)</small>
-        </div>
-        <div class="large-5 large-offset-0-1 columns">
             <label>预付</label>
             @Html.TextBoxFor(m => m.PrePay, new { @type = "text", @style = "margin-bottom:0px" })
             <small class="error">@Html.ValidationMessageFor(m => m.PrePay)</small>

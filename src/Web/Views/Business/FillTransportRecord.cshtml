@@ -68,21 +68,12 @@
             </tr>
             <tr>
                 <th>
-                    运费
-                </th>
-                <td>
-                    @Model.DeliverPrice
-                    @Html.HiddenFor(m => m.DeliverPrice)
-                </td>
-                <th>
                     预付
                 </th>
                 <td>
                     @Model.PrePay
                     @Html.HiddenFor(m => m.PrePay)
                 </td>
-            </tr>
-            <tr>
                 <th>
                     油卡
                 </th>
@@ -90,12 +81,21 @@
                     @Model.OilCard
                     @Html.HiddenFor(m => m.OilCard)
                 </td>
+            </tr>
+            <tr>
                 <th>
-                    专线
+                    专线/司机电话
                 </th>
                 <td>
                     @Model.DeliverType
                     @Html.HiddenFor(m => m.DeliverType)
+                </td>
+                <th>
+                    所在业务区域
+                </th>
+                <td>
+                    @Html.LabelFor(x => x.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName)
+                    @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
                 </td>
             </tr>
             <tr>
@@ -109,84 +109,54 @@
             </tr>
             <tr>
                 <th>
-                    所在业务区域
+                    托编号
                 </th>
-                <td colspan="3">
-                    @Html.LabelFor(x => x.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName)
-                    @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
+                <td>
+                    @Html.TextBoxFor(x => x.TrayNo, new { @style = "margin-bottom:-0.5rem" })
+                    @Html.ValidationMessageFor(x => x.TrayNo)
                 </td>
             </tr>
-            @if (string.IsNullOrEmpty(Model.TrayNo))
-            {
-                <tr>
-                    <th>
-                        托编号
-                    </th>
-                    <td>
-                        @Html.TextBoxFor(x => x.TrayNo, new { @style = "margin-bottom:-0.5rem" })
-                        @Html.ValidationMessageFor(x => x.TrayNo)
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        体积
-                    </th>
-                    <td>
-                        @Html.TextBoxFor(x => x.Volume, new { @style = "margin-bottom:-0.5rem" })
-                        @Html.ValidationMessageFor(x => x.Volume)
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        数量
-                    </th>
-                    <td>
-                        @Html.TextBoxFor(x => x.Quantity)
-                        @Html.ValidationMessageFor(x => x.Quantity)
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        <input type="submit" class="button tiny" value="保存" />
-                    </th>
-                </tr>
-            }
-            else
-            {
-                <tr>
-                    <th>
-                        托编号
-                    </th>
-                    <td>
-                        @Model.TrayNo
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        体积
-                    </th>
-                    <td>
-                        @Model.Volume
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        数量
-                    </th>
-                    <td>
-                        @Model.Quantity
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                    </th>
-                    <td>
-                    </td>
-                    <td colspan="2">
-                        信息已经完成填充
-                    </td>
-                </tr>
-            }
+            <tr>
+                <th>
+                    体积
+                </th>
+                <td>
+                    @Html.TextBoxFor(x => x.Volume, new { @style = "margin-bottom:-0.5rem" })
+                    @Html.ValidationMessageFor(x => x.Volume)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    数量
+                </th>
+                <td>
+                    @Html.TextBoxFor(x => x.Quantity)
+                    @Html.ValidationMessageFor(x => x.Quantity)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    运费
+                </th>
+                <td>
+                    @Html.TextBoxFor(x => x.DeliverPrice)
+                    @Html.ValidationMessageFor(x => x.DeliverPrice)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    短驳费
+                </th>
+                <td>
+                    @Html.TextBoxFor(x => x.ShortBargeFee)
+                    @Html.ValidationMessageFor(x => x.ShortBargeFee)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <input type="submit" class="button tiny" value="保存" />
+                </th>
+            </tr>
         </table>
     </fieldset>
 }
