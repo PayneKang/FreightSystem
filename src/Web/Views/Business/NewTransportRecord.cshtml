@@ -27,7 +27,9 @@
         </div>
         <div class="large-5 large-offset-0-1 columns">
             <label>客户</label>
-            @Html.TextBoxFor(m => m.ClientName, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+            @Html.DropDownListFor(m => m.ClientName,
+                                  (List<SelectListItem>)ViewBag.Clients
+                                  , new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
              <small class="error">@Html.ValidationMessageFor(m => m.ClientName)</small>
         </div>
         <div class="large-5 large-offset-0-1 columns">

@@ -22,7 +22,7 @@
                     客户</label>
             </div>
             <div class="small-1-5 columns">
-                @Html.TextBoxFor(x => x.ClientName, new { @type = "text" })
+                @Html.DropDownListFor(m => m.ClientName, (List<SelectListItem>)ViewBag.Clients)
             </div>
             <div class="small-1 columns">
                 @Html.DropDownListFor(m => m.Received,
