@@ -2,34 +2,31 @@
 @{
     ViewBag.Title = "编辑客户信息";
 }
-
 <br />
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(m=>m.ID)
+    @Html.HiddenFor(m => m.ID)
     <fieldset class="large-5">
-        <legend>编辑信息</legend>
-        <div>@ViewBag.Message</div>
-        <table style="border: 0px">
-            <tr>
-                <th class="large-3">
-                    客户名称
-                </th>
-                <td class="large-3">
-                    @Html.TextBoxFor(m=>m.ClientName)
-                </td>
-                <th class="large-3">
-                    客户简写
-                </th>
-                <td class="large-3">
-                    @Html.TextBoxFor(m=>m.ShortName)
-                </td>
-            </tr>
-            <tr>
-                <th colspan="4">
-                    <input type="submit" class="button tiny" value="保存" />
-                </th>
-            </tr>
-        </table>
+        <legend>@ViewBag.Title</legend>
+        <br />
+        <div class="row">
+            <div class="large-3 large-offset-0-1 columns">
+                <label>
+                    客户名称</label>@Html.TextBoxFor(m => m.ClientName)
+            </div>
+            <div class="large-2 large-offset-0-1 columns">
+                <label>
+                    客户简写</label>
+                @Html.TextBoxFor(m => m.ShortName)
+            </div>
+            <div class="large-5 large-offset-0-1 columns">
+                <label style="visibility: hidden">
+                    button
+                </label>
+                <input type="submit" class="button tiny" value="保存" />
+            </div>
+        </div>
+        <br />
+        <label style="color: Red;">@ViewBag.ErrorMessage</label>
     </fieldset>
 }

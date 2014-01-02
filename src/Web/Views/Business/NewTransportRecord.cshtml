@@ -89,43 +89,7 @@
         </div>
     </div>
     <br />
-    <label>@ViewBag.ErrorMessage</label>
-    @*
-    <table style="width:50%;">
-        <tr>
-            <th>体积（立方米）</th>
-            <td>@Html.TextBoxFor(m => m.Volume) *
-                @Html.ValidationMessageFor(m => m.Volume)</td>
-            <th>件数（件）</th>
-            <td>@Html.TextBoxFor(m => m.Quantity) *
-                @Html.ValidationMessageFor(m => m.Quantity)</td>
-        </tr>
-        <tr>
-            <th>装卸费</th>
-            <td>@Html.TextBoxFor(m => m.HandlingFee)
-                @Html.ValidationMessageFor(m => m.HandlingFee)</td>
-            <th>赔款</th>
-            <td>@Html.TextBoxFor(m => m.Reparations)
-                @Html.ValidationMessageFor(m => m.Reparations)</td>
-        </tr>
-        <tr>
-            <th>扣款</th>
-            <td>@Html.TextBoxFor(m => m.Deductions)
-                @Html.ValidationMessageFor(m => m.Deductions)</td>
-            <th>短驳费</th>
-            <td>@Html.TextBoxFor(m => m.ShortBargeFee)
-                @Html.ValidationMessageFor(m => m.ShortBargeFee)</td>
-        </tr>
-        <tr>
-            <th>付款日</th>
-            <td>@Html.TextBoxFor(m => m.PayDate)
-                @Html.ValidationMessageFor(m => m.PayDate)</td>
-            <th>应付</th>
-            <td>@Html.TextBoxFor(m => m.AccountPayble)
-                @Html.ValidationMessageFor(m => m.AccountPayble)</td>     
-        </tr>
-    </table>
-    *@
+    <label style="color: Red;">@ViewBag.ErrorMessage</label>
 </fieldset>
 }
 </section>
