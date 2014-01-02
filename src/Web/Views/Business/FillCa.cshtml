@@ -11,7 +11,6 @@
     @Html.HiddenFor(m => m.Received)
     <fieldset class="large-5">
         <legend>补充货物信息</legend>
-        <div style="color:Red;">@ViewBag.ErrorMessage</div>
         <table style="border: 0px">
             <tr>
                 <th class="large-3">
@@ -143,19 +142,25 @@
             @if (!Model.Paid)
             {
                 <tr>
-                    <th>扣款</th>
+                    <th>
+                        扣款
+                    </th>
                     <td>
                         @Html.TextBoxFor(x => x.Deductions, new { @style = "margin-bottom:-0.5rem", @onchange = "CalculateShouldPayPrice();" })
                         <small class="error">@Html.ValidationMessageFor(x => x.Deductions)</small>
                     </td>
-                    <th>赔款</th>
+                    <th>
+                        赔款
+                    </th>
                     <td>
                         @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:-0.5rem", @onchange = "CalculateShouldPayPrice();" })
                         <small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
                     </td>
                 </tr>
                 <tr>
-                    <th>应付金额</th>
+                    <th>
+                        应付金额
+                    </th>
                     <td>
                         @Html.TextBoxFor(x => x.AccountPayble, new { @style = "margin-bottom:-0.5rem" })
                     </td>
@@ -197,23 +202,29 @@
                         CalculateShouldPayPrice();
                     });
                     $("#submitBtn").click(function () {
-                     })
+                    })
                 </script>
             }
             else
             {
                 <tr>
-                    <th>扣款</th>
+                    <th>
+                        扣款
+                    </th>
                     <td>
                         @Model.Deductions
                     </td>
-                    <th>赔款</th>
+                    <th>
+                        赔款
+                    </th>
                     <td>
                         @Model.Reparations
                     </td>
                 </tr>
                 <tr>
-                    <th>应付</th>
+                    <th>
+                        应付
+                    </th>
                     <td colspan="3">
                         @Model.ShouldPayPrice
                     </td>
@@ -239,5 +250,7 @@
                 </tr>
             }
         </table>
+        <br />
+        <label style="color: Red;">@ViewBag.ErrorMessage</label>
     </fieldset>
 }
