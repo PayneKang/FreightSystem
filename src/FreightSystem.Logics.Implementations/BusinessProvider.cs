@@ -352,7 +352,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public void UpdateTransportModel(int id, string trayNo, double volume, int quantity, double? deliverprice, double? shortbargefee, string userID)
+        public void UpdateTransportModel(int id, string trayNo, double volume, int quantity, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -364,12 +364,10 @@ namespace FreightSystem.Logics.Implementations
                 record.TrayNo = trayNo;
                 record.Volume = volume;
                 record.Quantity = quantity;
-                record.DeliverPrice = deliverprice;
-                record.ShortBargeFee = shortbargefee;
                 record.TransportRecordsOptionHistory.Add(
                     new TransportRecordsOptionHistory()
                     {
-                        Description = string.Format("更新单据内容，新内容 托编号:{0} 体积： {1} 数量：{2} 运费：{3} 短驳费：{4}", trayNo, volume, quantity,deliverprice, shortbargefee),
+                        Description = string.Format("更新单据内容，新内容 托编号:{0} 体积： {1} 数量：{2} ", trayNo, volume, quantity),
                         LogDateTime = DateTime.Now,
                         Operation = "更新",
                         UserID = userID
