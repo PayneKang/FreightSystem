@@ -388,6 +388,63 @@ namespace Web.Controllers
             }
             return View(client);
         }
+        [LoggedIn(CheckAccess:false,AccessCode:"")]
+        [HttpGet]
+        public ActionResult TransportDetails(int id)
+        {
+            TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
+            return View(model);
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [HttpGet]
+        public ActionResult DetailsMgr(int id)
+        {
+            TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
+            return View(model);
+        }
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [HttpPost]
+        public ActionResult DetailsMgr(TransportRecordModel model)
+        {
+            string detailNo = Request["detailNo"];
+            string packageName = Request["packagename"];
+            int quantity = 0;
+            double volume = 0f;
+
+            if (string.IsNullOrEmpty(detailNo))
+            {
+                ViewBag.ErrorMessage = "单据编号为空";
+                return View(model);
+            }
+            if (string.IsNullOrEmpty(packageName))
+            {
+                ViewBag.ErrorMessage = "货物名称为空";
+                return View(model);
+            }
+            if (!int.TryParse(Request["quantity"], out quantity))
+            {
+                ViewBag.ErrorMessage = "数量没有正确填写，必须填写整数数字";
+                return View(model);
+            }
+            if (!double.TryParse(Request["volume"], out volume))
+            {
+                ViewBag.ErrorMessage = "体积没有正确填写，必须填写数字";
+                return View(model);
+            }
+            TransportRecordDetailModel newDetail = new TransportRecordDetailModel()
+            {
+                DetailNo = detailNo,
+                PackageName = packageName,
+                Quantity = quantity,
+                TransportRecordID = model.ID,
+                Volume = volume
+            };
+            UserModel user = this.cacheProvider.GetCurrentLoggedUser();
+            businessProvider.InsertNewTransportDetail(newDetail,user.UserID);
+            return RedirectToAction("DetailsMgr");
+        }
+        
 
         private ActionResult RedirectToLocal(string returnUrl)
         {

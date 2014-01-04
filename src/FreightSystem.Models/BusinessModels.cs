@@ -108,6 +108,7 @@ namespace FreightSystem.Models
     public class TransportRecordDetailModel
     {
         public long ID { get; set; }
+        public string DetailNo { get; set; }
         public string PackageName { get; set; }
         public int Quantity { get; set; }
         public double? Volume { get; set; }

@@ -1,0 +1,10 @@
+﻿@using FreightSystem.Models;
+@model FreightSystem.Models.TransportRecordModel
+@{
+    ViewBag.Title = "Transport details";
+}
+@Html.Partial("_TransportRecordPartial", Model)
+<br />
+@Html.Partial("_TransportRecordDetailsPartial", Model)
+<br />
+@Html.Partial("_TransportRecordHistoryPartial", Model)

@@ -348,7 +348,50 @@ namespace FreightSystem.Logics.Implementations
                             ErrorMessage = x.ErrorMessage,
                             Paid = x.Paid,
                             Received = x.Received,
-                            ReceivedDate = x.ReceivedDate
+                            ReceivedDate = x.ReceivedDate,
+                            HistoryItem = (from y in x.TransportRecordsOptionHistory
+                                           orderby y.LogDateTime
+                                           select new TransportRecordsHistoryModel()
+                                           {
+                                               Description = y.Description,
+                                               LogDateTime = y.LogDateTime,
+                                               Operation = y.Operation,
+                                               TransportRecordID = y.TransportRecordID,
+                                               UserID = y.UserID,
+                                               User = new UserModel()
+                                               {
+
+                                                   Comment = y.Users.Comment,
+                                                   CreateDateTime = y.Users.CreateDateTime,
+                                                   LastLoginIP = y.Users.LastLoginIP,
+                                                   LastLoginTime = y.Users.LastLoginTime,
+                                                   AreaID = y.Users.AreaID,
+                                                   Area = new BusinessAreaModel()
+                                                   {
+                                                       AreaName = y.Users.BusinessArea.AreaName,
+                                                       ID = y.Users.BusinessArea.ID
+                                                   },
+                                                   Name = y.Users.Name,
+                                                   Password = y.Users.Password,
+                                                   RoleID = y.Users.RoleId,
+                                                   UserID = y.Users.UserID,
+                                                   Role = new RoleModel()
+                                                   {
+                                                       RoleID = y.Users.Roles.RoleID,
+                                                       RoleName = y.Users.Roles.RoleName
+                                                   }
+                                               }
+                                           }).ToList(),
+                            DetailItem = (from y in x.TransportRecordDetail
+                                          select new TransportRecordDetailModel()
+                                          {
+                                              DetailNo = y.DetailNo,
+                                              ID = y.ID,
+                                              PackageName = y.PackageName,
+                                              Quantity = y.Quantity,
+                                              TransportRecordID = y.TransportRecordID,
+                                              Volume = y.Volume
+                                          }).ToList()
                         }).FirstOrDefault();
             }
         }
@@ -546,7 +589,7 @@ namespace FreightSystem.Logics.Implementations
                     {
                         Description = string.Format("修改价格信息， 运费：{0}，短驳费：{1}",deliverPrice,shortBargeFee),
                         LogDateTime = DateTime.Now,
-                        Operation = "修改异常状态",
+                        Operation = "修改价格信息",
                         UserID = userID
                     });
                 context.SubmitChanges();
@@ -571,6 +614,35 @@ namespace FreightSystem.Logics.Implementations
         private int GetTrayNoIndex(string trayNo)
         {
             return int.Parse(trayNo.Substring(trayNo.Length - 4));
+        }
+
+
+        public void InsertNewTransportDetail(TransportRecordDetailModel detail,string userID)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                context.TransportRecordDetail.InsertOnSubmit(
+                    new TransportRecordDetail()
+                    {
+                        DetailNo = detail.DetailNo,
+                        PackageName = detail.PackageName,
+                        Quantity = detail.Quantity,
+                        TransportRecordID = detail.TransportRecordID,
+                        Volume = detail.Volume
+                    }
+                    );
+                context.TransportRecordsOptionHistory.InsertOnSubmit(
+                    new TransportRecordsOptionHistory()
+                    {
+                        Description = string.Format("插入新货物明细， 编号：{0},货物{1},数量：{2}，体积：{3}", detail.DetailNo, detail.PackageName, detail.Quantity, detail.Volume),
+                        LogDateTime = DateTime.Now,
+                        Operation = "新货物明细",
+                        UserID = userID,
+                        TransportRecordID = detail.TransportRecordID
+                    }
+                    );
+                context.SubmitChanges();
+            }
         }
     }
 }

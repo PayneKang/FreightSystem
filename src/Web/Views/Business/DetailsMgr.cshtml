@@ -1,0 +1,33 @@
+﻿@using FreightSystem.Models;
+@model FreightSystem.Models.TransportRecordModel
+@{
+    ViewBag.Title = "FillTransportRecord";
+}
+@Html.Partial("_TransportRecordPartial", Model)
+<br />
+@Html.Partial("_TransportRecordDetailsPartial", Model)
+<fieldset  class="large-5">
+    <legend>插入新的货物明细</legend>
+    @using (Html.BeginForm())
+    {
+        <table style="width:100%;">
+            <tr>
+                <th>单据编号</th>
+                <td><input type="text" name="detailNo" /></td>
+            </tr>
+            <tr>
+                <th>货物名称</th>
+                <td><input type="text" name="packagename" /></td>
+            </tr>
+            <tr>
+                <th>数量</th>
+                <td><input type="text" name="quantity" /></td>
+            </tr>
+            <tr>
+                <th>体积</th>
+                <td><input type="text" name="volume" /></td>
+            </tr>
+            <tr><td colspan="2"><input type="submit" value="插入" /></td></tr>
+        </table>
+    }
+</fieldset>

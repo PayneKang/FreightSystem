@@ -76,16 +76,6 @@
       <Column Name="CreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.TransportRecordDetail" Member="TransportRecordDetail">
-    <Type Name="TransportRecordDetail">
-      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PackageName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Volume" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="TransportRecordID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.TransportRecords" Member="TransportRecords">
     <Type Name="TransportRecords">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -119,6 +109,17 @@
       <Column Name="Paid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordsOptionHistory" />
       <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecordDetail" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransportRecordDetail" Member="TransportRecordDetail">
+    <Type Name="TransportRecordDetail">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DetailNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PackageName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Volume" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TransportRecordID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

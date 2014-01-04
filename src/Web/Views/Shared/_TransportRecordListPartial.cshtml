@@ -158,12 +158,19 @@
                         <a class="button tiny radius"  href="/Business/FillTransportRecord/@record.ID">内勤补充</a>
                     }
                     @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLPRICE"))
-                    { 
-                        if (!record.DeliverPrice.HasValue){
+                    {
+                        if (!record.DeliverPrice.HasValue)
+                        {
                             <a class="button tiny radius"  href="/Business/FillPrice/@record.ID">调度补充</a>
-                        }else{
+                        }
+                        else
+                        {
                             <div class="button tiny radius" style="cursor: inherit; background-color: #999;">调度已填</div>
                         }
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
+                    {
+                        <a class="button tiny radius"  href="/Business/DetailsMgr/@record.ID">管理明细</a>
                     }
                     <a class="button tiny radius"  href="/Business/TransportDetails/@record.ID">查看</a>
                 </td>
@@ -276,8 +283,9 @@
                         <a class="button tiny radius"  href="/Business/FillTransportRecord/@record.ID">内勤补充</a>
                     }
                     @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLPRICE"))
-                    { 
-                        if (!record.DeliverPrice.HasValue){
+                    {
+                        if (!record.DeliverPrice.HasValue)
+                        {
                             <a class="button tiny radius"  href="/Business/FillPrice/@record.ID">调度补充</a>
                         }
                         else
@@ -285,6 +293,10 @@
                             <div class="button tiny radius" style="cursor: inherit; background-color: #999;">调度已填</div>
                         }
 
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
+                    {
+                        <a class="button tiny radius"  href="/Business/DetailsMgr/@record.ID">管理明细</a>
                     }
                     <a class="button tiny radius"  href="/Business/TransportDetails/@record.ID">查看</a>
                 </td>
