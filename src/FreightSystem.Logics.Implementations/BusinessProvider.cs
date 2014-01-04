@@ -345,6 +345,7 @@ namespace FreightSystem.Logics.Implementations
                             OilCard = x.OilCard,
                             BusinessArea = x.BusinessArea,
                             Error = x.Error,
+                            ErrorMessage = x.ErrorMessage,
                             Paid = x.Paid,
                             Received = x.Received,
                             ReceivedDate = x.ReceivedDate
@@ -401,8 +402,8 @@ namespace FreightSystem.Logics.Implementations
                 context.SubmitChanges();
             }
         }
-        
-        public void UpdateTransportErrorStatus(int id, bool error,string userID)
+
+        public void UpdateTransportErrorStatus(int id, bool error, string errorMessage, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -412,10 +413,11 @@ namespace FreightSystem.Logics.Implementations
                     throw new ApplicationException("要修改的记录不存在");
                 }
                 record.Error = error;
+                record.ErrorMessage = errorMessage;
                 record.TransportRecordsOptionHistory.Add(
                     new TransportRecordsOptionHistory()
                     {
-                        Description = string.Format("修改异常状态为{0}", error?"异常":"正常"),
+                        Description = string.Format("修改异常状态为{0}, 异常信息：{1}", error?"异常":"正常",errorMessage),
                         LogDateTime = DateTime.Now,
                         Operation = "修改异常状态",
                         UserID = userID

@@ -60,6 +60,32 @@
       <Association Name="Roles_Users" Member="Users" ThisKey="RoleID" OtherKey="RoleId" Type="Users" />
     </Type>
   </Table>
+  <Table Name="dbo.FuncItem" Member="FuncItem">
+    <Type Name="FuncItem">
+      <Column Name="FuncCode" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FuncText" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Client" Member="Client">
+    <Type Name="Client">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="ShortName" Type="System.String" DbType="NVarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="IndexMonth" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Index]" Member="Index" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransportRecordDetail" Member="TransportRecordDetail">
+    <Type Name="TransportRecordDetail">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PackageName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Volume" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TransportRecordID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.TransportRecords" Member="TransportRecords">
     <Type Name="TransportRecords">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -87,37 +113,12 @@
       <Column Name="TrayNo" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="BusinessArea" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="Error" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ErrorMessage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="Received" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="ReceivedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Paid" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordsOptionHistory" />
       <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecordDetail" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordDetail" />
-    </Type>
-  </Table>
-  <Table Name="dbo.FuncItem" Member="FuncItem">
-    <Type Name="FuncItem">
-      <Column Name="FuncCode" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="FuncText" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Client" Member="Client">
-    <Type Name="Client">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ClientName" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="ShortName" Type="System.String" DbType="NVarChar(2) NOT NULL" CanBeNull="false" />
-      <Column Name="IndexMonth" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="[Index]" Member="Index" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CreateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TransportRecordDetail" Member="TransportRecordDetail">
-    <Type Name="TransportRecordDetail">
-      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="PackageName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Volume" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="TransportRecordID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

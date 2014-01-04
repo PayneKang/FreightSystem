@@ -48,9 +48,6 @@ namespace DAO_Access
     partial void InsertRoles(Roles instance);
     partial void UpdateRoles(Roles instance);
     partial void DeleteRoles(Roles instance);
-    partial void InsertTransportRecords(TransportRecords instance);
-    partial void UpdateTransportRecords(TransportRecords instance);
-    partial void DeleteTransportRecords(TransportRecords instance);
     partial void InsertFuncItem(FuncItem instance);
     partial void UpdateFuncItem(FuncItem instance);
     partial void DeleteFuncItem(FuncItem instance);
@@ -60,6 +57,9 @@ namespace DAO_Access
     partial void InsertTransportRecordDetail(TransportRecordDetail instance);
     partial void UpdateTransportRecordDetail(TransportRecordDetail instance);
     partial void DeleteTransportRecordDetail(TransportRecordDetail instance);
+    partial void InsertTransportRecords(TransportRecords instance);
+    partial void UpdateTransportRecords(TransportRecords instance);
+    partial void DeleteTransportRecords(TransportRecords instance);
     #endregion
 		
 		public SQLDBDataContext() : 
@@ -140,14 +140,6 @@ namespace DAO_Access
 			}
 		}
 		
-		public System.Data.Linq.Table<TransportRecords> TransportRecords
-		{
-			get
-			{
-				return this.GetTable<TransportRecords>();
-			}
-		}
-		
 		public System.Data.Linq.Table<FuncItem> FuncItem
 		{
 			get
@@ -169,6 +161,14 @@ namespace DAO_Access
 			get
 			{
 				return this.GetTable<TransportRecordDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TransportRecords> TransportRecords
+		{
+			get
+			{
+				return this.GetTable<TransportRecords>();
 			}
 		}
 	}
@@ -1387,6 +1387,473 @@ namespace DAO_Access
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FuncItem")]
+	public partial class FuncItem : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _FuncCode;
+		
+		private string _FuncText;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnFuncCodeChanging(string value);
+    partial void OnFuncCodeChanged();
+    partial void OnFuncTextChanging(string value);
+    partial void OnFuncTextChanged();
+    #endregion
+		
+		public FuncItem()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FuncCode", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string FuncCode
+		{
+			get
+			{
+				return this._FuncCode;
+			}
+			set
+			{
+				if ((this._FuncCode != value))
+				{
+					this.OnFuncCodeChanging(value);
+					this.SendPropertyChanging();
+					this._FuncCode = value;
+					this.SendPropertyChanged("FuncCode");
+					this.OnFuncCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FuncText", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string FuncText
+		{
+			get
+			{
+				return this._FuncText;
+			}
+			set
+			{
+				if ((this._FuncText != value))
+				{
+					this.OnFuncTextChanging(value);
+					this.SendPropertyChanging();
+					this._FuncText = value;
+					this.SendPropertyChanged("FuncText");
+					this.OnFuncTextChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
+	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _ClientName;
+		
+		private string _ShortName;
+		
+		private int _IndexMonth;
+		
+		private int _Index;
+		
+		private System.DateTime _CreateTime;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnClientNameChanging(string value);
+    partial void OnClientNameChanged();
+    partial void OnShortNameChanging(string value);
+    partial void OnShortNameChanged();
+    partial void OnIndexMonthChanging(int value);
+    partial void OnIndexMonthChanged();
+    partial void OnIndexChanging(int value);
+    partial void OnIndexChanged();
+    partial void OnCreateTimeChanging(System.DateTime value);
+    partial void OnCreateTimeChanged();
+    #endregion
+		
+		public Client()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string ClientName
+		{
+			get
+			{
+				return this._ClientName;
+			}
+			set
+			{
+				if ((this._ClientName != value))
+				{
+					this.OnClientNameChanging(value);
+					this.SendPropertyChanging();
+					this._ClientName = value;
+					this.SendPropertyChanged("ClientName");
+					this.OnClientNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(2) NOT NULL", CanBeNull=false)]
+		public string ShortName
+		{
+			get
+			{
+				return this._ShortName;
+			}
+			set
+			{
+				if ((this._ShortName != value))
+				{
+					this.OnShortNameChanging(value);
+					this.SendPropertyChanging();
+					this._ShortName = value;
+					this.SendPropertyChanged("ShortName");
+					this.OnShortNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndexMonth", DbType="Int NOT NULL")]
+		public int IndexMonth
+		{
+			get
+			{
+				return this._IndexMonth;
+			}
+			set
+			{
+				if ((this._IndexMonth != value))
+				{
+					this.OnIndexMonthChanging(value);
+					this.SendPropertyChanging();
+					this._IndexMonth = value;
+					this.SendPropertyChanged("IndexMonth");
+					this.OnIndexMonthChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Index]", Storage="_Index", DbType="Int NOT NULL")]
+		public int Index
+		{
+			get
+			{
+				return this._Index;
+			}
+			set
+			{
+				if ((this._Index != value))
+				{
+					this.OnIndexChanging(value);
+					this.SendPropertyChanging();
+					this._Index = value;
+					this.SendPropertyChanged("Index");
+					this.OnIndexChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateTime", DbType="DateTime NOT NULL")]
+		public System.DateTime CreateTime
+		{
+			get
+			{
+				return this._CreateTime;
+			}
+			set
+			{
+				if ((this._CreateTime != value))
+				{
+					this.OnCreateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._CreateTime = value;
+					this.SendPropertyChanged("CreateTime");
+					this.OnCreateTimeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TransportRecordDetail")]
+	public partial class TransportRecordDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _ID;
+		
+		private string _PackageName;
+		
+		private int _Quantity;
+		
+		private System.Nullable<double> _Volume;
+		
+		private int _TransportRecordID;
+		
+		private EntityRef<TransportRecords> _TransportRecords;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(long value);
+    partial void OnIDChanged();
+    partial void OnPackageNameChanging(string value);
+    partial void OnPackageNameChanged();
+    partial void OnQuantityChanging(int value);
+    partial void OnQuantityChanged();
+    partial void OnVolumeChanging(System.Nullable<double> value);
+    partial void OnVolumeChanged();
+    partial void OnTransportRecordIDChanging(int value);
+    partial void OnTransportRecordIDChanged();
+    #endregion
+		
+		public TransportRecordDetail()
+		{
+			this._TransportRecords = default(EntityRef<TransportRecords>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string PackageName
+		{
+			get
+			{
+				return this._PackageName;
+			}
+			set
+			{
+				if ((this._PackageName != value))
+				{
+					this.OnPackageNameChanging(value);
+					this.SendPropertyChanging();
+					this._PackageName = value;
+					this.SendPropertyChanged("PackageName");
+					this.OnPackageNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
+		public int Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Volume", DbType="Float")]
+		public System.Nullable<double> Volume
+		{
+			get
+			{
+				return this._Volume;
+			}
+			set
+			{
+				if ((this._Volume != value))
+				{
+					this.OnVolumeChanging(value);
+					this.SendPropertyChanging();
+					this._Volume = value;
+					this.SendPropertyChanged("Volume");
+					this.OnVolumeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportRecordID", DbType="Int NOT NULL")]
+		public int TransportRecordID
+		{
+			get
+			{
+				return this._TransportRecordID;
+			}
+			set
+			{
+				if ((this._TransportRecordID != value))
+				{
+					if (this._TransportRecords.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTransportRecordIDChanging(value);
+					this.SendPropertyChanging();
+					this._TransportRecordID = value;
+					this.SendPropertyChanged("TransportRecordID");
+					this.OnTransportRecordIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TransportRecords_TransportRecordDetail", Storage="_TransportRecords", ThisKey="TransportRecordID", OtherKey="ID", IsForeignKey=true)]
+		public TransportRecords TransportRecords
+		{
+			get
+			{
+				return this._TransportRecords.Entity;
+			}
+			set
+			{
+				TransportRecords previousValue = this._TransportRecords.Entity;
+				if (((previousValue != value) 
+							|| (this._TransportRecords.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TransportRecords.Entity = null;
+						previousValue.TransportRecordDetail.Remove(this);
+					}
+					this._TransportRecords.Entity = value;
+					if ((value != null))
+					{
+						value.TransportRecordDetail.Add(this);
+						this._TransportRecordID = value.ID;
+					}
+					else
+					{
+						this._TransportRecordID = default(int);
+					}
+					this.SendPropertyChanged("TransportRecords");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TransportRecords")]
 	public partial class TransportRecords : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1442,6 +1909,8 @@ namespace DAO_Access
 		private string _BusinessArea;
 		
 		private bool _Error;
+		
+		private string _ErrorMessage;
 		
 		private bool _Received;
 		
@@ -1507,6 +1976,8 @@ namespace DAO_Access
     partial void OnBusinessAreaChanged();
     partial void OnErrorChanging(bool value);
     partial void OnErrorChanged();
+    partial void OnErrorMessageChanging(string value);
+    partial void OnErrorMessageChanged();
     partial void OnReceivedChanging(bool value);
     partial void OnReceivedChanged();
     partial void OnReceivedDateChanging(System.Nullable<System.DateTime> value);
@@ -2022,6 +2493,26 @@ namespace DAO_Access
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ErrorMessage", DbType="NVarChar(MAX)")]
+		public string ErrorMessage
+		{
+			get
+			{
+				return this._ErrorMessage;
+			}
+			set
+			{
+				if ((this._ErrorMessage != value))
+				{
+					this.OnErrorMessageChanging(value);
+					this.SendPropertyChanging();
+					this._ErrorMessage = value;
+					this.SendPropertyChanged("ErrorMessage");
+					this.OnErrorMessageChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Received", DbType="Bit NOT NULL")]
 		public bool Received
 		{
@@ -2150,473 +2641,6 @@ namespace DAO_Access
 		{
 			this.SendPropertyChanging();
 			entity.TransportRecords = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FuncItem")]
-	public partial class FuncItem : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _FuncCode;
-		
-		private string _FuncText;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnFuncCodeChanging(string value);
-    partial void OnFuncCodeChanged();
-    partial void OnFuncTextChanging(string value);
-    partial void OnFuncTextChanged();
-    #endregion
-		
-		public FuncItem()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FuncCode", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string FuncCode
-		{
-			get
-			{
-				return this._FuncCode;
-			}
-			set
-			{
-				if ((this._FuncCode != value))
-				{
-					this.OnFuncCodeChanging(value);
-					this.SendPropertyChanging();
-					this._FuncCode = value;
-					this.SendPropertyChanged("FuncCode");
-					this.OnFuncCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FuncText", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string FuncText
-		{
-			get
-			{
-				return this._FuncText;
-			}
-			set
-			{
-				if ((this._FuncText != value))
-				{
-					this.OnFuncTextChanging(value);
-					this.SendPropertyChanging();
-					this._FuncText = value;
-					this.SendPropertyChanged("FuncText");
-					this.OnFuncTextChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
-	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _ClientName;
-		
-		private string _ShortName;
-		
-		private int _IndexMonth;
-		
-		private int _Index;
-		
-		private System.DateTime _CreateTime;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnClientNameChanging(string value);
-    partial void OnClientNameChanged();
-    partial void OnShortNameChanging(string value);
-    partial void OnShortNameChanged();
-    partial void OnIndexMonthChanging(int value);
-    partial void OnIndexMonthChanged();
-    partial void OnIndexChanging(int value);
-    partial void OnIndexChanged();
-    partial void OnCreateTimeChanging(System.DateTime value);
-    partial void OnCreateTimeChanged();
-    #endregion
-		
-		public Client()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClientName", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string ClientName
-		{
-			get
-			{
-				return this._ClientName;
-			}
-			set
-			{
-				if ((this._ClientName != value))
-				{
-					this.OnClientNameChanging(value);
-					this.SendPropertyChanging();
-					this._ClientName = value;
-					this.SendPropertyChanged("ClientName");
-					this.OnClientNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ShortName", DbType="NVarChar(2) NOT NULL", CanBeNull=false)]
-		public string ShortName
-		{
-			get
-			{
-				return this._ShortName;
-			}
-			set
-			{
-				if ((this._ShortName != value))
-				{
-					this.OnShortNameChanging(value);
-					this.SendPropertyChanging();
-					this._ShortName = value;
-					this.SendPropertyChanged("ShortName");
-					this.OnShortNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IndexMonth", DbType="Int NOT NULL")]
-		public int IndexMonth
-		{
-			get
-			{
-				return this._IndexMonth;
-			}
-			set
-			{
-				if ((this._IndexMonth != value))
-				{
-					this.OnIndexMonthChanging(value);
-					this.SendPropertyChanging();
-					this._IndexMonth = value;
-					this.SendPropertyChanged("IndexMonth");
-					this.OnIndexMonthChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Index]", Storage="_Index", DbType="Int NOT NULL")]
-		public int Index
-		{
-			get
-			{
-				return this._Index;
-			}
-			set
-			{
-				if ((this._Index != value))
-				{
-					this.OnIndexChanging(value);
-					this.SendPropertyChanging();
-					this._Index = value;
-					this.SendPropertyChanged("Index");
-					this.OnIndexChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateTime", DbType="DateTime NOT NULL")]
-		public System.DateTime CreateTime
-		{
-			get
-			{
-				return this._CreateTime;
-			}
-			set
-			{
-				if ((this._CreateTime != value))
-				{
-					this.OnCreateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._CreateTime = value;
-					this.SendPropertyChanged("CreateTime");
-					this.OnCreateTimeChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TransportRecordDetail")]
-	public partial class TransportRecordDetail : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private long _ID;
-		
-		private string _PackageName;
-		
-		private int _Quantity;
-		
-		private System.Nullable<double> _Volume;
-		
-		private int _TransportRecordID;
-		
-		private EntityRef<TransportRecords> _TransportRecords;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(long value);
-    partial void OnIDChanged();
-    partial void OnPackageNameChanging(string value);
-    partial void OnPackageNameChanged();
-    partial void OnQuantityChanging(int value);
-    partial void OnQuantityChanged();
-    partial void OnVolumeChanging(System.Nullable<double> value);
-    partial void OnVolumeChanged();
-    partial void OnTransportRecordIDChanging(int value);
-    partial void OnTransportRecordIDChanged();
-    #endregion
-		
-		public TransportRecordDetail()
-		{
-			this._TransportRecords = default(EntityRef<TransportRecords>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public long ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string PackageName
-		{
-			get
-			{
-				return this._PackageName;
-			}
-			set
-			{
-				if ((this._PackageName != value))
-				{
-					this.OnPackageNameChanging(value);
-					this.SendPropertyChanging();
-					this._PackageName = value;
-					this.SendPropertyChanged("PackageName");
-					this.OnPackageNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int NOT NULL")]
-		public int Quantity
-		{
-			get
-			{
-				return this._Quantity;
-			}
-			set
-			{
-				if ((this._Quantity != value))
-				{
-					this.OnQuantityChanging(value);
-					this.SendPropertyChanging();
-					this._Quantity = value;
-					this.SendPropertyChanged("Quantity");
-					this.OnQuantityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Volume", DbType="Float")]
-		public System.Nullable<double> Volume
-		{
-			get
-			{
-				return this._Volume;
-			}
-			set
-			{
-				if ((this._Volume != value))
-				{
-					this.OnVolumeChanging(value);
-					this.SendPropertyChanging();
-					this._Volume = value;
-					this.SendPropertyChanged("Volume");
-					this.OnVolumeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TransportRecordID", DbType="Int NOT NULL")]
-		public int TransportRecordID
-		{
-			get
-			{
-				return this._TransportRecordID;
-			}
-			set
-			{
-				if ((this._TransportRecordID != value))
-				{
-					if (this._TransportRecords.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTransportRecordIDChanging(value);
-					this.SendPropertyChanging();
-					this._TransportRecordID = value;
-					this.SendPropertyChanged("TransportRecordID");
-					this.OnTransportRecordIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TransportRecords_TransportRecordDetail", Storage="_TransportRecords", ThisKey="TransportRecordID", OtherKey="ID", IsForeignKey=true)]
-		public TransportRecords TransportRecords
-		{
-			get
-			{
-				return this._TransportRecords.Entity;
-			}
-			set
-			{
-				TransportRecords previousValue = this._TransportRecords.Entity;
-				if (((previousValue != value) 
-							|| (this._TransportRecords.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TransportRecords.Entity = null;
-						previousValue.TransportRecordDetail.Remove(this);
-					}
-					this._TransportRecords.Entity = value;
-					if ((value != null))
-					{
-						value.TransportRecordDetail.Add(this);
-						this._TransportRecordID = value.ID;
-					}
-					else
-					{
-						this._TransportRecordID = default(int);
-					}
-					this.SendPropertyChanged("TransportRecords");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 }

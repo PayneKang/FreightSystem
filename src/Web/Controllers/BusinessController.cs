@@ -192,7 +192,8 @@ namespace Web.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.ErrorMessage = ex.Message;
+                ViewBag.ErrorMessage = "请正确选择要编辑的纪录";
+                return View("Error");
             }
             return View(model);
         }
@@ -254,24 +255,43 @@ namespace Web.Controllers
             TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
             return View(model);
         }
-        
+
         [LoggedIn(CheckAccess: true, AccessCode: "UPDTERR")]
         [HttpGet]
         public ActionResult UpdateErr(int id)
         {
-            string returnUrl = Request["returnUrl"];
-            string error = Request["error"];
-            bool berr = true;
-            bool.TryParse(error, out berr);
-            UserModel user = this.cacheProvider.GetCurrentLoggedUser();
-            businessProvider.UpdateTransportErrorStatus(id, berr, user.UserID);
-
-            if (user.Role.AccessList.Contains("TOTALRDLIST"))
-                return RedirectToAction("Index", "Business");
-            if (user.Role.AccessList.Contains("LOCALRDLIST"))
-                return RedirectToAction("LocalTransportRecordList", "Business");
-            return RedirectToLocal(returnUrl);
+            TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
+            return View(model);
         }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTERR")]
+        [HttpPost]
+        public ActionResult UpdateErr(TransportRecordModel model)
+        {
+            UserModel user = this.cacheProvider.GetCurrentLoggedUser();
+            businessProvider.UpdateTransportErrorStatus(model.ID,model.Error,model.ErrorMessage , user.UserID);
+            model = businessProvider.GetTransportRecordModel(model.ID);
+            ViewBag.Message = "更新数据成功";
+            return View(model);
+        }
+        
+        //[LoggedIn(CheckAccess: true, AccessCode: "UPDTERR")]
+        //[HttpGet]
+        //public ActionResult UpdateErr(int id)
+        //{
+        //    string returnUrl = Request["returnUrl"];
+        //    string error = Request["error"];
+        //    bool berr = true;
+        //    bool.TryParse(error, out berr);
+        //    UserModel user = this.cacheProvider.GetCurrentLoggedUser();
+        //    businessProvider.UpdateTransportErrorStatus(id, berr, user.UserID);
+
+        //    if (user.Role.AccessList.Contains("TOTALRDLIST"))
+        //        return RedirectToAction("Index", "Business");
+        //    if (user.Role.AccessList.Contains("LOCALRDLIST"))
+        //        return RedirectToAction("LocalTransportRecordList", "Business");
+        //    return RedirectToLocal(returnUrl);
+        //}
 
         [LoggedIn(CheckAccess: true, AccessCode: "UPDTREV")]
         [HttpGet]
