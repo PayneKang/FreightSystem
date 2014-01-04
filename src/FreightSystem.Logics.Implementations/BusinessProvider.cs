@@ -449,7 +449,6 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-
         public void InsertClient(ClientModel client)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
@@ -471,7 +470,6 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-
         public List<ClientModel> QueryClient()
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
@@ -488,7 +486,6 @@ namespace FreightSystem.Logics.Implementations
                         }).ToList();
             }
         }
-
 
         public ClientModel GetClient(int id)
         {
@@ -511,7 +508,6 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-
         public void UpdateClientInformation(ClientModel client)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
@@ -521,6 +517,29 @@ namespace FreightSystem.Logics.Implementations
                     throw new ApplicationException("要修改的客户信息不存在");
                 update.ClientName = client.ClientName;
                 update.ShortName = client.ShortName;
+                context.SubmitChanges();
+            }
+        }
+
+        public void UpdateTransportPrice(int id, double? deliverPrice, double? shortBargeFee, string userID)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecords record = context.TransportRecords.FirstOrDefault(x => x.ID == id);
+                if (record == null)
+                {
+                    throw new ApplicationException("要修改的记录不存在");
+                }
+                record.DeliverPrice = deliverPrice;
+                record.ShortBargeFee = shortBargeFee;
+                record.TransportRecordsOptionHistory.Add(
+                    new TransportRecordsOptionHistory()
+                    {
+                        Description = string.Format("修改价格信息， 运费：{0}，短驳费：{1}",deliverPrice,shortBargeFee),
+                        LogDateTime = DateTime.Now,
+                        Operation = "修改异常状态",
+                        UserID = userID
+                    });
                 context.SubmitChanges();
             }
         }

@@ -1,0 +1,40 @@
+﻿@model FreightSystem.Models.TransportRecordModel
+@Html.Partial("_TransportRecordPartial", Model)
+@using (Html.BeginForm())
+{
+    <fieldset class="large-5">
+        <div style="color:Red;">@ViewBag.Message </div>
+        @if (!Model.DeliverPrice.HasValue)
+        {
+        <table style="width:100%;">
+            <tr>
+                <th>
+                    运费
+                </th>
+                <td>
+                    @Html.TextBoxFor(x => x.DeliverPrice, new { @style = "width:100px;" })
+                    @Html.ValidationMessageFor(x => x.DeliverPrice)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    短驳费
+                </th>
+                <td>
+                    @Html.TextBoxFor(x => x.ShortBargeFee, new { @style = "width:100px;" })
+                    @Html.ValidationMessageFor(x => x.ShortBargeFee)
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input type="submit" class="button tiny" value="保存" />
+                </th>
+            </tr>
+        </table>
+        }
+        else
+        {
+         <div>价格信息已经填充，无法修改</div>   
+        }
+    </fieldset>
+}

@@ -21,6 +21,7 @@ namespace FreightSystem.Logics.Interfaces
         void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayble, double? deductions, double? reparations, bool paid, string userID);
         void UpdateTransportErrorStatus(int id, bool error,string errorMessage,string userID);
         void UpdateTransportReceivedStatus(int id, bool received,DateTime? receivedDate, string userID);
+        void UpdateTransportPrice(int id, double? deliverPrice, double? shortBargeFee, string userID);
         void InsertClient(ClientModel client);
         List<ClientModel> QueryClient();
         ClientModel GetClient(int id);

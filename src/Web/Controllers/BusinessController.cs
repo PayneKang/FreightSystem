@@ -250,6 +250,24 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [LoggedIn(CheckAccess: true, AccessCode: "FILLPRICE")]
+        [HttpGet]
+        public ActionResult FillPrice(int id)
+        {
+            TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
+            return View(model);
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "FILLPRICE")]
+        [HttpPost]
+        public ActionResult FillPrice(TransportRecordModel model)
+        {
+            UserModel user = this.cacheProvider.GetCurrentLoggedUser();
+            businessProvider.UpdateTransportPrice(model.ID, model.DeliverPrice, model.ShortBargeFee, user.UserID);
+            model = businessProvider.GetTransportRecordModel(model.ID);
+            return View(model);
+        }
+
         [LoggedIn(CheckAccess: true, AccessCode: "PRINT")]
         [HttpGet]
         public ActionResult PrintTR(int id)

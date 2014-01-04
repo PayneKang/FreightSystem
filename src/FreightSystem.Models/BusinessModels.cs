@@ -47,6 +47,7 @@ namespace FreightSystem.Models
         public double? AccountPayble { get; set; }
         public string Comment { get; set; }
         public double? Deductions { get; set; }
+        [Display(Name = "运费")]
         public double? DeliverPrice { get; set; }
         public string DeliverType { get; set; }
         public double? HandlingFee { get; set; }
@@ -54,6 +55,7 @@ namespace FreightSystem.Models
         public double? PrePay { get; set; }
         public double? OilCard { get; set; }
         public double? Reparations { get; set; }
+        [Display(Name = "短驳费")]
         public double? ShortBargeFee { get; set; }
         public string Status { get; set; }
         [Required(ErrorMessage = "托盘号必须填写")]
