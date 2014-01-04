@@ -212,6 +212,7 @@ namespace Web.Controllers
             TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
             return View(model);
         }
+
         [LoggedIn(CheckAccess: true, AccessCode: "FILLRD")]
         [HttpPost]
         public ActionResult FillTransportRecord(TransportRecordModel model)
@@ -234,6 +235,7 @@ namespace Web.Controllers
             TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
             return View(model);
         }
+
         [LoggedIn(CheckAccess: true, AccessCode: "UPDTPAID")]
         [HttpPost]
         public ActionResult FillCa(TransportRecordModel model)
@@ -275,24 +277,6 @@ namespace Web.Controllers
             return View(model);
         }
         
-        //[LoggedIn(CheckAccess: true, AccessCode: "UPDTERR")]
-        //[HttpGet]
-        //public ActionResult UpdateErr(int id)
-        //{
-        //    string returnUrl = Request["returnUrl"];
-        //    string error = Request["error"];
-        //    bool berr = true;
-        //    bool.TryParse(error, out berr);
-        //    UserModel user = this.cacheProvider.GetCurrentLoggedUser();
-        //    businessProvider.UpdateTransportErrorStatus(id, berr, user.UserID);
-
-        //    if (user.Role.AccessList.Contains("TOTALRDLIST"))
-        //        return RedirectToAction("Index", "Business");
-        //    if (user.Role.AccessList.Contains("LOCALRDLIST"))
-        //        return RedirectToAction("LocalTransportRecordList", "Business");
-        //    return RedirectToLocal(returnUrl);
-        //}
-
         [LoggedIn(CheckAccess: true, AccessCode: "UPDTREV")]
         [HttpGet]
         public ActionResult UpdateReceived(int id)
@@ -300,6 +284,7 @@ namespace Web.Controllers
             TransportRecordModel model = this.businessProvider.GetTransportRecordModel(id);
             return View(model);
         }
+
         [LoggedIn(CheckAccess: true, AccessCode: "UPDTREV")]
         [HttpPost]
         public ActionResult UpdateReceived(TransportRecordModel model)
@@ -314,6 +299,7 @@ namespace Web.Controllers
             ViewBag.Message = "更新到货状态成功";
             return View(model);
         }
+
         [LoggedIn(CheckAccess: true, AccessCode: "CLTMGR")]
         [HttpGet]
         public ActionResult ClientList()
@@ -321,6 +307,7 @@ namespace Web.Controllers
             List<ClientModel> clients = businessProvider.QueryClient();
             return View(clients);
         }
+
         [LoggedIn(CheckAccess: true, AccessCode: "CLTMGR")]
         [HttpPost]
         public ActionResult ClientList(string clientname,string shortname)
@@ -394,6 +381,7 @@ namespace Web.Controllers
                 return RedirectToAction("Index", "Business");
             }
         }
+
         private List<SelectListItem> CreateClientListForQuery()
         {
             List<SelectListItem> clients = new List<SelectListItem>() { 

@@ -1,0 +1,31 @@
+﻿@model FreightSystem.Models.TransportRecordModel
+@Html.Partial("_TransportRecordPartial", Model)
+@using (Html.BeginForm())
+{
+    <fieldset class="large-5">
+        <div style="color:Red;">@ViewBag.Message </div>
+        <table style="width:100%;">
+            <tr>
+                <th>
+                    是否异常
+                </th>
+                <td>
+                    @Html.CheckBoxFor(x => x.Error)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    异常描述
+                </th>
+                <td>
+                    @Html.TextAreaFor(x => x.ErrorMessage)
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <input type="submit" class="button tiny" value="保存" />
+                </th>
+            </tr>
+        </table>
+    </fieldset>
+}
