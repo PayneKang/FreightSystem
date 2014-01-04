@@ -373,6 +373,15 @@ namespace FreightSystem.Logics.Implementations
                         Operation = "更新",
                         UserID = userID
                     });
+                Client client = context.Client.FirstOrDefault(x => x.ClientName == record.ClientName);
+                if (client != null)
+                {
+                    client.Index = GetTrayNoIndex(trayNo);
+                    if (client.IndexMonth != DateTime.Now.Month) {
+                        client.Index = 0;
+                        client.IndexMonth = DateTime.Now.Month;
+                    }
+                }
                 context.SubmitChanges();
             }
         }
@@ -461,7 +470,7 @@ namespace FreightSystem.Logics.Implementations
                 {
                     ClientName = client.ClientName,
                     CreateTime = DateTime.Now,
-                    Index = 1,
+                    Index = 0,
                     IndexMonth = DateTime.Now.Month,
                     ShortName = client.ShortName
                 };
@@ -542,6 +551,26 @@ namespace FreightSystem.Logics.Implementations
                     });
                 context.SubmitChanges();
             }
+        }
+
+
+        public string GetNextTrayNo(string clientName)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                Client client = context.Client.FirstOrDefault(x => x.ClientName == clientName);
+                if (client == null)
+                    return string.Empty;
+                int index = client.Index + 1;
+                if (client.IndexMonth != DateTime.Now.Month)
+                    index = 1;
+                return string.Format("{0}{1}-{2}", client.ShortName, DateTime.Now.Month.ToString().PadLeft(2, '0'), index.ToString().PadLeft(4, '0'));
+            }
+        }
+
+        private int GetTrayNoIndex(string trayNo)
+        {
+            return int.Parse(trayNo.Substring(trayNo.Length - 4));
         }
     }
 }

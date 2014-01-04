@@ -210,6 +210,7 @@ namespace Web.Controllers
                 return View("Error");
             }
             TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
+            ViewBag.DefaultTrayNo = businessProvider.GetNextTrayNo(model.ClientName);
             return View(model);
         }
 

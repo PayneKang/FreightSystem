@@ -3,110 +3,13 @@
 @{
     ViewBag.Title = "FillTransportRecord";
 }
+@Html.Partial("_TransportRecordPartial", Model)
 <br />
 @using (Html.BeginForm())
 {
     <fieldset class="large-5">
-        <legend>补充货物信息</legend>
+        <legend>补充货物信息</legend>      
         <table style="border: 0px">
-            <tr>
-                <th class="large-3">
-                    日期
-                </th>
-                <td class="large-3">
-                    @Model.DeliverDate.ToString("yyyy-MM-dd")
-                    @Html.HiddenFor(m => m.DeliverDate)
-                </td>
-                <th class="large-3">
-                    客户
-                </th>
-                <td class="large-3">
-                    @Model.ClientName
-                    @Html.HiddenFor(m => m.ClientName)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    驾驶员
-                </th>
-                <td>
-                    @Model.Driver
-                    @Html.HiddenFor(m => m.Driver)
-                </td>
-                <th>
-                    车牌号
-                </th>
-                <td>
-                    @Model.CarLicense
-                    @Html.HiddenFor(m => m.CarLicense)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    物品名称
-                </th>
-                <td colspan="3">
-                    @Model.PackageName
-                    @Html.HiddenFor(m => m.PackageName)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    起运地
-                </th>
-                <td>
-                    @Model.FromLocation
-                    @Html.HiddenFor(m => m.FromLocation)
-                </td>
-                <th>
-                    卸货地 / 单位
-                </th>
-                <td>
-                    @Model.ToLocation
-                    @Html.HiddenFor(m => m.ToLocation)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    预付
-                </th>
-                <td>
-                    @Model.PrePay
-                    @Html.HiddenFor(m => m.PrePay)
-                </td>
-                <th>
-                    油卡
-                </th>
-                <td>
-                    @Model.OilCard
-                    @Html.HiddenFor(m => m.OilCard)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    专线/司机电话
-                </th>
-                <td>
-                    @Model.DeliverType
-                    @Html.HiddenFor(m => m.DeliverType)
-                </td>
-                <th>
-                    所在业务区域
-                </th>
-                <td>
-                    @Html.LabelFor(x => x.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName)
-                    @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    备注
-                </th>
-                <td colspan="3">
-                    @Model.Comment
-                    @Html.HiddenFor(m => m.Comment)
-                </td>
-            </tr>
             <tr>
                 <th>
                     托编号
@@ -141,4 +44,10 @@
             </tr>
         </table>
     </fieldset>
+    if(string.IsNullOrEmpty(Model.TrayNo)){
+    <script language="javascript">
+        $("#TrayNo").val("@ViewBag.DefaultTrayNo");
+    </script>
+    }
+    
 }

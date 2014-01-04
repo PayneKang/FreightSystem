@@ -26,5 +26,6 @@ namespace FreightSystem.Logics.Interfaces
         List<ClientModel> QueryClient();
         ClientModel GetClient(int id);
         void UpdateClientInformation(ClientModel client);
+        string GetNextTrayNo(string clientName);
     }
 }
