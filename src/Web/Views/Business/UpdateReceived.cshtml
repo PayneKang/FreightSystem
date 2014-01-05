@@ -3,155 +3,38 @@
     ViewBag.Title = "UpdateReceived";
 }
 <br />
-@using (Html.BeginForm())
-{
-    <fieldset class="large-5">
-        <legend>修改到货信息</legend>
-        <table style="border: 0px">
-            <tr>
-                <th class="large-3">
-                    日期
-                </th>
-                <td class="large-3">
-                    @Model.DeliverDate.ToString("yyyy-MM-dd")
-                    @Html.HiddenFor(m => m.DeliverDate)
-                </td>
-                <th class="large-3">
-                    客户
-                </th>
-                <td class="large-3">
-                    @Model.ClientName
-                    @Html.HiddenFor(m => m.ClientName)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    驾驶员
-                </th>
-                <td>
-                    @Model.Driver
-                    @Html.HiddenFor(m => m.Driver)
-                </td>
-                <th>
-                    车牌号
-                </th>
-                <td>
-                    @Model.CarLicense
-                    @Html.HiddenFor(m => m.CarLicense)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    物品名称
-                </th>
-                <td colspan="3">
-                    @Model.PackageName
-                    @Html.HiddenFor(m => m.PackageName)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    起运地
-                </th>
-                <td>
-                    @Model.FromLocation
-                    @Html.HiddenFor(m => m.FromLocation)
-                </td>
-                <th>
-                    卸货地 / 单位
-                </th>
-                <td>
-                    @Model.ToLocation
-                    @Html.HiddenFor(m => m.ToLocation)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    运费
-                </th>
-                <td>
-                    @Model.DeliverPrice
-                    @Html.HiddenFor(m => m.DeliverPrice)
-                </td>
-                <th>
-                    预付
-                </th>
-                <td>
-                    @Model.PrePay
-                    @Html.HiddenFor(m => m.PrePay)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    油卡
-                </th>
-                <td>
-                    @Model.OilCard
-                    @Html.HiddenFor(m => m.OilCard)
-                </td>
-                <th>
-                    专线
-                </th>
-                <td>
-                    @Model.DeliverType
-                    @Html.HiddenFor(m => m.DeliverType)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    备注
-                </th>
-                <td colspan="3">
-                    @Model.Comment
-                    @Html.HiddenFor(m => m.Comment)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    托编号
-                </th>
-                <td>
-                    @Html.LabelFor(x => x.TrayNo, new { @style = "margin-bottom:-0.5rem" })
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    体积
-                </th>
-                <td>
-                    @Html.LabelFor(x => x.Volume, new { @style = "margin-bottom:-0.5rem" })
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    数量
-                </th>
-                <td>
-                    @Html.LabelFor(x => x.Quantity)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    到货
-                </th>
-                <td>
-                    @Html.CheckBoxFor(x => x.Received)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    到货日期
-                </th>
-                <td>
-                    <script language="javascript" type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
-                    @Html.TextBoxFor(x => x.ReceivedDate, new { @onClick = "WdatePicker()", @type = "text" })
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    <input type="submit" class="button tiny" value="保存" />
-                </th>
-            </tr>
-        </table>
-    </fieldset>
-}
+<div class="row">
+    <div class="large-6 columns">
+        @Html.Partial("_TransportRecordPartial", Model)
+    </div>
+    <div class="large-6 columns">
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <legend>修改到货信息</legend>
+                <br />
+                <div class="row">
+                    <div class="large-offset-0-1 columns">
+                        <label>
+                            到货</label>
+                        @Html.CheckBoxFor(x => x.Received)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-3 large-offset-0-1 columns">
+                        <label>
+                            到货日期</label>
+                        <script language="javascript" type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
+                        @Html.TextBoxFor(x => x.ReceivedDate, new { @onClick = "WdatePicker()", @style = "margin-bottom:0px", @type = "text" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-offset-0-1  columns">
+                        <button type="submit" class="left button tiny" style="margin-top: 1rem">
+                            保存</button>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>

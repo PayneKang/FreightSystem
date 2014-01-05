@@ -13,20 +13,20 @@
                 {
                     <div class="row">
                         <br />
-                        <div class="large-3 large-offset-0-1 columns">
+                        <div class="large-2 large-offset-0-1 columns">
                             <label>
                                 运费</label>
                             @Html.TextBoxFor(x => x.DeliverPrice, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
                             <small class="error">@Html.ValidationMessageFor(x => x.DeliverPrice)</small>
                         </div>
-                        <div class="large-3 large-offset-0-1 columns">
+                        <div class="large-2 large-offset-0-1 columns">
                             <label>
                                 短驳费</label>
                             @Html.TextBoxFor(x => x.ShortBargeFee, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
                             <small class="error">@Html.ValidationMessageFor(x => x.ShortBargeFee)</small>
                         </div>
-                        <div class="large-11 columns">
-                            <button type="submit" class="left button tiny" style="margin-top: 1rem">
+                        <div class="large-3  large-offset-0-1 columns">
+                            <button type="submit" class="left button tiny" style="margin-top: 1.2rem">
                                 保存</button>
                         </div>
                     </div>        

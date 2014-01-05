@@ -3,254 +3,123 @@
 @{
     ViewBag.Title = "FillTransportRecord";
 }
-<br />
 <script language="javascript" type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
-@using (Html.BeginForm())
-{
-    @Html.HiddenFor(m => m.Error)
-    @Html.HiddenFor(m => m.Received)
-    <fieldset class="large-5">
-        <legend>补充货物信息</legend>
-        <table style="border: 0px">
-            <tr>
-                <th class="large-3">
-                    日期
-                </th>
-                <td class="large-3">
-                    @Model.DeliverDate.ToString("yyyy-MM-dd")
-                    @Html.HiddenFor(m => m.DeliverDate)
-                </td>
-                <th class="large-3">
-                    客户
-                </th>
-                <td class="large-3">
-                    @Model.ClientName
-                    @Html.HiddenFor(m => m.ClientName)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    驾驶员
-                </th>
-                <td>
-                    @Model.Driver
-                    @Html.HiddenFor(m => m.Driver)
-                </td>
-                <th>
-                    车牌号
-                </th>
-                <td>
-                    @Model.CarLicense
-                    @Html.HiddenFor(m => m.CarLicense)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    物品名称
-                </th>
-                <td colspan="3">
-                    @Model.PackageName
-                    @Html.HiddenFor(m => m.PackageName)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    起运地
-                </th>
-                <td>
-                    @Model.FromLocation
-                    @Html.HiddenFor(m => m.FromLocation)
-                </td>
-                <th>
-                    卸货地 / 单位
-                </th>
-                <td>
-                    @Model.ToLocation
-                    @Html.HiddenFor(m => m.ToLocation)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    运费
-                </th>
-                <td>
-                    @Model.DeliverPrice
-                    @Html.HiddenFor(m => m.DeliverPrice)
-                </td>
-                <th>
-                    预付
-                </th>
-                <td>
-                    @Model.PrePay
-                    @Html.HiddenFor(m => m.PrePay)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    油卡
-                </th>
-                <td>
-                    @Model.OilCard
-                    @Html.HiddenFor(m => m.OilCard)
-                </td>
-                <th>
-                    专线
-                </th>
-                <td>
-                    @Model.DeliverType
-                    @Html.HiddenFor(m => m.DeliverType)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    备注
-                </th>
-                <td colspan="3">
-                    @Model.Comment
-                    @Html.HiddenFor(m => m.Comment)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    所在业务区域
-                </th>
-                <td>
-                    @Html.LabelFor(x => x.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName)
-                    @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
-                </td>
-                <th>
-                    托编号
-                </th>
-                <td>
-                    @Model.TrayNo
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    体积
-                </th>
-                <td>
-                    @Model.Volume
-                </td>
-                <th>
-                    数量
-                </th>
-                <td>
-                    @Model.Quantity
-                </td>
-            </tr>
-            @if (!Model.Paid)
-            {
-                <tr>
-                    <th>
-                        扣款
-                    </th>
-                    <td>
-                        @Html.TextBoxFor(x => x.Deductions, new { @style = "margin-bottom:-0.5rem", @onchange = "CalculateShouldPayPrice();" })
-                        <small class="error">@Html.ValidationMessageFor(x => x.Deductions)</small>
-                    </td>
-                    <th>
-                        赔款
-                    </th>
-                    <td>
-                        @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:-0.5rem", @onchange = "CalculateShouldPayPrice();" })
-                        <small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        应付金额
-                    </th>
-                    <td>
-                        @Html.TextBoxFor(x => x.AccountPayble, new { @style = "margin-bottom:-0.5rem" })
-                    </td>
-                    <th>
-                        付款日期
-                    </th>
-                    <td>
-                        @Html.TextBoxFor(x => x.PayDate, new { @onClick = "WdatePicker()", @style = "margin-bottom:-0.5rem" })
-                        <small class="error">@Html.ValidationMessageFor(x => x.PayDate)</small>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        已结算
-                    </th>
-                    <td>
-                        @Html.CheckBoxFor(m => m.Paid)
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        <input id="submitBtn" type="submit" class="button tiny" value="保存" />
-                    </th>
-                </tr>
-                <script language="javascript" type="text/javascript">
-                    var CalculateShouldPayPrice = function () {
-                        var shouldpayvalue = 0;
-                        //calculate should pay
-                        var price = $("#DeliverPrice").val();
-                        var prepay = $("#PrePay").val();
-                        var oilcard = $("#OilCard").val();
-                        var deductions = $("#Deductions").val();
-                        var reparations = $("#Reparations").val();
+<br />
+<div class="row">
+    <div class="large-6 columns">
+        @Html.Partial("_TransportRecordPartial", Model)
+    </div>
+    <div class="large-6 columns">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(m => m.Error)
+            @Html.HiddenFor(m => m.Received)
+            <fieldset>
+                <legend>补充财务信息</legend>
+                @if (!Model.Paid)
+                {
+                    <div class="row">
+                        <br />
+                        <div class="large-5 large-offset-0-1 columns">
+                            <label>
+                                扣款</label>
+                            @Html.TextBoxFor(x => x.Deductions, new { @style = "margin-bottom:0px", @onchange = "CalculateShouldPayPrice();" })
+                            <small class="error">@Html.ValidationMessageFor(x => x.Deductions)</small>
+                        </div>
+                        <div class="large-5 large-offset-0-1 columns">
+                            <label>
+                                赔款</label>
+                            @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:0px", @onchange = "CalculateShouldPayPrice();" })
+                            <small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
+                        </div>
+                        <div class="large-5 large-offset-0-1 columns">
+                            <label>
+                                应付金额</label>
+                            @Html.TextBoxFor(x => x.AccountPayble, new { @style = "margin-bottom:0px" })
+                            <small class="error">@Html.ValidationMessageFor(x => x.AccountPayble)</small>
+                        </div>
+                        <div class="large-5 large-offset-0-1 columns">
+                            <label>
+                                付款日期</label>
+                            @Html.TextBoxFor(x => x.PayDate, new { @onClick = "WdatePicker()", @style = "margin-bottom:0px" })
+                            <small class="error">@Html.ValidationMessageFor(x => x.PayDate)</small>
+                        </div>
+                        <div class="large-5 large-offset-0-1 columns">
+                            <label>
+                                结算状态</label>
+                            @Html.CheckBoxFor(m => m.Paid)
+                        </div>
+                        <div class="large-3 columns">
+                            <button type="submit" class="left button tiny">
+                                保存</button>
+                        </div>
+                    </div>
+                    <script language="javascript" type="text/javascript">
+                        var CalculateShouldPayPrice = function () {
+                            var shouldpayvalue = 0;
+                            //calculate should pay
+                            var price = $("#DeliverPrice").val();
+                            var prepay = $("#PrePay").val();
+                            var oilcard = $("#OilCard").val();
+                            var deductions = $("#Deductions").val();
+                            var reparations = $("#Reparations").val();
 
-                        shouldpayvalue = price - prepay - oilcard - deductions - reparations;
-                        $("#AccountPayble").val(shouldpayvalue);
-                    }
-                    $(document).ready(function () {
-                        CalculateShouldPayPrice();
-                    });
-                    $("#submitBtn").click(function () {
-                    })
-                </script>
-            }
-            else
-            {
-                <tr>
-                    <th>
-                        扣款
-                    </th>
-                    <td>
-                        @Model.Deductions
-                    </td>
-                    <th>
-                        赔款
-                    </th>
-                    <td>
-                        @Model.Reparations
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        应付
-                    </th>
-                    <td colspan="3">
-                        @Model.ShouldPayPrice
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        付款日期
-                    </th>
-                    <td>
-                        @if (Model.PayDate.HasValue)
-                        {
-                            <div>@Model.PayDate.Value.ToString("yyyy-MM-dd")</div>
+                            shouldpayvalue = price - prepay - oilcard - deductions - reparations;
+                            $("#AccountPayble").val(shouldpayvalue);
                         }
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        已结算
-                    </th>
-                    <td>
-                        已结算
-                    </td>
-                </tr>
-            }
-        </table>
-        <br />
-        <label style="color: Red;">@ViewBag.ErrorMessage</label>
-    </fieldset>
-}
+                        $(document).ready(function () {
+                            CalculateShouldPayPrice();
+                        });
+                        $("#submitBtn").click(function () {
+                        })
+                    </script>
+                }
+                else
+                {
+                    <table class="large-12" style="border: 0px">
+                        <tr>
+                            <th class="large-3">
+                                扣款
+                            </th>
+                            <td class="large-3">
+                                @Model.Deductions
+                            </td>
+                            <th class="large-3">
+                                赔款
+                            </th>
+                            <td class="large-3">
+                                @Model.Reparations
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                应付
+                            </th>
+                            <td>
+                                @Model.ShouldPayPrice
+                            </td>
+                            <th>
+                                付款日期
+                            </th>
+                            <td>
+                                @if (Model.PayDate.HasValue)
+                                {
+                                    <div>@Model.PayDate.Value.ToString("yyyy-MM-dd")</div>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                结算状态
+                            </th>
+                            <td>
+                                已结算
+                            </td>
+                        </tr>
+                    </table>
+                }
+                <label style="color: Red;">@ViewBag.ErrorMessage</label>
+            </fieldset>
+        }
+    </div>
+</div>
