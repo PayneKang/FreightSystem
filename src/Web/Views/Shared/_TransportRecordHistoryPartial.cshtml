@@ -1,15 +1,15 @@
 ﻿@model FreightSystem.Models.TransportRecordModel
-<fieldset class="large-5">
+<fieldset>
     <legend>操作历史</legend>
-                    @if (Model.HistoryItem != null)
-                    {
-                        <ul>
-                            @foreach (FreightSystem.Models.TransportRecordsHistoryModel history in Model.HistoryItem)
-                            {
-                                <li><small>@history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation]
-                                    @history.Description
-                                    操作人：@history.User.UserID</small> </li>
-                            }
-                        </ul>
-                    }
+    @if (Model.HistoryItem != null)
+    {
+        <ul>
+            @foreach (FreightSystem.Models.TransportRecordsHistoryModel history in Model.HistoryItem)
+            {
+                <li><small>@history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation]
+                    @history.Description
+                    操作人：@history.User.UserID</small> </li>
+            }
+        </ul>
+    }
 </fieldset>

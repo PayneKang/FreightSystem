@@ -8,11 +8,11 @@
 @using (Html.BeginForm())
 {
 @Html.HiddenFor(m => m.RoleID)
-<fieldset class="large-4">
+<fieldset class="large-5">
 <legend>@ViewBag.Title</legend>
     <div class="row">
         <br />
-        <div class="large-10 columns large-offset-1">
+        <div class="large-5 columns large-offset-1">
             <label>角色名称</label>
             @Html.TextBoxFor(m => m.RoleName, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" }) 
             <small class="error">@Html.ValidationMessageFor(m => m.RoleName)</small>

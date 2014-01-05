@@ -3,8 +3,14 @@
 @{
     ViewBag.Title = "Transport details";
 }
-@Html.Partial("_TransportRecordPartial", Model)
 <br />
-@Html.Partial("_TransportRecordDetailsPartial", Model)
-<br />
-@Html.Partial("_TransportRecordHistoryPartial", Model)
+<div class="row">
+    <div class="large-6 columns">
+        @Html.Partial("_TransportRecordPartial", Model)
+    </div>
+    <div class="large-6 columns">
+        @Html.Partial("_TransportRecordDetailsPartial", Model)
+        <br />
+        @Html.Partial("_TransportRecordHistoryPartial", Model)
+    </div>
+</div>

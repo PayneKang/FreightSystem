@@ -1,37 +1,41 @@
 ﻿@using FreightSystem.Models;
-@model FreightSystem.Models.TransportRecordModel   
-<fieldset class="large-5">
-    <legend>动态表货物明细列表</legend>
-    <table style="width: 100%;">
-        <tr>
-            <th>
-                单据号
-            </th>
-            <th>
-                货品名称
-            </th>
-            <th>
-                数量
-            </th>
-            <th>
-                体积
-            </th>
-        </tr>
-        @if (Model.DetailItem != null)
-        {
-            foreach (TransportRecordDetailModel detail in Model.DetailItem)
-            {
+@model FreightSystem.Models.TransportRecordModel
+<fieldset>
+    <legend>货物明细</legend>
+    <table class="table-cell-spacing large-12">
+        <thead>
             <tr>
-                <td>@detail.DetailNo
-                </td>
-                <td>@detail.PackageName
-                </td>
-                <td>@detail.Quantity
-                </td>
-                <td>@detail.Volume
-                </td>
+                <th>
+                    单据号
+                </th>
+                <th>
+                    货品名称
+                </th>
+                <th>
+                    数量
+                </th>
+                <th>
+                    体积
+                </th>
             </tr>
+        </thead>
+        <tbody>
+            @if (Model.DetailItem != null)
+            {
+                foreach (TransportRecordDetailModel detail in Model.DetailItem)
+                {
+                <tr>
+                    <td>@detail.DetailNo
+                    </td>
+                    <td>@detail.PackageName
+                    </td>
+                    <td>@detail.Quantity
+                    </td>
+                    <td>@detail.Volume
+                    </td>
+                </tr>
+                }
             }
-        }
+        </tbody>
     </table>
 </fieldset>

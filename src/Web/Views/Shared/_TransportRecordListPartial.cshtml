@@ -80,15 +80,36 @@
                 <td>@record.DeliverType
                 </td>
                 <td>
+                    <a class="button operate radius"  href="/Business/TransportDetails/@record.ID">查看</a>
+                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
+                    {
+                        <a class="button operate radius"  href="/Business/DetailsMgr/@record.ID">管理明细</a>
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLPRICE"))
+                    {
+                        if (!record.DeliverPrice.HasValue)
+                        {
+                        <a class="button operate radius"  href="/Business/FillPrice/@record.ID">未调度</a>
+                        }
+                        else
+                        {
+                        <div class="button operate radius" style="cursor: inherit; background-color: #999;">
+                            已调度</div>
+                        }
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
+                    { 
+                        <a class="button operate radius"  href="/Business/FillTransportRecord/@record.ID">内勤</a>
+                    }
                     @if (record.Received)
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny radius" href="/Business/UpdateReceived/@record.ID">已到货</a>
+                        <a class="button operate radius" href="/Business/UpdateReceived/@record.ID">已到货</a>
                         }
                         else
                         {
-                        <div class="button tiny radius disabledB" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate radius disabledB" style="cursor: inherit; background-color: #999;">
                             已到货</div>
                         }
                     }
@@ -96,28 +117,28 @@
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny alert radius" href="/Business/UpdateReceived/@record.ID">未到货</a>
+                        <a class="button operate alert radius" href="/Business/UpdateReceived/@record.ID">未到货</a>
                         }
                         else
                         {                            
-                        <div class="button tiny alert radius disabledA" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate alert radius disabledA" style="cursor: inherit; background-color: #999;">
                             未到货</div>
                         }
                     }
                     @if (record.Paid)
                     {
-                        <div class="button tiny radius" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate radius" style="cursor: inherit; background-color: #999;">
                             已结算</div>
                     }
                     else
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny alert radius" href="/Business/FillCa/@record.ID" >未结算</a>
+                        <a class="button operate alert radius" href="/Business/FillCa/@record.ID" >未结算</a>
                         }
                         else
                         {                            
-                        <div class="button tiny alert radius" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">
                             未结算</div>
                         }
                     }
@@ -125,13 +146,13 @@
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny alert radius" href="/Business/UpdateErr/@record.ID?error=false" >
+                        <a class="button operate alert radius" href="/Business/UpdateErr/@record.ID?error=false" >
                             异常</a>
                         
                         }
                         else
                         {                            
-                        <div class="button tiny alert radius" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">
                             异常</div>
                         }
                     }
@@ -139,40 +160,19 @@
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny radius" href="/Business/UpdateErr/@record.ID?error=true" >
-                            正常</a>
+                        <a class="button operate radius" href="/Business/UpdateErr/@record.ID?error=true" >正常</a>
                         
                         }
                         else
                         {                            
-                        <div class="button tiny radius" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate radius" style="cursor: inherit; background-color: #999;">
                             正常</div>
                         }
                     }
                     @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
-                        <a class="button tiny radius success" href="/Business/PrintTR/@record.ID">打印</a>
+                        <a class="button operate radius success" href="/Business/PrintTR/@record.ID">打印</a>
                     }
-                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
-                    { 
-                        <a class="button tiny radius"  href="/Business/FillTransportRecord/@record.ID">内勤补充</a>
-                    }
-                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLPRICE"))
-                    {
-                        if (!record.DeliverPrice.HasValue)
-                        {
-                            <a class="button tiny radius"  href="/Business/FillPrice/@record.ID">调度补充</a>
-                        }
-                        else
-                        {
-                            <div class="button tiny radius" style="cursor: inherit; background-color: #999;">调度已填</div>
-                        }
-                    }
-                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
-                    {
-                        <a class="button tiny radius"  href="/Business/DetailsMgr/@record.ID">管理明细</a>
-                    }
-                    <a class="button tiny radius"  href="/Business/TransportDetails/@record.ID">查看</a>
                 </td>
             </tr>
             }
@@ -205,15 +205,36 @@
                 <td>@record.DeliverType
                 </td>
                 <td>
+                    <a class="button operate radius"  href="/Business/TransportDetails/@record.ID">查看</a>
+                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
+                    {
+                        <a class="button operate radius"  href="/Business/DetailsMgr/@record.ID">管理明细</a>
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLPRICE"))
+                    {
+                        if (!record.DeliverPrice.HasValue)
+                        {
+                        <a class="button operate radius"  href="/Business/FillPrice/@record.ID">未调度</a>
+                        }
+                        else
+                        {
+                        <div class="button operate radius" style="cursor: inherit; background-color: #999;">
+                            已调度</div>
+                        }
+                    }
+                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
+                    { 
+                        <a class="button operate radius"  href="/Business/FillTransportRecord/@record.ID">内勤</a>
+                    }
                     @if (record.Received)
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny radius" href="/Business/UpdateReceived/@record.ID">已到货</a>
+                        <a class="button operate radius" href="/Business/UpdateReceived/@record.ID">已到货</a>
                         }
                         else
                         {
-                        <div class="button tiny radius disabledB" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate radius disabledB" style="cursor: inherit; background-color: #999;">
                             已到货</div>
                         }
                     }
@@ -221,28 +242,28 @@
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny alert radius" href="/Business/UpdateReceived/@record.ID">未到货</a>
+                        <a class="button operate alert radius" href="/Business/UpdateReceived/@record.ID">未到货</a>
                         }
                         else
                         {                            
-                        <div class="button tiny alert radius disabledA" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate alert radius disabledA" style="cursor: inherit; background-color: #999;">
                             未到货</div>
                         }
                     }
                     @if (record.Paid)
                     {
-                        <div class="button tiny radius" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate radius" style="cursor: inherit; background-color: #999;">
                             已结算</div>
                     }
                     else
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny alert radius" href="/Business/FillCa/@record.ID">未结算</a>
+                        <a class="button operate alert radius" href="/Business/FillCa/@record.ID">未结算</a>
                         }
                         else
                         {                            
-                        <div class="button tiny alert radius" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">
                             未结算</div>
                         }
                     }
@@ -250,13 +271,13 @@
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny alert radius" href="/Business/UpdateErr/@record.ID?error=false" >
+                        <a class="button operate alert radius" href="/Business/UpdateErr/@record.ID?error=false" >
                             异常</a>
                         
                         }
                         else
                         {                            
-                        <div class="button tiny alert radius" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">
                             异常</div>
                         }
                     }
@@ -264,117 +285,24 @@
                     {
                         if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
                         {
-                        <a class="button tiny radius" href="/Business/UpdateErr/@record.ID?error=true" >
-                            正常</a>
+                        <a class="button operate radius" href="/Business/UpdateErr/@record.ID?error=true" >正常</a>
                         
                         }
                         else
                         {                            
-                        <div class="button tiny radius" style="cursor: inherit; background-color: #999;">
+                        <div class="button operate radius" style="cursor: inherit; background-color: #999;">
                             正常</div>
                         }
                     }
                     @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
                     {
-                        <a class="button tiny radius success" href="/Business/PrintTR/@record.ID">打印</a>
+                        <a class="button operate radius success" href="/Business/PrintTR/@record.ID">打印</a>
                     }
-                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
-                    { 
-                        <a class="button tiny radius"  href="/Business/FillTransportRecord/@record.ID">内勤补充</a>
-                    }
-                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLPRICE"))
-                    {
-                        if (!record.DeliverPrice.HasValue)
-                        {
-                            <a class="button tiny radius"  href="/Business/FillPrice/@record.ID">调度补充</a>
-                        }
-                        else
-                        {
-                            <div class="button tiny radius" style="cursor: inherit; background-color: #999;">调度已填</div>
-                        }
-
-                    }
-                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
-                    {
-                        <a class="button tiny radius"  href="/Business/DetailsMgr/@record.ID">管理明细</a>
-                    }
-                    <a class="button tiny radius"  href="/Business/TransportDetails/@record.ID">查看</a>
                 </td>
             </tr>
             }
             <tr style="display:none;" type="TRDetails" TRID="@record.ID">
                 <td colspan="13">
-                    <div class="row">
-                        <div class="large-1 columns">
-                            <label>
-                                运费</label>
-                            <input type="text" value="@record.DeliverPrice" readonly="readonly" />
-                        </div>
-                        <div class="large-1 columns">
-                            <label>
-                                短驳费</label>
-                            <input type="text" value="@record.ShortBargeFee" readonly="readonly" />
-                        </div>
-                        <div class="large-1 columns">
-                            <label>
-                                装卸费</label>
-                            <input type="text" value="@record.HandlingFee" readonly="readonly" />
-                        </div>
-                        <div class="large-1 columns">
-                            <label>
-                                赔款</label>
-                            <input type="text" value="@record.Reparations" readonly="readonly" />
-                        </div>
-                        <div class="large-1 columns">
-                            <label>
-                                扣款</label>
-                            <input type="text" value="@record.Deductions" readonly="readonly" />
-                        </div>
-                        <div class="large-1 columns">
-                            <label>
-                                预付款</label>
-                            <input type="text" value="@record.PrePay" readonly="readonly" />
-                        </div>
-                        <div class="large-1 columns">
-                            <label>
-                                油卡</label>
-                            <input type="text" value="@record.OilCard" readonly="readonly" />
-                        </div>
-                        <div class="large-1 columns">
-                            <label>
-                                应付款</label>
-                            <input type="text" value="@record.AccountPayble" readonly="readonly" />
-                        </div>
-                        <div class="large-1 columns">
-                            <label>
-                                付款日</label>
-                            @if (record.PayDate != null)
-                            {
-                                <input type="text" value="@record.PayDate.Value.ToString("MM.dd.yyyy")" readonly="readonly" />
-                            }
-                            else
-                            { 
-                                <input type="text" value="" readonly="readonly" />
-                            }
-                        </div>
-                        <div class="large-1 columns">
-                            <label>
-                                到货日期</label>
-                            @if (record.ReceivedDate != null)
-                            {
-                                <input type="text" value="@record.ReceivedDate.Value.ToString("MM.dd.yyyy")" readonly="readonly" />
-                            }
-                            else
-                            { 
-                                <input type="text" value="" readonly="readonly" />
-                            }
-                        </div>
-                        <div class="large-2 columns">
-                            <label>
-                                备注</label>
-                            <input type="text" value="@record.Comment" readonly="readonly" />
-                        </div>
-                    </div>
                     @if (record.HistoryItem != null)
                     {
                         <ul>

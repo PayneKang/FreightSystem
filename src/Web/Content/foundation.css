@@ -1991,6 +1991,12 @@ button, .button {
     padding-left: 0.4rem;
     font-size: 0.84rem;*/
     /*     @else                            { font-size: $padding - rem-calc(2); } */ }
+  button.operate, .button.operate  {
+    padding-top: 0.5rem;
+    padding-right: 0.6rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.6rem;
+    font-size: 0.84rem; }
   button.expand, .button.expand {
     padding-right: 0;
     padding-left: 0;
