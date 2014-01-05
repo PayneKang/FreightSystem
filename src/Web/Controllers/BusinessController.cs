@@ -293,6 +293,7 @@ namespace Web.Controllers
         public ActionResult FillTransportRecord(TransportRecordModel model)
         {
             businessProvider.UpdateTransportModel(model.ID, model.TrayNo, model.Volume, model.Quantity, this.cacheProvider.GetCurrentLoggedUser().UserID);
+            model = businessProvider.GetTransportRecordModel(model.ID);
             return View(model);
         }
 
@@ -322,6 +323,7 @@ namespace Web.Controllers
                 return View(model);
             }
             businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate, model.AccountPayble, model.Deductions, model.Reparations, model.Paid, this.cacheProvider.GetCurrentLoggedUser().UserID);
+            model = businessProvider.GetTransportRecordModel(model.ID);
             return View(model);
         }
 
@@ -388,7 +390,7 @@ namespace Web.Controllers
             bool.TryParse(received, out breceived);
             UserModel user = this.cacheProvider.GetCurrentLoggedUser();
             businessProvider.UpdateTransportReceivedStatus(model.ID, model.Received, model.ReceivedDate, user.UserID);
-
+            model = businessProvider.GetTransportRecordModel(model.ID);
             ViewBag.Message = "更新到货状态成功";
             return View(model);
         }
@@ -529,6 +531,7 @@ namespace Web.Controllers
             };
             UserModel user = this.cacheProvider.GetCurrentLoggedUser();
             businessProvider.InsertNewTransportDetail(newDetail, user.UserID);
+            model = businessProvider.GetTransportRecordModel(model.ID);
             return RedirectToAction(string.Format("{0}/{1}", viewName, id));
         }
         
