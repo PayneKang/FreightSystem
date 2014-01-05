@@ -1,31 +1,39 @@
 ﻿@model FreightSystem.Models.TransportRecordModel
-@Html.Partial("_TransportRecordPartial", Model)
-@using (Html.BeginForm())
-{
-    <fieldset class="large-5">
-        <div style="color:Red;">@ViewBag.Message </div>
-        <table style="width:100%;">
-            <tr>
-                <th>
-                    是否异常
-                </th>
-                <td>
-                    @Html.CheckBoxFor(x => x.Error)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    异常描述
-                </th>
-                <td>
-                    @Html.TextAreaFor(x => x.ErrorMessage)
-                </td>
-            </tr>
-            <tr>
-                <th colspan="2">
-                    <input type="submit" class="button tiny" value="保存" />
-                </th>
-            </tr>
-        </table>
-    </fieldset>
-}
+<br />
+<div class="row">
+    <div class="large-6 columns">
+        @Html.Partial("_TransportRecordPartial", Model)
+    </div>
+    <div class="large-6 columns">
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <legend>异常</legend>
+                <br />
+                <div class="row">
+                    <div class="large-5 large-offset-0-1 columns">
+                        <label>
+                            是否异常</label>
+                        @Html.CheckBoxFor(x => x.Error)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-11 large-offset-0-1 columns">
+                        <label>
+                            异常描述</label>
+                        @Html.TextAreaFor(x => x.ErrorMessage)
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="large-3 large-offset-0-1 columns">
+                        <button type="submit" class="left button tiny">
+                            保存</button>
+                    </div>
+                </div>
+                <br />
+                <label style="color: Red;">@ViewBag.ErrorMessage</label>
+            </fieldset>
+        }
+    </div>
+</div>
