@@ -1,0 +1,300 @@
+﻿@using FreightSystem.Models;
+@model FreightSystem.Models.TransportRecordModel
+<script language="javascript" type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
+<fieldset>
+    <legend>详细信息</legend>
+    @using (Html.BeginForm())
+    {
+        <input type="hidden" name="actionType" value="updtRecord" />
+        <table class="large-12" style="border: 0px">
+            <tr>
+                <th class="large-3">
+                    发货日期
+                </th>
+                <td class="large-3">
+                    @Html.TextBoxFor(m => m.DeliverDate, new { @class = "Wdate", @Value = Model.DeliverDate.ToString("yyyy-MM-dd"), @onclick = "WdatePicker()" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.DeliverDate)</small>
+                </td>
+                <th class="large-3">
+                    客户
+                </th>
+                <td class="large-3">
+                    @Html.DropDownListFor(m => m.ClientName, (List<SelectListItem>)ViewBag.Clients, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.ClientName)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    驾驶员
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Driver, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.Driver)</small>
+                </td>
+                <th>
+                    车牌号
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.CarLicense, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.CarLicense)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    托编号
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.TrayNo, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.TrayNo)</small>
+                </td>
+                <th>
+                    物品名称
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.PackageName, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.PackageName)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    起运地
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.FromLocation, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.FromLocation)</small>
+                </td>
+                <th>
+                    卸货地 / 单位
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.ToLocation, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.ToLocation)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    专线/司机电话
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.DeliverType, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.DeliverType)</small>
+                </td>
+                <th>
+                    所在业务区域
+                </th>
+                <td>
+                    @Html.LabelFor(m => m.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName, new { @class = "left", @style = "padding-top:1rem" })
+                    @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    预付
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.PrePay, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.PrePay)</small>
+                </td>
+                <th>
+                    油卡
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.OilCard, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.OilCard)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    体积
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Volume, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.Volume)</small>
+                </td>
+                <th>
+                    数量
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Quantity, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.Quantity)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    运费
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.DeliverPrice, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.DeliverPrice)</small>
+                </td>
+                <th>
+                    短驳费
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.ShortBargeFee, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.ShortBargeFee)</small>
+                </td>
+            </tr>
+            @*  <tr>
+            <th>
+                装卸费
+            </th>
+            <td>@Model.HandlingFee
+            </td>
+        </tr>*@
+            <tr>
+                <th>
+                    扣款
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Deductions, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.Deductions)</small>
+                </td>
+                <th>
+                    赔款
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.Reparations, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.Reparations)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    应付金额
+                </th>
+                <td colspan="3">
+                    @Html.TextBoxFor(m => m.AccountPayble, new { @type = "text", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.AccountPayble)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    付款时间
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.PayDate, new { @type = "text", @Value = Model.PayDate.HasValue ? Model.PayDate.Value.ToString("yyyy-MM-dd") : "", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.PayDate)</small>
+                </td>
+                <th>
+                    到货时间
+                </th>
+                <td>
+                    @Html.TextBoxFor(m => m.ReceivedDate, new { @type = "text", @Value = Model.ReceivedDate.HasValue ? Model.ReceivedDate.Value.ToString("yyyy-MM-dd") : "", @style = "margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.ReceivedDate)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    备注
+                </th>
+                <td colspan="3">
+                    @Html.TextAreaFor(m => m.Comment, new { @style = "width:87%;height:80px;margin-bottom:0px" })
+                    <small class="error">@Html.ValidationMessageFor(m => m.Comment)</small>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    状态
+                </th>
+                <td colspan="3">
+                    是否正常：@Html.CheckBoxFor(m => m.Error)<br />
+                    是否到货：@Html.CheckBoxFor(m => m.Received)<br />
+                    是否结算：@Html.CheckBoxFor(m => m.Paid)
+                </td>
+            </tr>
+            <tr>
+                <th colspan="4">
+                    <input type="submit" value="修改" />
+                </th>
+            </tr>
+        </table>
+        if (string.IsNullOrEmpty(Model.TrayNo))
+        {
+        <script language="javascript">
+            $("#TrayNo").val("@ViewBag.DefaultTrayNo");
+        </script>
+        }
+    }
+</fieldset>
+<br />
+<fieldset>
+    <legend>货物明细</legend>
+    <table class="table-cell-spacing large-12">
+        <thead>
+            <tr>
+                <th>
+                    单据号
+                </th>
+                <th>
+                    货品名称
+                </th>
+                <th>
+                    数量
+                </th>
+                <th>
+                    体积
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.DetailItem != null)
+            {
+                foreach (TransportRecordDetailModel detail in Model.DetailItem)
+                {
+                <tr>
+                    <td>@detail.DetailNo
+                    </td>
+                    <td>@detail.PackageName
+                    </td>
+                    <td>@detail.Quantity
+                    </td>
+                    <td>@detail.Volume
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</fieldset>
+<br />
+@using (Html.BeginForm("DetailsMgr", "Business"))
+{
+    <input type="hidden" name="actionType" value="fillDetails" />
+    <fieldset>
+        <legend>新增货物明细</legend>
+        @using (Html.BeginForm())
+        {
+            <input type="hidden" name="recordID" value="@Model.ID" />
+            <div class="row">
+                <br />
+                <div class="large-5 large-offset-0-1 columns">
+                    <label>
+                        单据编号</label>
+                    <input type="text" name="detailNo" />
+                </div>
+                <div class="large-5 large-offset-0-1 columns">
+                    <label>
+                        货物名称</label>
+                    <input type="text" name="packagename" />
+                </div>
+                <div class="large-5 large-offset-0-1 columns">
+                    <label>
+                        数量</label>
+                    <input type="text" name="quantity" />
+                </div>
+                <div class="large-5 large-offset-0-1 columns">
+                    <label>
+                        体积</label>
+                    <input type="text" name="volume" />
+                </div>
+                <div class="large-11 columns">
+                    <button type="submit" class="left button tiny" style="margin-top: 1rem">
+                        新增</button>
+                </div>
+            </div>
+        }
+    </fieldset>
+        
+}
+<br />
+@Html.Partial("_TransportRecordHistoryPartial", Model)

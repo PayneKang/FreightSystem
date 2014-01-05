@@ -28,7 +28,7 @@ namespace FreightSystem.Models
         [Required(ErrorMessage = "客户必须填写")]
         public string ClientName { get; set; }
         [Required(ErrorMessage = "日期必须填写")]
-        [Display(Name="发货日期")]
+        [Display(Name = "发货日期")]
         public DateTime DeliverDate { get; set; }
         [Required(ErrorMessage = "驾驶员必须填写")]
         public string Driver { get; set; }

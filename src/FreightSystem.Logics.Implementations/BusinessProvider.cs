@@ -644,5 +644,42 @@ namespace FreightSystem.Logics.Implementations
                 context.SubmitChanges();
             }
         }
+
+
+        public void UpdateTransportModel(TransportRecordModel model, string userID)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecords record = context.TransportRecords.FirstOrDefault(x => x.ID == model.ID);
+                record.AccountPayble = model.AccountPayble;
+                record.CarLicense = model.CarLicense;
+                record.ClientName = model.ClientName;
+                record.Comment = model.Comment;
+                record.Deductions = model.Deductions;
+                record.DeliverDate = model.DeliverDate;
+                record.DeliverPrice = model.DeliverPrice;
+                record.DeliverType = model.DeliverType;
+                record.Driver = model.Driver;
+                record.Error = model.Error;
+                record.ErrorMessage = model.ErrorMessage;
+                record.FromLocation = model.FromLocation;
+                record.HandlingFee = model.HandlingFee;
+                record.OilCard = model.OilCard;
+                record.PackageName = model.PackageName;
+                record.Paid = model.Paid;
+                record.PayDate = model.PayDate;
+                record.PrePay = model.PrePay;
+                record.Quantity = model.Quantity;
+                record.Received = model.Received;
+                record.ReceivedDate = model.ReceivedDate;
+                record.Reparations = model.Reparations;
+                record.ShortBargeFee = model.ShortBargeFee;
+                record.Status = model.Status;
+                record.ToLocation = model.ToLocation;
+                record.TrayNo = model.TrayNo;
+                record.Volume = model.Volume;
+                context.SubmitChanges();
+            }
+        }
     }
 }

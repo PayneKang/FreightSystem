@@ -61,6 +61,80 @@ namespace Web.Controllers
             return View(areas);
         }
 
+
+        [LoggedIn(CheckAccess: true, AccessCode: "SUPERUPT")]
+        [HttpPost]
+        public ActionResult UpdateTransportRecord(TransportRecordModel model)
+        {
+            ViewBag.Clients = (from x in businessProvider.QueryClient()
+                               select new SelectListItem()
+                               {
+                                   Text = x.ClientName,
+                                   Value = x.ClientName
+                               }).ToList();
+            string actionType = Request["actionType"];
+            if (actionType == "updtRecord")
+            {
+                UserModel user = this.cacheProvider.GetCurrentLoggedUser();
+                businessProvider.UpdateTransportModel(model, user.UserID);
+            }
+            else if (actionType == "fillDetails")
+            {
+                string detailNo = Request["detailNo"];
+                string packageName = Request["packagename"];
+                int quantity = 0;
+                double volume = 0f;
+
+                if (string.IsNullOrEmpty(detailNo))
+                {
+                    ViewBag.ErrorMessage = "单据编号为空";
+                    return View(model);
+                }
+                if (string.IsNullOrEmpty(packageName))
+                {
+                    ViewBag.ErrorMessage = "货物名称为空";
+                    return View(model);
+                }
+                if (!int.TryParse(Request["quantity"], out quantity))
+                {
+                    ViewBag.ErrorMessage = "数量没有正确填写，必须填写整数数字";
+                    return View(model);
+                }
+                if (!double.TryParse(Request["volume"], out volume))
+                {
+                    ViewBag.ErrorMessage = "体积没有正确填写，必须填写数字";
+                    return View(model);
+                }
+                TransportRecordDetailModel newDetail = new TransportRecordDetailModel()
+                {
+                    DetailNo = detailNo,
+                    PackageName = packageName,
+                    Quantity = quantity,
+                    TransportRecordID = model.ID,
+                    Volume = volume
+                };
+                UserModel user = this.cacheProvider.GetCurrentLoggedUser();
+                businessProvider.InsertNewTransportDetail(newDetail, user.UserID);
+            }
+            model = businessProvider.GetTransportRecordModel(model.ID);
+            return View(model);
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "SUPERUPT")]
+        [HttpGet]
+        public ActionResult UpdateTransportRecord(int id)
+        {
+            ViewBag.Clients = (from x in businessProvider.QueryClient()
+                               select new SelectListItem()
+                               {
+                                   Text = x.ClientName,
+                                   Value = x.ClientName
+                               }).ToList();
+            TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
+            ViewBag.DefaultTrayNo = businessProvider.GetNextTrayNo(model.ClientName);
+            return View(model);
+        }
+
         [LoggedIn(CheckAccess: true, AccessCode: "EXPORT")]
         public ActionResult Export()
         {
@@ -411,38 +485,51 @@ namespace Web.Controllers
             string packageName = Request["packagename"];
             int quantity = 0;
             double volume = 0f;
+            string actionType = Request["actionType"];
+            int id;
+            string viewName = "";
+            if (actionType == "fillDetails")
+            {
+                id = int.Parse(Request["recordID"]);
+                viewName = "UpdateTransportRecord";
+            }
+            else
+            {
+                id = model.ID;
+                viewName = "DetailsMgr";
+            }
 
             if (string.IsNullOrEmpty(detailNo))
             {
                 ViewBag.ErrorMessage = "单据编号为空";
-                return View(model);
+                return View(viewName, model);
             }
             if (string.IsNullOrEmpty(packageName))
             {
                 ViewBag.ErrorMessage = "货物名称为空";
-                return View(model);
+                return View(viewName, model);
             }
             if (!int.TryParse(Request["quantity"], out quantity))
             {
                 ViewBag.ErrorMessage = "数量没有正确填写，必须填写整数数字";
-                return View(model);
+                return View(viewName, model);
             }
             if (!double.TryParse(Request["volume"], out volume))
             {
                 ViewBag.ErrorMessage = "体积没有正确填写，必须填写数字";
-                return View(model);
+                return View(viewName, model);
             }
             TransportRecordDetailModel newDetail = new TransportRecordDetailModel()
             {
                 DetailNo = detailNo,
                 PackageName = packageName,
                 Quantity = quantity,
-                TransportRecordID = model.ID,
+                TransportRecordID = id,
                 Volume = volume
             };
             UserModel user = this.cacheProvider.GetCurrentLoggedUser();
-            businessProvider.InsertNewTransportDetail(newDetail,user.UserID);
-            return RedirectToAction("DetailsMgr");
+            businessProvider.InsertNewTransportDetail(newDetail, user.UserID);
+            return RedirectToAction(string.Format("{0}/{1}", viewName, id));
         }
         
 
