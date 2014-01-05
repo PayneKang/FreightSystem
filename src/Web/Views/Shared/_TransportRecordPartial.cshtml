@@ -1,5 +1,8 @@
 ﻿@using FreightSystem.Models;
 @model FreightSystem.Models.TransportRecordModel
+@{
+    UserModel loggedUser = (UserModel)ViewBag.LoggedUser;
+}
 <fieldset>
     <legend>详细信息</legend>
     <table class="large-12" style="border: 0px">
@@ -209,5 +212,9 @@
                 }
             </td>
         </tr>
+        @if (loggedUser.Role.AccessList.Contains("ALL")||loggedUser.Role.AccessList.Contains("SUPERUPT"))
+        {
+        <tr><th colspan="4"><a href="/Business/UpdateTransportRecord/@Model.ID">修改单据信息</a></th></tr>
+        }
     </table>
 </fieldset>
