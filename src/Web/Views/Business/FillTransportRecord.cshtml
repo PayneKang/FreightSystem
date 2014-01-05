@@ -3,51 +3,48 @@
 @{
     ViewBag.Title = "FillTransportRecord";
 }
-@Html.Partial("_TransportRecordPartial", Model)
 <br />
-@using (Html.BeginForm())
-{
-    <fieldset class="large-5">
-        <legend>补充货物信息</legend>      
-        <table style="border: 0px">
-            <tr>
-                <th>
-                    托编号
-                </th>
-                <td>
-                    @Html.TextBoxFor(x => x.TrayNo, new { @style = "margin-bottom:-0.5rem" })
-                    @Html.ValidationMessageFor(x => x.TrayNo)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    体积
-                </th>
-                <td>
-                    @Html.TextBoxFor(x => x.Volume, new { @style = "margin-bottom:-0.5rem" })
-                    @Html.ValidationMessageFor(x => x.Volume)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    数量
-                </th>
-                <td>
-                    @Html.TextBoxFor(x => x.Quantity)
-                    @Html.ValidationMessageFor(x => x.Quantity)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    <input type="submit" class="button tiny" value="保存" />
-                </th>
-            </tr>
-        </table>
-    </fieldset>
-    if(string.IsNullOrEmpty(Model.TrayNo)){
-    <script language="javascript">
-        $("#TrayNo").val("@ViewBag.DefaultTrayNo");
-    </script>
-    }
-    
-}
+<div class="row">
+    <div class="large-6 columns">
+        @Html.Partial("_TransportRecordPartial", Model)
+    </div>
+    <div class="large-6 columns">
+        @using (Html.BeginForm())
+        {
+            <fieldset>
+                <legend>补充货物信息</legend>
+                <div class="row">
+                    <br />
+                    <div class="large-4 large-offset-0-1 columns">
+                        <label>
+                            托编号</label>
+                        @Html.TextBoxFor(x => x.TrayNo, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                        <small class="error">@Html.ValidationMessageFor(x => x.TrayNo)</small>
+                    </div>
+                    <div class="large-3 large-offset-0-1 columns">
+                        <label>
+                            体积</label>
+                        @Html.TextBoxFor(x => x.Volume, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                        <small class="error">@Html.ValidationMessageFor(x => x.Volume)</small>
+                    </div>
+                    <div class="large-3 large-offset-0-1 columns">
+                        <label>
+                            数量</label>
+                        @Html.TextBoxFor(x => x.Quantity, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                        <small class="error">@Html.ValidationMessageFor(x => x.Quantity)</small>
+                    </div>
+                    <div class="large-11 columns">
+                        <button type="submit" class="left button tiny" style="margin-top: 1rem">
+                            保存</button>
+                    </div>
+                </div>
+            </fieldset>
+            if (string.IsNullOrEmpty(Model.TrayNo))
+            {
+            <script language="javascript">
+                $("#TrayNo").val("@ViewBag.DefaultTrayNo");
+            </script>
+            }
+        }
+    </div>
+</div>

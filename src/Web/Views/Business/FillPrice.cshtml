@@ -1,40 +1,48 @@
 ﻿@model FreightSystem.Models.TransportRecordModel
-@Html.Partial("_TransportRecordPartial", Model)
-@using (Html.BeginForm())
-{
-    <fieldset class="large-5">
-        <div style="color:Red;">@ViewBag.Message </div>
-        @if (!Model.DeliverPrice.HasValue)
+<br />
+<div class="row">
+    <div class="large-6 columns">
+        @Html.Partial("_TransportRecordPartial", Model)
+    </div>
+    <div class="large-6 columns">
+        @using (Html.BeginForm())
         {
-        <table style="width:100%;">
-            <tr>
-                <th>
-                    运费
-                </th>
-                <td>
-                    @Html.TextBoxFor(x => x.DeliverPrice, new { @style = "width:100px;" })
-                    @Html.ValidationMessageFor(x => x.DeliverPrice)
-                </td>
-            </tr>
-            <tr>
-                <th>
-                    短驳费
-                </th>
-                <td>
-                    @Html.TextBoxFor(x => x.ShortBargeFee, new { @style = "width:100px;" })
-                    @Html.ValidationMessageFor(x => x.ShortBargeFee)
-                </td>
-            </tr>
-            <tr>
-                <th colspan="2">
-                    <input type="submit" class="button tiny" value="保存" />
-                </th>
-            </tr>
-        </table>
+            <fieldset>
+                <legend>调度</legend>
+                @if (!Model.DeliverPrice.HasValue)
+                {
+                    <div class="row">
+                        <br />
+                        <div class="large-3 large-offset-0-1 columns">
+                            <label>
+                                运费</label>
+                            @Html.TextBoxFor(x => x.DeliverPrice, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                            <small class="error">@Html.ValidationMessageFor(x => x.DeliverPrice)</small>
+                        </div>
+                        <div class="large-3 large-offset-0-1 columns">
+                            <label>
+                                短驳费</label>
+                            @Html.TextBoxFor(x => x.ShortBargeFee, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                            <small class="error">@Html.ValidationMessageFor(x => x.ShortBargeFee)</small>
+                        </div>
+                        <div class="large-11 columns">
+                            <button type="submit" class="left button tiny" style="margin-top: 1rem">
+                                保存</button>
+                        </div>
+                    </div>        
+                }
+                else
+                {
+                    <div class="row">
+                        <br />
+                        <div class="large-12 large-offset-3  columns">
+                            <label style="color: Red;">
+                                价格信息已经填充，无法修改</label></div>
+                    </div>
+                }
+                <br />
+                <label style="color: Red;">@ViewBag.ErrorMessage</label>
+            </fieldset>
         }
-        else
-        {
-         <div>价格信息已经填充，无法修改</div>   
-        }
-    </fieldset>
-}
+    </div>
+</div>
