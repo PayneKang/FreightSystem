@@ -7,7 +7,15 @@
     $(document).ready(
         function () {
             var date = new Date();
-            var dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+            var dd = date.getDate();
+            var month = (date.getMonth() + 1);
+            var sd = "";
+            if (Number(dd) < 10)
+                sd = "0" + dd;
+            var sm = "";
+            if (Number(month) < 10)
+                sm = "0" + month;
+            var dateString = date.getFullYear() + "-" + sm + "-" + sd;
             $("#DeliverDate").val(dateString);
         }
     );

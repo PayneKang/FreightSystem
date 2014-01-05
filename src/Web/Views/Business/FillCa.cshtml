@@ -14,6 +14,9 @@
         {
             @Html.HiddenFor(m => m.Error)
             @Html.HiddenFor(m => m.Received)
+                    @Html.HiddenFor(m => m.OilCard);
+                    @Html.HiddenFor(m => m.DeliverPrice);
+                    @Html.HiddenFor(m => m.PrePay);
             <fieldset>
                 <legend>补充财务信息</legend>
                 @if (!Model.Paid)
@@ -23,13 +26,13 @@
                         <div class="large-5 large-offset-0-1 columns">
                             <label>
                                 扣款</label>
-                            @Html.TextBoxFor(x => x.Deductions, new { @style = "margin-bottom:0px", @onchange = "CalculateShouldPayPrice();" })
+                            @Html.TextBoxFor(x => x.Deductions, new { @style = "margin-bottom:0px", @onchange = "UpdateShouldPay();" })
                             <small class="error">@Html.ValidationMessageFor(x => x.Deductions)</small>
                         </div>
                         <div class="large-5 large-offset-0-1 columns">
                             <label>
                                 赔款</label>
-                            @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:0px", @onchange = "CalculateShouldPayPrice();" })
+                            @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:0px", @onchange = "UpdateShouldPay();" })
                             <small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
                         </div>
                         <div class="large-5 large-offset-0-1 columns">
@@ -55,6 +58,19 @@
                         </div>
                     </div>
                     <script language="javascript" type="text/javascript">
+                        $(document).ready(function () {
+                            UpdateShouldPay();
+                        });
+                        var UpdateShouldPay = function () {
+                            var deliverPrice = Number($("#DeliverPrice").val());
+                            var shortbargefee = Number($("#ShortBargeFee").val());
+                            var oilCard = Number($("#OilCard").val());
+                            var deduction = Number($("#Deductions").val());
+                            var reparation = Number($("#Reparations").val());
+                            var prepay = Number($("#PrePay").val());
+                            var shouldPay = deliverPrice - prepay - oilCard - deduction - reparation;
+                            $("#AccountPayble").val(shouldPay);
+                        }
                         var CalculateShouldPayPrice = function () {
                             var shouldpayvalue = 0;
                             //calculate should pay
