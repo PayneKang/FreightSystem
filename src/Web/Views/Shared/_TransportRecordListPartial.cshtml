@@ -55,7 +55,7 @@
             {
             <tr type="RecordTR" trid="@record.ID" class="info">
                 <td>
-                    <div class="actionLink">@record.DeliverDate.ToString("MM.dd")</div>
+                    <a class="has-tip"  href="/Business/TransportDetails/@record.ID">@record.DeliverDate.ToString("MM.dd")</a>
                 </td>
                 <td>@record.ClientName
                 </td>
@@ -80,7 +80,6 @@
                 <td>@record.DeliverType
                 </td>
                 <td>
-                    <a class="button operate radius"  href="/Business/TransportDetails/@record.ID">查看</a>
                     @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
                     {
                         <a class="button operate radius"  href="/Business/DetailsMgr/@record.ID">管理明细</a>
@@ -180,7 +179,7 @@
             {
             <tr type="RecordTR" trid="@record.ID" >
                 <td>
-                    <div class="actionLink">@record.DeliverDate.ToString("MM.dd")</div>
+                    <a class="has-tip"  href="/Business/TransportDetails/@record.ID">@record.DeliverDate.ToString("MM.dd")</a>
                 </td>
                 <td>@record.ClientName
                 </td>
@@ -205,7 +204,6 @@
                 <td>@record.DeliverType
                 </td>
                 <td>
-                    <a class="button operate radius"  href="/Business/TransportDetails/@record.ID">查看</a>
                     @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
                     {
                         <a class="button operate radius"  href="/Business/DetailsMgr/@record.ID">管理明细</a>
@@ -301,7 +299,7 @@
                 </td>
             </tr>
             }
-            <tr style="display:none;" type="TRDetails" TRID="@record.ID">
+@*<tr style="display:none;" type="TRDetails" TRID="@record.ID">
                 <td colspan="13">
                     @if (record.HistoryItem != null)
                     {
@@ -315,7 +313,7 @@
                         </ul>
                     }
                 </td>
-            </tr>
+            </tr>*@
         }
     </tbody>
     <tfoot>
@@ -350,7 +348,7 @@
         </tr>
     </tfoot>
 </table>
-<script language="javascript" type="text/javascript">
+@*<script language="javascript" type="text/javascript">
     $("tr[type='RecordTR'] div[class='actionLink']").each(
         function (index) {
             $(this).click(
@@ -362,4 +360,4 @@
             );
         }
     );
-</script>
+</script>*@ 

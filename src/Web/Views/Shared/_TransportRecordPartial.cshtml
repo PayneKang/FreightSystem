@@ -90,20 +90,6 @@
         </tr>
         <tr>
             <th>
-                体积
-            </th>
-            <td>
-                @Model.Volume
-            </td>
-            <th>
-                数量
-            </th>
-            <td>
-                @Model.Quantity
-            </td>
-        </tr>
-        <tr>
-            <th>
                 运费
             </th>
             <td>@Model.DeliverPrice
@@ -123,6 +109,31 @@
         </tr>*@
         <tr>
             <th>
+                体积
+            </th>
+            <td>
+                @Model.Volume
+            </td>
+            <th>
+                数量
+            </th>
+            <td>
+                @Model.Quantity
+            </td>
+        </tr>
+        <tr>
+            <th>
+                到货时间
+            </th>
+            <td>
+                @if (Model.ReceivedDate.HasValue)
+                {
+                    <div>@Model.ReceivedDate.Value.ToString("yyyy-MM-dd")</div>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>
                 扣款
             </th>
             <td>
@@ -139,27 +150,16 @@
             <th>
                 应付金额
             </th>
-            <td colspan="3">
+            <td>
                 @Model.AccountPayble
             </td>
-        </tr>
-        <tr>
             <th>
                 付款时间
             </th>
             <td>
                 @if (Model.PayDate.HasValue)
                 {
-                    <div>@Model.PayDate.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
-                }
-            </td>
-            <th>
-                到货时间
-            </th>
-            <td>
-                @if (Model.ReceivedDate.HasValue)
-                {
-                    <div>@Model.ReceivedDate.Value.ToString("yyyy-MM-dd HH:mm:ss")</div>
+                    <div>@Model.PayDate.Value.ToString("yyyy-MM-dd")</div>
                 }
             </td>
         </tr>
