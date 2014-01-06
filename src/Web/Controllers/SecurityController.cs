@@ -125,6 +125,9 @@ namespace Web.Controllers
                 return View();
             }
             cacheProvider.SaveUser(user);
+            user.LastLoginIP = Request.UserHostAddress;
+            user.LastLoginTime = DateTime.Now;
+            userProvider.UpdateLoginData(user);
             if (user.Role.AccessList.Contains("LOCALRDLIST"))
                 return RedirectToAction("LocalTransportRecordList", "Business");
             return RedirectToAction("Index", "Business");

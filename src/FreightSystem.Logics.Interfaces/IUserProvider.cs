@@ -19,6 +19,7 @@ namespace FreightSystem.Logics.Interfaces
         UserListModel GetUserList();
         void InsertUserModel(UserModel user);
         List<MenuItemModel> GetAllMenuItem();
+        void UpdateLoginData(UserModel user);
         List<FuncItemModel> GetAllFuncItem();
     }
 }

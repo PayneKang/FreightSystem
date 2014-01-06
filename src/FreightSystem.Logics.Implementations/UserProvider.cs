@@ -290,5 +290,19 @@ namespace FreightSystem.Logics.Implementations
                         }).ToList();
             }
         }
+
+
+        public void UpdateLoginData(UserModel user)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                Users curuser = context.Users.FirstOrDefault(x => x.UserID == user.UserID);
+                if (curuser == null)
+                    return;
+                curuser.LastLoginIP = user.LastLoginIP;
+                curuser.LastLoginTime = user.LastLoginTime;
+                context.SubmitChanges();
+            }
+        }
     }
 }
