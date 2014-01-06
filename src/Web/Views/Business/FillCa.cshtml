@@ -17,6 +17,7 @@
                     @Html.HiddenFor(m => m.OilCard);
                     @Html.HiddenFor(m => m.DeliverPrice);
                     @Html.HiddenFor(m => m.PrePay);
+                    @Html.HiddenFor(m => m.HandlingFee);
             <fieldset>
                 <legend>补充财务信息</legend>
                 @if (!Model.Paid)
@@ -68,26 +69,10 @@
                             var deduction = Number($("#Deductions").val());
                             var reparation = Number($("#Reparations").val());
                             var prepay = Number($("#PrePay").val());
-                            var shouldPay = deliverPrice - prepay - oilCard - deduction - reparation;
+                            var handlingfee = Number($("#HandlingFee").val());
+                            var shouldPay = deliverPrice - prepay - oilCard - deduction - reparation - handlingfee;
                             $("#AccountPayble").val(shouldPay);
                         }
-                        var CalculateShouldPayPrice = function () {
-                            var shouldpayvalue = 0;
-                            //calculate should pay
-                            var price = $("#DeliverPrice").val();
-                            var prepay = $("#PrePay").val();
-                            var oilcard = $("#OilCard").val();
-                            var deductions = $("#Deductions").val();
-                            var reparations = $("#Reparations").val();
-
-                            shouldpayvalue = price - prepay - oilcard - deductions - reparations;
-                            $("#AccountPayble").val(shouldpayvalue);
-                        }
-                        $(document).ready(function () {
-                            CalculateShouldPayPrice();
-                        });
-                        $("#submitBtn").click(function () {
-                        })
                     </script>
                 }
                 else

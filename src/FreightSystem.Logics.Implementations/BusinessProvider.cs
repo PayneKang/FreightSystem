@@ -574,7 +574,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public void UpdateTransportPrice(int id, double? deliverPrice, double? shortBargeFee, string userID)
+        public void UpdateTransportPrice(int id, double? deliverPrice, double? shortBargeFee, double? accoundPayable, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -585,10 +585,11 @@ namespace FreightSystem.Logics.Implementations
                 }
                 record.DeliverPrice = deliverPrice;
                 record.ShortBargeFee = shortBargeFee;
+                record.AccountPayble = accoundPayable;
                 record.TransportRecordsOptionHistory.Add(
                     new TransportRecordsOptionHistory()
                     {
-                        Description = string.Format("修改价格信息， 运费：{0}，短驳费：{1}",deliverPrice,shortBargeFee),
+                        Description = string.Format("修改价格信息， 运费：{0}，短驳费：{1}，应付金额:{2}",deliverPrice,shortBargeFee,accoundPayable),
                         LogDateTime = DateTime.Now,
                         Operation = "修改价格信息",
                         UserID = userID

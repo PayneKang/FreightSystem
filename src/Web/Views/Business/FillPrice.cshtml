@@ -15,6 +15,7 @@
                     @Html.HiddenFor(m => m.Deductions);
                     @Html.HiddenFor(m => m.PrePay);
                     @Html.HiddenFor(m => m.Reparations);
+                    @Html.HiddenFor(m => m.HandlingFee);
                     <div class="row">
                         <br />
                         <div class="large-2 large-offset-0-1 columns">
@@ -51,7 +52,8 @@
                             var deduction = Number($("#Deductions").val());
                             var reparation = Number($("#Reparations").val());
                             var prepay = Number($("#PrePay").val());
-                            var shouldPay = deliverPrice - prepay - oilCard - deduction - reparation;
+                            var handlingfee = Number($("#HandlingFee").val());
+                            var shouldPay = deliverPrice - prepay - oilCard - deduction - reparation - handlingfee;
                             $("#AccountPayble").val(shouldPay);
                         }
                     </script>

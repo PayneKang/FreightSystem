@@ -340,7 +340,7 @@ namespace Web.Controllers
         public ActionResult FillPrice(TransportRecordModel model)
         {
             UserModel user = this.cacheProvider.GetCurrentLoggedUser();
-            businessProvider.UpdateTransportPrice(model.ID, model.DeliverPrice, model.ShortBargeFee, user.UserID);
+            businessProvider.UpdateTransportPrice(model.ID, model.DeliverPrice, model.ShortBargeFee,model.AccountPayble, user.UserID);
             model = businessProvider.GetTransportRecordModel(model.ID);
             return View(model);
         }
