@@ -35,6 +35,7 @@ namespace FreightSystem.Logics.Implementations
                     UserID = user.UserID,
                     LastLoginIP = user.LastLoginIP,
                     LastLoginTime = user.LastLoginTime,
+                    Disabled = user.Disabled,
                     Role = new RoleModel()
                     {
                         RoleID = user.Roles.RoleID,
@@ -61,12 +62,11 @@ namespace FreightSystem.Logics.Implementations
                 Users target = context.Users.FirstOrDefault(x => x.UserID == user.UserID);
                 if (target == null)
                     throw new ApplicationException("用户不存在");
-                target.Comment = user.Comment;
-                target.LastLoginIP = user.LastLoginIP;
-                target.LastLoginTime = user.LastLoginTime;
+                target.Comment = string.IsNullOrEmpty(user.Comment)?string.Empty:user.Comment;
                 target.AreaID = user.AreaID;
                 target.Name = user.Name;
-                target.RoleId = user.RoleID;
+                //target.RoleId = user.RoleID;
+                target.Disabled = user.Disabled;
                 context.SubmitChanges();
             }
         }
@@ -171,6 +171,7 @@ namespace FreightSystem.Logics.Implementations
                                       Password = x.Password,
                                       RoleID = x.RoleId,
                                       UserID = x.UserID,
+                                      Disabled = x.Disabled,
                                       Role = new RoleModel()
                                       {
                                           RoleID = x.Roles.RoleID,
@@ -197,7 +198,7 @@ namespace FreightSystem.Logics.Implementations
                     Password = user.Password,
                     RoleId = user.RoleID,
                     UserID = user.UserID,
-
+                    Disabled = user.Disabled
                 };
                 context.Users.InsertOnSubmit(newUser);
                 context.SubmitChanges();
@@ -302,6 +303,50 @@ namespace FreightSystem.Logics.Implementations
                 curuser.LastLoginIP = user.LastLoginIP;
                 curuser.LastLoginTime = user.LastLoginTime;
                 context.SubmitChanges();
+            }
+        }
+
+
+        public UserModel GetUser(string userID)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                Users user = context.Users.FirstOrDefault(x => x.UserID == userID);
+                if (user == null)
+                    return null;
+                return new UserModel()
+                {
+                    Comment = user.Comment,
+                    CreateDateTime = user.CreateDateTime,
+                    AreaID = user.AreaID,
+                    Area = new BusinessAreaModel()
+                    {
+                        AreaName = user.BusinessArea.AreaName,
+                        ID = user.BusinessArea.ID
+                    },
+                    Name = user.Name,
+                    Password = user.Password,
+                    RoleID = user.RoleId,
+                    UserID = user.UserID,
+                    LastLoginIP = user.LastLoginIP,
+                    LastLoginTime = user.LastLoginTime,
+                    Disabled = user.Disabled,
+                    Role = new RoleModel()
+                    {
+                        RoleID = user.Roles.RoleID,
+                        RoleName = user.Roles.RoleName,
+                        Menus = (from x in user.Roles.MenuAccess
+                                 orderby x.MenuItem.OrderIndex
+                                 select new MenuItemModel()
+                                 {
+                                     Link = x.MenuItem.Link,
+                                     MenuCode = x.MenuItem.MenuCode,
+                                     MenuText = x.MenuItem.MenuText,
+                                     OrderIndex = x.MenuItem.OrderIndex
+                                 }).ToList(),
+                        AccessList = user.Roles.AccessList
+                    }
+                };
             }
         }
     }

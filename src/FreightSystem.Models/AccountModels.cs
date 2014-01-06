@@ -17,6 +17,7 @@ namespace FreightSystem.Models
         public DateTime LastLoginTime { get; set; }
         public string LastLoginIP { get; set; }
         public RoleModel Role { get; set; }
+        public bool Disabled { get; set; }
     }
     public class UserListModel
     {

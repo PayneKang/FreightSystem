@@ -20,6 +20,43 @@ namespace Web.Controllers
         #endregion
 
         #region Actions
+
+        [LoggedIn(CheckAccess:true,AccessCode:"USERMGR")]
+        [HttpGet]
+        public ActionResult UpdateUser()
+        {
+            string userID = Request["userID"];
+            ViewBag.AllArea = (from x in businessProvider.ListAllArea()
+                               select new SelectListItem()
+                               {
+                                   Text = x.AreaName,
+                                   Value = x.ID.ToString()
+                               }).ToList();
+            UserModel user = userProvider.GetUser(userID);
+            return View(user);
+        }
+        [LoggedIn(CheckAccess: true, AccessCode: "USERMGR")]
+        [HttpPost]
+        public ActionResult UpdateUser(UserModel model)
+        {
+            ViewBag.AllArea = (from x in businessProvider.ListAllArea()
+                               select new SelectListItem()
+                               {
+                                   Text = x.AreaName,
+                                   Value = x.ID.ToString()
+                               }).ToList();
+            ViewBag.Roles = (from x in userProvider.GetRoleList().ItemList
+                               select new SelectListItem()
+                               {
+                                   Text = x.RoleName,
+                                   Value = x.RoleID.ToString()
+                               }).ToList();
+            userProvider.UpdateUser(model);
+            model = userProvider.GetUser(model.UserID);
+            ViewBag.Message = "修改信息成功";
+            return View(model);
+        }
+
         [LoggedIn(CheckAccess:true,AccessCode:"USERMGR")]
         [HttpGet]
         public ActionResult NewUser()
@@ -122,6 +159,11 @@ namespace Web.Controllers
             if (user == null)
             {
                 ViewBag.ErrorMessage = "登陆失败，用户名或者密码错误";
+                return View();
+            }
+            if (user.Disabled)
+            {
+                ViewBag.ErrorMessage = "登陆失败，此用户已被禁用";
                 return View();
             }
             cacheProvider.SaveUser(user);

@@ -13,6 +13,9 @@
                 <thead>
                     <tr>
                         <th>
+                            状态
+                        </th>
+                        <th>
                             用户名
                         </th>
                         <th>
@@ -33,12 +36,17 @@
                         <th>
                             最近登陆时间 | IP
                         </th>
+                        <th>
+                            操作
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (UserModel record in Model.ItemList)
                     {
                         <tr>
+                            <td>@(record.Disabled?"禁用":"可用")
+                            </td>
                             <td>@record.UserID
                             </td>
                             <td>@record.Role.RoleName
@@ -52,6 +60,9 @@
                             <td>@record.CreateDateTime
                             </td>
                             <td>@record.LastLoginTime | @record.LastLoginIP
+                            </td>
+                            <td>
+                            <a href="/Security/UpdateUser?userid=@record.UserID">编辑</a>
                             </td>
                         </tr>
                     }

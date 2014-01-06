@@ -7,8 +7,8 @@
       <Column Name="LogDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Operation" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Association Name="Users_TransportRecordsOptionHistory" Member="Users" ThisKey="UserID" OtherKey="UserID" Type="Users" IsForeignKey="true" />
       <Association Name="TransportRecords_TransportRecordsOptionHistory" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
+      <Association Name="Users_TransportRecordsOptionHistory" Member="Users" ThisKey="UserID" OtherKey="UserID" Type="Users" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.MenuAccess" Member="MenuAccess">
@@ -26,22 +26,6 @@
       <Column Name="Link" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="OrderIndex" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="MenuItem_MenuAccess" Member="MenuAccess" ThisKey="MenuCode" OtherKey="MenuCode" Type="MenuAccess" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="Users">
-      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
-      <Column Name="CreateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Comment" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="AreaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="LastLoginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="LastLoginIP" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Association Name="Users_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="UserID" OtherKey="UserID" Type="TransportRecordsOptionHistory" />
-      <Association Name="BusinessArea_Users" Member="BusinessArea" ThisKey="AreaID" OtherKey="ID" Type="BusinessArea" IsForeignKey="true" />
-      <Association Name="Roles_Users" Member="Roles" ThisKey="RoleId" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.BusinessArea" Member="BusinessArea">
@@ -120,6 +104,23 @@
       <Column Name="Volume" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="TransportRecordID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="Users">
+      <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="CreateDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AreaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginIP" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Disabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Users_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="UserID" OtherKey="UserID" Type="TransportRecordsOptionHistory" />
+      <Association Name="BusinessArea_Users" Member="BusinessArea" ThisKey="AreaID" OtherKey="ID" Type="BusinessArea" IsForeignKey="true" />
+      <Association Name="Roles_Users" Member="Roles" ThisKey="RoleId" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
