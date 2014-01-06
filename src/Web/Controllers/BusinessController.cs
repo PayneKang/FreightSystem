@@ -474,6 +474,31 @@ namespace Web.Controllers
 
         [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
         [HttpGet]
+        public ActionResult DeleteDetails(int id)
+        {
+            TransportRecordDetailModel model = businessProvider.GetTransportRecordDetailModel(id);
+            businessProvider.DeleteTransportRecordDetail(id);
+            return RedirectToAction("DetailsMgr", "Business", new { id = model.TransportRecordID });
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [HttpGet]
+        public ActionResult UpdateDetails(int id)
+        {
+            TransportRecordDetailModel model = businessProvider.GetTransportRecordDetailModel(id);
+            return View(model);
+        }
+
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [HttpPost]
+        public ActionResult UpdateDetails(TransportRecordDetailModel model)
+        {
+            businessProvider.UpdateTransportDetailModel(model);
+            model = businessProvider.GetTransportRecordDetailModel(model.ID);
+            return RedirectToAction("DetailsMgr", "Business", new { id = model.TransportRecordID });
+        }
+        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [HttpGet]
         public ActionResult DetailsMgr(int id)
         {
             TransportRecordModel model = businessProvider.GetTransportRecordModel(id);

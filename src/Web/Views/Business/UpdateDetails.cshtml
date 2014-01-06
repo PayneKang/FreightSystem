@@ -1,0 +1,45 @@
+﻿@model FreightSystem.Models.TransportRecordDetailModel
+@{
+    ViewBag.Title = "编辑明细";
+}
+<div class="large-6 columns">
+        <br />
+        <fieldset>
+            <legend>编辑货物明细</legend>
+            @using (Html.BeginForm())
+            {
+                <div class="row" style="color:Red;">@ViewBag.ErrorMessage</div>
+                <div class="row">
+                    <br />
+                    <div class="large-5 large-offset-0-1 columns">
+                        <label>
+                            单据编号</label>
+                        @Html.TextBoxFor(x=>x.DetailNo)
+                        @Html.ValidationMessageFor(x=>x.DetailNo)
+                    </div>
+                    <div class="large-5 large-offset-0-1 columns">
+                        <label>
+                            货物名称</label>
+                        @Html.TextBoxFor(x=>x.PackageName)
+                        @Html.ValidationMessageFor(x=>x.PackageName)
+                    </div>
+                    <div class="large-5 large-offset-0-1 columns">
+                        <label>
+                            数量</label>
+                        @Html.TextBoxFor(x=>x.Quantity)
+                        @Html.ValidationMessageFor(x=>x.Quantity)
+                    </div>
+                    <div class="large-5 large-offset-0-1 columns">
+                        <label>
+                            体积</label>
+                        @Html.TextBoxFor(x=>x.Volume)
+                        @Html.ValidationMessageFor(x=>x.Volume)
+                    </div>
+                    <div class="large-11 columns">
+                        <button type="submit" class="left button tiny" style="margin-top: 1rem">
+                            保存</button>
+                    </div>
+                </div>
+            }
+        </fieldset>
+    </div>

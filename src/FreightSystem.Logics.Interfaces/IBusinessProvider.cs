@@ -29,5 +29,8 @@ namespace FreightSystem.Logics.Interfaces
         ClientModel GetClient(int id);
         void UpdateClientInformation(ClientModel client);
         string GetNextTrayNo(string clientName);
+        TransportRecordDetailModel GetTransportRecordDetailModel(long id);
+        void UpdateTransportDetailModel(TransportRecordDetailModel model);
+        void DeleteTransportRecordDetail(long id);
     }
 }

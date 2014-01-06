@@ -1,5 +1,8 @@
 ﻿@using FreightSystem.Models;
 @model FreightSystem.Models.TransportRecordModel
+@{
+    UserModel loggedUser = (UserModel)ViewBag.LoggedUser;
+}
 <fieldset>
     <legend>货物明细</legend>
     <table class="table-cell-spacing large-12">
@@ -17,6 +20,9 @@
                 <th>
                     体积
                 </th>
+                <th>
+                    操作
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +38,12 @@
                     <td>@detail.Quantity
                     </td>
                     <td>@detail.Volume
+                    </td>
+                    <td>
+                    @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
+                    {
+                        <a href="/Business/UpdateDetails/@detail.ID">编辑</a> <a href="/Business/DeleteDetails/@detail.ID" onclick="return confirm('确定要删除此明细？');">删除</a>                    
+                    }
                     </td>
                 </tr>
                 }

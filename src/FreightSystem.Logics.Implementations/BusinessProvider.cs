@@ -683,5 +683,49 @@ namespace FreightSystem.Logics.Implementations
                 context.SubmitChanges();
             }
         }
+
+
+        public TransportRecordDetailModel GetTransportRecordDetailModel(long id)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecordDetail detail = context.TransportRecordDetail.FirstOrDefault(x => x.ID == id);
+                return new TransportRecordDetailModel()
+                {
+                    DetailNo = detail.DetailNo,
+                    ID = detail.ID,
+                    PackageName = detail.PackageName,
+                    Quantity = detail.Quantity,
+                    TransportRecordID = detail.TransportRecordID,
+                    Volume = detail.Volume
+                };
+            }
+        }
+
+
+        public void UpdateTransportDetailModel(TransportRecordDetailModel model)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecordDetail detail = context.TransportRecordDetail.FirstOrDefault(x => x.ID == model.ID);
+                if (detail == null)
+                    return;
+                detail.DetailNo = model.DetailNo;
+                detail.PackageName = model.PackageName;
+                detail.Quantity = model.Quantity;
+                detail.Volume = model.Volume;
+                context.SubmitChanges();
+            }
+        }
+
+
+        public void DeleteTransportRecordDetail(long id)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                context.TransportRecordDetail.DeleteOnSubmit( context.TransportRecordDetail.FirstOrDefault(x => x.ID == id));
+                context.SubmitChanges();
+            }
+        }
     }
 }
