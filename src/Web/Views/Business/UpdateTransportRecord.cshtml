@@ -1,5 +1,8 @@
 ﻿@using FreightSystem.Models;
 @model FreightSystem.Models.TransportRecordModel
+@{
+    UserModel loggedUser = (UserModel)ViewBag.LoggedUser;
+}
 <script language="javascript" type="text/javascript" src="/Scripts/My97DatePicker/WdatePicker.js"></script>
 <br />
 <div class="row">
@@ -79,15 +82,9 @@
                     </div>
                     <div class="large-5 large-offset-0-1 columns">
                         <label>
-                            体积</label>
-                        @Html.TextBoxFor(m => m.Volume, new { @type = "text", @style = "margin-bottom:0px" })
-                        <small class="error">@Html.ValidationMessageFor(m => m.Volume)</small>
-                    </div>
-                    <div class="large-5 large-offset-0-1 columns">
-                        <label>
-                            数量</label>
-                        @Html.TextBoxFor(m => m.Quantity, new { @type = "text", @style = "margin-bottom:0px" })
-                        <small class="error">@Html.ValidationMessageFor(m => m.Quantity)</small>
+                            装卸费</label>
+                        @Html.TextBoxFor(m => m.HandlingFee, new { @type = "text", @style = "margin-bottom:0px" })
+                        <small class="error">@Html.ValidationMessageFor(m => m.HandlingFee)</small>
                     </div>
                     <div class="large-5 large-offset-0-1 columns">
                         <label>
@@ -103,6 +100,24 @@
                     </div>
                     <div class="large-5 large-offset-0-1 columns">
                         <label>
+                            体积</label>
+                        @Html.TextBoxFor(m => m.Volume, new { @type = "text", @style = "margin-bottom:0px" })
+                        <small class="error">@Html.ValidationMessageFor(m => m.Volume)</small>
+                    </div>
+                    <div class="large-5 large-offset-0-1 columns">
+                        <label>
+                            数量</label>
+                        @Html.TextBoxFor(m => m.Quantity, new { @type = "text", @style = "margin-bottom:0px" })
+                        <small class="error">@Html.ValidationMessageFor(m => m.Quantity)</small>
+                    </div>
+                    <div class="large-5 large-offset-0-1 columns">
+                        <label>
+                            到货时间</label>
+                        @Html.TextBoxFor(m => m.ReceivedDate, new { @type = "text", @Value = Model.ReceivedDate.HasValue ? Model.ReceivedDate.Value.ToString("yyyy-MM-dd") : "", @style = "margin-bottom:0px" })
+                        <small class="error">@Html.ValidationMessageFor(m => m.ReceivedDate)</small>
+                    </div>
+                    <div class="large-5 large-offset-0-1 columns">
+                        <label>
                             扣款</label>
                         @Html.TextBoxFor(m => m.Deductions, new { @type = "text", @style = "margin-bottom:0px" })
                         <small class="error">@Html.ValidationMessageFor(m => m.Deductions)</small>
@@ -112,12 +127,6 @@
                             赔款</label>
                         @Html.TextBoxFor(m => m.Reparations, new { @type = "text", @style = "margin-bottom:0px" })
                         <small class="error">@Html.ValidationMessageFor(m => m.Reparations)</small>
-                    </div>
-                    <div class="large-5 large-offset-0-1 columns">
-                        <label>
-                            装卸费</label>
-                        @Html.TextBoxFor(m => m.HandlingFee, new { @type = "text", @style = "margin-bottom:0px" })
-                        <small class="error">@Html.ValidationMessageFor(m => m.HandlingFee)</small>
                     </div>
                     <div class="large-5 large-offset-0-1 columns">
                         <label>
@@ -131,23 +140,11 @@
                         @Html.TextBoxFor(m => m.PayDate, new { @type = "text", @Value = Model.PayDate.HasValue ? Model.PayDate.Value.ToString("yyyy-MM-dd") : "", @style = "margin-bottom:0px" })
                         <small class="error">@Html.ValidationMessageFor(m => m.PayDate)</small>
                     </div>
-                    <div class="large-5 large-offset-0-1 columns">
-                        <label>
-                            到货时间</label>
-                        @Html.TextBoxFor(m => m.ReceivedDate, new { @type = "text", @Value = Model.ReceivedDate.HasValue ? Model.ReceivedDate.Value.ToString("yyyy-MM-dd") : "", @style = "margin-bottom:0px" })
-                        <small class="error">@Html.ValidationMessageFor(m => m.ReceivedDate)</small>
-                    </div>
                     <div class="large-12 large-offset-0-1 columns">
                         <label>
                             备注</label>
                         @Html.TextAreaFor(m => m.Comment, new { @style = "width:87%;height:80px;margin-bottom:0px" })
                         <small class="error">@Html.ValidationMessageFor(m => m.Comment)</small>
-                    </div>
-                    <div class="large-12 large-offset-0-1 columns">
-                        <label>
-                            所在业务区域</label>
-                        @Html.LabelFor(m => m.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName, new { @class = "left", @style = "padding-top:1rem" })
-                        @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
                     </div>
                     <div class="large-3 large-offset-0-1 columns">
                         是否正常：@Html.CheckBoxFor(m => m.Error)
@@ -158,8 +155,18 @@
                     <div class="large-3 large-offset-0-1 columns">
                         是否结算 ：@Html.CheckBoxFor(m => m.Paid)
                     </div>
-                    <div class="large-2 large-offset-0-1 columns">
-                        <input type="submit" value="修改" />
+                    <div class="large-3 large-offset-0-1 columns">
+                        <br />
+                        <label>
+                            所在业务区域</label>
+                    </div>
+                    <div class="large-3 large-offset-0-1 columns">
+                        <br />
+                        @Html.LabelFor(m => m.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName, new { @class = "left" })
+                        @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
+                    </div>
+                    <div class="large-3 large-offset-0-1 columns">
+                        <input type="submit" class="button tiny" style="margin-top: 1rem" value="修改" />
                     </div>
                 </div>
                 if (string.IsNullOrEmpty(Model.TrayNo))
@@ -189,6 +196,9 @@
                         <th>
                             体积
                         </th>
+                        <th>
+                            操作
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -204,6 +214,12 @@
                             <td>@detail.Quantity
                             </td>
                             <td>@detail.Volume
+                            </td>
+                            <td>
+                                @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
+                                {
+                                    <a class="left" href="/Business/UpdateDetails/@detail.ID">编辑</a><a class="right" href="/Business/DeleteDetails/@detail.ID" onclick="return confirm('确定要删除此明细？');">删除</a>                    
+                                }
                             </td>
                         </tr>
                         }

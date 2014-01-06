@@ -6,11 +6,11 @@
 <br />
 @using (Html.BeginForm())
 {
-    <fieldset class="large-3">
+    <fieldset class="large-6">
         <legend>@ViewBag.Title</legend>
         <div class="row">
             <br />
-            <div class="large-10 columns large-offset-1">
+            <div class="large-10 columns large-offset-3">
                 <div style="width: 100%; overflow: auto;">
                     <ul>
                         @foreach (BusinessAreaModel area in Model)
@@ -20,12 +20,12 @@
                     </ul>
                 </div>
             </div>
-            <div class="large-10 columns large-offset-1">
+            <div class="large-4 columns large-offset-3">
                 <label>
                     地区名称</label>
-                <input type="text" name="newarea" style="width: 80%" />
+                <input type="text" name="newarea" />
             </div>
-            <div class="large-11 columns">
+            <div class="large-9 columns">
                 <input type="submit" class="button tiny" value="创建" />
             </div>
         </div>

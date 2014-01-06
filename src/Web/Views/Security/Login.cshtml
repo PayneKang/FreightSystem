@@ -23,17 +23,18 @@
     <div class="large-12 columns">
         @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
         {   
-            <fieldset class="large-4">
-                <legend>欢迎登陆 <small>>> 物流单据管理系统</small></legend>
+            <fieldset style="margin: 0 auto;" class="large-6">
+                <legend>欢迎登陆 >> 物流单据管理系统</legend>
+                <br />
+                <br />
                 <div class="row">
-                    <br />
-                    <div class="large-10 columns large-offset-1">
+                    <div class="large-6 columns large-offset-3">
                         @Html.TextBoxFor(m => m.Username, new { @type = "text", @placeholder = "请输入用户名" })
                     </div>
-                    <div class="large-10 columns large-offset-1">
+                    <div class="large-6 columns large-offset-3">
                         @Html.PasswordFor(m => m.Password, new { @type = "password", @placeholder = "请输入密码" })
                     </div>
-                    <div class="large-11 columns">
+                    <div class="large-9 large-offset-3 columns">
                         <button type="submit" value="" class="button tiny">
                             登录</button>
                     </div>

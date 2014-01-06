@@ -6,42 +6,46 @@
 <br />
 @using (Html.BeginForm())
 {
-    <fieldset class="large-3">
+    <fieldset class="large-6">
     <legend>@ViewBag.Title</legend>
-        <div class="row" style="color:Red;">@ViewBag.Message</div>
+        <label style="color: Red;">@ViewBag.Message</label>
         <div class="row">
             <br />
-            <div class="large-10 columns large-offset-1">
+            <div class="large-5 columns large-offset-3">
                 <label>用户名 : @Model.UserID</label>
+                <br />
             </div>
-            <div class="large-10 columns large-offset-1">
+            <div class="large-5 columns large-offset-3">
                 <label>密码</label>
                 @Html.TextBoxFor(m => m.Password, new { @type = "password", @style = "margin-bottom:0px", @placeholder = "必填" })
                 <small class="error">@Html.ValidationMessageFor(m => m.Password)</small>
             </div>
-            <div class="large-10 columns large-offset-1">
+            <div class="large-5 columns large-offset-3">
                 <label>所在地</label>
                 @Html.DropDownListFor(m => m.AreaID, (List<SelectListItem>)ViewBag.AllArea, new { @style = "margin-bottom:0px;margin-bottom:1rem;", @placeholder = "必填" })
                 <small class="error">@Html.ValidationMessageFor(m => m.AreaID)</small>
             </div>
-            <div class="large-10 columns large-offset-1">
+            <div class="large-5 columns large-offset-3">
                 <label>姓名</label>
                 @Html.TextBoxFor(m => m.Name, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
                 <small class="error">@Html.ValidationMessageFor(m => m.Name)</small>
+                <br />
             </div>
-            <div class="large-10 columns large-offset-1">
+            <div class="large-5 columns large-offset-3">
                 <label>角色 ：@Model.Role.RoleName</label>
+                <br />
             </div>
-            <div class="large-10 columns large-offset-1">
+            <div class="large-5 columns large-offset-3">
                 <label>备注</label>
                 @Html.TextBoxFor(m => m.Comment, new { @type = "text", @style = "margin-bottom:0px" })
                 <small class="error">@Html.ValidationMessageFor(m => m.Comment)</small>
+                <br />
             </div>
-            <div class="large-10 columns large-offset-1">
+            <div class="large-5 columns large-offset-3">
                 <label>是否禁用</label>
                 @Html.CheckBoxFor(m => m.Disabled)
             </div>
-            <div class="large-11 columns">
+            <div class="large-9 columns">
                 <button type="submit" class="button tiny" style="margin-top:1rem">保存</button>
             </div>
         </div>

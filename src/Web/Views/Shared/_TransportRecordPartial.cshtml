@@ -93,6 +93,13 @@
         </tr>
         <tr>
             <th>
+                装卸费
+            </th>
+            <td colspan="3">@Model.HandlingFee
+            </td>
+        </tr>
+        <tr>
+            <th>
                 运费
             </th>
             <td>@Model.DeliverPrice
@@ -101,13 +108,6 @@
                 短驳费
             </th>
             <td>@Model.ShortBargeFee
-            </td>
-        </tr>
-        <tr>
-            <th>
-                装卸费
-            </th>
-            <td colspan="3">@Model.HandlingFee
             </td>
         </tr>
         <tr>
@@ -212,9 +212,13 @@
                 }
             </td>
         </tr>
-        @if (loggedUser.Role.AccessList.Contains("ALL")||loggedUser.Role.AccessList.Contains("SUPERUPT"))
+        @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("SUPERUPT"))
         {
-        <tr><th colspan="4"><a href="/Business/UpdateTransportRecord/@Model.ID">修改单据信息</a></th></tr>
+            <tr>
+                <th colspan="4">
+                    <a href="/Business/UpdateTransportRecord/@Model.ID">修改单据信息</a>
+                </th>
+            </tr>
         }
     </table>
 </fieldset>

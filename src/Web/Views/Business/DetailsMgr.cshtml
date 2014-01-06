@@ -15,7 +15,6 @@
             <legend>新增货物明细</legend>
             @using (Html.BeginForm())
             {
-                <div class="row" style="color:Red;">@ViewBag.ErrorMessage</div>
                 <div class="row">
                     <br />
                     <div class="large-5 large-offset-0-1 columns">
@@ -44,6 +43,8 @@
                     </div>
                 </div>
             }
+            <br />
+            <label style="color: Red;">@ViewBag.ErrorMessage</label>
         </fieldset>
     </div>
 </div>

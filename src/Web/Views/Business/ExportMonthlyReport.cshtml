@@ -2,64 +2,133 @@
 @using FreightSystem.Models;
 @using FreightSystem.Models.Extra;
 @{Layout = null;}
-<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-<table border="1">
+    <table border="1">
         <tr>
-            <th>日期</th>
-            <th>客户</th>
-            <th>托编号</th>
-            <th>驾驶员</th>
-            <th>车号</th>
-            <th>货物名称</th>
-            <th>体积</th>
-            <th>数量</th>
-            <th>起运地</th>
-            <th>卸货地</th>
-            <th>运费</th>
-            <th>短驳费</th>
-            <th>装卸费</th>
-            <th>赔款</th>
-            <th>扣款</th>
-            <th>预付款</th>
-            <th>应付款</th>
-            <th>付款日</th>
-            <th>专线</th>
-            <th>备注</th>
+            <th>
+                日期
+            </th>
+            <th>
+                客户
+            </th>
+            <th>
+                托编号
+            </th>
+            <th>
+                驾驶员
+            </th>
+            <th>
+                车号
+            </th>
+            <th>
+                货物名称
+            </th>
+            <th>
+                体积
+            </th>
+            <th>
+                数量
+            </th>
+            <th>
+                起运地
+            </th>
+            <th>
+                卸货地
+            </th>
+            <th>
+                运费
+            </th>
+            <th>
+                短驳费
+            </th>
+            <th>
+                装卸费
+            </th>
+            <th>
+                赔款
+            </th>
+            <th>
+                扣款
+            </th>
+            <th>
+                预付款
+            </th>
+            <th>
+                应付款
+            </th>
+            <th>
+                到货日
+            </th>
+            <th>
+                付款日
+            </th>
+            <th>
+                专线
+            </th>
+            <th>
+                备注
+            </th>
         </tr>
-    @foreach (TransportRecordModel record in Model.ItemList)
-    {
-        <tr>
-            <td>@record.DeliverDate.ToString("yyyy.MM.dd")</td>
-            <td>@record.ClientName</td>
-            <td>@record.TrayNo</td>
-            <td>@record.Driver</td>
-            <td>@record.CarLicense</td>
-            <td>@record.PackageName</td>
-            <td>@record.Volume</td>
-            <td>@record.Quantity</td>
-            <td>@record.FromLocation</td>
-            <td>@record.ToLocation</td>
-            <td>@record.DeliverPrice</td>
-            <td>@record.ShortBargeFee</td>
-            <td>@record.HandlingFee</td>
-            <td>@record.Reparations</td>
-            <td>@record.Deductions</td>
-            <td>@record.PrePay</td>
-            <td>@record.AccountPayble</td>
-            <td>
-                @if (record.PayDate != null)
-                {
-                    record.PayDate.Value.ToString("MM.dd");
-                }
-            </td>
-            <td>@record.DeliverType</td>
-            <td>@record.Comment</td>
-        </tr>
-    }
-</table>
+        @foreach (TransportRecordModel record in Model.ItemList)
+        {
+            <tr>
+                <td>@record.DeliverDate.ToString("yyyy.MM.dd")
+                </td>
+                <td>@record.ClientName
+                </td>
+                <td>@record.TrayNo
+                </td>
+                <td>@record.Driver
+                </td>
+                <td>@record.CarLicense
+                </td>
+                <td>@record.PackageName
+                </td>
+                <td>@record.Volume
+                </td>
+                <td>@record.Quantity
+                </td>
+                <td>@record.FromLocation
+                </td>
+                <td>@record.ToLocation
+                </td>
+                <td>@record.DeliverPrice
+                </td>
+                <td>@record.ShortBargeFee
+                </td>
+                <td>@record.HandlingFee
+                </td>
+                <td>@record.Reparations
+                </td>
+                <td>@record.Deductions
+                </td>
+                <td>@record.PrePay
+                </td>
+                <td>@record.AccountPayble
+                </td>
+                <td>
+                    @if (record.ReceivedDate != null)
+                    {
+                        @record.ReceivedDate.Value.ToString("yyyy.MM.dd");
+                    }
+                </td>
+                <td>
+                    @if (record.PayDate != null)
+                    {
+                        @record.PayDate.Value.ToString("yyyy.MM.dd");
+                    }
+                </td>
+                <td>@record.DeliverType
+                </td>
+                <td>@record.Comment
+                </td>
+            </tr>
+        }
+    </table>
 </body>
 </html>

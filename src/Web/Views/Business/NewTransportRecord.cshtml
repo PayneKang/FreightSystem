@@ -24,78 +24,78 @@
 <br />
 @using (Html.BeginForm())
 {
-<fieldset class="large-5">
+<fieldset class="large-6">
     <legend>@ViewBag.Title</legend>
     <div class="row">
         <br />
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>日期</label>
             @Html.TextBoxFor(m => m.DeliverDate, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" }) 
             <small class="error">@Html.ValidationMessageFor(m => m.DeliverDate)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>客户</label>
             @Html.DropDownListFor(m => m.ClientName, (List<SelectListItem>)ViewBag.Clients, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
              <small class="error">@Html.ValidationMessageFor(m => m.ClientName)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>驾驶员</label>
             @Html.TextBoxFor(m => m.Driver, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" }) 
             <small class="error">@Html.ValidationMessageFor(m => m.Driver)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>车牌号</label>
             @Html.TextBoxFor(m => m.CarLicense, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" }) 
             <small class="error">@Html.ValidationMessageFor(m => m.CarLicense)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>物品名称</label>
             @Html.TextBoxFor(m => m.PackageName, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" }) 
             <small class="error">@Html.ValidationMessageFor(m => m.PackageName)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>起运地</label>
             @Html.TextBoxFor(m => m.FromLocation, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" }) 
             <small class="error">@Html.ValidationMessageFor(m => m.FromLocation)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>卸货地 / 单位</label>
             @Html.TextBoxFor(m => m.ToLocation, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" }) 
             <small class="error">@Html.ValidationMessageFor(m => m.ToLocation)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>预付</label>
             @Html.TextBoxFor(m => m.PrePay, new { @type = "text", @style = "margin-bottom:0px" })
             <small class="error">@Html.ValidationMessageFor(m => m.PrePay)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>油卡</label>
             @Html.TextBoxFor(m => m.OilCard, new { @type = "text", @style = "margin-bottom:0px" })
             <small class="error">@Html.ValidationMessageFor(m => m.OilCard)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>装卸费</label>
             @Html.TextBoxFor(m => m.HandlingFee, new { @type = "text", @style = "margin-bottom:0px" })
             <small class="error">@Html.ValidationMessageFor(m => m.HandlingFee)</small>
         </div>
-        <div class="large-5 large-offset-0-1 columns">
+        <div class="large-4 large-offset-1 columns">
             <label>专线</label>
             @Html.TextBoxFor(m => m.DeliverType, new { @type = "text", @style = "margin-bottom:0px" })
             <small class="error">@Html.ValidationMessageFor(m => m.DeliverType)</small>
         </div>
-        <div class="large-12 large-offset-0-1 columns">
+        <div class="large-10 large-offset-1 columns">
             <label>备注</label>
-            @Html.TextAreaFor(m => m.Comment, new { @style = "width:87%;height:80px;margin-bottom:0px" })
+            @Html.TextAreaFor(m => m.Comment, new { @style = "width:90%; height:80px; margin-bottom:0px" })
             <small class="error">@Html.ValidationMessageFor(m => m.Comment)</small>
         </div>
-        <div class="large-3 large-offset-0-1 columns">
+        <div class="large-3 large-offset-1 columns">
             <label style="padding-top:1rem">所在业务区域： </label>
         </div>
         <div class="large-2 columns">
             @Html.LabelFor(m => m.BusinessArea, ((UserModel)ViewBag.LoggedUser).Area.AreaName, new { @class = "left", @style = "padding-top:1rem" }) 
             @Html.Hidden("businessarea", ((UserModel)ViewBag.LoggedUser).Area.AreaName)
         </div>
-        <div class="large-3 columns">
+        <div class="large-4 columns">
             <button type="submit" class="button tiny" style="margin-top:1rem" >保存</button>
         </div>
     </div>

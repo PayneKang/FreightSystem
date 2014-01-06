@@ -4,7 +4,7 @@
     ViewBag.Title = "用户列表";
 }
 <br />
-<fieldset class="large-8">
+<fieldset class="large-12">
     <legend>@ViewBag.Title >> @Html.ActionLink("新建用户", "NewUser", "Security")</legend>
     <div class="row">
         <br />
@@ -45,7 +45,7 @@
                     @foreach (UserModel record in Model.ItemList)
                     {
                         <tr>
-                            <td>@(record.Disabled?"禁用":"可用")
+                            <td>@(record.Disabled ? "禁用" : "可用")
                             </td>
                             <td>@record.UserID
                             </td>
@@ -62,7 +62,7 @@
                             <td>@record.LastLoginTime | @record.LastLoginIP
                             </td>
                             <td>
-                            <a href="/Security/UpdateUser?userid=@record.UserID">编辑</a>
+                                <a href="/Security/UpdateUser?userid=@record.UserID">编辑</a>
                             </td>
                         </tr>
                     }

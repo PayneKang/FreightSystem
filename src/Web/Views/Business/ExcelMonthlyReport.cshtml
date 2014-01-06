@@ -6,22 +6,23 @@
 <br />
 @using (Html.BeginForm("ExcelMonthlyReport", "Business", FormMethod.Post))
 {
-    <fieldset class="large-5">
+    <fieldset class="large-6">
         <legend>@ViewBag.Title</legend>
         <div class="row">
             <br />
-            <div class="large-6 columns large-offset-1">
+            <div class="large-4 columns large-offset-2">
                 <label>
                     日期</label>
                 @Html.TextBoxFor(x => x.YearMonth, new { @onClick = "WdatePicker({dateFmt:'yyyy-MM'})" })
                 @Html.ValidationMessageFor(x => x.YearMonth)
             </div>
-            <div class="large-5 columns">
+            <div class="large-6 columns">
                 <label style="visibility: hidden">
                     样式调整</label>
                 <button type="submit" class="button tiny" id="btnExport">
                     导出月报表</button>
             </div>
+            <br />
         </div>
     </fieldset>
 }
