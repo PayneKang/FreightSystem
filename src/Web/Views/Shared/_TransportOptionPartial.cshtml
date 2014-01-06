@@ -1,0 +1,98 @@
+﻿@model FreightSystem.Models.TransportRecordModel
+@using FreightSystem.Models;
+@using FreightSystem.Models.Extra;
+@{
+    UserModel loggedUser = (UserModel)ViewBag.LoggedUser;
+}
+@if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
+{
+    <a class="button operate radius"  href="/Business/DetailsMgr/@Model.ID">管理明细</a>
+}
+@if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLPRICE"))
+{
+    if (!Model.DeliverPrice.HasValue)
+    {
+    <a class="button operate radius"  href="/Business/FillPrice/@Model.ID">未调度</a>
+    }
+    else
+    {
+    <div class="button operate radius" style="cursor: inherit; background-color: #999;">
+        已调度</div>
+    }
+}
+@if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
+{ 
+    <a class="button operate radius"  href="/Business/FillTransportRecord/@Model.ID">内勤</a>
+}
+@if (Model.Received)
+{
+    if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
+    {
+    <a class="button operate radius" href="/Business/UpdateReceived/@Model.ID">已到货</a>
+    }
+    else
+    {
+    <div class="button operate radius disabledB" style="cursor: inherit; background-color: #999;">
+        已到货</div>
+    }
+}
+else
+{
+    if (loggedUser.Role.AccessList.Contains("UPDTREV") || loggedUser.Role.AccessList.Contains("ALL"))
+    {
+    <a class="button operate alert radius" href="/Business/UpdateReceived/@Model.ID">未到货</a>
+    }
+    else
+    {                            
+    <div class="button operate alert radius disabledA" style="cursor: inherit; background-color: #999;">
+        未到货</div>
+    }
+}
+@if (Model.Paid)
+{
+    <div class="button operate radius" style="cursor: inherit; background-color: #999;">
+        已结算</div>
+}
+else
+{
+    if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
+    {
+    <a class="button operate alert radius" href="/Business/FillCa/@Model.ID" >未结算</a>
+    }
+    else
+    {                            
+    <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">
+        未结算</div>
+    }
+}
+@if (Model.Error)
+{
+    if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
+    {
+    <a class="button operate alert radius" href="/Business/UpdateErr/@Model.ID?error=false" >
+        异常</a>
+                        
+    }
+    else
+    {                            
+    <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">
+        异常</div>
+    }
+}
+else
+{
+    if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
+    {
+    <a class="button operate radius" href="/Business/UpdateErr/@Model.ID?error=true" >正常</a>
+                        
+    }
+    else
+    {                            
+    <div class="button operate radius" style="cursor: inherit; background-color: #999;">
+        正常</div>
+    }
+}
+@if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
+{
+    <a class="button operate radius success" href="/Business/PrintTR/@Model.ID">打印</a>
+}

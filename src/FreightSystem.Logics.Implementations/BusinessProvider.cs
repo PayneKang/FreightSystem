@@ -12,6 +12,7 @@ namespace FreightSystem.Logics.Implementations
 {  
     public class BusinessProvider : IBusinessProvider
     {
+        public const int IndexLength = 3;
         public TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate,string received,string paid,string error, int pageIndex)
         {
             return QueryTransportModel(clientName, deliverDate,received, paid,error, pageIndex, null);
@@ -607,13 +608,13 @@ namespace FreightSystem.Logics.Implementations
                 int index = client.Index + 1;
                 if (client.IndexMonth != DateTime.Now.Month)
                     index = 1;
-                return string.Format("{0}{1}-{2}", client.ShortName, DateTime.Now.Month.ToString().PadLeft(2, '0'), index.ToString().PadLeft(4, '0'));
+                return string.Format("{0}{1}-{2}", client.ShortName, DateTime.Now.Month.ToString().PadLeft(2, '0'), index.ToString().PadLeft(IndexLength, '0'));
             }
         }
 
         private int GetTrayNoIndex(string trayNo)
         {
-            return int.Parse(trayNo.Substring(trayNo.Length - 4));
+            return int.Parse(trayNo.Substring(trayNo.Length - IndexLength));
         }
 
 
