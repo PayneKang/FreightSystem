@@ -1,0 +1,86 @@
+﻿@model FreightSystem.Models.TransportRecordModel
+@using FreightSystem.Models;
+@using FreightSystem.Models.Extra;
+@{
+    UserModel loggedUser = (UserModel)ViewBag.LoggedUser;
+}
+@if ((@Model.ID % 2) == 0)
+{
+    <tr type="RecordTR" trid="@Model.ID" class="info">
+        <td>
+            <a class="has-tip"  href="/Business/TransportDetails/@Model.ID">@Model.DeliverDate.ToString("MM.dd")</a>
+        </td>
+        <td>@Model.ClientName
+        </td>
+        <td>@Model.TrayNo
+        </td>
+        <td>@Model.Driver
+        </td>
+        <td>@Model.CarLicense
+        </td>
+        <td>@Model.PackageName
+        </td>
+        <td>@Model.Volume
+        </td>
+        <td>@Model.Quantity
+        </td>
+        <td>@Model.FromLocation
+        </td>
+        <td>@Model.ToLocation
+        </td>
+        <td>@Model.BusinessArea
+        </td>
+        <td>@Model.DeliverType
+        </td>
+        <td>
+            @Html.Partial("_TransportOptionPartial", Model)
+        </td>
+    </tr>
+}
+else
+{
+    <tr type="RecordTR" trid="@Model.ID" >
+        <td>
+            <a class="has-tip"  href="/Business/TransportDetails/@Model.ID">@Model.DeliverDate.ToString("MM.dd")</a>
+        </td>
+        <td>@Model.ClientName
+        </td>
+        <td>@Model.TrayNo
+        </td>
+        <td>@Model.Driver
+        </td>
+        <td>@Model.CarLicense
+        </td>
+        <td>@Model.PackageName
+        </td>
+        <td>@Model.Volume
+        </td>
+        <td>@Model.Quantity
+        </td>
+        <td>@Model.FromLocation
+        </td>
+        <td>@Model.ToLocation
+        </td>
+        <td>@Model.BusinessArea
+        </td>
+        <td>@Model.DeliverType
+        </td>
+        <td>
+            @Html.Partial("_TransportOptionPartial", Model)
+        </td>
+    </tr>
+}@*<tr style="display:none;" type="TRDetails" TRID="@record.ID">
+                <td colspan="13">
+                    @if (record.HistoryItem != null)
+                    {
+                        <ul>
+                            @foreach (TransportRecordsHistoryModel history in record.HistoryItem)
+                            {
+                                <li><small>@history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation]
+                                    @history.Description
+                                    操作人：@history.User.UserID</small> </li>
+                            }
+                        </ul>
+                    }
+                </td>
+            </tr>*@
