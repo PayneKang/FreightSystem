@@ -15,11 +15,11 @@
         {
             if (!Model.DeliverPrice.HasValue)
             {
-            <a class="button operate radius"  href="/Business/FillPrice/@Model.ID">未调度</a>
+            <a class="button operate alert radius"  href="/Business/FillPrice/@Model.ID">未调度</a>
             }
             else
             {
-            <div class="button operate radius" style="cursor: inherit; background-color: #999;">
+            <div class="button operate radius" style="cursor: inherit;">
                 已调度</div>
             }
         }
@@ -31,7 +31,7 @@
             }
             else
             {
-            <div class="button operate radius disabledB" style="cursor: inherit; background-color: #999;">
+            <div class="button operate radius disabled" style="cursor: inherit;">
                 已到货</div>
             }
         }
@@ -43,14 +43,22 @@
             }
             else
             {                            
-            <div class="button operate alert radius disabledA" style="cursor: inherit; background-color: #999;">
+            <div class="button operate alert radius disabled" style="cursor: inherit;">
                 未到货</div>
             }
         }
         @if (Model.Paid)
         {
-            <div class="button operate radius" style="cursor: inherit; background-color: #999;">
+            if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
+            {
+            <div class="button operate radius" style="cursor: inherit;">
                 已结算</div>
+            }
+            else
+            {
+            <div class="button operate radius disabled" style="cursor: inherit;">
+                已结算</div>
+            }
         }
         else
         {
@@ -60,7 +68,7 @@
             }
             else
             {                            
-            <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">
+            <div class="button operate alert radius disabled" style="cursor: inherit;">
                 未结算</div>
             }
         }
@@ -70,11 +78,10 @@
             {
             <a class="button operate alert radius" href="/Business/UpdateErr/@Model.ID?error=false" >
                 异常</a>
-                        
             }
             else
             {                            
-            <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">
+            <div class="button operate alert radius disabled" style="cursor: inherit;">
                 异常</div>
             }
         }
@@ -82,12 +89,11 @@
         {
             if (loggedUser.Role.AccessList.Contains("UPDTERR") || loggedUser.Role.AccessList.Contains("ALL"))
             {
-            <a class="button operate radius" href="/Business/UpdateErr/@Model.ID?error=true" >正常</a>
-                        
+            <a class="button operate radius" href="/Business/UpdateErr/@Model.ID?error=true" >正常</a>        
             }
             else
             {                            
-            <div class="button operate radius" style="cursor: inherit; background-color: #999;">
+            <div class="button operate radius disabled" style="cursor: inherit;">
                 正常</div>
             }
         }
@@ -102,35 +108,43 @@ else
     <div>
         @if (!Model.DeliverPrice.HasValue)
         {
-        <div class="button operate radius" style="cursor: inherit; background-color: #999;">未调度</div>
+            <div class="button operate alert radius disabled" style="cursor: inherit;">
+                未调度</div>
         }
         else
         {
-        <div class="button operate radius" style="cursor: inherit; background-color: #999;">已调度</div>
+            <div class="button operate radius disabled" style="cursor: inherit;">
+                已调度</div>
         }
         @if (Model.Received)
         {
-            <div class="button operate radius" style="cursor: inherit; background-color: #999;">已到货</div>
+            <div class="button operate radius disabled" style="cursor: inherit;">
+                已到货</div>
         }
         else
         {                          
-            <div class="button operate alert radius disabledA" style="cursor: inherit; background-color: #999;">未到货</div>
+            <div class="button operate alert radius disabled" style="cursor: inherit;">
+                未到货</div>
         }
         @if (Model.Paid)
         {
-            <div class="button operate radius" style="cursor: inherit; background-color: #999;">已结算</div>
+            <div class="button operate radius disabled" style="cursor: inherit;">
+                已结算</div>
         }
         else
         {                  
-            <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">未结算</div>
+            <div class="button operate alert radius disabled" style="cursor: inherit;">
+                未结算</div>
         }
         @if (Model.Error)
         {                          
-            <div class="button operate alert radius" style="cursor: inherit; background-color: #999;">异常</div>
+            <div class="button operate alert radius disabled" style="cursor: inherit;">
+                异常</div>
         }
         else
         {                           
-            <div class="button operate radius" style="cursor: inherit; background-color: #999;">正常</div>
+            <div class="button operate radius disabled" style="cursor: inherit;">
+                正常</div>
         }
         @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
         {
