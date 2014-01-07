@@ -18,7 +18,7 @@ namespace FreightSystem.Logics.Implementations
             return QueryTransportModel(clientName, deliverDate,received, paid,error, pageIndex, null);
         }
 
-        public void InsertTransprotModel(TransportRecordModel model)
+        public int InsertTransprotModel(TransportRecordModel model)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -62,7 +62,21 @@ namespace FreightSystem.Logics.Implementations
                                                                      UserID = x.UserID
                                                                  });
                 context.TransportRecords.InsertOnSubmit(newRecord);
+                if (!string.IsNullOrEmpty(model.TrayNo))
+                {
+                    Client client = context.Client.FirstOrDefault(x => x.ClientName == model.ClientName);
+                    if (client != null)
+                    {
+                        client.Index = GetTrayNoIndex(model.TrayNo); 
+                        if (client.IndexMonth != DateTime.Now.Month)
+                        {
+                            client.Index = 0;
+                            client.IndexMonth = DateTime.Now.Month;
+                        }
+                    }
+                }
                 context.SubmitChanges();
+                return newRecord.ID;
             }
         }
 
@@ -417,15 +431,6 @@ namespace FreightSystem.Logics.Implementations
                         Operation = "更新",
                         UserID = userID
                     });
-                Client client = context.Client.FirstOrDefault(x => x.ClientName == record.ClientName);
-                if (client != null)
-                {
-                    client.Index = GetTrayNoIndex(trayNo);
-                    if (client.IndexMonth != DateTime.Now.Month) {
-                        client.Index = 0;
-                        client.IndexMonth = DateTime.Now.Month;
-                    }
-                }
                 context.SubmitChanges();
             }
         }
@@ -609,7 +614,7 @@ namespace FreightSystem.Logics.Implementations
                 int index = client.Index + 1;
                 if (client.IndexMonth != DateTime.Now.Month)
                     index = 1;
-                return string.Format("{0}{1}-{2}", client.ShortName, DateTime.Now.Month.ToString().PadLeft(2), index.ToString().PadLeft(IndexLength, '0'));
+                return string.Format("{0}{1}-{2}", client.ShortName, DateTime.Now.Month.ToString().PadLeft(2,'0'), index.ToString().PadLeft(IndexLength, '0'));
             }
         }
 

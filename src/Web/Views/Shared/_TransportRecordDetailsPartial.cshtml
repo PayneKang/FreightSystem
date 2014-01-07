@@ -40,7 +40,7 @@
                     <td>@detail.Volume
                     </td>
                     <td>
-                        @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
+                        @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("NEWRD"))
                         {
                             <a class="left" href="/Business/UpdateDetails/@detail.ID">编辑</a><a class="right" href="/Business/DeleteDetails/@detail.ID" onclick="return confirm('确定要删除此明细？');">删除</a>                    
                         }

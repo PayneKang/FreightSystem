@@ -241,7 +241,15 @@ namespace Web.Controllers
                                   Text = x.ClientName,
                                   Value = x.ClientName
                               }).ToList();
+
             return View();
+        }
+
+        public JsonResult GetNextTrayNo()
+        {
+            string clientname=Request["clientname"];
+            string trayno = businessProvider.GetNextTrayNo(clientname);
+            return Json(trayno, JsonRequestBehavior.AllowGet);
         }
 
         [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
@@ -258,21 +266,17 @@ namespace Web.Controllers
             });
             try
             {
-                businessProvider.InsertTransprotModel(model);
-                UserModel currUser = ViewBag.LoggedUser;
-                if (currUser.Role.AccessList.Contains("LOCALRDLIST"))
-                    return RedirectToAction("LocalTransportRecordList", "Business");
-                return RedirectToAction("Index", "Business");
+                int newid = businessProvider.InsertTransprotModel(model);
+                return RedirectToAction("DetailsMgr", "Business", new { id = newid});
             }
             catch (Exception ex)
             {
                 ViewBag.ErrorMessage = "请正确选择要编辑的纪录";
                 return View("Error");
             }
-            return View(model);
         }
 
-        [LoggedIn(CheckAccess: true, AccessCode: "FILLRD")]
+        [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpGet]
         public ActionResult FillTransportRecord()
         {
@@ -288,13 +292,13 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [LoggedIn(CheckAccess: true, AccessCode: "FILLRD")]
+        [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpPost]
         public ActionResult FillTransportRecord(TransportRecordModel model)
         {
             businessProvider.UpdateTransportModel(model.ID, model.TrayNo, model.Volume, model.Quantity, this.cacheProvider.GetCurrentLoggedUser().UserID);
             model = businessProvider.GetTransportRecordModel(model.ID);
-            return View(model);
+            return RedirectToAction("DetailsMgr", "Business", new { id = model.ID });
         }
 
         [LoggedIn(CheckAccess: true, AccessCode: "UPDTPAID")]
@@ -472,7 +476,7 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpGet]
         public ActionResult DeleteDetails(int id)
         {
@@ -481,7 +485,7 @@ namespace Web.Controllers
             return RedirectToAction("DetailsMgr", "Business", new { id = model.TransportRecordID });
         }
 
-        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpGet]
         public ActionResult UpdateDetails(int id)
         {
@@ -489,7 +493,7 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpPost]
         public ActionResult UpdateDetails(TransportRecordDetailModel model)
         {
@@ -497,14 +501,14 @@ namespace Web.Controllers
             model = businessProvider.GetTransportRecordDetailModel(model.ID);
             return RedirectToAction("DetailsMgr", "Business", new { id = model.TransportRecordID });
         }
-        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpGet]
         public ActionResult DetailsMgr(int id)
         {
             TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
             return View(model);
         }
-        [LoggedIn(CheckAccess: true, AccessCode: "UPDTDETAIL")]
+        [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
         [HttpPost]
         public ActionResult DetailsMgr(TransportRecordModel model)
         {

@@ -7,7 +7,7 @@
 @if (!Model.Paid)
 {
     <div>
-        @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("UPDTDETAIL"))
+        @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("NEWRD"))
         {
             <a class="button operate radius"  href="/Business/DetailsMgr/@Model.ID">管理明细</a>
         }
@@ -22,10 +22,6 @@
             <div class="button operate radius" style="cursor: inherit; background-color: #999;">
                 已调度</div>
             }
-        }
-        @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLRD"))
-        { 
-            <a class="button operate radius"  href="/Business/FillTransportRecord/@Model.ID">内勤</a>
         }
         @if (Model.Received)
         {

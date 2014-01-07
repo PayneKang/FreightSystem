@@ -13,7 +13,7 @@ namespace FreightSystem.Logics.Interfaces
         TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate, string received, string paid, string error);
         TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate, string received, string paid, string error, BusinessAreaModel area);
         MonthlyReportModel QueryTransportModel(string clientName, string received, string paid, string error, DateTime fromDate, DateTime toDate);
-        void InsertTransprotModel(TransportRecordModel model);
+        int InsertTransprotModel(TransportRecordModel model);
         void InsertNewArea(string newArea);
         List<BusinessAreaModel> ListAllArea();
         TransportRecordModel GetTransportRecordModel(int id);

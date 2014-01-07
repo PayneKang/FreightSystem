@@ -35,7 +35,7 @@
         </div>
         <div class="large-4 large-offset-1 columns">
             <label>客户</label>
-            @Html.DropDownListFor(m => m.ClientName, (List<SelectListItem>)ViewBag.Clients, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+            @Html.DropDownListFor(m => m.ClientName, (List<SelectListItem>)ViewBag.Clients, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填", @onchange = "javascript:SetTrayNo();" })
              <small class="error">@Html.ValidationMessageFor(m => m.ClientName)</small>
         </div>
         <div class="large-4 large-offset-1 columns">
@@ -45,7 +45,7 @@
         </div>
         <div class="large-4 large-offset-1 columns">
             <label>车牌号</label>
-            @Html.TextBoxFor(m => m.CarLicense, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" }) 
+            @Html.TextBoxFor(m => m.CarLicense, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填"}) 
             <small class="error">@Html.ValidationMessageFor(m => m.CarLicense)</small>
         </div>
         <div class="large-4 large-offset-1 columns">
@@ -78,6 +78,23 @@
             @Html.TextBoxFor(m => m.HandlingFee, new { @type = "text", @style = "margin-bottom:0px" })
             <small class="error">@Html.ValidationMessageFor(m => m.HandlingFee)</small>
         </div>
+                    <div class="large-4 large-offset-1 columns">
+                        <label>
+                            托编号</label>
+                        @Html.TextBoxFor(x => x.TrayNo, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                        <small class="error">@Html.ValidationMessageFor(x => x.TrayNo)</small>
+                    </div>
+                    <div class="large-4 large-offset-1 columns">
+                        <label>
+                            体积</label>
+                        @Html.TextBoxFor(x => x.Volume, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                        <small class="error">@Html.ValidationMessageFor(x => x.Volume)</small>
+                    </div>
+                    <div class="large-4 large-offset-1 columns">
+                        <label>数量</label>
+                        @Html.TextBoxFor(x => x.Quantity, new { @type = "text", @style = "margin-bottom:0px", @placeholder = "必填" })
+                        <small class="error">@Html.ValidationMessageFor(x => x.Quantity)</small>
+                    </div>
         <div class="large-4 large-offset-1 columns">
             <label>专线</label>
             @Html.TextBoxFor(m => m.DeliverType, new { @type = "text", @style = "margin-bottom:0px" })
@@ -102,5 +119,16 @@
     <br />
     <label style="color: Red;">@ViewBag.ErrorMessage</label>
 </fieldset>
+<script language="javascript" type="text/javascript">
+    var SetTrayNo = function () {
+        $.getJSON("/Business/GetNextTrayNo?clientname=" + $("#ClientName").val(),
+        function (data) {
+            $("#TrayNo").val(data);
+        }
+        );
+    }
+    $(document).ready(function () { SetTrayNo(); });
+</script>
+    
 }
 </section>
