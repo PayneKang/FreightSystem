@@ -10,27 +10,99 @@
         <td>
             <a class="has-tip"  href="/Business/TransportDetails/@Model.ID">@Model.DeliverDate.ToString("MM.dd")</a>
         </td>
-        <td>@Model.ClientName
+        <td>
+            @if (Model.ClientName.Length > 5)
+            { 
+                <div title ="@Model.ClientName">
+                    @Model.ClientName.Substring(0, 5)..</div>
+            }
+            else
+            {
+                <div>@Model.ClientName</div>
+            }
         </td>
-        <td>@Model.TrayNo
+        <td>
+            @if (Model.TrayNo.Length > 7)
+            { 
+                <div title ="@Model.TrayNo">
+                    @Model.TrayNo.Substring(0, 7)..</div>
+            }
+            else
+            {
+                <div>@Model.TrayNo</div>
+            }
         </td>
-        <td>@Model.Driver
+        <td>
+            @if (Model.Driver.Length > 3)
+            { 
+                <div title ="@Model.Driver">
+                    @Model.Driver.Substring(0, 3)..</div>
+            }
+            else
+            {
+                <div>@Model.Driver</div>
+            }
         </td>
-        <td>@Model.CarLicense
+        <td>
+            @if (Model.CarLicense.Length > 7)
+            { 
+                <div title ="@Model.CarLicense">
+                    @Model.CarLicense.Substring(0, 7)..</div>
+            }
+            else
+            {
+                <div>@Model.CarLicense</div>
+            }
         </td>
-        <td>@Model.PackageName
+        <td>
+            @if (Model.PackageName.Length > 6)
+            { 
+                <div title ="@Model.PackageName">
+                    @Model.PackageName.Substring(0, 6)..</div>
+            }
+            else
+            {
+                <div>@Model.PackageName</div>
+            }
         </td>
         <td>@Model.Volume
         </td>
         <td>@Model.Quantity
         </td>
-        <td>@Model.FromLocation
+        <td>
+            @if (Model.FromLocation.Length > 3)
+            { 
+                <div title ="@Model.FromLocation">
+                    @Model.FromLocation.Substring(0, 3)..</div>
+            }
+            else
+            {
+                <div>@Model.FromLocation</div>
+            }
         </td>
-        <td>@Model.ToLocation
+        <td>
+            @if (Model.ToLocation.Length > 6)
+            { 
+                <div title ="@Model.ToLocation">
+                    @Model.ToLocation.Substring(0, 6)..</div>
+            }
+            else
+            {
+                <div>@Model.ToLocation</div>
+            }
         </td>
         <td>@Model.BusinessArea
         </td>
-        <td>@Model.DeliverType
+        <td>
+            @if (Model.DeliverType.Length > 11)
+            { 
+                <div title ="@Model.DeliverType">
+                    @Model.DeliverType.Substring(0, 11)..</div>
+            }
+            else
+            {
+                <div>@Model.DeliverType</div>
+            }
         </td>
         <td>
             @Html.Partial("_TransportOptionPartial", Model)
@@ -43,27 +115,99 @@ else
         <td>
             <a class="has-tip"  href="/Business/TransportDetails/@Model.ID">@Model.DeliverDate.ToString("MM.dd")</a>
         </td>
-        <td>@Model.ClientName
+        <td>
+            @if (Model.ClientName.Length > 5)
+            { 
+                <div title ="@Model.ClientName">
+                    @Model.ClientName.Substring(0, 5)..</div>
+            }
+            else
+            {
+                <div>@Model.ClientName</div>
+            }
         </td>
-        <td>@Model.TrayNo
+        <td>
+            @if (Model.TrayNo.Length > 7)
+            { 
+                <div title ="@Model.TrayNo">
+                    @Model.TrayNo.Substring(0, 7)..</div>
+            }
+            else
+            {
+                <div>@Model.TrayNo</div>
+            }
         </td>
-        <td>@Model.Driver
+        <td>
+            @if (Model.Driver.Length > 3)
+            { 
+                <div title ="@Model.Driver">
+                    @Model.Driver.Substring(0, 3)..</div>
+            }
+            else
+            {
+                <div>@Model.Driver</div>
+            }
         </td>
-        <td>@Model.CarLicense
+        <td>
+            @if (Model.CarLicense.Length > 7)
+            { 
+                <div title ="@Model.CarLicense">
+                    @Model.CarLicense.Substring(0, 7)..</div>
+            }
+            else
+            {
+                <div>@Model.CarLicense</div>
+            }
         </td>
-        <td>@Model.PackageName
+        <td>
+            @if (Model.PackageName.Length > 6)
+            { 
+                <div title ="@Model.PackageName">
+                    @Model.PackageName.Substring(0, 6)..</div>
+            }
+            else
+            {
+                <div>@Model.PackageName</div>
+            }
         </td>
         <td>@Model.Volume
         </td>
         <td>@Model.Quantity
         </td>
-        <td>@Model.FromLocation
+        <td>
+            @if (Model.FromLocation.Length > 3)
+            { 
+                <div title ="@Model.FromLocation">
+                    @Model.FromLocation.Substring(0, 3)..</div>
+            }
+            else
+            {
+                <div>@Model.FromLocation</div>
+            }
         </td>
-        <td>@Model.ToLocation
+        <td>
+            @if (Model.ToLocation.Length > 6)
+            { 
+                <div title ="@Model.ToLocation">
+                    @Model.ToLocation.Substring(0, 6)..</div>
+            }
+            else
+            {
+                <div>@Model.ToLocation</div>
+            }
         </td>
         <td>@Model.BusinessArea
         </td>
-        <td>@Model.DeliverType
+        <td>
+            @if (Model.DeliverType.Length > 11)
+            { 
+                <div title ="@Model.DeliverType">
+                    @Model.DeliverType.Substring(0, 11)..</div>
+            }
+            else
+            {
+                <div>@Model.DeliverType</div>
+            }
         </td>
         <td>
             @Html.Partial("_TransportOptionPartial", Model)
