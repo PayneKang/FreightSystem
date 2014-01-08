@@ -11,58 +11,73 @@
             <a class="has-tip"  href="/Business/TransportDetails/@Model.ID">@Model.DeliverDate.ToString("MM.dd")</a>
         </td>
         <td>
-            @if (Model.ClientName.Length > 5)
-            { 
+            @if (!Model.ClientName.IsEmpty())
+            {
+                if (Model.ClientName.Length > 5)
+                {
                 <div title ="@Model.ClientName">
                     @Model.ClientName.Substring(0, 5)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.ClientName</div>
+                }
             }
         </td>
         <td>
-            @if (Model.TrayNo.Length > 7)
-            { 
+            @if (!Model.TrayNo.IsEmpty())
+            {
+                if (Model.TrayNo.Length > 7)
+                { 
                 <div title ="@Model.TrayNo">
                     @Model.TrayNo.Substring(0, 7)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.TrayNo</div>
+                }
             }
         </td>
         <td>
-            @if (Model.Driver.Length > 3)
-            { 
+            @if (!Model.Driver.IsEmpty())
+            {
+                if (Model.Driver.Length > 3)
+                { 
                 <div title ="@Model.Driver">
                     @Model.Driver.Substring(0, 3)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.Driver</div>
+                }
             }
         </td>
         <td>
-            @if (Model.CarLicense.Length > 7)
-            { 
+            @if (!Model.CarLicense.IsEmpty())
+            {
+                if (Model.CarLicense.Length > 7)
+                { 
                 <div title ="@Model.CarLicense">
                     @Model.CarLicense.Substring(0, 7)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.CarLicense</div>
+                }
             }
         </td>
         <td>
-            @if (Model.PackageName.Length > 6)
-            { 
+            @if (!Model.PackageName.IsEmpty())
+            {
+                if (Model.PackageName.Length > 6)
+                { 
                 <div title ="@Model.PackageName">
                     @Model.PackageName.Substring(0, 6)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.PackageName</div>
+                }
             }
         </td>
         <td>@Model.Volume
@@ -70,38 +85,47 @@
         <td>@Model.Quantity
         </td>
         <td>
-            @if (Model.FromLocation.Length > 3)
-            { 
+            @if (!Model.FromLocation.IsEmpty())
+            {
+                if (Model.FromLocation.Length > 3)
+                { 
                 <div title ="@Model.FromLocation">
                     @Model.FromLocation.Substring(0, 3)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.FromLocation</div>
+                }
             }
         </td>
         <td>
-            @if (Model.ToLocation.Length > 6)
-            { 
+            @if (!Model.ToLocation.IsEmpty())
+            {
+                if (Model.ToLocation.Length > 6)
+                { 
                 <div title ="@Model.ToLocation">
                     @Model.ToLocation.Substring(0, 6)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.ToLocation</div>
+                }
             }
         </td>
         <td>@Model.BusinessArea
         </td>
         <td>
-            @if (Model.DeliverType.Length > 11)
-            { 
+            @if (!Model.DeliverType.IsEmpty())
+            {
+                if (Model.DeliverType.Length > 11)
+                { 
                 <div title ="@Model.DeliverType">
                     @Model.DeliverType.Substring(0, 11)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.DeliverType</div>
+                }
             }
         </td>
         <td>
@@ -116,58 +140,73 @@ else
             <a class="has-tip"  href="/Business/TransportDetails/@Model.ID">@Model.DeliverDate.ToString("MM.dd")</a>
         </td>
         <td>
-            @if (Model.ClientName.Length > 5)
-            { 
+            @if (!Model.ClientName.IsEmpty())
+            {
+                if (Model.ClientName.Length > 5)
+                {
                 <div title ="@Model.ClientName">
                     @Model.ClientName.Substring(0, 5)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.ClientName</div>
+                }
             }
         </td>
         <td>
-            @if (Model.TrayNo.Length > 7)
-            { 
+            @if (!Model.TrayNo.IsEmpty())
+            {
+                if (Model.TrayNo.Length > 7)
+                { 
                 <div title ="@Model.TrayNo">
                     @Model.TrayNo.Substring(0, 7)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.TrayNo</div>
+                }
             }
         </td>
         <td>
-            @if (Model.Driver.Length > 3)
-            { 
+            @if (!Model.Driver.IsEmpty())
+            {
+                if (Model.Driver.Length > 3)
+                { 
                 <div title ="@Model.Driver">
                     @Model.Driver.Substring(0, 3)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.Driver</div>
+                }
             }
         </td>
         <td>
-            @if (Model.CarLicense.Length > 7)
-            { 
+            @if (!Model.CarLicense.IsEmpty())
+            {
+                if (Model.CarLicense.Length > 7)
+                { 
                 <div title ="@Model.CarLicense">
                     @Model.CarLicense.Substring(0, 7)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.CarLicense</div>
+                }
             }
         </td>
         <td>
-            @if (Model.PackageName.Length > 6)
-            { 
+            @if (!Model.PackageName.IsEmpty())
+            {
+                if (Model.PackageName.Length > 6)
+                { 
                 <div title ="@Model.PackageName">
                     @Model.PackageName.Substring(0, 6)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.PackageName</div>
+                }
             }
         </td>
         <td>@Model.Volume
@@ -175,56 +214,66 @@ else
         <td>@Model.Quantity
         </td>
         <td>
-            @if (Model.FromLocation.Length > 3)
-            { 
+            @if (!Model.FromLocation.IsEmpty())
+            {
+                if (Model.FromLocation.Length > 3)
+                { 
                 <div title ="@Model.FromLocation">
                     @Model.FromLocation.Substring(0, 3)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.FromLocation</div>
+                }
             }
         </td>
         <td>
-            @if (Model.ToLocation.Length > 6)
-            { 
+            @if (!Model.ToLocation.IsEmpty())
+            {
+                if (Model.ToLocation.Length > 6)
+                { 
                 <div title ="@Model.ToLocation">
                     @Model.ToLocation.Substring(0, 6)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.ToLocation</div>
+                }
             }
         </td>
         <td>@Model.BusinessArea
         </td>
         <td>
-            @if (Model.DeliverType.Length > 11)
-            { 
+            @if (!Model.DeliverType.IsEmpty())
+            {
+                if (Model.DeliverType.Length > 11)
+                {
                 <div title ="@Model.DeliverType">
                     @Model.DeliverType.Substring(0, 11)..</div>
-            }
-            else
-            {
+                }
+                else
+                {
                 <div>@Model.DeliverType</div>
+                }
             }
         </td>
         <td>
             @Html.Partial("_TransportOptionPartial", Model)
         </td>
     </tr>
-}@*<tr style="display:none;" type="TRDetails" TRID="@record.ID">
-                <td colspan="13">
-                    @if (record.HistoryItem != null)
+}
+@*<tr style="display:none;" type="TRDetails" TRID="@record.ID">
+        <td colspan="13">
+            @if (record.HistoryItem != null)
+            {
+                <ul>
+                    @foreach (TransportRecordsHistoryModel history in record.HistoryItem)
                     {
-                        <ul>
-                            @foreach (TransportRecordsHistoryModel history in record.HistoryItem)
-                            {
-                                <li><small>@history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation]
-                                    @history.Description
-                                    操作人：@history.User.UserID</small> </li>
-                            }
-                        </ul>
+                        <li><small>@history.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss") : [@history.Operation]
+                            @history.Description
+                            操作人：@history.User.UserID</small> </li>
                     }
-                </td>
-            </tr>*@
+                </ul>
+            }
+        </td>
+    </tr>*@
