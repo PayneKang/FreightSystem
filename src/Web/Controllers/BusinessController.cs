@@ -296,7 +296,9 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult FillTransportRecord(TransportRecordModel model)
         {
-            businessProvider.UpdateTransportModel(model.ID, model.TrayNo, model.Volume, model.Quantity, this.cacheProvider.GetCurrentLoggedUser().UserID);
+            string supdateindex = Request["updateindex"];
+            bool updateindex = supdateindex == "1"? true: false;
+            businessProvider.UpdateTransportModel(model.ID, model.TrayNo, model.Volume, model.Quantity,updateindex, this.cacheProvider.GetCurrentLoggedUser().UserID);
             model = businessProvider.GetTransportRecordModel(model.ID);
             return RedirectToAction("DetailsMgr", "Business", new { id = model.ID });
         }
@@ -506,6 +508,7 @@ namespace Web.Controllers
         public ActionResult DetailsMgr(int id)
         {
             TransportRecordModel model = businessProvider.GetTransportRecordModel(id);
+            ViewBag.DefaultTrayNo = businessProvider.GetNextTrayNo(model.ClientName);
             return View(model);
         }
         [LoggedIn(CheckAccess: true, AccessCode: "NEWRD")]
