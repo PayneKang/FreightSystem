@@ -2,7 +2,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "DisplayError";
 }
-
-<h2>错误信息</h2>
-<div>@Request["errmsg"]</div>
-<a href="#" onclick="history.go(-2);">返回前页</a>
+<h3 style="color: Red;">
+    错误信息: @Request["errmsg"]
+</h3>
+<br />
+<br />
+<a class="button tiny" href="#" onclick="history.go(-2);">返回前页</a>
+<br />
