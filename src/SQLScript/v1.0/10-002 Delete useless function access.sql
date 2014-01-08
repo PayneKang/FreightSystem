@@ -1,6 +1,6 @@
 use [FreightSystemDB]
 
 DELETE FROM [FreightSystemDB].[dbo].[FuncItem]
-      WHERE <ËÑË÷Ìõ¼þ,,>
+      WHERE [FuncCode] in ('FILLRD', 'UPDTDETAIL')
 GO
 

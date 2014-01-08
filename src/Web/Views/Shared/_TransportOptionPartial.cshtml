@@ -9,7 +9,7 @@
     <div>
         @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("NEWRD"))
         {
-            <a class="button operate radius"  href="/Business/DetailsMgr/@Model.ID">管理明细</a>
+            <a class="button operate radius"  href="/Business/DetailsMgr/@Model.ID">货物管理</a>
         }
         @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("FILLPRICE"))
         {
