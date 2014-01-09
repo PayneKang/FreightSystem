@@ -867,9 +867,17 @@ select {
     padding-right: 0.9375rem;
     float: left; }
 
+  .large-0 {
+    position: relative;
+    width: 5%; }
+
   .large-1 {
     position: relative;
     width: 8.33333%; }
+    
+  .large-1-5 {
+    position: relative;
+    width: 10%; }
 
   .large-2 {
     position: relative;
