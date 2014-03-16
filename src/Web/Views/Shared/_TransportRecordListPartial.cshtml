@@ -2,6 +2,7 @@
 @using FreightSystem.Models;
 @using FreightSystem.Models.Extra;
 @{
+    int PageCount = 3;
     UserModel loggedUser = (UserModel)ViewBag.LoggedUser;
 }
 <table class="large-12 table-hover table-cell-spacing">
@@ -81,6 +82,37 @@
                 {
                     <span>下一页</span>
                     <span>尾页</span>
+                }<br />
+                
+                @if (Model.PageIndex - PageCount - 1 > 1)
+                {
+                    <a href="?DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">1</a> <span>...</span>
+                    for (int i = Model.PageIndex - PageCount; i < Model.PageIndex; i++)
+                    {
+                        <a href="?page=@i&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">@i</a>
+                    }
+                }
+                else {
+                    for (int i = 1; i < Model.PageIndex; i++)
+                    {
+                        <a href="?page=@i&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">@i</a>
+                    }
+                }
+                <span style="font-weight:bold">@Model.PageIndex</span>
+                @if (Model.TotalPage - Model.PageIndex > (PageCount + 1))
+                {
+                    for (int i = Model.PageIndex + 1; i < Model.PageIndex + PageCount; i++)
+                    {
+                        <a href="?page=@i&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">@i</a>
+                    }
+                    <span>...</span><a href="?page=@Model.TotalPage&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">@Model.TotalPage</a>                 
+                }
+                else
+                {
+                    for (int i = Model.PageIndex + 1; i <= Model.TotalPage; i++)
+                    {
+                        <a href="?page=@i&DeliverDate=@(Model.DeliverDate.ToDateString("yyyy-MM-dd"))&ClientName=@(Model.ClientName)">@i</a>
+                    }
                 }
             </td>
         </tr>
