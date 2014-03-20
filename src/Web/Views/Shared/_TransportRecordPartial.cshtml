@@ -171,8 +171,21 @@
                 备注
             </th>
             <td colspan="3">
-                @Model.Comment
-                @Html.HiddenFor(m => m.Comment)
+            @if (!Model.Paid)
+            { 
+                using (Html.BeginForm("UpdateComment", "Business"))
+                {
+                    @Html.Hidden("backUrl", Request.Url)
+                    @Html.HiddenFor(m => m.ID)
+                    @Html.TextAreaFor(m => m.Comment)
+                    <input type="submit" value="修改备注" />
+                }
+            }
+            else
+            {
+                <div>@Model.Comment</div>
+                <div style="color:red;">已结算不允许修改</div>
+            }
             </td>
         </tr>
         <tr>

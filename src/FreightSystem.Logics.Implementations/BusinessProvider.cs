@@ -438,6 +438,29 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
+        public void UpdateTransportComment(int id, String comment, String userID)
+        {
+            using (SQLDBDataContext context = new SQLDBDataContext())
+            {
+                TransportRecords record = context.TransportRecords.FirstOrDefault(x => x.ID == id);
+                if (record == null)
+                {
+                    throw new ApplicationException("要修改的记录不存在");
+                }
+                record.Comment = comment;
+                record.TransportRecordsOptionHistory.Add(
+                    new TransportRecordsOptionHistory()
+                    {
+                        Description = string.Format("修改备注信息为: {0} ", comment),
+                        LogDateTime = DateTime.Now,
+                        Operation = "更新",
+                        UserID = userID
+                    });
+
+                context.SubmitChanges();
+            }
+        }
+
         public void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayble, double? deductions, double? reparations,double? handlingfee, bool paid, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())

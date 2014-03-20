@@ -319,6 +319,14 @@ namespace Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public ActionResult UpdateComment(TransportRecordModel model)
+        {
+            String returnUrl = Request["backUrl"];
+            businessProvider.UpdateTransportComment(model.ID, model.Comment, this.cacheProvider.GetCurrentLoggedUser().UserID);
+            return Redirect(returnUrl);
+        }
+
         [LoggedIn(CheckAccess: true, AccessCode: "UPDTPAID")]
         [HttpPost]
         public ActionResult FillCa(TransportRecordModel model)

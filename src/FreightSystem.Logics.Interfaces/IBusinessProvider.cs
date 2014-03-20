@@ -8,6 +8,7 @@ namespace FreightSystem.Logics.Interfaces
 {
     public interface IBusinessProvider
     {
+
         TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate, string received, string paid, string error, int pageIndex);
         TransportRecordListModel QueryTransportModel(string clientName, DateTime? deliverDate, string received, string paid, string error, int pageIndex, BusinessAreaModel area);
         TransportRecordListModel QueryDailyTransportModel(string clientName, DateTime deliverDate, string received, string paid, string error);
@@ -17,6 +18,7 @@ namespace FreightSystem.Logics.Interfaces
         void InsertNewArea(string newArea);
         List<BusinessAreaModel> ListAllArea();
         TransportRecordModel GetTransportRecordModel(int id);
+        void UpdateTransportComment(int id, string comment,string userID);
         void UpdateTransportModel(int id, string trayNo, double volume, int quantity,bool updateClientIndex, string userID);
         void UpdateTransportModel(TransportRecordModel model, string userID);
         void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayble, double? deductions, double? reparations,double? handlingfee, bool paid, string userID);
