@@ -438,7 +438,7 @@ namespace FreightSystem.Logics.Implementations
             }
         }
 
-        public void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayble, double? deductions, double? reparations, bool paid, string userID)
+        public void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayble, double? deductions, double? reparations,double? handlingfee, bool paid, string userID)
         {
             using (SQLDBDataContext context = new SQLDBDataContext())
             {
@@ -451,6 +451,7 @@ namespace FreightSystem.Logics.Implementations
                 record.AccountPayble = accountPayble;
                 record.Deductions = deductions;
                 record.Reparations = reparations;
+                record.HandlingFee = handlingfee;
                 record.Paid = paid;
                 record.TransportRecordsOptionHistory.Add(
                     new TransportRecordsOptionHistory()

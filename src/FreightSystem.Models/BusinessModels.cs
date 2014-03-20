@@ -29,6 +29,7 @@ namespace FreightSystem.Models
         public string ClientName { get; set; }
         [Required(ErrorMessage = "日期必须填写")]
         [Display(Name = "发货日期")]
+        [DisplayFormat(ApplyFormatInEditMode = true,ConvertEmptyStringToNull = false, DataFormatString = "{0:yyyy-MM-dd}")] 
         public DateTime DeliverDate { get; set; }
         [Required(ErrorMessage = "驾驶员必须填写")]
         public string Driver { get; set; }

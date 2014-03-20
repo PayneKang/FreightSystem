@@ -19,7 +19,7 @@ namespace FreightSystem.Logics.Interfaces
         TransportRecordModel GetTransportRecordModel(int id);
         void UpdateTransportModel(int id, string trayNo, double volume, int quantity,bool updateClientIndex, string userID);
         void UpdateTransportModel(TransportRecordModel model, string userID);
-        void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayble, double? deductions, double? reparations, bool paid, string userID);
+        void UpdateTransportPaymentData(int id, DateTime? paymentDate, double? accountPayble, double? deductions, double? reparations,double? handlingfee, bool paid, string userID);
         void UpdateTransportErrorStatus(int id, bool error,string errorMessage,string userID);
         void UpdateTransportReceivedStatus(int id, bool received,DateTime? receivedDate, string userID);
         void UpdateTransportPrice(int id, double? deliverPrice, double? shortBargeFee,double? accoundPayable, string userID);

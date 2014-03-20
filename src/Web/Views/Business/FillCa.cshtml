@@ -17,7 +17,6 @@
                     @Html.HiddenFor(m => m.OilCard);
                     @Html.HiddenFor(m => m.DeliverPrice);
                     @Html.HiddenFor(m => m.PrePay);
-                    @Html.HiddenFor(m => m.HandlingFee);
             <fieldset>
                 <legend>补充财务信息</legend>
                 @if (!Model.Paid)
@@ -35,6 +34,12 @@
                                 赔款</label>
                             @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:0px", @onchange = "UpdateShouldPay();" })
                             <small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
+                        </div>
+                        <div class="large-5 large-offset-0-1 columns">
+                            <label>
+                                装卸费</label>
+                            @Html.TextBoxFor(x => x.HandlingFee, new { @style = "margin-bottom:0px", @onchange = "UpdateShouldPay();" })
+                            <small class="error">@Html.ValidationMessageFor(x => x.HandlingFee)</small>
                         </div>
                         <div class="large-5 large-offset-0-1 columns">
                             <label>

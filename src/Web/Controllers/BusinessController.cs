@@ -241,8 +241,9 @@ namespace Web.Controllers
                                   Text = x.ClientName,
                                   Value = x.ClientName
                               }).ToList();
-
-            return View();
+            TransportRecordModel model = new TransportRecordModel();
+            model.DeliverDate = DateTime.Now;
+            return View(model);
         }
 
         public JsonResult GetNextTrayNo()
@@ -328,7 +329,7 @@ namespace Web.Controllers
                 model.Paid = false;
                 return View(model);
             }
-            businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate, model.AccountPayble, model.Deductions, model.Reparations, model.Paid, this.cacheProvider.GetCurrentLoggedUser().UserID);
+            businessProvider.UpdateTransportPaymentData(model.ID, model.PayDate, model.AccountPayble, model.Deductions, model.Reparations, model.HandlingFee, model.Paid, this.cacheProvider.GetCurrentLoggedUser().UserID);
             model = businessProvider.GetTransportRecordModel(model.ID);
             return View(model);
         }
