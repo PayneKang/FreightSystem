@@ -21,6 +21,12 @@
                     体积
                 </th>
                 <th>
+                    单据数量
+                </th>
+                <th>
+                    备注
+                </th>
+                <th>
                     操作
                 </th>
             </tr>
@@ -38,6 +44,10 @@
                     <td>@detail.Quantity
                     </td>
                     <td>@detail.Volume
+                    </td>
+                    <td>@detail.ReceiptCount
+                    </td>
+                    <td>@detail.Comment
                     </td>
                     <td>
                         @if (loggedUser.Role.AccessList.Contains("ALL") || loggedUser.Role.AccessList.Contains("NEWRD"))

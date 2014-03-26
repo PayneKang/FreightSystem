@@ -95,17 +95,6 @@
       <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecordDetail" ThisKey="ID" OtherKey="TransportRecordID" Type="TransportRecordDetail" />
     </Type>
   </Table>
-  <Table Name="dbo.TransportRecordDetail" Member="TransportRecordDetail">
-    <Type Name="TransportRecordDetail">
-      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DetailNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="PackageName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Volume" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="TransportRecordID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Users" Member="Users">
     <Type Name="Users">
       <Column Name="UserID" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -121,6 +110,19 @@
       <Association Name="Users_TransportRecordsOptionHistory" Member="TransportRecordsOptionHistory" ThisKey="UserID" OtherKey="UserID" Type="TransportRecordsOptionHistory" />
       <Association Name="BusinessArea_Users" Member="BusinessArea" ThisKey="AreaID" OtherKey="ID" Type="BusinessArea" IsForeignKey="true" />
       <Association Name="Roles_Users" Member="Roles" ThisKey="RoleId" OtherKey="RoleID" Type="Roles" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TransportRecordDetail" Member="TransportRecordDetail">
+    <Type Name="TransportRecordDetail">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DetailNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PackageName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Volume" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TransportRecordID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReceiptCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Association Name="TransportRecords_TransportRecordDetail" Member="TransportRecords" ThisKey="TransportRecordID" OtherKey="ID" Type="TransportRecords" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

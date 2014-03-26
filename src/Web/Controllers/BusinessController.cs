@@ -529,6 +529,11 @@ namespace Web.Controllers
             int quantity = 0;
             double volume = 0f;
             string actionType = Request["actionType"];
+            string strreceiptcount = Request["receiptcount"];
+            int? receiptcount = null;
+            if (!String.IsNullOrEmpty(strreceiptcount))
+                receiptcount = int.Parse(strreceiptcount);
+            string comment = Request["comment"];
             int id;
             string viewName = "";
             if (actionType == "fillDetails")
@@ -568,7 +573,9 @@ namespace Web.Controllers
                 PackageName = packageName,
                 Quantity = quantity,
                 TransportRecordID = id,
-                Volume = volume
+                Volume = volume,
+                ReceiptCount = receiptcount,
+                Comment = comment
             };
             UserModel user = this.cacheProvider.GetCurrentLoggedUser();
             businessProvider.InsertNewTransportDetail(newDetail, user.UserID);

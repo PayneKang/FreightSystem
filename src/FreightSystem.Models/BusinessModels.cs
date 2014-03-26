@@ -112,6 +112,8 @@ namespace FreightSystem.Models
         public string DetailNo { get; set; }
         public string PackageName { get; set; }
         public int Quantity { get; set; }
+        public int? ReceiptCount { get; set; }
+        public string Comment { get; set; }
         public double? Volume { get; set; }
         public int TransportRecordID { get; set; }
     }

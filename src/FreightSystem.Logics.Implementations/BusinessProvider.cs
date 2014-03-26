@@ -392,7 +392,9 @@ namespace FreightSystem.Logics.Implementations
                                               PackageName = y.PackageName,
                                               Quantity = y.Quantity,
                                               TransportRecordID = y.TransportRecordID,
-                                              Volume = y.Volume
+                                              Volume = y.Volume,
+                                              ReceiptCount = y.ReceiptCount,
+                                              Comment = y.Comment
                                           }).ToList()
                         }).FirstOrDefault();
             }
@@ -662,7 +664,9 @@ namespace FreightSystem.Logics.Implementations
                         PackageName = detail.PackageName,
                         Quantity = detail.Quantity,
                         TransportRecordID = detail.TransportRecordID,
-                        Volume = detail.Volume
+                        Volume = detail.Volume,
+                        ReceiptCount = detail.ReceiptCount,
+                        Comment = detail.Comment
                     }
                     );
                 context.TransportRecordsOptionHistory.InsertOnSubmit(
