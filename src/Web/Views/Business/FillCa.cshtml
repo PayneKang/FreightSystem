@@ -82,9 +82,14 @@
                 }
                 else
                 {
+                    @Html.HiddenFor(x => x.Deductions)
+                    @Html.HiddenFor(x => x.HandlingFee)
+                    @Html.HiddenFor(x => x.AccountPayble)
+                    @Html.HiddenFor(x => x.PayDate)
+                    @Html.HiddenFor(m => m.Paid)
                     <table class="large-12" style="border: 0px">
                         <tr>
-                            <th class="large-3">
+                            <th class="large-3" style="width:50px;">
                                 扣款
                             </th>
                             <td class="large-3">
@@ -94,7 +99,9 @@
                                 赔款
                             </th>
                             <td class="large-3">
-                                @Model.Reparations
+                                @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:0px", @onchange = "UpdateShouldPay();" })
+                                <small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
+                                <input type="submit" value="修改" onclick="return confirm('确认修改赔款金额？');" />
                             </td>
                         </tr>
                         <tr>

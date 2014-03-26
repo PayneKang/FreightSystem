@@ -51,8 +51,7 @@
         {
             if (loggedUser.Role.AccessList.Contains("UPDTPAID") || loggedUser.Role.AccessList.Contains("ALL"))
             {
-            <div class="button operate radius" style="cursor: inherit;">
-                已结算</div>
+                <a class="button operate radius"  style="cursor: pointer;" href="/Business/FillCa/@Model.ID" >已结算</a>
             }
             else
             {
@@ -128,8 +127,7 @@ else
         }
         @if (Model.Paid)
         {
-            <div class="button operate radius disabled" style="cursor: inherit;">
-                已结算</div>
+            <a class="button operate radius disabled"  style="cursor: pointer;" href="/Business/FillCa/@Model.ID" >已结算</a>
         }
         else
         {                  
