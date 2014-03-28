@@ -100,8 +100,8 @@
                             </th>
                             <td class="large-3">
                                 @Html.TextBoxFor(x => x.Reparations, new { @style = "margin-bottom:0px", @onchange = "UpdateShouldPay();" })
-                                <small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
                                 <input type="submit" value="修改" onclick="return confirm('确认修改赔款金额？');" />
+								<small class="error">@Html.ValidationMessageFor(x => x.Reparations)</small>
                             </td>
                         </tr>
                         <tr>
