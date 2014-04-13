@@ -180,6 +180,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="FreightSystem.UserControls.Printer.dll" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\foundation.min.js" />
     <Content Include="Scripts\foundation\foundation.abide.js" />
@@ -245,6 +246,7 @@
     <Content Include="Scripts\vendor\jquery.js" />
     <Content Include="Scripts\vendor\placeholder.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="TestPrint.htm" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -284,6 +286,10 @@
     <ProjectReference Include="..\FreightSystem.Models\FreightSystem.Models.csproj">
       <Project>{13221790-B59D-4EE3-9D89-6538DD30C298}</Project>
       <Name>FreightSystem.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FreightSystem.UserControls.Printer\FreightSystem.UserControls.Printer.csproj">
+      <Project>{9A5D060C-ED63-4DAB-8191-2ABB2F536025}</Project>
+      <Name>FreightSystem.UserControls.Printer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
