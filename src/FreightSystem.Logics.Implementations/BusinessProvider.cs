@@ -733,7 +733,9 @@ namespace FreightSystem.Logics.Implementations
                     PackageName = detail.PackageName,
                     Quantity = detail.Quantity,
                     TransportRecordID = detail.TransportRecordID,
-                    Volume = detail.Volume
+                    Volume = detail.Volume,
+                    Comment = detail.Comment,
+                    ReceiptCount = detail.ReceiptCount
                 };
             }
         }
@@ -750,6 +752,8 @@ namespace FreightSystem.Logics.Implementations
                 detail.PackageName = model.PackageName;
                 detail.Quantity = model.Quantity;
                 detail.Volume = model.Volume;
+                detail.ReceiptCount = model.ReceiptCount;
+                detail.Comment = model.Comment;
                 context.SubmitChanges();
             }
         }

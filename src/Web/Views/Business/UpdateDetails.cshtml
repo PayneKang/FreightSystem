@@ -35,6 +35,18 @@
                     @Html.TextBoxFor(x => x.Volume)
                     @Html.ValidationMessageFor(x => x.Volume)
                 </div>
+                <div class="large-5 large-offset-0-1 columns">
+                    <label>
+                        单据数量</label>
+                    @Html.TextBoxFor(x => x.ReceiptCount)
+                    @Html.ValidationMessageFor(x => x.ReceiptCount)
+                </div>
+                <div class="large-5 large-offset-0-1 columns">
+                    <label>
+                        备注</label>
+                    @Html.TextBoxFor(x => x.Comment)
+                    @Html.ValidationMessageFor(x => x.Comment)
+                </div>
                 <div class="large-11 columns">
                     <button type="submit" class="left button tiny" style="margin-top: 1rem">
                         保存</button>
