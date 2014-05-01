@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PrintNodes>
+  <PrintNode Name="year" Left="426" Top="80" FontName="宋体" Color="Red" Size="12"/>
+  <PrintNode Name="month" Left="486" Top="80" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="day" Left="536" Top="80" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="trayno" Left="60" Top="80" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="client" Left="60" Top="120" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="packagename" Left="60" Top="180" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="volumn" Left="280" Top="180" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="qty" Left="305" Top="180" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="from" Left="380" Top="180" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="to" Left="580" Top="180" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="dirver" Left="60" Top="360" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="carno" Left="140" Top="360" FontName="宋体" Color="Black" Size="12"/>
+  <PrintNode Name="comment" Left="540" Top="360" FontName="宋体" Color="Black" Size="12"/>
+</PrintNodes>
