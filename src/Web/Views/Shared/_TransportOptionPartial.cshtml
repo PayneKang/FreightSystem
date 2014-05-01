@@ -98,7 +98,8 @@
         }
         @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
         {
-            <a class="button operate radius success" href="/Business/PrintTR/@Model.ID">打印</a>
+            
+            <a class="button operate radius success" target="_blank" href="http://localhost:88?cmd=print&data=year:@Model.DeliverDate.ToString("yyyy"),month:@Model.DeliverDate.ToString("MM"),day:@Model.DeliverDate.ToString("dd"),client:@Model.ClientName,trayno:@Model.TrayNo,packagename:@Model.DetailNames,volumn:@Model.DetailVolumes,qty:@Model.DetailQtys,from:@Model.FromLocation,to:@Model.ToLocation,dirver:@Model.Driver,carno:@Model.CarLicense,comment:@Model.Comment">打印</a>
         }
     </div>
 }
@@ -146,7 +147,7 @@ else
         }
         @if (loggedUser.Role.AccessList.Contains("PRINT") || loggedUser.Role.AccessList.Contains("ALL"))
         {
-            <a class="button operate radius success" href="/Business/PrintTR/@Model.ID">打印</a>
+            <a class="button operate radius success" target="_blank" href="http://localhost:88?cmd=print&data=year:@Model.DeliverDate.ToString("yyyy"),month:@Model.DeliverDate.ToString("MM"),day:@Model.DeliverDate.ToString("dd"),client:@Model.ClientName,trayno:@Model.TrayNo,packagename:@Model.DetailNames,volumn:@Model.DetailVolumes,qty:@Model.DetailQtys,from:@Model.FromLocation,to:@Model.ToLocation,dirver:@Model.Driver,carno:@Model.CarLicense,comment:@Model.Comment">打印</a>
         }
     </div>
 }

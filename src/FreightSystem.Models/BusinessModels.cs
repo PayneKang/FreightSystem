@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace FreightSystem.Models
 {
@@ -72,6 +73,70 @@ namespace FreightSystem.Models
         } }
         public List<TransportRecordsHistoryModel> HistoryItem { get; set; }
         public List<TransportRecordDetailModel> DetailItem { get; set; }
+        public string DetailNames
+        {
+            get
+            {
+                if (DetailItem == null)
+                    return this.PackageName;
+                List<string> itemname = DetailItem.Select(x => x.PackageName).ToList();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < itemname.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        sb.Append(itemname[i]);
+                        continue;
+                    }
+                    sb.Append("|" + itemname[i]);
+                }
+                return sb.ToString();
+            }
+        }
+        public string DetailVolumes
+        {
+            get
+            {
+                if (DetailItem == null)
+                    return this.Volume.ToString();
+                List<double?> item = DetailItem.Select(x => x.Volume).ToList();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < item.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        if (item[i].HasValue)
+                            sb.Append(item[i]);
+                        continue;
+                    }
+                    sb.Append("|");
+                    if (item[i].HasValue)
+                        sb.Append(item[i]);
+                }
+                return sb.ToString();
+            }
+        }
+        public string DetailQtys
+        {
+            get
+            {
+                if (DetailItem == null)
+                    return this.Quantity.ToString();
+                List<int> item = DetailItem.Select(x => x.Quantity).ToList();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < item.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                            sb.Append(item[i]);
+                        continue;
+                    }
+                    sb.Append("|");
+                    sb.Append(item[i]);
+                }
+                return sb.ToString();
+            }
+        }
     }
 
     public class TransportRecordsHistoryModel
