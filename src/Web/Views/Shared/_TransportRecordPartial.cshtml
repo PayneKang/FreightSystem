@@ -172,13 +172,18 @@
             </th>
             <td colspan="3">
             @if (!Model.Paid)
-            { 
-                using (Html.BeginForm("UpdateComment", "Business"))
+            {
+                if (loggedUser.Role.AccessList.Contains("COMMENT"))
                 {
+                    using (Html.BeginForm("UpdateComment", "Business"))
+                    {
                     @Html.Hidden("backUrl", Request.Url)
                     @Html.HiddenFor(m => m.ID)
                     @Html.TextAreaFor(m => m.Comment)
                     <input type="submit" value="修改备注" />
+                    }
+                }else{
+                <div>@Model.Comment</div>
                 }
             }
             else
